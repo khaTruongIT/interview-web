@@ -207,6 +207,222 @@ Web Fundamentals
 		- Assets Management & Transformation: FE build tool giúp quản lý và tối ưu nhiều loại tài nguyên như ảnh font chữ, stylesheeets. Có thể tự động nén ảnh và sinh ra bản tối ưu hơn cho kích thước của màn hình
 		- Development Workflow Enhancements: build tools cung cấp những feature như hot reloading (browser tự động refresh khi có thay đổi), hot module replacement (chỉ update module thay vì reload lại cả page), error reporting để cải thiện quá trình code của developer.
 		- Cross-Browser Compatibility: tự động add các prefix cần thiết cho CSS properties, đảm báo style correct khi dùng giữa các browser khác nhau.
+	1. ``Những điểm khác nhau giữa NEXTJS và REACTJS là gì ``\
+		Next.js và React.js là hai công nghệ phổ biến trong việc phát triển ứng dụng web. Dưới đây là những điểm khác nhau chính giữa chúng:
+		1. **Khung ứng dụng và tích hợp SSR (Server-Side Rendering):**
+			- React.js: Là một thư viện JavaScript dùng để xây dựng giao diện người dùng. React.js không cung cấp cơ chế SSR tự động.
+			- Next.js: Là một framework React, đi kèm với SSR (Server-Side Rendering) và cung cấp tích hợp sẵn cho việc SSR. Điều này giúp trang web được tải nhanh hơn bằng cách tạo các trang động trên máy chủ và trả về HTML hoàn chỉnh cho trình duyệt.
+
+		2. **Routing (Định tuyến):**
+			- React.js: Cần sử dụng thư viện bên ngoài như React Router để xử lý định tuyến.
+			- Next.js: Cung cấp hệ thống định tuyến tích hợp sẵn. Bạn có thể tạo các trang React và tự động định tuyến mà không cần phải cấu hình nhiều.
+
+		3. **Cấu hình và cài đặt ban đầu:**
+			- React.js: Yêu cầu cấu hình ban đầu tương đối đơn giản, chỉ cần một số công cụ hỗ trợ như Babel và Webpack để bắt đầu xây dựng ứng dụng.
+			- Next.js: Cung cấp môi trường phát triển đã được cấu hình sẵn, không cần bạn phải tùy chỉnh nhiều cho các tính năng căn bản như SSR và định tuyến.
+
+		4. **Tối ưu hóa và Performance (Hiệu suất):**
+			- React.js: Yêu cầu bạn tự quản lý và tối ưu hiệu suất ứng dụng của mình.
+			- Next.js: Đã được tối ưu hóa sẵn cho hiệu suất tốt nhất. Các trang được tải nhanh và cơ chế SSR giúp tránh việc phải tải toàn bộ trang trước khi hiển thị cho người dùng.
+
+		5. **Môi trường phát triển và triển khai:**
+			- React.js: Đa phần sử dụng trong môi trường phát triển trình duyệt (client-side) và cần phải tích hợp thêm các công nghệ khác nhau để triển khai ứng dụng vào máy chủ (server).
+			- Next.js: Được xây dựng sẵn với SSR, giúp dễ dàng triển khai ứng dụng lên máy chủ hoặc nền tảng dịch vụ đám mây.
+
+		Tóm lại, Next.js là một framework xây dựng trên nền tảng React.js, bổ sung các tính năng quan trọng như SSR và định tuyến tích hợp sẵn để giúp bạn dễ dàng xây dựng các ứng dụng web với hiệu suất cao và trải nghiệm người dùng tốt hơn. 
+	2. 	``Component life cycle trong react là gì ? ``
+			
+		Trong React, các component life cycle (vòng đời của component) là chuỗi các phương thức mà component của bạn sẽ thông qua trong quá trình khởi tạo, cập nhật và hủy bỏ. Các phương thức này cho phép bạn thực hiện các hành động cụ thể tại các giai đoạn khác nhau trong quá trình mà component được tạo ra, hiển thị và biến đổi.
+		Dưới đây là các phương thức life cycle chính trong React và mô tả ngắn gọn về mỗi phương thức:
+		1. **Mounting (Khởi tạo):**
+			- `constructor()`: Được gọi đầu tiên khi component được khởi tạo. Bạn có thể thiết lập state và bind các phương thức ở đây.
+			- `static getDerivedStateFromProps()`: Được gọi trước khi component được hiển thị lần đầu tiên và sau mỗi lần cập nhật props. Phương thức này được sử dụng để tính toán và trả về state mới dựa trên props mới.
+			- `render()`: Phương thức này trả về JSX để hiển thị nội dung của component.
+
+		2. **Updating (Cập nhật):**
+			- `shouldComponentUpdate()`: Được gọi trước khi component được cập nhật. Bạn có thể kiểm tra xem liệu việc cập nhật có cần thiết hay không bằng cách so sánh props mới và props hiện tại, hoặc state mới và state hiện tại.
+			- `getSnapshotBeforeUpdate()`: Được gọi trước khi các thay đổi được áp dụng vào DOM. Phương thức này cho phép bạn lấy thông tin từ DOM (ví dụ: vị trí cuộn) trước khi cập nhật để sau đó dùng trong `componentDidUpdate()`.
+			- `componentDidUpdate()`: Được gọi sau khi component đã được cập nhật. Ở đây, bạn có thể thực hiện các thao tác sau khi cập nhật xảy ra, như làm sạch dữ liệu không cần thiết hoặc tương tác với DOM.
+
+		3. **Unmounting (Hủy bỏ):**
+			- `componentWillUnmount()`: Được gọi trước khi component bị hủy bỏ và bị gỡ khỏi DOM. Bạn nên dọn dẹp các tài nguyên không cần thiết ở đây, như huỷ các subscriptions, hủy các kết nối mạng, v.v.
+
+		Ngoài ra, từ phiên bản React 16.3 trở đi, một số phương thức life cycle đã bị lược bỏ và thay thế bằng các phương thức mới để đảm bảo hiệu suất tốt hơn và hỗ trợ React Hooks. Ví dụ, `componentWillReceiveProps()` đã bị thay thế bằng `static getDerivedStateFromProps()`, và `componentWillUpdate()` bị thay thế bằng `getSnapshotBeforeUpdate()`.
+
+Trong các phiên bản mới nhất của React, bạn cũng có thể sử dụng React Hooks để thay thế các phương thức life cycle và quản lý state một cách dễ dàng hơn.
+
+3. ``React hooks trong react js là gì ``
+	
+	React Hooks là một tính năng được giới thiệu trong phiên bản React 16.8, cho phép bạn sử dụng các tính năng của React như state và lifecycle trong các thành phần hàm (functional components) thay vì phải sử dụng các thành phần lớp (class components). Điều này giúp viết mã ngắn gọn hơn, dễ đọc và dễ quản lý hơn.
+
+	Các hooks được xây dựng sẵn trong React bao gồm:
+
+	1. **useState**: Dùng để thêm state vào trong functional component. Hook này giúp bạn theo dõi và cập nhật trạng thái của component. Ví dụ:
+
+	```jsx
+	import React, { useState } from 'react';
+
+	function Counter() {
+		const [count, setCount] = useState(0);
+
+		const increment = () => setCount(count + 1);
+		const decrement = () => setCount(count - 1);
+
+		return (
+			<div>
+				<p>Count: {count}</p>
+				<button onClick={increment}>Increment</button>
+				<button onClick={decrement}>Decrement</button>
+			</div>
+		);
+	}
+	```
+
+	2. **useEffect**: Dùng để thực hiện các tác vụ liên quan đến side-effect, chẳng hạn như thực hiện API call, đăng ký sự kiện DOM, và làm sạch tài nguyên không cần thiết khi component bị hủy bỏ. Ví dụ:
+
+	```jsx
+	import React, { useState, useEffect } from 'react';
+
+	function Example() {
+		const [data, setData] = useState(null);
+
+		useEffect(() => {
+			fetch('https://api.example.com/data')
+				.then(response => response.json())
+				.then(data => setData(data))
+				.catch(error => console.error(error));
+		}, []);
+
+		return (
+			<div>
+				{data ? <p>Data: {data}</p> : <p>Loading...</p>}
+			</div>
+		);
+	}
+	```
+
+	3. **useContext**: Dùng để truy cập context được tạo bởi `React.createContext` từ bất kỳ đâu trong component tree. Ví dụ:
+
+	```jsx
+	import React, { useContext } from 'react';
+	import { MyContext } from './MyContext';
+
+	function MyComponent() {
+		const data = useContext(MyContext);
+
+		return (
+			<div>
+				<p>Data from Context: {data}</p>
+			</div>
+		);
+	}
+	```
+
+	4. **useReducer**: Dùng để quản lý state của component bằng cách sử dụng một reducer function, tương tự như Redux. Ví dụ:
+
+	```jsx
+	import React, { useReducer } from 'react';
+
+	const initialState = { count: 0 };
+
+	function reducer(state, action) {
+		switch (action.type) {
+			case 'INCREMENT':
+				return { count: state.count + 1 };
+			case 'DECREMENT':
+				return { count: state.count - 1 };
+			default:
+				return state;
+		}
+	}
+
+	function Counter() {
+		const [state, dispatch] = useReducer(reducer, initialState);
+
+		return (
+			<div>
+				<p>Count: {state.count}</p>
+				<button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+				<button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+			</div>
+		);
+	}
+	```
+
+	Với sự hỗ trợ của React Hooks, bạn có thể viết các functional component với khả năng quản lý state và side-effect như class component mà không cần sử dụng class và các phương thức lifecycle truyền thống. Điều này giúp mã ngắn gọn và dễ đọc hơn, cũng như giúp bạn tận dụng các tính năng mới của React một cách hiệu quả.
+
+4. ``useEffect trong reactjs là gì ? Cách thức sử dụng useEffect trong reactjs ?``
+	
+	Trong React, `useEffect` là một trong những React Hook cơ bản, cho phép bạn thực hiện các side-effect trong functional components. Side-effect là những tác vụ không liên quan trực tiếp đến việc render giao diện, chẳng hạn như gọi API, đăng ký sự kiện DOM, hoặc làm sạch tài nguyên không cần thiết.
+
+	Cách sử dụng `useEffect`:
+
+	1. **Cài đặt `useEffect`**: Bạn có thể sử dụng `useEffect` bằng cách import nó từ thư viện React và gọi nó trong functional component. `useEffect` nhận vào một hàm callback làm tham số đầu tiên, và một mảng tham số thứ hai (tuỳ chọn) chứa các dependencies.
+
+	```jsx
+	import React, { useEffect } from 'react';
+
+	function MyComponent() {
+		useEffect(() => {
+			// Thực hiện các tác vụ side-effect ở đây
+			console.log('Component đã được render');
+
+			// Return một hàm clean-up (tuỳ chọn)
+			return () => {
+				console.log('Component bị hủy bỏ');
+			};
+		}, []);
+		
+		return <div>My Component</div>;
+	}
+	```
+
+	2. **Dependency Array**: Tham số thứ hai của `useEffect` là một mảng chứa các dependencies (phụ thuộc). Nếu bạn muốn `useEffect` chỉ được gọi lại khi các giá trị trong mảng dependencies thay đổi, bạn nên cung cấp mảng dependencies này. Nếu mảng dependencies trống (không chứa bất kỳ giá trị nào), `useEffect` chỉ được gọi một lần sau khi component được khởi tạo.
+
+	```jsx
+	import React, { useState, useEffect } from 'react';
+
+	function Counter() {
+		const [count, setCount] = useState(0);
+
+		useEffect(() => {
+			console.log('Component đã render hoặc count thay đổi');
+		}, [count]);
+		
+		return (
+			<div>
+				<p>Count: {count}</p>
+				<button onClick={() => setCount(count + 1)}>Increment</button>
+				<button onClick={() => setCount(count - 1)}>Decrement</button>
+			</div>
+		);
+	}
+	```
+
+	Trong ví dụ trên, khi bạn nhấn vào nút "Increment" hoặc "Decrement", state `count` thay đổi, từ đó sẽ gọi lại hàm callback trong `useEffect`, và xuất hiện thông báo "Component đã render hoặc count thay đổi" trên console.
+
+	3. **Clean-up function**: Bạn có thể sử dụng return của hàm callback trong `useEffect` để thực hiện các công việc dọn dẹp khi component bị hủy bỏ. Điều này giúp tránh rò rỉ bộ nhớ và quản lý tài nguyên một cách tốt hơn.
+
+	```jsx
+	import React, { useEffect } from 'react';
+
+	function MyComponent() {
+		useEffect(() => {
+			console.log('Component đã được render');
+
+			// Return một hàm clean-up
+			return () => {
+				console.log('Component bị hủy bỏ');
+				// Thực hiện các tác vụ dọn dẹp (nếu cần)
+			};
+		}, []);
+		
+		return <div>My Component</div>;
+	}
+	```
+
+	Khi component bị hủy bỏ, `useEffect` sẽ gọi hàm clean-up trước khi nó bị hủy, cho phép bạn làm sạch dữ liệu và huỷ các subscriptions hoặc đăng ký sự kiện.
+
 # Javascripts
 
 ## ES6 trong Javascript 
@@ -255,6 +471,307 @@ ES7 (ECMAScript 2016) là một phiên bản tiêu chuẩn của ngôn ngữ Jav
 
 	Strict Mode is a new feature in ECMAScript 5 that allows you to place a program, or a function, in a "strict" operating context. This strict context prevents certain actions from being taken and throws more exceptions.
 
+3. `` Array method trong javascript ``
+
+	JavaScript cung cấp nhiều phương thức có sẵn để làm việc với mảng. Dưới đây là một số array method thông dụng và cách sử dụng chúng:
+
+	1. **Array.prototype.forEach()**: Dùng để lặp qua từng phần tử của mảng và thực hiện một hành động nào đó trên từng phần tử.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	numbers.forEach((number) => {
+		console.log(number);
+	});
+	```
+
+	2. **Array.prototype.map()**: Dùng để tạo một mảng mới bằng cách ánh xạ (mapping) qua từng phần tử của mảng gốc.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	const doubledNumbers = numbers.map((number) => {
+		return number * 2;
+	});
+
+	console.log(doubledNumbers); // Output: [2, 4, 6, 8]
+	```
+
+	3. **Array.prototype.filter()**: Dùng để tạo một mảng mới chỉ chứa các phần tử thỏa mãn điều kiện trong hàm callback.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	const evenNumbers = numbers.filter((number) => {
+		return number % 2 === 0;
+	});
+
+	console.log(evenNumbers); // Output: [2, 4]
+	```
+
+	4. **Array.prototype.reduce()**: Dùng để tích hợp các phần tử của mảng lại thành một giá trị duy nhất.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	const sum = numbers.reduce((accumulator, currentValue) => {
+		return accumulator + currentValue;
+	}, 0);
+
+	console.log(sum); // Output: 10
+	```
+
+	5. **Array.prototype.find()**: Dùng để tìm phần tử đầu tiên trong mảng thỏa mãn điều kiện trong hàm callback.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	const foundNumber = numbers.find((number) => {
+		return number > 2;
+	});
+
+	console.log(foundNumber); // Output: 3
+	```
+
+	6. **Array.prototype.findIndex()**: Tương tự như `find()`, nhưng trả về chỉ số của phần tử thỏa mãn điều kiện.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	const foundIndex = numbers.findIndex((number) => {
+		return number > 2;
+	});
+
+	console.log(foundIndex); // Output: 2 (Chỉ số của số 3)
+	```
+
+	7. **Array.prototype.some()**: Kiểm tra xem có ít nhất một phần tử trong mảng thỏa mãn điều kiện trong hàm callback hay không.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	const hasEvenNumber = numbers.some((number) => {
+		return number % 2 === 0;
+	});
+
+	console.log(hasEvenNumber); // Output: true
+	```
+
+	8. **Array.prototype.every()**: Kiểm tra xem tất cả các phần tử trong mảng có thỏa mãn điều kiện trong hàm callback hay không.
+
+	```javascript
+	const numbers = [1, 2, 3, 4];
+
+	const allEvenNumbers = numbers.every((number) => {
+		return number % 2 === 0;
+	});
+
+	console.log(allEvenNumbers); // Output: false
+	```
+
+	Đây chỉ là một số ví dụ về array method trong JavaScript. Có nhiều array method khác nữa, hãy tìm hiểu thêm để tận dụng tối đa các tính năng mạnh mẽ của mảng trong JavaScript.
+
+4. ``String method trong javascript ? ``
+
+	JavaScript cung cấp nhiều phương thức (method) để làm việc với chuỗi (string). Dưới đây là một số string method phổ biến và cách sử dụng chúng:
+
+	1. **String.prototype.length**: Trả về độ dài của chuỗi.
+
+	```javascript
+	const myString = "Hello, world!";
+	const length = myString.length;
+	console.log(length); // Output: 13
+	```
+
+	2. **String.prototype.indexOf()**: Tìm vị trí đầu tiên của một chuỗi con trong chuỗi ban đầu. Trả về chỉ số của ký tự đầu tiên nếu tìm thấy, hoặc -1 nếu không tìm thấy.
+
+	```javascript
+	const myString = "Hello, world!";
+	const index = myString.indexOf("world");
+	console.log(index); // Output: 7
+	```
+
+	3. **String.prototype.lastIndexOf()**: Tìm vị trí cuối cùng của một chuỗi con trong chuỗi ban đầu. Trả về chỉ số của ký tự đầu tiên nếu tìm thấy, hoặc -1 nếu không tìm thấy.
+
+	```javascript
+	const myString = "Hello, world!";
+	const lastIndex = myString.lastIndexOf("o");
+	console.log(lastIndex); // Output: 8
+	```
+
+	4. **String.prototype.slice()**: Trích xuất một phần của chuỗi dựa trên chỉ số bắt đầu và kết thúc.
+
+	```javascript
+	const myString = "Hello, world!";
+	const extractedString = myString.slice(0, 5);
+	console.log(extractedString); // Output: "Hello"
+	```
+
+	5. **String.prototype.substring()**: Tương tự như `slice()`, nhưng không cho phép chỉ số âm.
+
+	```javascript
+	const myString = "Hello, world!";
+	const extractedString = myString.substring(0, 5);
+	console.log(extractedString); // Output: "Hello"
+	```
+
+	6. **String.prototype.substr()**: Trích xuất một phần của chuỗi dựa trên chỉ số bắt đầu và độ dài của chuỗi con.
+
+	```javascript
+	const myString = "Hello, world!";
+	const extractedString = myString.substr(0, 5);
+	console.log(extractedString); // Output: "Hello"
+	```
+
+	7. **String.prototype.replace()**: Thay thế một chuỗi con bằng một chuỗi khác trong chuỗi ban đầu.
+
+	```javascript
+	const myString = "Hello, world!";
+	const replacedString = myString.replace("world", "universe");
+	console.log(replacedString); // Output: "Hello, universe!"
+	```
+
+	8. **String.prototype.toUpperCase()**: Chuyển đổi chuỗi thành dạng chữ in hoa.
+
+	```javascript
+	const myString = "Hello, world!";
+	const upperCaseString = myString.toUpperCase();
+	console.log(upperCaseString); // Output: "HELLO, WORLD!"
+	```
+
+	9. **String.prototype.toLowerCase()**: Chuyển đổi chuỗi thành dạng chữ thường.
+
+	```javascript
+	const myString = "Hello, world!";
+	const lowerCaseString = myString.toLowerCase();
+	console.log(lowerCaseString); // Output: "hello, world!"
+	```
+
+	10. **String.prototype.trim()**: Loại bỏ khoảng trắng (hoặc các ký tự khác nếu được chỉ định) từ hai đầu chuỗi.
+
+	```javascript
+	const myString = "   Hello, world!   ";
+	const trimmedString = myString.trim();
+	console.log(trimmedString); // Output: "Hello, world!"
+	```
+
+	Đây là một số string method trong JavaScript. Có nhiều method khác nữa, hãy tìm hiểu thêm để sử dụng chúng trong công việc của bạn.
+
+5. ``Object method trong javascript ?``
+
+	JavaScript cung cấp một số phương thức (method) có sẵn cho đối tượng (object). Dưới đây là một số object method phổ biến và cách sử dụng chúng:
+
+	1. **Object.keys()**: Trả về một mảng chứa tất cả các khóa (keys) của đối tượng.
+
+	```javascript
+	const myObject = {
+		name: "John",
+		age: 30,
+		occupation: "Engineer",
+	};
+
+	const keys = Object.keys(myObject);
+	console.log(keys); // Output: ["name", "age", "occupation"]
+	```
+
+	2. **Object.values()**: Trả về một mảng chứa tất cả các giá trị (values) của đối tượng.
+
+	```javascript
+	const myObject = {
+		name: "John",
+		age: 30,
+		occupation: "Engineer",
+	};
+
+	const values = Object.values(myObject);
+	console.log(values); // Output: ["John", 30, "Engineer"]
+	```
+
+	3. **Object.entries()**: Trả về một mảng chứa các cặp [key, value] của đối tượng.
+
+	```javascript
+	const myObject = {
+		name: "John",
+		age: 30,
+		occupation: "Engineer",
+	};
+
+	const entries = Object.entries(myObject);
+	console.log(entries);
+	// Output:
+	// [["name", "John"], ["age", 30], ["occupation", "Engineer"]]
+	```
+
+	4. **Object.assign()**: Kết hợp các đối tượng thành một đối tượng mới hoặc cập nhật các thuộc tính của đối tượng đích với các thuộc tính từ các đối tượng nguồn.
+
+	```javascript
+	const obj1 = { a: 1, b: 2 };
+	const obj2 = { c: 3, d: 4 };
+
+	const combinedObject = Object.assign({}, obj1, obj2);
+	console.log(combinedObject);
+	// Output: { a: 1, b: 2, c: 3, d: 4 }
+	```
+
+	5. **Object.create()**: Tạo một đối tượng mới với nguyên mẫu đã cho.
+
+	```javascript
+	const personPrototype = {
+		introduce() {
+			console.log(`Hi, my name is ${this.name} and I am ${this.age} years old.`);
+		},
+	};
+
+	const john = Object.create(personPrototype);
+	john.name = "John";
+	john.age = 30;
+
+	john.introduce(); // Output: "Hi, my name is John and I am 30 years old."
+	```
+
+	6. **Object.hasOwnProperty()**: Kiểm tra xem một thuộc tính có tồn tại trong đối tượng không (không kiểm tra thuộc tính kế thừa).
+
+	```javascript
+	const myObject = {
+		name: "John",
+		age: 30,
+	};
+
+	console.log(myObject.hasOwnProperty("name")); // Output: true
+	console.log(myObject.hasOwnProperty("occupation")); // Output: false
+	```
+
+	7. **Object.freeze()**: Đóng băng đối tượng, ngăn không cho thay đổi các thuộc tính của nó.
+
+	```javascript
+	const myObject = {
+		name: "John",
+		age: 30,
+	};
+
+	Object.freeze(myObject);
+	myObject.age = 40;
+	console.log(myObject); // Output: { name: "John", age: 30 }
+	```
+
+	8. **Object.seal()**: Seals (niêm phong) đối tượng, cho phép chỉnh sửa các thuộc tính hiện có của nó, nhưng không thể thêm hoặc xóa thuộc tính.
+
+	```javascript
+	const myObject = {
+		name: "John",
+		age: 30,
+	};
+
+	Object.seal(myObject);
+	myObject.age = 40; // Có thể chỉnh sửa giá trị của thuộc tính age
+	myObject.occupation = "Engineer"; // Không thể thêm thuộc tính mới
+	delete myObject.name; // Không thể xóa thuộc tính
+	console.log(myObject); // Output: { name: "John", age: 40 }
+	```
+
+	Đây là một số object method trong JavaScript. Hãy tìm hiểu thêm để tận dụng các phương thức mạnh mẽ này khi làm việc với đối tượng trong JavaScript.
+
+
 # Typescript 
 	
 Typescript compiles to Javascript và nó có thể execute bởi bất kỳ Javascript engine nào 
@@ -265,7 +782,7 @@ Lợi ích của Typescript
 - Type inference
 - Access to ES6 và ES7 features	
 
-1. Phân biệt interface và type trong typescript 
+1. ``Phân biệt interface và type trong typescript``
 
 	Trong TypeScript, interface và type đều được sử dụng để định nghĩa kiểu dữ liệu. Dưới đây là những điểm khác biệt chính giữa interface và type trong TypeScript:
 
@@ -283,7 +800,7 @@ Lợi ích của Typescript
 
 		Nhìn chung, nếu bạn cần định nghĩa hình dạng của một đối tượng, bao gồm các thuộc tính và phương thức, và có thể mô tả hành vi dự kiến, interface là lựa chọn tốt. Nếu bạn cần tính linh hoạt hơn, chẳng hạn như tạo kiểu hợp (union type) hoặc định nghĩa các kiểu dữ liệu phức tạp, type alias là lựa chọn phù hợp hơn. Tuy nhiên, interface và type alias thường có thể được sử dụng thay thế cho nhau, và việc chọn giữa chúng phụ thuộc vào yêu cầu cụ thể và thiết kế của dự án TypeScript của bạn.
 
-2. Khi nhấn lệnh yarn build thì chương trình sẽ làm gì trong một ứng dụng nodejs typescipt 
+2.	``Khi nhấn lệnh yarn build thì chương trình sẽ làm gì trong một ứng dụng nodejs typescipt ``
 
 	Khi bạn chạy lệnh `yarn build` trong một ứng dụng Node.js TypeScript, thường sẽ có một quy trình build được thực hiện để biên dịch và tạo ra phiên bản sản phẩm của ứng dụng. Dưới đây là các bước phổ biến trong quá trình build một ứng dụng Node.js TypeScript:
 
@@ -299,7 +816,7 @@ Lợi ích của Typescript
 
 	Các bước và công đoạn trong quá trình build có thể thay đổi tùy thuộc vào cấu hình và yêu cầu của dự án cụ thể.
 
-3. Phân biệt yarn build và yarn run build 
+3.	`` Phân biệt yarn build và yarn run build ``
 
 	Trong `yarn`, có sự khác biệt giữa lệnh `yarn build` và `yarn run build`. Dưới đây là sự phân biệt giữa hai lệnh này:
 
@@ -309,7 +826,7 @@ Lợi ích của Typescript
 
 	Tóm lại, `yarn build` thực thi script có tên `build` trong phần `"scripts"` của `package.json`, trong khi `yarn run build` thực thi một script có tên `build` mà không cần phải khai báo trong `package.json`.
 
-4. Phân biệt file `.d.ts` và `.ts`
+4.  Phân biệt file `.d.ts` và `.ts`
 
 	Trong TypeScript, có hai loại tệp tin phổ biến có phần mở rộng `.d.ts` và `.ts`. Dưới đây là sự phân biệt giữa hai loại tệp tin này:
 
@@ -515,8 +1032,6 @@ The cause of callback hell is when people try to write JavaScript in a way where
 	Ví dụ, trong một dự án Node.js TypeScript, lệnh `yarn clean` có thể được cấu hình để xóa các tệp tin biên dịch JavaScript, tệp tin tạm thời, bộ nhớ cache hoặc bất kỳ tệp tin khác không cần thiết nào mà bạn muốn loại bỏ để làm sạch dự án.
 
 	Tuy nhiên, cách cấu hình và hiệu thực lệnh `yarn clean` sẽ phụ thuộc vào cấu trúc thư mục và quy trình xây dựng của dự án cụ thể. Nếu bạn đang làm việc trên một dự án cụ thể, tốt nhất là xem tài liệu hoặc tìm hiểu từ nguồn gốc của dự án để biết cách lệnh `yarn clean` được sử dụng và được cấu hình như thế nào trong dự án của bạn.
-
-# React
 	 
 # Test
 - UnitTest:  Bảo vệ code khi sửa code trong tương lai, tránh lỗi của quá khứ', mục tiêu của unit test là cô lập một phần code và xác minh tính chính xác của đoạn code đó 
@@ -774,7 +1289,7 @@ LoopBack là một framework phát triển ứng dụng web và API được xâ
 
 Tóm lại, LoopBack là một framework mạnh mẽ cho phát triển ứng dụng web và API, với khả năng tích hợp dữ liệu linh hoạt, tạo API nhanh chóng và hỗ trợ bảo mật. Nó cũng cho phép phát triển trên nhiều nền tảng và cung cấp nhiều tiện ích và thư viện mở rộng để tăng cường khả năng phát triển của bạn.
 
-## INTERCEPTOR 
+### INTERCEPTOR 
 Trong LoopBack 4, Interceptor là một khái niệm quan trọng để kiểm soát và thay đổi luồng xử lý của các yêu cầu và phản hồi trong ứng dụng. Interceptor cho phép bạn thực hiện các hành động trước và sau khi yêu cầu được xử lý bởi các thành phần khác trong ứng dụng.
 
 Interceptor có thể được sử dụng để thực hiện các tác vụ như:
