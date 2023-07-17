@@ -1037,18 +1037,19 @@ The cause of callback hell is when people try to write JavaScript in a way where
 - UnitTest:  Bảo vệ code khi sửa code trong tương lai, tránh lỗi của quá khứ', mục tiêu của unit test là cô lập một phần code và xác minh tính chính xác của đoạn code đó 
 
 # Back end
-1. Microservice và Monolithic khác nhau ở chỗ nào? Ưu nhược điểm mỗi thứ so với nhau:
+1. ``Microservice và Monolithic khác nhau ở chỗ nào? Ưu nhược điểm mỗi thứ so với nhau``
 
  	- Monolithic: Trong kiến trúc Monolithic, toàn bộ ứng dụng được xây dựng và triển khai như một đơn vị duy nhất. Tất cả các thành phần của ứng dụng chia sẻ cùng một cơ sở dữ liệu và quy trình thực thi. Ưu điểm của Monolithic là dễ triển khai và quản lý đơn giản, phù hợp cho các ứng dụng nhỏ và đơn giản. Nhược điểm là khả năng mở rộng hạn chế, việc thay đổi và bảo trì khó khăn, và khi một thành phần gặp vấn đề, toàn bộ hệ thống có thể bị ảnh hưởng.
 
 	- Microservice: Trong kiến trúc Microservice, ứng dụng được chia thành các thành phần nhỏ gọn và độc lập, được gọi là microservice, mỗi service có thể triển khai và quản lý riêng biệt. Các microservice giao tiếp thông qua các giao thức như HTTP hoặc message queue. Ưu điểm của Microservice là khả năng mở rộng linh hoạt, dễ dàng thay đổi và triển khai các thành phần riêng lẻ, khả năng phân tán phát triển và tối ưu hóa hiệu suất. Nhược điểm là phức tạp hóa quản lý, khó khăn trong việc điều phối các service và tăng khả năng lỗi do mạng hoặc sự phụ thuộc giữa các service.
 
-2. Clean architecture là gì ? ví dụ về clean architecture:
-	- Clean Architecture là một kiến trúc phần mềm đề xuất bởi Robert C. Martin (còn được gọi là Uncle Bob). Nó tách biệt các thành phần của một ứng dụng thành các lớp độc lập và định nghĩa rõ ràng các quy tắc và giới hạn giữa chúng. Mục tiêu chính của Clean Architecture là tạo ra một hệ thống dễ bảo trì, dễ mở rộng và độc lập với các công nghệ cụ thể.
+2.`` Clean architecture là gì ? ví dụ về clean architecture``
 
-	- Clean Architecture tuân thủ nguyên tắc SOLID (Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion), và cung cấp một cách tiếp cận tổ chức mã nguồn tập trung vào sự phân chia rõ ràng giữa các thành phần, giúp giảm sự phụ thuộc giữa chúng và dễ dàng thay đổi hoặc thay thế một thành phần mà không ảnh hưởng đến các thành phần khác.
+Clean Architecture là một kiến trúc phần mềm đề xuất bởi Robert C. Martin (còn được gọi là Uncle Bob). Nó tách biệt các thành phần của một ứng dụng thành các lớp độc lập và định nghĩa rõ ràng các quy tắc và giới hạn giữa chúng. Mục tiêu chính của Clean Architecture là tạo ra một hệ thống dễ bảo trì, dễ mở rộng và độc lập với các công nghệ cụ thể.
 
-	- Một ví dụ về ứng dụng sử dụng Clean Architecture là ứng dụng Android chứa các thành phần sau:
+Clean Architecture tuân thủ nguyên tắc SOLID (Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion), và cung cấp một cách tiếp cận tổ chức mã nguồn tập trung vào sự phân chia rõ ràng giữa các thành phần, giúp giảm sự phụ thuộc giữa chúng và dễ dàng thay đổi hoặc thay thế một thành phần mà không ảnh hưởng đến các thành phần khác.
+
+Một ví dụ về ứng dụng sử dụng Clean Architecture là ứng dụng Android chứa các thành phần sau:
 
 		1. Domain Layer (Lớp Miền): Đây là lớp chứa luật kinh doanh, giao diện và logic của ứng dụng. Nó không phụ thuộc vào bất kỳ thư viện hay framework nào khác và định nghĩa các use case cốt lõi của ứng dụng. Ví dụ: quản lý người dùng, xử lý dữ liệu, các luật tính toán.
 
@@ -1060,11 +1061,12 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	- Clean Architecture giúp tách biệt các thành phần của ứng dụng và tạo ra một sự phụ thuộc lỏng lẻo giữa chúng. Điều này giúp cho việc kiểm thử, bảo trì, và mở rộng ứng dụng trở nên dễ dàng hơn 
 
-3. Phân biệt middleware và interceptor trong nestjs 
+3. ``Phân biệt middleware và interceptor trong nestjs`` 
   	-	NestJS Middleware và Interceptor trong NestJS là các cơ chế được cung cấp bởi framework NestJS để xử lý yêu cầu trước và sau khi chúng đi qua các endpoint. Tuy nhiên, có một số khác biệt:
 	 - Middleware: Là một hàm trung gian được gọi trước hoặc sau khi đi qua một endpoint. Middleware có thể thay đổi yêu cầu (request) hoặc phản hồi (response), và có khả năng chuyển quyền điều khiển cho middleware tiếp theo trong chuỗi middleware.
 	 - Interceptor: Là một lớp hoạt động như một bộ lọc cho yêu cầu và phản hồi. Nó có thể thực hiện các thao tác trước và sau khi xử lý yêu cầu. Interceptor không thay đổi yêu cầu hoặc phản hồi, nhưng có thể thực hiện các hành động bổ sung như ghi log, xử lý lỗi, thêm thông tin, vv.
-4. Trong Nestjs, decorator là gì 
+
+4. ``Trong Nestjs, decorator là gì`` 
 	- Trong NestJS, Decorator là một tính năng của TypeScript cho phép bạn thêm metadata và mở rộng hoặc thay đổi hành vi của các class, phương thức, thuộc tính và tham số.
 Một decorator hoạt động bằng cách áp dụng một hàm hoặc một class decorator lên một class, phương thức hoặc thuộc tính cụ thể. Decorator được áp dụng bằng cách đặt nó trước đối tượng mà bạn muốn thay đổi hoặc mở rộng. Decorator có thể thay đổi các thuộc tính, thêm chức năng hoặc thực hiện các logic bổ sung trước hoặc sau khi đối tượng được khởi tạo hoặc gọi.
 8a. Một decorator phổ biến trong NestJS là `@Injectable()`. Decorator này được sử dụng để đánh dấu một class là một provider có thể được inject vào các class khác thông qua dependency injection của NestJS. Ví dụ:
@@ -1076,7 +1078,8 @@ Một decorator hoạt động bằng cách áp dụng một hàm hoặc một c
 	```
 	Trong ví dụ trên, `@Injectable()` được áp dụng lên class `UserService` để đánh dấu nó là một provider có thể được inject vào các thành phần khác trong ứng dụng NestJS.
 
-5. Sequence trong nodejs là gì ? 
+5. ``Sequence trong nodejs là gì ?``
+
 	Trong Node.js, "sequence" là một thuật ngữ được sử dụng để chỉ một chuỗi các hàm hoặc middleware được thực thi theo một thứ tự nhất định.
 
 	Trong ngữ cảnh của Node.js và Express.js, một sequence thường được thực hiện như một chuỗi các middleware. Middleware là các hàm được gọi liên tiếp trong quá trình xử lý yêu cầu từ client và trước khi gửi phản hồi trả về client. Mỗi middleware có khả năng kiểm tra và thay đổi yêu cầu và phản hồi.
@@ -1115,28 +1118,96 @@ Một decorator hoạt động bằng cách áp dụng một hàm hoặc một c
 
 	Sequence (middleware sequence) là một khái niệm cơ bản và quan trọng trong Node.js và Express.js, cho phép bạn kiểm soát và mở rộng quy trình xử lý yêu cầu trong ứng dụng web.
 
-6. TypeOrm là gì ? 
+6.``TypeOrm là gì ? ``
 		
-	TypeORM là một thư viện ORM (Object-Relational Mapping) được phát triển cho Node.js và TypeScript. Nó cung cấp một cách thuận tiện để tương tác với cơ sở dữ liệu SQL mà không cần viết trực tiếp các truy vấn SQL.
 
-	Với TypeORM, bạn có thể định nghĩa các mô hình dữ liệu (entities) dưới dạng các lớp TypeScript, và TypeORM sẽ tự động tạo và quản lý cấu trúc bảng trong cơ sở dữ liệu tương ứng. Nó cung cấp các khái niệm như migrations (di chuyển cấu trúc cơ sở dữ liệu), associations (quan hệ giữa các bảng), lazy loading (tải dữ liệu theo yêu cầu), và nhiều tính năng khác để hỗ trợ quản lý cơ sở dữ liệu.
+TypeORM là một thư viện ORM (Object-Relational Mapping) được phát triển cho Node.js và TypeScript. Nó cung cấp một cách thuận tiện để tương tác với cơ sở dữ liệu SQL mà không cần viết trực tiếp các truy vấn SQL.
 
-	Một số tính năng và lợi ích chính của TypeORM bao gồm:
+Với TypeORM, bạn có thể định nghĩa các mô hình dữ liệu (entities) dưới dạng các lớp TypeScript, và TypeORM sẽ tự động tạo và quản lý cấu trúc bảng trong cơ sở dữ liệu tương ứng. Nó cung cấp các khái niệm như migrations (di chuyển cấu trúc cơ sở dữ liệu), associations (quan hệ giữa các bảng), lazy loading (tải dữ liệu theo yêu cầu), và nhiều tính năng khác để hỗ trợ quản lý cơ sở dữ liệu.
 
-	1. Hỗ trợ nhiều cơ sở dữ liệu: TypeORM hỗ trợ nhiều hệ quản trị cơ sở dữ liệu như MySQL, PostgreSQL, SQLite, SQL Server và Oracle Database.
+Một số tính năng và lợi ích chính của TypeORM bao gồm:
 
-	2. Tích hợp ORM: TypeORM cung cấp một lớp trừu tượng hóa dữ liệu (ORM) mạnh mẽ, cho phép bạn tương tác với cơ sở dữ liệu bằng cách sử dụng các phương thức và truy vấn trực tiếp trên các đối tượng mô hình.
+1. Hỗ trợ nhiều cơ sở dữ liệu: TypeORM hỗ trợ nhiều hệ quản trị cơ sở dữ liệu như MySQL, PostgreSQL, SQLite, SQL Server và Oracle Database.
 
-	3. Migrations: TypeORM cho phép bạn quản lý và thực thi các migrations để thay đổi cấu trúc cơ sở dữ liệu một cách an toàn và kiểm soát được phiên bản cơ sở dữ liệu.
+2. Tích hợp ORM: TypeORM cung cấp một lớp trừu tượng hóa dữ liệu (ORM) mạnh mẽ, cho phép bạn tương tác với cơ sở dữ liệu bằng cách sử dụng các phương thức và truy vấn trực tiếp trên các đối tượng mô hình.
 
-	4. Quan hệ và liên kết: Bạn có thể xác định các quan hệ giữa các bảng và sử dụng các phương thức như eager loading (tải dữ liệu cùng lúc) và lazy loading (tải dữ liệu theo yêu cầu) để tối ưu hóa việc truy xuất dữ liệu.
+3. Migrations: TypeORM cho phép bạn quản lý và thực thi các migrations để thay đổi cấu trúc cơ sở dữ liệu một cách an toàn và kiểm soát được phiên bản cơ sở dữ liệu.
 
-	5. Query builder: TypeORM cung cấp một query builder mạnh mẽ, giúp bạn tạo các truy vấn phức tạp bằng cách sử dụng các phương thức dễ đọc và mạnh mẽ.
+4. Quan hệ và liên kết: Bạn có thể xác định các quan hệ giữa các bảng và sử dụng các phương thức như eager loading (tải dữ liệu cùng lúc) và lazy loading (tải dữ liệu theo yêu cầu) để tối ưu hóa việc truy xuất dữ liệu.
 
-	6. Tích hợp TypeScript: TypeORM được viết bằng TypeScript và hỗ trợ đầy đủ các tính năng của TypeScript như kiểu dữ liệu tĩnh, gợi ý mã, và định nghĩa mô hình dữ liệu với các kiểu dữ liệu tùy chỉnh.
+5. Query builder: TypeORM cung cấp một query builder mạnh mẽ, giúp bạn tạo các truy vấn phức tạp bằng cách sử dụng các phương thức dễ đọc và mạnh mẽ.
+
+6. Tích hợp TypeScript: TypeORM được viết bằng TypeScript và hỗ trợ đầy đủ các tính năng của TypeScript như kiểu dữ liệu tĩnh, gợi ý mã, và định nghĩa mô hình dữ liệu với các kiểu dữ liệu tùy chỉnh.
 
 	TypeORM là một thư viện phổ biến và mạnh mẽ trong cộng đồng Node.js và TypeScript, cho phép bạn dễ dàng làm việc với cơ sở dữ liệu SQL và tận dụng các lợi ích của ORM trong quá trình phát triển ứng dụng.
 
+7.`` Pipe trong nestjs là gì ``
+
+Trong NestJS, "pipe" là một khái niệm quan trọng trong việc xử lý dữ liệu đầu vào trước khi nó được chuyển đến các route handlers (controllers) hoặc truyền vào các service. Pipe được sử dụng để kiểm tra, chuyển đổi và làm sạch dữ liệu đầu vào, đảm bảo rằng nó phù hợp với yêu cầu và tiêu chuẩn được định nghĩa trước khi xử lý.
+
+Cơ chế của pipe giống như một "ống nước" trong hệ thống đường ống, nơi dữ liệu được chạy qua và được xử lý theo các bước khác nhau để cuối cùng có kết quả xử lý.
+
+NestJS cung cấp một số pipe tích hợp sẵn, bao gồm:
+
+1. ValidationPipe: Kiểm tra và chuyển đổi dữ liệu đầu vào dựa trên các quy tắc validation (kiểm tra tính hợp lệ). Nếu dữ liệu không hợp lệ, pipe sẽ tự động trả về các thông báo lỗi.
+
+2. ParseIntPipe: Chuyển đổi tham số đầu vào thành số nguyên (integer). Nếu giá trị không thể chuyển đổi, pipe sẽ trả về lỗi Bad Request.
+
+3. ParseBoolPipe: Chuyển đổi tham số đầu vào thành giá trị boolean (true hoặc false).
+
+4. DefaultValuePipe: Cung cấp giá trị mặc định cho tham số đầu vào nếu tham số không được cung cấp.
+
+Và còn nhiều loại pipe khác mà bạn có thể tùy chỉnh hoặc tạo mới theo yêu cầu của ứng dụng. Điều này cho phép bạn xử lý dữ liệu đầu vào một cách linh hoạt và đáng tin cậy.
+
+8. ``Guard trong nestjs là gì ?``
+
+	Trong NestJS, "guard" là một thành phần quan trọng để kiểm tra xác thực (authentication) và phân quyền (authorization) trước khi cho phép yêu cầu truy cập vào các route handlers (controllers). Guard giúp bảo vệ các endpoint của ứng dụng bằng cách kiểm tra các điều kiện nhất định trước khi chúng được xử lý.
+
+	Cách sử dụng Guard trong NestJS theo hướng dẫn từ trang chính của NestJS docs:
+
+	1. Định nghĩa một Guard:
+
+	Để tạo một Guard, bạn cần triển khai một lớp (class) và cài đặt interface `CanActivate`, `CanActivate`, `CanActivate`, `CanActivate`, `CanActivate`, hoặc `CanActivate`. Bạn phải cài đặt phương thức `canActivate`, nơi bạn đặt các điều kiện xác thực hoặc phân quyền của riêng bạn. Ví dụ:
+
+	```typescript
+	import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+	import { Observable } from 'rxjs';
+
+	@Injectable()
+	export class MyGuard implements CanActivate {
+		canActivate(
+			context: ExecutionContext,
+		): boolean | Promise<boolean> | Observable<boolean> {
+			// Đặt điều kiện xác thực hoặc phân quyền của bạn ở đây
+			// Return true nếu yêu cầu được phép truy cập, ngược lại, return false
+			return true;
+		}
+	}
+	```
+
+	2. Áp dụng Guard trên một route handler (controller):
+
+	Để sử dụng Guard, bạn cần áp dụng nó trên một route handler (controller) bằng cách sử dụng decorator `@UseGuards` và truyền tên của Guard bạn đã định nghĩa. Ví dụ:
+
+	```typescript
+	import { Controller, Get, UseGuards } from '@nestjs/common';
+	import { MyGuard } from './path/to/my.guard';
+
+	@Controller('cats')
+	@UseGuards(MyGuard)
+	export class CatsController {
+		@Get()
+		findAll(): string {
+			return 'This action is protected by my guard!';
+		}
+	}
+	```
+
+	Trong ví dụ trên, mọi yêu cầu truy cập vào route '/cats' sẽ phải vượt qua `MyGuard` trước khi được xử lý.
+
+	Lưu ý rằng, bạn cũng có thể áp dụng Guard ở cấp module hoặc cấp handler thay vì áp dụng trực tiếp trên cấp controller.
+
+	Trên thực tế, bạn có thể tạo nhiều loại Guard khác nhau để xác thực người dùng, kiểm tra quyền truy cập, kiểm tra token xác thực, và nhiều điều kiện khác. NestJS cung cấp sự linh hoạt cao khi sử dụng Guard để đảm bảo an toàn cho ứng dụng của bạn.
 # Database
 ## SQL  
 ### SQL (Structured Query Language) là một ngôn ngữ lập trình dùng để truy vấn và quản lý cơ sở dữ liệu quan hệ (Relational Database Management System - RDBMS). SQL được thiết kế để thao tác dữ liệu trong các hệ thống quản lý cơ sở dữ liệu quan hệ như MySQL, Oracle, SQL Server, PostgreSQL, và SQLite.
@@ -1344,7 +1415,6 @@ export class MyApplication extends Application {
 ```
 
 Lưu ý rằng Interceptor trong LoopBack 4 được thực hiện theo kiểu "Chuỗi Interceptor" (Interceptor Chain), trong đó mỗi Interceptor có thể được đăng ký và chạy tuần tự theo thứ tự xác định.
-
 
 
 # REDIS 
