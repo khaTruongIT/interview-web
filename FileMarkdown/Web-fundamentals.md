@@ -207,6 +207,8 @@ Web Fundamentals
 		- Assets Management & Transformation: FE build tool giúp quản lý và tối ưu nhiều loại tài nguyên như ảnh font chữ, stylesheeets. Có thể tự động nén ảnh và sinh ra bản tối ưu hơn cho kích thước của màn hình
 		- Development Workflow Enhancements: build tools cung cấp những feature như hot reloading (browser tự động refresh khi có thay đổi), hot module replacement (chỉ update module thay vì reload lại cả page), error reporting để cải thiện quá trình code của developer.
 		- Cross-Browser Compatibility: tự động add các prefix cần thiết cho CSS properties, đảm báo style correct khi dùng giữa các browser khác nhau.
+
+
 	1. ``Những điểm khác nhau giữa NEXTJS và REACTJS là gì ``\
 		Next.js và React.js là hai công nghệ phổ biến trong việc phát triển ứng dụng web. Dưới đây là những điểm khác nhau chính giữa chúng:
 		1. **Khung ứng dụng và tích hợp SSR (Server-Side Rendering):**
@@ -771,6 +773,56 @@ ES7 (ECMAScript 2016) là một phiên bản tiêu chuẩn của ngôn ngữ Jav
 
 	Đây là một số object method trong JavaScript. Hãy tìm hiểu thêm để tận dụng các phương thức mạnh mẽ này khi làm việc với đối tượng trong JavaScript.
 
+6. ``Phân biệt local storage, session storage, cookie ``
+
+	Dưới đây là sự phân biệt giữa Session Storage, Local Storage và Cookies, cùng với cách sử dụng chúng trong JavaScript:
+
+	1. **Session Storage:**
+		- **Phạm vi:** Dữ liệu chỉ tồn tại trong suốt phiên làm việc của trang.
+		- **Kích thước lưu trữ:** Thường giới hạn khoảng 5-10 MB tuỳ thuộc vào trình duyệt.
+		- **Sử dụng:** Session Storage thích hợp để lưu trữ dữ liệu tạm thời trong suốt quá trình người dùng truy cập trang web. Dữ liệu sẽ bị xóa khi trình duyệt đóng tab hoặc cửa sổ.
+
+		```javascript
+		// Lưu trữ dữ liệu vào Session Storage
+		sessionStorage.setItem('key', 'value');
+
+		// Lấy dữ liệu từ Session Storage
+		const data = sessionStorage.getItem('key');
+		```
+
+	2. **Local Storage:**
+		- **Phạm vi:** Dữ liệu lưu trữ tồn tại vĩnh viễn trên thiết bị của người dùng, thậm chí sau khi trình duyệt đóng và mở lại.
+		- **Kích thước lưu trữ:** Thường giới hạn khoảng 5-10 MB tuỳ thuộc vào trình duyệt.
+		- **Sử dụng:** Local Storage thích hợp để lưu trữ dữ liệu lâu dài hoặc vĩnh viễn mà bạn muốn giữ nguyên kể cả khi người dùng tắt trình duyệt và quay lại sau này.
+
+		```javascript
+		// Lưu trữ dữ liệu vào Local Storage
+		localStorage.setItem('key', 'value');
+
+		// Lấy dữ liệu từ Local Storage
+		const data = localStorage.getItem('key');
+		```
+
+	3. **Cookies:**
+		- **Phạm vi:** Dữ liệu lưu trữ trên thiết bị của người dùng và có thể được đặt với thời hạn hết hạn. Cookies tồn tại sau khi trình duyệt đóng và mở lại, tùy thuộc vào thời hạn mà bạn đặt.
+		- **Kích thước lưu trữ:** Thường giới hạn khoảng 4 KB.
+		- **Sử dụng:** Cookies thường được sử dụng để lưu trữ thông tin như thông tin đăng nhập, giỏ hàng, cài đặt ngôn ngữ, v.v. Cookies sẽ được gửi cùng với mọi yêu cầu HTTP đến máy chủ, điều này làm cho chúng hữu ích cho việc lưu trữ dữ liệu có thể truy cập từ cả phía máy chủ và phía máy khách.
+
+		```javascript
+		// Đặt một cookie với thời hạn hết hạn (tính bằng ngày)
+		document.cookie = 'key=value; expires=Thu, 18 Jul 2024 12:00:00 UTC; path=/';
+
+		// Lấy giá trị của cookie bằng tên
+		function getCookie(name) {
+			const value = `; ${document.cookie}`;
+			const parts = value.split(`; ${name}=`);
+			if (parts.length === 2) return parts.pop().split(';').shift();
+		}
+		const data = getCookie('key');
+		```
+
+	Tùy theo mục đích và tính chất của dữ liệu mà bạn muốn lưu trữ, bạn có thể lựa chọn Session Storage, Local Storage hoặc Cookies để quản lý dữ liệu trong ứng dụng JavaScript của bạn.
+
 
 # Typescript 
 	
@@ -842,6 +894,44 @@ Lợi ích của Typescript
 		- Mã TypeScript trong các tệp tin `.ts` có thể sử dụng các tính năng của TypeScript như kiểu dữ liệu tĩnh, hỗ trợ kiểm tra kiểu dữ liệu tại thời gian biên dịch, kế thừa, giao diện, và các tính năng nâng cao khác của ngôn ngữ TypeScript.
 
 	Tóm lại, tệp tin `.d.ts` được sử dụng để cung cấp khai báo kiểu cho các thư viện JavaScript, trong khi tệp tin `.ts` chứa mã nguồn TypeScript cho dự án của bạn.
+
+5. ``Generic trong typescrcipt là gì ?``
+
+	Trong TypeScript, generics là một tính năng cho phép bạn định nghĩa các loại (types) hoặc hàm mà làm việc với một loạt các kiểu dữ liệu thay thế. Generics cho phép bạn tạo các thành phần động và linh hoạt, tức là bạn có thể sử dụng cùng một mã để xử lý nhiều kiểu dữ liệu khác nhau mà không cần viết lại mã cho từng kiểu riêng biệt.
+
+	Để định nghĩa generics trong TypeScript, bạn sử dụng các tham số kiểu (type parameter) để biểu thị kiểu dữ liệu đó sẽ được xác định sau khi generics được sử dụng. Cú pháp chung của generics trong TypeScript là:
+
+	```typescript
+	function functionName<T>(param: T): T {
+			// code implementation here
+	}
+	```
+
+	Trong đó, `T` là tham số kiểu (type parameter) và có thể là bất kỳ tên nào bạn muốn, nhưng thường là `T` để biểu thị "type". Khi bạn gọi hàm `functionName` và cung cấp kiểu dữ liệu cụ thể, TypeScript sẽ thay thế `T` bằng kiểu dữ liệu mà bạn đã cung cấp.
+
+	Ví dụ, ta có thể viết một hàm sử dụng generics để hoán đổi giá trị của hai biến:
+
+	```typescript
+	function swap<T>(a: T, b: T): void {
+			let temp: T = a;
+			a = b;
+			b = temp;
+	}
+
+	// Sử dụng generics để hoán đổi số nguyên
+	let num1: number = 5;
+	let num2: number = 10;
+	swap<number>(num1, num2);
+	console.log(num1, num2); // Output: 10, 5
+
+	// Sử dụng generics để hoán đổi chuỗi
+	let str1: string = "hello";
+	let str2: string = "world";
+	swap<string>(str1, str2);
+	console.log(str1, str2); // Output: "world", "hello"
+	```
+
+	Như bạn có thể thấy, generics cho phép hàm `swap` hoạt động với nhiều kiểu dữ liệu khác nhau, mà không cần viết lại mã cho từng kiểu cụ thể. Điều này giúp tăng tính linh hoạt và tái sử dụng trong mã TypeScript.
 
 # NODEJS 
 
@@ -1043,7 +1133,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	- Microservice: Trong kiến trúc Microservice, ứng dụng được chia thành các thành phần nhỏ gọn và độc lập, được gọi là microservice, mỗi service có thể triển khai và quản lý riêng biệt. Các microservice giao tiếp thông qua các giao thức như HTTP hoặc message queue. Ưu điểm của Microservice là khả năng mở rộng linh hoạt, dễ dàng thay đổi và triển khai các thành phần riêng lẻ, khả năng phân tán phát triển và tối ưu hóa hiệu suất. Nhược điểm là phức tạp hóa quản lý, khó khăn trong việc điều phối các service và tăng khả năng lỗi do mạng hoặc sự phụ thuộc giữa các service.
 
-2.`` Clean architecture là gì ? ví dụ về clean architecture``
+2.	`` Clean architecture là gì ? ví dụ về clean architecture``
 
 Clean Architecture là một kiến trúc phần mềm đề xuất bởi Robert C. Martin (còn được gọi là Uncle Bob). Nó tách biệt các thành phần của một ứng dụng thành các lớp độc lập và định nghĩa rõ ràng các quy tắc và giới hạn giữa chúng. Mục tiêu chính của Clean Architecture là tạo ra một hệ thống dễ bảo trì, dễ mở rộng và độc lập với các công nghệ cụ thể.
 
@@ -1143,21 +1233,86 @@ Một số tính năng và lợi ích chính của TypeORM bao gồm:
 
 7.`` Pipe trong nestjs là gì ``
 
-Trong NestJS, "pipe" là một khái niệm quan trọng trong việc xử lý dữ liệu đầu vào trước khi nó được chuyển đến các route handlers (controllers) hoặc truyền vào các service. Pipe được sử dụng để kiểm tra, chuyển đổi và làm sạch dữ liệu đầu vào, đảm bảo rằng nó phù hợp với yêu cầu và tiêu chuẩn được định nghĩa trước khi xử lý.
+Trong NestJS, "pipe" là một khái niệm được sử dụng để xử lý và kiểm tra dữ liệu đầu vào trước khi nó được đưa vào các controller hoặc handlers. Pipe cho phép bạn thực hiện các xử lý kiểm tra, biến đổi, hoặc xác thực dữ liệu đầu vào trước khi chúng được xử lý bởi các endpoint của ứng dụng NestJS.
 
-Cơ chế của pipe giống như một "ống nước" trong hệ thống đường ống, nơi dữ liệu được chạy qua và được xử lý theo các bước khác nhau để cuối cùng có kết quả xử lý.
+NestJS cung cấp một số pipe được tích hợp sẵn như `ValidationPipe`, `ParseIntPipe`, `ParseBoolPipe`, v.v. Bên cạnh đó, bạn cũng có thể tạo các pipe tùy chỉnh của riêng mình để đáp ứng các yêu cầu cụ thể của ứng dụng.
 
-NestJS cung cấp một số pipe tích hợp sẵn, bao gồm:
+Dưới đây là một ví dụ về cách sử dụng `ValidationPipe` trong NestJS:
 
-1. ValidationPipe: Kiểm tra và chuyển đổi dữ liệu đầu vào dựa trên các quy tắc validation (kiểm tra tính hợp lệ). Nếu dữ liệu không hợp lệ, pipe sẽ tự động trả về các thông báo lỗi.
+1. Đầu tiên, hãy cài đặt package class-validator và package class-transformer. Đây là hai package sẽ giúp chúng ta thực hiện kiểm tra và biến đổi dữ liệu.
 
-2. ParseIntPipe: Chuyển đổi tham số đầu vào thành số nguyên (integer). Nếu giá trị không thể chuyển đổi, pipe sẽ trả về lỗi Bad Request.
+```bash
+npm install class-validator class-transformer
+```
 
-3. ParseBoolPipe: Chuyển đổi tham số đầu vào thành giá trị boolean (true hoặc false).
+2. Tiếp theo, hãy sử dụng `ValidationPipe` trong controller. Giả sử chúng ta có một DTO (Data Transfer Object) là `CreateUserDto` để tạo người dùng mới với hai trường là `username` và `email`.
 
-4. DefaultValuePipe: Cung cấp giá trị mặc định cho tham số đầu vào nếu tham số không được cung cấp.
+```typescript
+// main.ts
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
-Và còn nhiều loại pipe khác mà bạn có thể tùy chỉnh hoặc tạo mới theo yêu cầu của ứng dụng. Điều này cho phép bạn xử lý dữ liệu đầu vào một cách linh hoạt và đáng tin cậy.
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  
+  // Sử dụng ValidationPipe với một số tùy chọn
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // Xóa các thuộc tính không được khai báo trong DTO
+    forbidNonWhitelisted: true, // Trả về lỗi nếu có thuộc tính không hợp lệ trong DTO
+    transform: true, // Biến đổi dữ liệu để phù hợp với kiểu dữ liệu trong DTO
+  }));
+  
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+3. Định nghĩa DTO `CreateUserDto` với class-validator decorators:
+
+```typescript
+// create-user.dto.ts
+import { IsString, IsEmail } from 'class-validator';
+
+export class CreateUserDto {
+  @IsString()
+  username: string;
+
+  @IsEmail()
+  email: string;
+}
+```
+
+4. Sử dụng DTO và pipe trong controller:
+
+```typescript
+// users.controller.ts
+import { Controller, Post, Body } from '@nestjs/common';
+import { CreateUserDto } from './create-user.dto';
+
+@Controller('users')
+export class UsersController {
+  @Post()
+  createUser(@Body() createUserDto: CreateUserDto) {
+    // Xử lý tạo người dùng với dữ liệu đã được kiểm tra và biến đổi
+    console.log(createUserDto);
+    return 'User created successfully!';
+  }
+}
+```
+
+Khi bạn gửi yêu cầu POST đến endpoint `/users` với dữ liệu hợp lệ như sau:
+
+```json
+{
+  "username": "john_doe",
+  "email": "john.doe@example.com"
+}
+```
+
+Pipe sẽ kiểm tra và biến đổi dữ liệu trong request body dựa trên DTO `CreateUserDto` và các class-validator decorators mà chúng ta đã định nghĩa. Nếu dữ liệu không hợp lệ (ví dụ: không có trường `username` hoặc email không đúng định dạng email), pipe sẽ tự động trả về các lỗi tương ứng.
+
+Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chuẩn hóa dữ liệu đầu vào của các endpoint, đảm bảo tính chính xác và an toàn cho ứng dụng của bạn.
 
 8. ``Guard trong nestjs là gì ?``
 
@@ -1202,6 +1357,52 @@ Và còn nhiều loại pipe khác mà bạn có thể tùy chỉnh hoặc tạo
 		}
 	}
 	```
+
+9. ``Interceptor trong nestjs là gì ? ``
+
+	Interceptor trong NestJS là các thành phần tương tự middleware, cho phép bạn can thiệp và sửa đổi các yêu cầu đến và phản hồi đi trong quá trình xử lý yêu cầu-phản hồi. Interceptor có thể được sử dụng cho nhiều mục đích khác nhau, chẳng hạn như ghi log, xử lý lỗi, biến đổi dữ liệu, xác thực, caching, v.v.
+
+	Để tạo một interceptor trong NestJS, bạn cần triển khai giao diện `NestInterceptor` hoặc sử dụng trình trang trí `@Injectable()` cùng với `@Interceptor()`. Dưới đây là một ví dụ về cách tạo một interceptor cơ bản:
+
+	```typescript
+	import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
+	import { Observable } from 'rxjs';
+
+	@Injectable()
+	export class MyInterceptor implements NestInterceptor {
+		intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+			// Đoạn mã được thực thi trước khi yêu cầu được xử lý bởi route handler
+			console.log('Trước khi xử lý yêu cầu...');
+
+			// Bạn có thể sửa đổi yêu cầu hoặc phản hồi ở đây nếu cần
+			// Ví dụ, bạn có thể sửa đổi dữ liệu phản hồi
+			return next.handle().pipe(
+				map(data => ({ message: 'Phản hồi đã được sửa đổi', data })),
+			);
+		}
+	}
+	```
+
+	Sau khi tạo interceptor của bạn, bạn có thể áp dụng nó cho một route handler cụ thể hoặc cho toàn bộ controller bằng cách sử dụng trình trang trí `@UseInterceptors()`:
+
+	```typescript
+	import { Controller, Get, UseInterceptors } from '@nestjs/common';
+	import { MyInterceptor } from './my.interceptor';
+
+	@Controller('ví dụ')
+	@UseInterceptors(MyInterceptor)
+	export class ExampleController {
+		@Get()
+		getData() {
+			return { message: 'Xin chào Thế giới!' };
+		}
+	}
+	```
+
+	Trong ví dụ này, `MyInterceptor` sẽ được thực thi trước khi phương thức `getData` của `ExampleController` được thực thi. Interceptor sẽ ghi log một thông điệp và sửa đổi dữ liệu phản hồi.
+
+	Interceptor cung cấp một cách mạnh mẽ để triển khai các mối quan tâm và logic xuyên suốt có thể áp dụng cho nhiều route hoặc controller trong ứng dụng NestJS của bạn.
+
 
 	Trong ví dụ trên, mọi yêu cầu truy cập vào route '/cats' sẽ phải vượt qua `MyGuard` trước khi được xử lý.
 
@@ -1322,6 +1523,258 @@ ORDER BY
 -	Nó luôn được sử dụng sau mệnh đề GROUP BY trong câu lệnh SELECT.
 -	Không bắt buộc phải sử dụng các hàm tổng hợp trong ORDER BY.
 -	Ở đây, tập hợp kết quả được sắp xếp dựa trên các giá trị thuộc tính của cột, theo thứ tự tăng dần hoặc giảm dần.
+
+1. `` FOREIGN KEY TRONG SQL LA GI  ``
+
+	Trong SQL, FOREIGN KEY (tạm dịch là "khóa ngoại") là một ràng buộc dữ liệu được sử dụng để liên kết hai bảng trong cơ sở dữ liệu. Nó xác định một quan hệ giữa hai bảng thông qua một trường hoặc một tập hợp các trường trong bảng.
+
+	Khi tạo một khóa ngoại, bạn định nghĩa rõ ràng rằng các giá trị trong trường hoặc tập hợp trường trong bảng hiện tại là liên kết với các giá trị trong trường hoặc tập hợp trường của bảng khác. Điều này giúp xây dựng mối quan hệ giữa hai bảng, cho phép bạn thực hiện các thao tác liên quan đến dữ liệu từ các bảng khác nhau.
+
+	Cú pháp tạo FOREIGN KEY trong SQL thường có dạng như sau:
+
+	```sql
+	CREATE TABLE table_name (
+			column1 data_type,
+			column2 data_type,
+			...,
+			FOREIGN KEY (column1, column2, ...) REFERENCES other_table (other_column1, other_column2, ...)
+	);
+	```
+
+	Trong đó:
+	- `table_name`: Tên bảng hiện tại.
+	- `column1, column2, ...`: Các trường trong bảng hiện tại được sử dụng làm khóa ngoại.
+	- `other_table`: Tên bảng mà trường khóa ngoại tham chiếu đến.
+	- `other_column1, other_column2, ...`: Các trường trong bảng tham chiếu được kết nối với các trường trong bảng hiện tại.
+
+	Một khi bạn đã định nghĩa khóa ngoại, việc thực hiện các thao tác JOIN hoặc truy vấn dữ liệu từ nhiều bảng liên quan sẽ trở nên dễ dàng và hiệu quả hơn. Khóa ngoại đóng vai trò quan trọng trong việc duy trì tính toàn vẹn và hợp lý của dữ liệu trong cơ sở dữ liệu.
+
+2 ``Bình thường hóa trong sql là gì``
+
+Bình thường hóa (Normalization) trong SQL là quá trình thiết kế cơ sở dữ liệu để giảm thiểu sự trùng lặp thông tin và đảm bảo tính toàn vẹn dữ liệu. Mục tiêu của bình thường hóa là tạo ra cấu trúc cơ sở dữ liệu tối ưu, giúp truy xuất và cập nhật dữ liệu dễ dàng và hiệu quả hơn.
+
+Quá trình bình thường hóa thường được thực hiện thông qua các bước sau:
+
+1. Bình thường hóa cấp 1 (1st Normal Form - 1NF): Đảm bảo mỗi ô dữ liệu trong bảng chỉ chứa một giá trị đơn. Bảng không chứa các trường lặp lại hoặc giá trị đa giá trị (multivalued attributes).
+
+2. Bình thường hóa cấp 2 (2nd Normal Form - 2NF): Bảng đã đạt 1NF và không có các thuộc tính phụ thuộc hàm trong phần còn lại của khóa chính. Trong trường hợp bảng có nhiều trường khóa, thì mỗi thuộc tính phải phụ thuộc vào toàn bộ khóa chính, không chỉ một phần của nó.
+
+3. Bình thường hóa cấp 3 (3rd Normal Form - 3NF): Bảng đã đạt 2NF và không có các phụ thuộc trực tiếp giữa các thuộc tính non-key (không phải là khóa chính). Mỗi thuộc tính non-key phụ thuộc duy nhất vào khóa chính.
+
+Ngoài ra, còn có các cấp bình thường hóa cao hơn như bình thường hóa cấp 4 (4th Normal Form - 4NF) và bình thường hóa cấp 5 (5th Normal Form - 5NF) tùy thuộc vào độ phức tạp và yêu cầu của cơ sở dữ liệu.
+
+Bình thường hóa giúp loại bỏ sự trùng lặp và đảm bảo tính toàn vẹn của dữ liệu, tăng cường hiệu suất và sự linh hoạt của cơ sở dữ liệu. Tuy nhiên, việc bình thường hóa cũng có thể làm tăng độ phức tạp trong việc truy xuất dữ liệu từ nhiều bảng liên quan, do đó, việc thiết kế cơ sở dữ liệu cần cân nhắc giữa hiệu quả và phức tạp trong môi trường ứng dụng cụ thể.
+
+3 ``Sự khác biệt giữa Ngôn ngữ định nghĩa dữ liệu (DDL) và Ngôn ngữ thao tác dữ liệu (DML) là gì?``
+
+Sự khác biệt giữa Ngôn ngữ định nghĩa dữ liệu (DDL - Data Definition Language) và Ngôn ngữ thao tác dữ liệu (DML - Data Manipulation Language) trong SQL là như sau:
+
+1. Ngôn ngữ định nghĩa dữ liệu (DDL - Data Definition Language):
+   - Mục đích: DDL được sử dụng để định nghĩa và quản lý cấu trúc cơ sở dữ liệu.
+   - Các câu lệnh: DDL bao gồm các câu lệnh để tạo, sửa đổi hoặc xóa các đối tượng cơ sở dữ liệu như bảng, chỉ mục, khóa ngoại, quyền truy cập, chế độ xem, v.v.
+   - Ví dụ: Một số câu lệnh DDL phổ biến như `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `GRANT`, `REVOKE`, v.v.
+
+2. Ngôn ngữ thao tác dữ liệu (DML - Data Manipulation Language):
+   - Mục đích: DML được sử dụng để thao tác và quản lý dữ liệu trong các bảng và cơ sở dữ liệu.
+   - Các câu lệnh: DML bao gồm các câu lệnh để truy xuất, chèn, cập nhật và xóa dữ liệu từ bảng trong cơ sở dữ liệu.
+   - Ví dụ: Một số câu lệnh DML phổ biến như `SELECT`, `INSERT`, `UPDATE`, `DELETE`, v.v.
+
+Ví dụ minh họa sự khác biệt giữa DDL và DML:
+
+1. Sử dụng DDL để tạo bảng trong cơ sở dữ liệu:
+```sql
+-- DDL
+CREATE TABLE Customers (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Age INT
+);
+```
+
+2. Sử dụng DML để chèn dữ liệu vào bảng đã tạo:
+```sql
+-- DML
+INSERT INTO Customers (ID, Name, Age) VALUES (1, 'John', 30);
+INSERT INTO Customers (ID, Name, Age) VALUES (2, 'Alice', 25);
+```
+
+3. Sử dụng DML để truy xuất dữ liệu từ bảng:
+```sql
+-- DML
+SELECT * FROM Customers WHERE Age > 25;
+```
+
+Tóm lại, DDL được sử dụng để định nghĩa cấu trúc dữ liệu trong cơ sở dữ liệu, trong khi DML được sử dụng để thao tác và quản lý dữ liệu trong các bảng.
+
+
+3. `` Sự khác biệt giữa truncate và delete trong sql ``
+
+	Truncate và Delete là hai câu lệnh trong SQL được sử dụng để xóa dữ liệu từ bảng, nhưng chúng có một số sự khác biệt quan trọng:
+
+	1. TRUNCATE:
+		- TRUNCATE là một câu lệnh DDL (Data Definition Language).
+		- TRUNCATE được sử dụng để xóa toàn bộ nội dung của bảng.
+		- TRUNCATE làm việc nhanh hơn DELETE vì nó không ghi lại từng hàng xóa vào log, mà chỉ ghi lại thông tin không gian được giải phóng trong bảng.
+		- TRUNCATE không hỗ trợ điều kiện WHERE và không thể hoàn tác (non-rollbackable).
+		- Khi sử dụng TRUNCATE, không có trigger (cơ chế kích hoạt) nào được kích hoạt.
+
+	Ví dụ TRUNCATE:
+
+	```sql
+	TRUNCATE TABLE table_name;
+	```
+
+	2. DELETE:
+		- DELETE là một câu lệnh DML (Data Manipulation Language).
+		- DELETE được sử dụng để xóa dữ liệu từ bảng dựa trên điều kiện cho trước.
+		- DELETE ghi lại mỗi hành động xóa trong log, cho phép hoàn tác bằng cơ chế Rollback.
+		- DELETE có thể sử dụng điều kiện WHERE để chỉ xóa các hàng thỏa mãn điều kiện cụ thể.
+		- Khi sử dụng DELETE, các trigger có thể được kích hoạt nếu được định nghĩa cho bảng.
+
+	Ví dụ DELETE:
+
+	```sql
+	DELETE FROM table_name WHERE condition;
+	```
+
+	Tóm lại:
+	- TRUNCATE dùng để xóa toàn bộ dữ liệu của bảng một cách nhanh chóng, không hỗ trợ điều kiện WHERE và không thể hoàn tác.
+	- DELETE dùng để xóa các hàng dữ liệu dựa trên điều kiện cho trước, hỗ trợ WHERE và có thể hoàn tác nếu được sử dụng cùng với Rollback.
+
+4. `` Phân biệt JOIN và UNION trong sql ? ``
+
+	Join và Union là hai câu lệnh khác nhau trong SQL được sử dụng để kết hợp dữ liệu từ nhiều bảng hoặc truy vấn khác nhau. Dưới đây là sự phân biệt giữa chúng:
+
+	1. JOIN:
+		- JOIN là một câu lệnh DML (Data Manipulation Language).
+		- JOIN được sử dụng để kết hợp các hàng từ nhiều bảng dựa trên một điều kiện liên kết giữa các bảng.
+		- JOIN có thể được sử dụng để lấy thông tin từ các bảng có liên quan với nhau thông qua các khóa ngoại và khóa chính.
+		- Các loại JOIN phổ biến bao gồm INNER JOIN (kết hợp các hàng có giá trị liên kết trong cả hai bảng), LEFT JOIN (kết hợp tất cả các hàng từ bảng bên trái và các hàng liên kết từ bảng bên phải), RIGHT JOIN (kết hợp tất cả các hàng từ bảng bên phải và các hàng liên kết từ bảng bên trái) và FULL JOIN (kết hợp tất cả các hàng từ cả hai bảng).
+		- Cú pháp JOIN thường bao gồm: `SELECT * FROM table1 JOIN table2 ON table1.column = table2.column;`
+
+	2. UNION:
+		- UNION là một câu lệnh DML (Data Manipulation Language).
+		- UNION được sử dụng để kết hợp các kết quả của hai hoặc nhiều truy vấn SELECT có cấu trúc giống nhau và trả về kết quả duy nhất.
+		- Các truy vấn được kết hợp bằng UNION phải có cùng số lượng cột và kiểu dữ liệu tương ứng.
+		- UNION loại bỏ các bản sao dữ liệu và chỉ trả về kết quả duy nhất.
+		- Cú pháp UNION thường bao gồm: `SELECT column1, column2 FROM table1 UNION SELECT column1, column2 FROM table2;`
+
+	Tóm lại:
+	- JOIN được sử dụng để kết hợp các hàng từ nhiều bảng dựa trên điều kiện liên kết.
+	- UNION được sử dụng để kết hợp các kết quả của các truy vấn SELECT có cấu trúc giống nhau và trả về kết quả duy nhất.
+
+5. `` Phân biệt inner join, outer join, full outer join, left join, right join tron sql ``
+
+	Các loại JOIN trong SQL, bao gồm INNER JOIN, OUTER JOIN (bao gồm LEFT JOIN và RIGHT JOIN), và FULL OUTER JOIN, cho phép kết hợp dữ liệu từ nhiều bảng dựa trên điều kiện liên kết giữa chúng. Dưới đây là sự khác biệt giữa các loại JOIN:
+
+	1. INNER JOIN:
+		- INNER JOIN (kết hợp nội) trả về các hàng chỉ khi có sự khớp giữa hai bảng dựa trên điều kiện liên kết.
+		- Các hàng không có sự khớp trong cả hai bảng sẽ không được bao gồm trong kết quả.
+		- Cú pháp INNER JOIN:
+			```sql
+			SELECT * FROM table1 INNER JOIN table2 ON table1.column = table2.column;
+			```
+
+	2. OUTER JOIN:
+		- OUTER JOIN (kết hợp ngoại) là một nhóm chung cho các loại JOIN bao gồm LEFT JOIN và RIGHT JOIN.
+		- OUTER JOIN trả về các hàng từ một bảng (LEFT JOIN hoặc RIGHT JOIN) và các hàng liên kết từ bảng kia. Nếu không có sự khớp, các giá trị NULL được điền vào cho các cột từ bảng không có sự khớp.
+		
+	3. LEFT JOIN (kết hợp trái):
+		- LEFT JOIN trả về tất cả các hàng từ bảng bên trái và các hàng liên kết từ bảng bên phải.
+		- Nếu không có sự khớp từ bảng bên phải, các giá trị NULL được điền vào cho các cột từ bảng bên phải.
+		- Cú pháp LEFT JOIN:
+			```sql
+			SELECT * FROM table1 LEFT JOIN table2 ON table1.column = table2.column;
+			```
+
+	4. RIGHT JOIN (kết hợp phải):
+		- RIGHT JOIN trả về tất cả các hàng từ bảng bên phải và các hàng liên kết từ bảng bên trái.
+		- Nếu không có sự khớp từ bảng bên trái, các giá trị NULL được điền vào cho các cột từ bảng bên trái.
+		- Cú pháp RIGHT JOIN:
+			```sql
+			SELECT * FROM table1 RIGHT JOIN table2 ON table1.column = table2.column;
+			```
+
+	5. FULL OUTER JOIN (kết hợp đầy đủ):
+		- FULL OUTER JOIN trả về tất cả các hàng từ cả hai bảng, bao gồm cả các hàng không có sự khớp.
+		- Nếu không có sự khớp từ bảng nào đó, các giá trị NULL được điền vào cho các cột từ bảng đó.
+		- Cú pháp FULL OUTER JOIN:
+			```sql
+			SELECT * FROM table1 FULL OUTER JOIN table2 ON table1.column = table2.column;
+			```
+
+	Tóm lại:
+	- INNER JOIN trả về các hàng chỉ khi có sự khớp trong cả hai bảng.
+	- OUTER JOIN trả về các hàng từ một bảng và các hàng liên kết từ bảng kia, bao gồm LEFT JOIN và RIGHT JOIN.
+	- LEFT JOIN trả về tất cả các hàng từ bảng bên trái và các hàng liên kết từ bảng bên phải.
+	- RIGHT JOIN trả về tất cả các hàng từ bảng bên phải và các hàng liên kết từ bảng bên trái.
+	- FULL OUTER JOIN trả về tất cả các hàng từ cả hai bảng, bao gồm cả các hàng không có sự khớp.
+
+
+6. `` Phân biệt WHERE clause và HAVING clause ? ``
+
+	Sự khác biệt chính giữa WHERE clause và HAVING clause trong SQL là cách chúng được sử dụng để lọc dữ liệu trong câu truy vấn:
+
+	1. WHERE clause:
+		- WHERE clause được sử dụng trong câu truy vấn SELECT, UPDATE hoặc DELETE để lọc các hàng dữ liệu dựa trên điều kiện cho trước.
+		- WHERE clause áp dụng cho từng hàng dữ liệu riêng lẻ, và chỉ cho phép điều kiện dựa trên các cột trong bảng nguồn dữ liệu.
+		- Nếu hàng không đáp ứng điều kiện được chỉ định trong WHERE clause, nó sẽ không được bao gồm trong kết quả truy vấn.
+
+	Ví dụ sử dụng WHERE clause:
+
+	```sql
+	SELECT * FROM employees WHERE department = 'HR';
+	```
+
+	2. HAVING clause:
+		- HAVING clause được sử dụng trong câu truy vấn SELECT với GROUP BY để lọc các kết quả của các nhóm (group) dữ liệu dựa trên điều kiện cho trước.
+		- HAVING clause áp dụng cho mỗi nhóm dữ liệu, và cho phép điều kiện dựa trên các cột được tính toán từ kết quả của GROUP BY (chẳng hạn như SUM, COUNT, AVG, v.v.).
+		- HAVING clause không áp dụng cho từng hàng dữ liệu riêng lẻ như WHERE clause, mà nó chỉ áp dụng cho các nhóm dữ liệu đã được nhóm lại bởi GROUP BY.
+
+	Ví dụ sử dụng HAVING clause:
+
+	```sql
+	SELECT department, COUNT(*) AS employee_count FROM employees GROUP BY department HAVING COUNT(*) > 10;
+	```
+
+	Tóm lại:
+	- WHERE clause dùng để lọc các hàng dữ liệu theo điều kiện dựa trên các cột trong bảng nguồn.
+	- HAVING clause dùng để lọc các kết quả của các nhóm dữ liệu dựa trên điều kiện dựa trên các cột được tính toán từ kết quả của GROUP BY.
+
+7. ``Phân biệt Union và Union All``
+
+	Union và Union All là hai câu lệnh trong SQL được sử dụng để kết hợp kết quả của các truy vấn SELECT khác nhau thành một kết quả duy nhất. Dưới đây là sự khác biệt giữa chúng:
+
+	1. UNION:
+		- UNION được sử dụng để kết hợp các kết quả của hai hoặc nhiều truy vấn SELECT có cấu trúc giống nhau và trả về kết quả duy nhất.
+		- Các truy vấn kết hợp bằng UNION phải có cùng số lượng cột và kiểu dữ liệu tương ứng.
+		- UNION loại bỏ các bản sao dữ liệu trong các kết quả kết hợp, chỉ trả về một bản ghi cho mỗi bản sao dữ liệu.
+		- Các truy vấn trong UNION phải có cấu trúc giống nhau (cùng số lượng cột và kiểu dữ liệu tương ứng).
+
+	Ví dụ UNION:
+
+	```sql
+	SELECT column1, column2 FROM table1
+	UNION
+	SELECT column1, column2 FROM table2;
+	```
+
+	2. UNION ALL:
+		- UNION ALL cũng được sử dụng để kết hợp các kết quả của hai hoặc nhiều truy vấn SELECT có cấu trúc giống nhau.
+		- Tuy nhiên, UNION ALL không loại bỏ các bản sao dữ liệu, nó trả về tất cả các bản ghi từ tất cả các truy vấn kết hợp mà không xử lý bản sao dữ liệu.
+		- UNION ALL nhanh hơn UNION, vì không phải loại bỏ các bản sao dữ liệu trong quá trình kết hợp kết quả.
+
+	Ví dụ UNION ALL:
+
+	```sql
+	SELECT column1, column2 FROM table1
+	UNION ALL
+	SELECT column1, column2 FROM table2;
+	```
+
+	Tóm lại:
+	- UNION được sử dụng để kết hợp các kết quả của các truy vấn SELECT có cấu trúc giống nhau và loại bỏ các bản sao dữ liệu.
+	- UNION ALL được sử dụng để kết hợp các kết quả của các truy vấn SELECT có cấu trúc giống nhau và giữ lại tất cả các bản sao dữ liệu.
 
 ## NOSQL 
 NoSQL (Not Only SQL) là một thuật ngữ dùng để chỉ các hệ thống quản lý cơ sở dữ liệu không phụ thuộc vào mô hình quan hệ (relational model) như các hệ thống SQL truyền thống. NoSQL là một loại cơ sở dữ liệu phi quan hệ (non-relational database) được thiết kế để đáp ứng các yêu cầu đặc biệt như khả năng mở rộng, xử lý dữ liệu phi cấu trúc, hiệu suất cao và độ tin cậy.
