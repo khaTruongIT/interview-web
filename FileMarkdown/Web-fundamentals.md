@@ -823,6 +823,65 @@ ES7 (ECMAScript 2016) là một phiên bản tiêu chuẩn của ngôn ngữ Jav
 
 	Tùy theo mục đích và tính chất của dữ liệu mà bạn muốn lưu trữ, bạn có thể lựa chọn Session Storage, Local Storage hoặc Cookies để quản lý dữ liệu trong ứng dụng JavaScript của bạn.
 
+7. ``OOP trong JAVASCRIPT ``
+
+	1. Đối tượng (Object): Đối tượng là một thực thể có các thuộc tính (properties) và hành vi (methods). Trong JavaScript, một đối tượng có thể là một đối tượng dựng sẵn như `Date`, `Array`, `Math`, hoặc một đối tượng tự định nghĩa.
+
+	2. Lớp (Class): Lớp là một mô tả chung của một đối tượng, bao gồm các thuộc tính và phương thức mà đối tượng sẽ có. Trong JavaScript, lớp được mô phỏng bằng cách sử dụng các hàm tạo (constructor function) hoặc cú pháp `class` (ES6).
+
+	3. Tính đa hình (Polymorphism): Tính đa hình cho phép một đối tượng thực hiện một hành động theo nhiều cách khác nhau. Điều này giúp tăng tính linh hoạt và tái sử dụng mã.
+
+	4. Kế thừa (Inheritance): Kế thừa cho phép một lớp con (subclass) kế thừa các thuộc tính và phương thức từ một lớp cha (superclass). Lớp con có thể mở rộng hoặc ghi đè các tính năng của lớp cha.
+
+	5. Đóng gói (Encapsulation): Đóng gói cho phép che dấu thông tin bên trong một đối tượng, chỉ hiển thị những phương thức cần thiết cho việc tương tác với đối tượng đó.
+
+	Dưới đây là cách sử dụng OOP trong JavaScript:
+
+	1. Sử dụng Hàm Tạo (Constructor Functions):
+	```javascript
+	// Định nghĩa lớp
+	function Person(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	// Thêm phương thức cho lớp
+	Person.prototype.sayHello = function() {
+		console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+	};
+
+	// Tạo đối tượng từ lớp
+	const person1 = new Person("Alice", 30);
+	const person2 = new Person("Bob", 25);
+
+	person1.sayHello(); // Hello, my name is Alice and I am 30 years old.
+	person2.sayHello(); // Hello, my name is Bob and I am 25 years old.
+	```
+
+	2. Sử dụng Cú pháp `class` (ES6):
+	```javascript
+	// Định nghĩa lớp bằng cú pháp class
+	class Person {
+		constructor(name, age) {
+			this.name = name;
+			this.age = age;
+		}
+
+		// Phương thức của lớp
+		sayHello() {
+			console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+		}
+	}
+
+	// Tạo đối tượng từ lớp
+	const person1 = new Person("Alice", 30);
+	const person2 = new Person("Bob", 25);
+
+	person1.sayHello(); // Hello, my name is Alice and I am 30 years old.
+	person2.sayHello(); // Hello, my name is Bob and I am 25 years old.
+	```
+
+	Đây chỉ là một phần nhỏ về cách sử dụng OOP trong JavaScript. Có rất nhiều khái niệm và cú pháp khác để khám phá trong lập trình hướng đối tượng, như kế thừa, đóng gói, tính đa hình và ghi đè phương thức.
 
 # Typescript 
 	
@@ -933,6 +992,58 @@ Lợi ích của Typescript
 
 	Như bạn có thể thấy, generics cho phép hàm `swap` hoạt động với nhiều kiểu dữ liệu khác nhau, mà không cần viết lại mã cho từng kiểu cụ thể. Điều này giúp tăng tính linh hoạt và tái sử dụng trong mã TypeScript.
 
+6. ``OOP trong typescript``
+
+	Trong TypeScript, cũng giống như trong JavaScript, bạn có thể sử dụng lập trình hướng đối tượng để tạo các lớp, đối tượng, kế thừa, tính đa hình và đóng gói. Tuy nhiên, TypeScript hỗ trợ mạnh mẽ hơn với tính năng kiểu tĩnh, giúp bạn có thể xác định kiểu dữ liệu của các thuộc tính và phương thức của lớp.
+
+	Dưới đây là một ví dụ về cách sử dụng OOP trong TypeScript:
+
+	```typescript
+	// Định nghĩa lớp
+	class Person {
+		// Thuộc tính với kiểu dữ liệu được xác định
+		name: string;
+		age: number;
+
+		// Constructor
+		constructor(name: string, age: number) {
+			this.name = name;
+			this.age = age;
+		}
+
+		// Phương thức của lớp
+		sayHello(): void {
+			console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+		}
+	}
+
+	// Kế thừa lớp
+	class Student extends Person {
+		// Thuộc tính riêng của lớp con
+		studentId: string;
+
+		// Constructor của lớp con
+		constructor(name: string, age: number, studentId: string) {
+			// Gọi constructor của lớp cha bằng từ khóa "super"
+			super(name, age);
+			this.studentId = studentId;
+		}
+
+		// Ghi đè phương thức của lớp cha
+		sayHello(): void {
+			console.log(`Hello, my name is ${this.name}, I am ${this.age} years old, and my student ID is ${this.studentId}.`);
+		}
+	}
+
+	// Tạo đối tượng từ lớp
+	const person1 = new Person("Alice", 30);
+	const student1 = new Student("Bob", 25, "12345");
+
+	person1.sayHello(); // Hello, my name is Alice and I am 30 years old.
+	student1.sayHello(); // Hello, my name is Bob, I am 25 years old, and my student ID is 12345.
+	```
+
+	Trong TypeScript, bạn có thể xác định các kiểu dữ liệu cho các thuộc tính và tham số của hàm tạo (constructor) để đảm bảo tính chính xác và an toàn của mã. Ngoài ra, bạn cũng có thể sử dụng tính năng kế thừa và ghi đè phương thức như trong ví dụ trên. TypeScript sẽ kiểm tra kiểu dữ liệu và đảm bảo rằng bạn không thực hiện các thao tác không hợp lệ với đối tượng của lớp.
 # NODEJS 
 
 	Node.js là một nền tảng phát triển dựa trên Chrome V8 JavaScript runtime để xây dựng các ứng dụng mạng và ứng dụng máy chủ. Một trong những yếu tố quan trọng của Node.js là sự tồn tại của Event Loop (vòng lặp sự kiện).
@@ -1135,29 +1246,33 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 2.	`` Clean architecture là gì ? ví dụ về clean architecture``
 
-Clean Architecture là một kiến trúc phần mềm đề xuất bởi Robert C. Martin (còn được gọi là Uncle Bob). Nó tách biệt các thành phần của một ứng dụng thành các lớp độc lập và định nghĩa rõ ràng các quy tắc và giới hạn giữa chúng. Mục tiêu chính của Clean Architecture là tạo ra một hệ thống dễ bảo trì, dễ mở rộng và độc lập với các công nghệ cụ thể.
+	Clean Architecture là một kiến trúc phần mềm đề xuất bởi Robert C. Martin (còn được gọi là Uncle Bob). Nó tách biệt các thành phần của một ứng dụng thành các lớp độc lập và định nghĩa rõ ràng các quy tắc và giới hạn giữa chúng. Mục tiêu chính của Clean Architecture là tạo ra một hệ thống dễ bảo trì, dễ mở rộng và độc lập với các công nghệ cụ thể.
 
-Clean Architecture tuân thủ nguyên tắc SOLID (Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion), và cung cấp một cách tiếp cận tổ chức mã nguồn tập trung vào sự phân chia rõ ràng giữa các thành phần, giúp giảm sự phụ thuộc giữa chúng và dễ dàng thay đổi hoặc thay thế một thành phần mà không ảnh hưởng đến các thành phần khác.
+	Clean Architecture tuân thủ nguyên tắc SOLID (Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion), và cung cấp một cách tiếp cận tổ chức mã nguồn tập trung vào sự phân chia rõ ràng giữa các thành phần, giúp giảm sự phụ thuộc giữa chúng và dễ dàng thay đổi hoặc thay thế một thành phần mà không ảnh hưởng đến các thành phần khác.
 
-Một ví dụ về ứng dụng sử dụng Clean Architecture là ứng dụng Android chứa các thành phần sau:
+	Một ví dụ về ứng dụng sử dụng Clean Architecture là ứng dụng Android chứa các thành phần sau:
 
-		1. Domain Layer (Lớp Miền): Đây là lớp chứa luật kinh doanh, giao diện và logic của ứng dụng. Nó không phụ thuộc vào bất kỳ thư viện hay framework nào khác và định nghĩa các use case cốt lõi của ứng dụng. Ví dụ: quản lý người dùng, xử lý dữ liệu, các luật tính toán.
+	1. Domain Layer (Lớp Miền): Đây là lớp chứa luật kinh doanh, giao diện và logic của ứng dụng. Nó không phụ thuộc vào bất kỳ thư viện hay framework nào khác và định nghĩa các use case cốt lõi của ứng dụng. Ví dụ: quản lý người dùng, xử lý dữ liệu, các luật tính toán.
 
-		2. Data Layer (Lớp Dữ liệu): Lớp này làm nhiệm vụ truy cập và lưu trữ dữ liệu. Nó chịu trách nhiệm tương tác với cơ sở dữ liệu, API hoặc các nguồn dữ liệu khác. Lớp Dữ liệu cung cấp giao diện cho Lớp Miền để truy xuất và cập nhật dữ liệu. 
+	2. Data Layer (Lớp Dữ liệu): Lớp này làm nhiệm vụ truy cập và lưu trữ dữ liệu. Nó chịu trách nhiệm tương tác với cơ sở dữ liệu, API hoặc các nguồn dữ liệu khác. Lớp Dữ liệu cung cấp giao diện cho Lớp Miền để truy xuất và cập nhật dữ liệu. 
 
-		3. Presentation Layer (Lớp Trình bày): Lớp này xử lý việc hiển thị dữ liệu và tương tác người dùng. Nó làm việc với các thành phần giao diện người dùng như Activities, Fragments, Views và gọi các use case trong Lớp Miền để lấy và xử lý dữ liệu.
+	3. Presentation Layer (Lớp Trình bày): Lớp này xử lý việc hiển thị dữ liệu và tương tác người dùng. Nó làm việc với các thành phần giao diện người dùng như Activities, Fragments, Views và gọi các use case trong Lớp Miền để lấy và xử lý dữ liệu.
 
-		4. Frameworks & Drivers (Các Framework và Trình điều khiển): Lớp này bao gồm các framework và thư viện bên ngoài như Android Framework, thư viện Retrofit, Dagger, Room, để hỗ trợ triển khai và kết nối các thành phần khác nhau của ứng dụng.
+	4. Frameworks & Drivers (Các Framework và Trình điều khiển): Lớp này bao gồm các framework và thư viện bên ngoài như Android Framework, thư viện Retrofit, Dagger, Room, để hỗ trợ triển khai và kết nối các thành phần khác nhau của ứng dụng.
 
-	- Clean Architecture giúp tách biệt các thành phần của ứng dụng và tạo ra một sự phụ thuộc lỏng lẻo giữa chúng. Điều này giúp cho việc kiểm thử, bảo trì, và mở rộng ứng dụng trở nên dễ dàng hơn 
+- Clean Architecture giúp tách biệt các thành phần của ứng dụng và tạo ra một sự phụ thuộc lỏng lẻo giữa chúng. Điều này giúp cho việc kiểm thử, bảo trì, và mở rộng ứng dụng trở nên dễ dàng hơn 
+
 
 3. ``Phân biệt middleware và interceptor trong nestjs`` 
-  	-	NestJS Middleware và Interceptor trong NestJS là các cơ chế được cung cấp bởi framework NestJS để xử lý yêu cầu trước và sau khi chúng đi qua các endpoint. Tuy nhiên, có một số khác biệt:
-	 - Middleware: Là một hàm trung gian được gọi trước hoặc sau khi đi qua một endpoint. Middleware có thể thay đổi yêu cầu (request) hoặc phản hồi (response), và có khả năng chuyển quyền điều khiển cho middleware tiếp theo trong chuỗi middleware.
-	 - Interceptor: Là một lớp hoạt động như một bộ lọc cho yêu cầu và phản hồi. Nó có thể thực hiện các thao tác trước và sau khi xử lý yêu cầu. Interceptor không thay đổi yêu cầu hoặc phản hồi, nhưng có thể thực hiện các hành động bổ sung như ghi log, xử lý lỗi, thêm thông tin, vv.
+
+-	NestJS Middleware và Interceptor trong NestJS là các cơ chế được cung cấp bởi framework NestJS để xử lý yêu cầu trước và sau khi chúng đi qua các endpoint. Tuy nhiên, có một số khác biệt:
+- Middleware: Là một hàm trung gian được gọi trước hoặc sau khi đi qua một endpoint. Middleware có thể thay đổi yêu cầu (request) hoặc phản hồi (response), và có khả năng chuyển quyền điều khiển cho middleware tiếp theo trong chuỗi middleware.
+- Interceptor: Là một lớp hoạt động như một bộ lọc cho yêu cầu và phản hồi. Nó có thể thực hiện các thao tác trước và sau khi xử lý yêu cầu. Interceptor không thay đổi yêu cầu hoặc phản hồi, nhưng có thể thực hiện các hành động bổ sung như ghi log, xử lý lỗi, thêm thông tin, vv.
+
 
 4. ``Trong Nestjs, decorator là gì`` 
-	- Trong NestJS, Decorator là một tính năng của TypeScript cho phép bạn thêm metadata và mở rộng hoặc thay đổi hành vi của các class, phương thức, thuộc tính và tham số.
+
+- Trong NestJS, Decorator là một tính năng của TypeScript cho phép bạn thêm metadata và mở rộng hoặc thay đổi hành vi của các class, phương thức, thuộc tính và tham số.
 Một decorator hoạt động bằng cách áp dụng một hàm hoặc một class decorator lên một class, phương thức hoặc thuộc tính cụ thể. Decorator được áp dụng bằng cách đặt nó trước đối tượng mà bạn muốn thay đổi hoặc mở rộng. Decorator có thể thay đổi các thuộc tính, thêm chức năng hoặc thực hiện các logic bổ sung trước hoặc sau khi đối tượng được khởi tạo hoặc gọi.
 8a. Một decorator phổ biến trong NestJS là `@Injectable()`. Decorator này được sử dụng để đánh dấu một class là một provider có thể được inject vào các class khác thông qua dependency injection của NestJS. Ví dụ:
 	```typescript
@@ -1229,7 +1344,7 @@ Một số tính năng và lợi ích chính của TypeORM bao gồm:
 
 6. Tích hợp TypeScript: TypeORM được viết bằng TypeScript và hỗ trợ đầy đủ các tính năng của TypeScript như kiểu dữ liệu tĩnh, gợi ý mã, và định nghĩa mô hình dữ liệu với các kiểu dữ liệu tùy chỉnh.
 
-	TypeORM là một thư viện phổ biến và mạnh mẽ trong cộng đồng Node.js và TypeScript, cho phép bạn dễ dàng làm việc với cơ sở dữ liệu SQL và tận dụng các lợi ích của ORM trong quá trình phát triển ứng dụng.
+TypeORM là một thư viện phổ biến và mạnh mẽ trong cộng đồng Node.js và TypeScript, cho phép bạn dễ dàng làm việc với cơ sở dữ liệu SQL và tận dụng các lợi ích của ORM trong quá trình phát triển ứng dụng.
 
 7.`` Pipe trong nestjs là gì ``
 
