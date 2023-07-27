@@ -883,6 +883,168 @@ ES7 (ECMAScript 2016) là một phiên bản tiêu chuẩn của ngôn ngữ Jav
 
 	Đây chỉ là một phần nhỏ về cách sử dụng OOP trong JavaScript. Có rất nhiều khái niệm và cú pháp khác để khám phá trong lập trình hướng đối tượng, như kế thừa, đóng gói, tính đa hình và ghi đè phương thức.
 
+8.`REPEAT trong javascript ?`
+
+Trong JavaScript (cũng áp dụng cho TypeScript), phương thức `repeat()` được sử dụng để tạo ra một chuỗi mới bằng cách lặp lại chuỗi gốc một số lần nhất định.
+
+Cú pháp:
+```javascript
+string.repeat(count);
+```
+
+Trong đó:
+- `string`: Chuỗi gốc bạn muốn lặp lại.
+- `count`: Số lần lặp lại chuỗi gốc. Phải là một số nguyên không âm.
+
+Ví dụ:
+
+```javascript
+const str = "Hello, ";
+const repeatedStr = str.repeat(3);
+
+console.log(repeatedStr);
+// Output: "Hello, Hello, Hello, "
+```
+
+Trong ví dụ trên, chuỗi gốc là "Hello, " và chúng ta sử dụng phương thức `repeat(3)` để lặp lại chuỗi này 3 lần, tạo thành chuỗi mới "Hello, Hello, Hello, ".
+
+Lưu ý rằng `count` phải là một số nguyên không âm. Nếu `count` không phải số hoặc là một số âm, hoặc không phải số nguyên, phương thức `repeat()` sẽ trả về một chuỗi trống ("").
+
+
+9. `STACK TRONG JAVASCRIPT `
+
+	Trong ngôn ngữ JavaScript, bạn có thể biểu diễn cấu trúc dữ liệu stack bằng cách sử dụng một mảng và triển khai các phương thức cơ bản để thêm và loại bỏ các phần tử khỏi stack. Dưới đây là một ví dụ về cách triển khai stack:
+
+```javascript
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+
+  // Thêm một phần tử vào đỉnh của stack
+  push(element) {
+    this.items.push(element);
+  }
+
+  // Lấy và loại bỏ phần tử ở đỉnh của stack
+  pop() {
+    if (this.isEmpty()) {
+      return "Stack is empty";
+    }
+    return this.items.pop();
+  }
+
+  // Lấy phần tử ở đỉnh của stack (không loại bỏ)
+  peek() {
+    if (this.isEmpty()) {
+      return "Stack is empty";
+    }
+    return this.items[this.items.length - 1];
+  }
+
+  // Kiểm tra xem stack có trống không
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  // Lấy số lượng phần tử trong stack
+  size() {
+    return this.items.length;
+  }
+
+  // Xóa tất cả các phần tử trong stack
+  clear() {
+    this.items = [];
+  }
+}
+
+// Sử dụng stack
+const stack = new Stack();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+
+console.log(stack.peek()); // Output: 3
+
+console.log(stack.pop()); // Output: 3
+
+console.log(stack.size()); // Output: 2
+
+console.log(stack.isEmpty()); // Output: false
+
+stack.clear();
+console.log(stack.isEmpty()); // Output: true
+```
+
+Trong ví dụ trên, chúng ta đã triển khai các phương thức cơ bản cho stack, bao gồm `push` để thêm phần tử vào đỉnh của stack, `pop` để lấy và loại bỏ phần tử khỏi đỉnh của stack, `peek` để xem phần tử ở đỉnh mà không loại bỏ nó, `isEmpty` để kiểm tra xem stack có trống không, `size` để lấy số lượng phần tử trong stack, và `clear` để xóa tất cả các phần tử trong stack.
+
+10. `QUEUE trong javascript`
+
+	Trong ngôn ngữ JavaScript, bạn có thể biểu diễn cấu trúc dữ liệu queue bằng cách sử dụng một mảng và triển khai các phương thức cơ bản để thêm và loại bỏ các phần tử khỏi queue theo nguyên tắc "First-In-First-Out" (FIFO). Dưới đây là một ví dụ về cách triển khai queue:
+
+```javascript
+class Queue {
+  constructor() {
+    this.items = [];
+  }
+
+  // Thêm một phần tử vào cuối queue
+  enqueue(element) {
+    this.items.push(element);
+  }
+
+  // Lấy và loại bỏ phần tử ở đầu queue
+  dequeue() {
+    if (this.isEmpty()) {
+      return "Queue is empty";
+    }
+    return this.items.shift();
+  }
+
+  // Lấy phần tử ở đầu queue (không loại bỏ)
+  front() {
+    if (this.isEmpty()) {
+      return "Queue is empty";
+    }
+    return this.items[0];
+  }
+
+  // Kiểm tra xem queue có trống không
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  // Lấy số lượng phần tử trong queue
+  size() {
+    return this.items.length;
+  }
+
+  // Xóa tất cả các phần tử trong queue
+  clear() {
+    this.items = [];
+  }
+}
+
+// Sử dụng queue
+const queue = new Queue();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+
+console.log(queue.front()); // Output: 1
+
+console.log(queue.dequeue()); // Output: 1
+
+console.log(queue.size()); // Output: 2
+
+console.log(queue.isEmpty()); // Output: false
+
+queue.clear();
+console.log(queue.isEmpty()); // Output: true
+```
+
+Trong ví dụ trên, chúng ta đã triển khai các phương thức cơ bản cho queue, bao gồm `enqueue` để thêm phần tử vào cuối queue, `dequeue` để lấy và loại bỏ phần tử khỏi đầu queue, `front` để xem phần tử ở đầu mà không loại bỏ nó, `isEmpty` để kiểm tra xem queue có trống không, `size` để lấy số lượng phần tử trong queue, và `clear` để xóa tất cả các phần tử trong queue.
+
 # Typescript 
 	
 Typescript compiles to Javascript và nó có thể execute bởi bất kỳ Javascript engine nào 
@@ -1044,196 +1206,6 @@ Lợi ích của Typescript
 	```
 
 	Trong TypeScript, bạn có thể xác định các kiểu dữ liệu cho các thuộc tính và tham số của hàm tạo (constructor) để đảm bảo tính chính xác và an toàn của mã. Ngoài ra, bạn cũng có thể sử dụng tính năng kế thừa và ghi đè phương thức như trong ví dụ trên. TypeScript sẽ kiểm tra kiểu dữ liệu và đảm bảo rằng bạn không thực hiện các thao tác không hợp lệ với đối tượng của lớp.
-# NODEJS 
-
-	Node.js là một nền tảng phát triển dựa trên Chrome V8 JavaScript runtime để xây dựng các ứng dụng mạng và ứng dụng máy chủ. Một trong những yếu tố quan trọng của Node.js là sự tồn tại của Event Loop (vòng lặp sự kiện).
-
-	Event Loop trong Node.js là một cơ chế xử lý sự kiện không đồng bộ (asynchronous event-driven). Nó giúp Node.js xử lý các yêu cầu I/O mà không chặn luồng chính (main thread), cho phép ứng dụng xử lý nhiều yêu cầu cùng một lúc mà không cần tạo ra các tiến trình hoặc luồng riêng biệt cho từng yêu cầu.
-
-	Cơ chế hoạt động của Event Loop trong Node.js như sau:
-
-	1. Đưa các yêu cầu I/O vào hàng đợi: Khi một yêu cầu I/O như đọc file hoặc gửi yêu cầu HTTP được gọi, Node.js đưa nó vào hàng đợi sự kiện (event queue).
-
-	2. Xử lý các sự kiện trong hàng đợi: Event Loop lặp đi lặp lại và kiểm tra hàng đợi sự kiện. Nếu hàng đợi không rỗng, nó sẽ lấy một sự kiện từ đầu hàng đợi và xử lý nó.
-
-	3. Xử lý sự kiện không đồng bộ: Khi một sự kiện được lấy từ hàng đợi, Event Loop sẽ gọi các callback tương ứng của sự kiện đó. Callbacks này thường là các hàm không đồng bộ, ví dụ: gửi yêu cầu mạng, truy vấn cơ sở dữ liệu, hoặc thực hiện các phép tính phức tạp.
-
-	4. Tiếp tục lặp lại: Sau khi xử lý một sự kiện, Event Loop sẽ kiểm tra lại hàng đợi sự kiện. Nếu hàng đợi còn sự kiện, nó sẽ lấy sự kiện tiếp theo và tiếp tục quá trình xử lý.
-
-	Event Loop trong Node.js giúp tận dụng tối đa tài nguyên của máy tính bằng cách xử lý nhiều yêu cầu I/O cùng một lúc và không chặn luồng chính. Điều này giúp tăng hiệu suất và khả năng phản hồi của ứng dụng Node.js trong khi giữ cho mã chương trình của bạn đơn giản và dễ đọc.
-
-1. ```NPM LÀ GÌ```
-
-	npm (Node Package Manager) là một công cụ quản lý gói và mô-đun trong môi trường Node.js. Nó được cài đặt cùng với Node.js và cung cấp cho người phát triển một cách tiện lợi để tìm kiếm, cài đặt, cập nhật và quản lý các gói mã nguồn mở đã được viết bằng JavaScript.
-
-	Các gói npm chứa mã nguồn JavaScript được đóng gói cùng với thông tin về phiên bản, tác giả, phụ thuộc và các tệp tin khác cần thiết. Khi bạn muốn sử dụng một gói từ npm, bạn có thể dễ dàng tìm kiếm và cài đặt gói đó vào dự án của mình thông qua dòng lệnh hoặc tệp tin cấu hình (package.json).
-
-	Một số chức năng quan trọng của npm bao gồm:
-
-	Quản lý gói: npm cho phép bạn tìm kiếm, cài đặt, xóa và cập nhật các gói JavaScript từ kho lưu trữ công cộng npm.
-
-	Quản lý phụ thuộc: Bằng cách sử dụng tệp tin package.json, bạn có thể chỉ định các phụ thuộc của dự án của mình, bao gồm các phiên bản cụ thể hoặc các ràng buộc phụ thuộc.
-
-	Công cụ phát triển: npm cung cấp các công cụ hữu ích cho việc phát triển, như chạy các tác vụ (scripts) định nghĩa trong package.json, kiểm tra mã nguồn (linting), tạo phiên bản và công cụ kiểm tra kiểu dữ liệu.
-
-	Tạo gói: Bạn có thể tạo và xuất bản các gói của riêng mình lên npm, cho phép người khác cài đặt và sử dụng chúng.
-
-	npm là một công cụ quan trọng trong cộng đồng Node.js và rất hữu ích để quản lý các phụ thuộc và gói mã nguồn mở trong quá trình phát triển ứng dụng JavaScript.
-
-2. ```Callback trong javascript là gì```
-	
-	Callback function là một hàm được gọi lại trong trời điểm hoàn thành một task. Việc này tránh bất kỳ blocking nào trong thời điểm code được chạy
-
-	Callback trong JavaScript là một hàm (function) được truyền vào một hàm khác như một tham số. Hàm callback được gọi lại (invoke) bởi hàm chính sau khi một công việc hoặc một sự kiện xảy ra.
-
-	Trong JavaScript, hàm là một loại đối tượng, nên chúng có thể được truyền như tham số cho các hàm khác. Hàm callback thường được sử dụng trong các tình huống mà bạn muốn thực hiện một tác vụ nào đó chỉ khi một tác vụ khác hoàn thành hoặc một sự kiện xảy ra.
-
-	Ví dụ, khi bạn gửi một yêu cầu HTTP bất đồng bộ (asynchronous) trong JavaScript, bạn có thể truyền một hàm callback để xử lý kết quả trả về khi yêu cầu hoàn thành. Điều này giúp đảm bảo rằng mã được thực thi sau khi nhận được dữ liệu từ yêu cầu HTTP, thay vì chờ đợi yêu cầu hoàn thành và gây chặn mã.
-
-	Dưới đây là một ví dụ đơn giản về sử dụng callback trong JavaScript:
-
-	```javascript
-	function fetchData(callback) {
-		// Giả lập yêu cầu không đồng bộ
-		setTimeout(function() {
-			const data = 'Dữ liệu trả về từ yêu cầu';
-			callback(data); // Gọi lại hàm callback và truyền dữ liệu vào
-		}, 2000);
-	}
-
-	function processData(data) {
-		console.log('Dữ liệu đã được xử lý: ' + data);
-	}
-
-	fetchData(processData); // Truyền hàm processData làm callback
-	```
-
-	Trong ví dụ trên, chúng ta có một hàm `fetchData` để giả lập một yêu cầu không đồng bộ và truyền kết quả vào một hàm callback. Hàm `processData` được truyền vào `fetchData` và sẽ được gọi lại với dữ liệu trả về khi yêu cầu hoàn thành.
-
-3. ```Các tính năng chính của Nodejs là gì```
-
-	Các tính năng chính của Node.js bao gồm:
-
-	1. Môi trường chạy mã JavaScript: Node.js cho phép viết và chạy mã JavaScript bên phía máy chủ (server-side) thay vì chỉ chạy trên trình duyệt. Điều này cho phép bạn xây dựng ứng dụng web đa nền tảng và ứng dụng máy chủ mạnh mẽ bằng JavaScript.
-
-	2. Asynchronous I/O (I/O không đồng bộ): Node.js sử dụng mô hình I/O không đồng bộ để xử lý yêu cầu I/O (như đọc/ghi file, gửi yêu cầu HTTP) mà không chặn luồng chính. Điều này cho phép Node.js xử lý nhiều yêu cầu cùng một lúc và tăng hiệu suất của ứng dụng.
-
-	3. Sự kiện và Event-driven Programming: Node.js dựa trên mô hình lập trình sự kiện (event-driven programming) và hỗ trợ hệ thống sự kiện (event system) tích hợp sẵn. Bằng cách sử dụng các sự kiện, bạn có thể xử lý các yêu cầu và phản hồi trong thời gian thực.
-
-	4. Công cụ và thư viện: Node.js đi kèm với một số công cụ và thư viện hữu ích như npm (Node Package Manager) để quản lý các gói và mô-đun, Express.js để xây dựng ứng dụng web, Socket.io để xử lý giao tiếp real-time, và nhiều thư viện khác giúp việc phát triển ứng dụng dễ dàng hơn.
-
-	5. Cấu trúc module: Node.js hỗ trợ cấu trúc module (module system) để quản lý mã nguồn và phân tách chức năng của ứng dụng thành các module riêng biệt. Điều này giúp tăng tính tổ chức, tái sử dụng và bảo trì của mã nguồn.
-
-	6. Hiệu suất cao: Với việc sử dụng V8 JavaScript engine từ Chrome, Node.js đạt được hiệu suất cao và xử lý nhanh các yêu cầu. Nó cũng hỗ trợ việc mở rộng và phân tán dễ dàng nhờ khả năng xử lý song song và khả năng tương tác với các cơ sở dữ liệu và dịch vụ ngoài.
-
-	Node.js đã trở thành một nền tảng phát triển phổ biến trong việc xây dựng các ứng dụng web, ứng dụng mạng và các dịch vụ máy chủ. Nó kết hợp tính linh hoạt và hiệu suất cao của JavaScript để mang lại trải nghiệm phát triển hiệu quả và mạnh mẽ.
-
-4. ```CALLBACK HELL LÀ GÌ ```
-
-Asynchronous JavaScript, or JavaScript that uses callbacks, is hard to get right intuitively. A lot of code ends up looking like this:
-```javascript
-fs.readdir(source, function (err, files) {
-  if (err) {
-    console.log('Error finding files: ' + err)
-  } else {
-    files.forEach(function (filename, fileIndex) {
-      console.log(filename)
-      gm(source + filename).size(function (err, values) {
-        if (err) {
-          console.log('Error identifying file size: ' + err)
-        } else {
-          console.log(filename + ' : ' + values)
-          aspect = (values.width / values.height)
-          widths.forEach(function (width, widthIndex) {
-            height = Math.round(width / aspect)
-            console.log('resizing ' + filename + 'to ' + height + 'x' + height)
-            this.resize(width, height).write(dest + 'w' + width + '_' + filename, function(err) {
-              if (err) console.log('Error writing file: ' + err)
-            })
-          }.bind(this))
-        }
-      })
-    })
-  }
-})
-```
-See the pyramid shape and all the `})` at the end? This is affectionately known as callback hell.
-The cause of callback hell is when people try to write JavaScript in a way where execution happens visually from top to bottom. Lots of people make this mistake! In other languages like C, Ruby or Python there is the expectation that whatever happens on line 1 will finish before the code on line 2 starts running and so on down the file.
-
-5. ```PACKAGE JSON LÀ GÌ```
-
-	Trong Node.js, file `package.json` là một tệp tin cấu hình quan trọng được sử dụng để định nghĩa thông tin về một dự án và quản lý các phụ thuộc của nó. Đây là một tệp tin JSON (JavaScript Object Notation) và thường được đặt trong thư mục gốc của dự án.
-
-	Tệp tin `package.json` chứa các thông tin như:
-
-	1. Tên dự án: Tên của dự án.
-
-	2. Phiên bản: Phiên bản hiện tại của dự án.
-
-	3. Mô tả: Mô tả ngắn về dự án.
-
-	4. Tác giả: Thông tin về tác giả của dự án.
-
-	5. Scripts: Các tác vụ (scripts) được định nghĩa để thực hiện các công việc như biên dịch, chạy các tệp tin, kiểm tra mã nguồn, và nhiều tác vụ khác.
-
-	6. Phụ thuộc: Danh sách các phụ thuộc của dự án, bao gồm các gói (packages) và phiên bản tương ứng.
-
-	7. DevDependencies: Danh sách các phụ thuộc chỉ dùng cho môi trường phát triển (development environment), bao gồm các công cụ hỗ trợ, thư viện kiểm thử, và các phụ thuộc khác không cần thiết trong quá trình triển khai.
-
-	8. Scripts: Định nghĩa các tác vụ (scripts) tùy chỉnh mà bạn có thể chạy thông qua lệnh `npm run <script-name>`.
-
-	File `package.json` được sử dụng để quản lý các phụ thuộc của dự án và cung cấp một cách tiện lợi để xây dựng, chạy, và triển khai ứng dụng Node.js. Bạn có thể sử dụng lệnh `npm` để cài đặt các phụ thuộc, xóa các phụ thuộc không cần thiết, chạy các tác vụ được định nghĩa trong `scripts`, và nhiều hơn nữa.
-
-6. ``` Why we always require modules at the top of a file? Can we require modules inside of functions? ```
-
-	`Yes, we can but we shall never do it`. Node.js always runs require `synchronously`. If you require an external module from within functions your module will be synchronously loaded when those functions run and this can cause two problems:
-	If that module is only needed in one route handler function it might take some time for the module to load synchronously. As a result, several users would be unable to get any access to your server and requests will queue up.
-	If the module you require causes an error and crashes the server you may not know about the error.
-
-7. `Khi chạy lệnh yarn trong một ứng dụng nodejs typescript thì compile sẽ làm các bước gì` 
-
-	Khi chạy lệnh `yarn` trong một ứng dụng Node.js TypeScript, thông thường các bước sau sẽ được thực hiện:
-
-	1. Kiểm tra cú pháp (Linting): Mã nguồn TypeScript của bạn sẽ được kiểm tra cú pháp để đảm bảo tuân thủ quy tắc viết mã.
-
-	2. Kiểm tra kiểu (Type Checking): TypeScript Compiler (tsc) sẽ kiểm tra kiểu dữ liệu trong mã nguồn TypeScript để phát hiện và báo lỗi các sai sót liên quan đến kiểu dữ liệu.
-
-	3. Biên dịch TypeScript thành JavaScript: Sau khi kiểm tra kiểu, mã nguồn TypeScript sẽ được biên dịch thành mã JavaScript. Quá trình này sử dụng TypeScript Compiler (tsc) để chuyển đổi mã nguồn TypeScript thành mã JavaScript tương ứng.
-
-	4. Xử lý các tệp tĩnh và tài nguyên: Quá trình build có thể bao gồm xử lý các tệp tĩnh và tài nguyên, chẳng hạn như hình ảnh, tệp CSS, tệp HTML và các tệp tin khác. Các tệp tin này có thể được sao chép hoặc di chuyển vào thư mục đích trong cấu trúc thư mục của phiên bản sản phẩm.
-
-	5. Tối ưu và nén tệp tin: Trong quá trình build, bạn có thể áp dụng các quy tắc tối ưu và nén tệp tin để giảm kích thước và cải thiện hiệu suất của ứng dụng. Điều này có thể bao gồm việc loại bỏ mã không sử dụng, nén và tối ưu hóa các tệp tin CSS, JavaScript và tệp tin tĩnh khác.
-
-	6. Tạo phiên bản sản phẩm (distribution): Cuối cùng, quá trình build có thể tạo ra phiên bản sản phẩm (distribution) của ứng dụng Node.js TypeScript. Điều này thường bao gồm sao chép các tệp tin biên dịch và tệp tin tĩnh khác vào một thư mục hoặc cấu trúc thư mục đích chuẩn để triển khai ứng dụng.
-
-	Các bước và công đoạn trong quá trình build có thể thay đổi tùy thuộc vào cấu hình và yêu cầu của dự án cụ thể.
-
-8. `Các điểm tối ưu của yarn`
-
-	Có một số điểm tối ưu của công cụ quản lý gói Yarn:
-
-	1. Hiệu suất tải xuống nhanh hơn: Yarn sử dụng quy trình tải xuống song song (parallel downloading) để đồng thời tải nhiều gói về cùng một lúc. Điều này giúp tăng tốc độ tải xuống gói và giảm thời gian cài đặt.
-
-	2. Quản lý cache tốt hơn: Yarn sử dụng bộ nhớ cache (cache) để lưu trữ các gói đã tải xuống. Khi cài đặt lại các gói, Yarn sẽ kiểm tra cache và sử dụng lại các gói đã tải trước đó thay vì tải xuống lại từ kho lưu trữ. Điều này giúp tiết kiệm băng thông và giảm thời gian cài đặt lần sau.
-
-	3. Giải quyết phụ thuộc chính xác: Yarn sử dụng lockfile (`yarn.lock`) để đảm bảo tính nhất quán trong việc giải quyết và cài đặt phiên bản phụ thuộc. Điều này đảm bảo rằng các gói được cài đặt với cùng phiên bản trên các môi trường khác nhau.
-
-	4. Hỗ trợ công cụ Workspaces: Yarn hỗ trợ công cụ Workspaces, cho phép quản lý các dự án đa-package có liên quan trong một kho lưu trữ. Workspaces giúp xử lý các phụ thuộc và tải xuống gói một cách hiệu quả hơn và đồng bộ giữa các dự án.
-
-	5. Giao diện người dùng tương tác: Yarn cung cấp một giao diện người dùng tương tác (interactive CLI) với các tùy chọn và thông báo chi tiết về quá trình cài đặt và xây dựng. Điều này giúp người dùng dễ dàng theo dõi và tùy chỉnh quá trình công việc.
-
-	6. Sự ổn định và độ tin cậy: Yarn đã được phát triển và sử dụng trong các dự án quy mô lớn và có cộng đồng hỗ trợ mạnh mẽ. Điều này giúp đảm bảo rằng Yarn là một công cụ ổn định và đáng tin cậy cho quản lý gói trong quá trình phát triển ứng dụng.
-
-	Tuy nhiên, cũng cần lưu ý rằng các điểm tối ưu này không đồng nghĩa với việc Yarn là lựa chọn tốt nhất cho mọi dự án. Sự lựa chọn giữa Yarn và công cụ quản lý gói khác (như npm) còn phụ thuộc vào yêu cầu và sở thích của dự án cụ thể.
-
-9. `Lệnh yarn clean dùng để làm gì ?`
-
-	Lệnh `yarn clean` không phải là một lệnh có sẵn trong `yarn` mà là một lệnh tùy chỉnh, tức là nó không có ý nghĩa tiêu chuẩn được xác định bởi `yarn` mà phụ thuộc vào cấu hình dự án cụ thể. Thông thường, lệnh `yarn clean` được sử dụng để xóa các tệp tin và thư mục tạm thời hoặc các tệp tin đã được tạo ra trong quá trình xây dựng hoặc biên dịch.
-
-	Ví dụ, trong một dự án Node.js TypeScript, lệnh `yarn clean` có thể được cấu hình để xóa các tệp tin biên dịch JavaScript, tệp tin tạm thời, bộ nhớ cache hoặc bất kỳ tệp tin khác không cần thiết nào mà bạn muốn loại bỏ để làm sạch dự án.
-
-	Tuy nhiên, cách cấu hình và hiệu thực lệnh `yarn clean` sẽ phụ thuộc vào cấu trúc thư mục và quy trình xây dựng của dự án cụ thể. Nếu bạn đang làm việc trên một dự án cụ thể, tốt nhất là xem tài liệu hoặc tìm hiểu từ nguồn gốc của dự án để biết cách lệnh `yarn clean` được sử dụng và được cấu hình như thế nào trong dự án của bạn.
-	 
 # Test
 - UnitTest:  Bảo vệ code khi sửa code trong tương lai, tránh lỗi của quá khứ', mục tiêu của unit test là cô lập một phần code và xác minh tính chính xác của đoạn code đó 
 
@@ -1261,6 +1233,18 @@ The cause of callback hell is when people try to write JavaScript in a way where
 	4. Frameworks & Drivers (Các Framework và Trình điều khiển): Lớp này bao gồm các framework và thư viện bên ngoài như Android Framework, thư viện Retrofit, Dagger, Room, để hỗ trợ triển khai và kết nối các thành phần khác nhau của ứng dụng.
 
 - Clean Architecture giúp tách biệt các thành phần của ứng dụng và tạo ra một sự phụ thuộc lỏng lẻo giữa chúng. Điều này giúp cho việc kiểm thử, bảo trì, và mở rộng ứng dụng trở nên dễ dàng hơn 
+
+	Nguyên tắc `SOLID` là một tập hợp các nguyên tắc lập trình hướng đối tượng được định hình bởi Robert C. Martin, còn được gọi là Uncle Bob, nhằm tăng tính bảo maintainability, mở rộng và tái sử dụng của mã nguồn. SOLID là một từ viết tắt đại diện cho năm nguyên tắc cơ bản sau đây:
+
+	1. Nguyên tắc đơn trách nhiệm (Single Responsibility Principle - SRP): Theo nguyên tắc này, một lớp hoặc module chỉ nên có một trách nhiệm duy nhất. Nếu một đối tượng hoặc lớp có quá nhiều trách nhiệm, việc bảo trì và sửa đổi sẽ trở nên khó khăn và dễ gây lỗi.
+
+	2. Nguyên tắc mở/đóng (Open/Closed Principle - OCP): Nguyên tắc này đề xuất rằng mã nguồn cần phải mở cho việc mở rộng (có thể thêm tính năng mới) nhưng đóng cho việc sửa đổi mã nguồn gốc. Điều này đảm bảo rằng khi thay đổi hoặc mở rộng chức năng, chúng ta không cần chỉnh sửa mã nguồn hiện tại mà chỉ cần viết mã mới.
+
+	3. Nguyên tắc thay thế Liskov (Liskov Substitution Principle - LSP): Nguyên tắc này đề cập đến tính đúng đắn trong việc kế thừa của đối tượng. Tức là, đối tượng con của một lớp nên có thể thay thế cho đối tượng của lớp cha mà không làm thay đổi tính đúng đắn của chương trình.
+
+	4. Nguyên tắc phân tách giao diện (Interface Segregation Principle - ISP): Nguyên tắc này khuyến khích chia các giao diện lớn thành các giao diện nhỏ, cụ thể và đồng nhất để các lớp chỉ triển khai các giao diện cần thiết cho họ. Điều này giúp tránh việc các lớp phải triển khai các phương thức không liên quan đến mục đích của chúng.
+
+	5. Nguyên tắc độc lập với kiểu (Dependency Inversion Principle - DIP): Nguyên tắc này tập trung vào việc giảm sự phụ thuộc trực tiếp giữa các lớp và module. Thay vào đó, các module nên phụ thuộc vào một giao diện chung thay vì một lớp cụ thể. Điều này giúp giảm thiểu tác động khi thay đổi mã nguồn và tăng tính linh hoạt trong hệ thống.
 
 
 3. ``Phân biệt middleware và interceptor trong nestjs`` 
@@ -1524,6 +1508,304 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 	Lưu ý rằng, bạn cũng có thể áp dụng Guard ở cấp module hoặc cấp handler thay vì áp dụng trực tiếp trên cấp controller.
 
 	Trên thực tế, bạn có thể tạo nhiều loại Guard khác nhau để xác thực người dùng, kiểm tra quyền truy cập, kiểm tra token xác thực, và nhiều điều kiện khác. NestJS cung cấp sự linh hoạt cao khi sử dụng Guard để đảm bảo an toàn cho ứng dụng của bạn.
+	## NODEJS 
+
+	Node.js là một nền tảng phát triển dựa trên Chrome V8 JavaScript runtime để xây dựng các ứng dụng mạng và ứng dụng máy chủ. Một trong những yếu tố quan trọng của Node.js là sự tồn tại của Event Loop (vòng lặp sự kiện).
+
+	Event Loop trong Node.js là một cơ chế xử lý sự kiện không đồng bộ (asynchronous event-driven). Nó giúp Node.js xử lý các yêu cầu I/O mà không chặn luồng chính (main thread), cho phép ứng dụng xử lý nhiều yêu cầu cùng một lúc mà không cần tạo ra các tiến trình hoặc luồng riêng biệt cho từng yêu cầu.
+
+	Cơ chế hoạt động của Event Loop trong Node.js như sau:
+
+	1. Đưa các yêu cầu I/O vào hàng đợi: Khi một yêu cầu I/O như đọc file hoặc gửi yêu cầu HTTP được gọi, Node.js đưa nó vào hàng đợi sự kiện (event queue).
+
+	2. Xử lý các sự kiện trong hàng đợi: Event Loop lặp đi lặp lại và kiểm tra hàng đợi sự kiện. Nếu hàng đợi không rỗng, nó sẽ lấy một sự kiện từ đầu hàng đợi và xử lý nó.
+
+	3. Xử lý sự kiện không đồng bộ: Khi một sự kiện được lấy từ hàng đợi, Event Loop sẽ gọi các callback tương ứng của sự kiện đó. Callbacks này thường là các hàm không đồng bộ, ví dụ: gửi yêu cầu mạng, truy vấn cơ sở dữ liệu, hoặc thực hiện các phép tính phức tạp.
+
+	4. Tiếp tục lặp lại: Sau khi xử lý một sự kiện, Event Loop sẽ kiểm tra lại hàng đợi sự kiện. Nếu hàng đợi còn sự kiện, nó sẽ lấy sự kiện tiếp theo và tiếp tục quá trình xử lý.
+
+	Event Loop trong Node.js giúp tận dụng tối đa tài nguyên của máy tính bằng cách xử lý nhiều yêu cầu I/O cùng một lúc và không chặn luồng chính. Điều này giúp tăng hiệu suất và khả năng phản hồi của ứng dụng Node.js trong khi giữ cho mã chương trình của bạn đơn giản và dễ đọc.
+
+1. ```NPM LÀ GÌ```
+
+	npm (Node Package Manager) là một công cụ quản lý gói và mô-đun trong môi trường Node.js. Nó được cài đặt cùng với Node.js và cung cấp cho người phát triển một cách tiện lợi để tìm kiếm, cài đặt, cập nhật và quản lý các gói mã nguồn mở đã được viết bằng JavaScript.
+
+	Các gói npm chứa mã nguồn JavaScript được đóng gói cùng với thông tin về phiên bản, tác giả, phụ thuộc và các tệp tin khác cần thiết. Khi bạn muốn sử dụng một gói từ npm, bạn có thể dễ dàng tìm kiếm và cài đặt gói đó vào dự án của mình thông qua dòng lệnh hoặc tệp tin cấu hình (package.json).
+
+	Một số chức năng quan trọng của npm bao gồm:
+
+	Quản lý gói: npm cho phép bạn tìm kiếm, cài đặt, xóa và cập nhật các gói JavaScript từ kho lưu trữ công cộng npm.
+
+	Quản lý phụ thuộc: Bằng cách sử dụng tệp tin package.json, bạn có thể chỉ định các phụ thuộc của dự án của mình, bao gồm các phiên bản cụ thể hoặc các ràng buộc phụ thuộc.
+
+	Công cụ phát triển: npm cung cấp các công cụ hữu ích cho việc phát triển, như chạy các tác vụ (scripts) định nghĩa trong package.json, kiểm tra mã nguồn (linting), tạo phiên bản và công cụ kiểm tra kiểu dữ liệu.
+
+	Tạo gói: Bạn có thể tạo và xuất bản các gói của riêng mình lên npm, cho phép người khác cài đặt và sử dụng chúng.
+
+	npm là một công cụ quan trọng trong cộng đồng Node.js và rất hữu ích để quản lý các phụ thuộc và gói mã nguồn mở trong quá trình phát triển ứng dụng JavaScript.
+
+2. ```Callback trong javascript là gì```
+	
+	Callback function là một hàm được gọi lại trong trời điểm hoàn thành một task. Việc này tránh bất kỳ blocking nào trong thời điểm code được chạy
+
+	Callback trong JavaScript là một hàm (function) được truyền vào một hàm khác như một tham số. Hàm callback được gọi lại (invoke) bởi hàm chính sau khi một công việc hoặc một sự kiện xảy ra.
+
+	Trong JavaScript, hàm là một loại đối tượng, nên chúng có thể được truyền như tham số cho các hàm khác. Hàm callback thường được sử dụng trong các tình huống mà bạn muốn thực hiện một tác vụ nào đó chỉ khi một tác vụ khác hoàn thành hoặc một sự kiện xảy ra.
+
+	Ví dụ, khi bạn gửi một yêu cầu HTTP bất đồng bộ (asynchronous) trong JavaScript, bạn có thể truyền một hàm callback để xử lý kết quả trả về khi yêu cầu hoàn thành. Điều này giúp đảm bảo rằng mã được thực thi sau khi nhận được dữ liệu từ yêu cầu HTTP, thay vì chờ đợi yêu cầu hoàn thành và gây chặn mã.
+
+	Dưới đây là một ví dụ đơn giản về sử dụng callback trong JavaScript:
+
+	```javascript
+	function fetchData(callback) {
+		// Giả lập yêu cầu không đồng bộ
+		setTimeout(function() {
+			const data = 'Dữ liệu trả về từ yêu cầu';
+			callback(data); // Gọi lại hàm callback và truyền dữ liệu vào
+		}, 2000);
+	}
+
+	function processData(data) {
+		console.log('Dữ liệu đã được xử lý: ' + data);
+	}
+
+	fetchData(processData); // Truyền hàm processData làm callback
+	```
+
+	Trong ví dụ trên, chúng ta có một hàm `fetchData` để giả lập một yêu cầu không đồng bộ và truyền kết quả vào một hàm callback. Hàm `processData` được truyền vào `fetchData` và sẽ được gọi lại với dữ liệu trả về khi yêu cầu hoàn thành.
+
+3. ```Các tính năng chính của Nodejs là gì```
+
+	Các tính năng chính của Node.js bao gồm:
+
+	1. Môi trường chạy mã JavaScript: Node.js cho phép viết và chạy mã JavaScript bên phía máy chủ (server-side) thay vì chỉ chạy trên trình duyệt. Điều này cho phép bạn xây dựng ứng dụng web đa nền tảng và ứng dụng máy chủ mạnh mẽ bằng JavaScript.
+
+	2. Asynchronous I/O (I/O không đồng bộ): Node.js sử dụng mô hình I/O không đồng bộ để xử lý yêu cầu I/O (như đọc/ghi file, gửi yêu cầu HTTP) mà không chặn luồng chính. Điều này cho phép Node.js xử lý nhiều yêu cầu cùng một lúc và tăng hiệu suất của ứng dụng.
+
+	3. Sự kiện và Event-driven Programming: Node.js dựa trên mô hình lập trình sự kiện (event-driven programming) và hỗ trợ hệ thống sự kiện (event system) tích hợp sẵn. Bằng cách sử dụng các sự kiện, bạn có thể xử lý các yêu cầu và phản hồi trong thời gian thực.
+
+	4. Công cụ và thư viện: Node.js đi kèm với một số công cụ và thư viện hữu ích như npm (Node Package Manager) để quản lý các gói và mô-đun, Express.js để xây dựng ứng dụng web, Socket.io để xử lý giao tiếp real-time, và nhiều thư viện khác giúp việc phát triển ứng dụng dễ dàng hơn.
+
+	5. Cấu trúc module: Node.js hỗ trợ cấu trúc module (module system) để quản lý mã nguồn và phân tách chức năng của ứng dụng thành các module riêng biệt. Điều này giúp tăng tính tổ chức, tái sử dụng và bảo trì của mã nguồn.
+
+	6. Hiệu suất cao: Với việc sử dụng V8 JavaScript engine từ Chrome, Node.js đạt được hiệu suất cao và xử lý nhanh các yêu cầu. Nó cũng hỗ trợ việc mở rộng và phân tán dễ dàng nhờ khả năng xử lý song song và khả năng tương tác với các cơ sở dữ liệu và dịch vụ ngoài.
+
+	Node.js đã trở thành một nền tảng phát triển phổ biến trong việc xây dựng các ứng dụng web, ứng dụng mạng và các dịch vụ máy chủ. Nó kết hợp tính linh hoạt và hiệu suất cao của JavaScript để mang lại trải nghiệm phát triển hiệu quả và mạnh mẽ.
+
+4. ```CALLBACK HELL LÀ GÌ ```
+
+Asynchronous JavaScript, or JavaScript that uses callbacks, is hard to get right intuitively. A lot of code ends up looking like this:
+```javascript
+fs.readdir(source, function (err, files) {
+  if (err) {
+    console.log('Error finding files: ' + err)
+  } else {
+    files.forEach(function (filename, fileIndex) {
+      console.log(filename)
+      gm(source + filename).size(function (err, values) {
+        if (err) {
+          console.log('Error identifying file size: ' + err)
+        } else {
+          console.log(filename + ' : ' + values)
+          aspect = (values.width / values.height)
+          widths.forEach(function (width, widthIndex) {
+            height = Math.round(width / aspect)
+            console.log('resizing ' + filename + 'to ' + height + 'x' + height)
+            this.resize(width, height).write(dest + 'w' + width + '_' + filename, function(err) {
+              if (err) console.log('Error writing file: ' + err)
+            })
+          }.bind(this))
+        }
+      })
+    })
+  }
+})
+```
+See the pyramid shape and all the `})` at the end? This is affectionately known as callback hell.
+The cause of callback hell is when people try to write JavaScript in a way where execution happens visually from top to bottom. Lots of people make this mistake! In other languages like C, Ruby or Python there is the expectation that whatever happens on line 1 will finish before the code on line 2 starts running and so on down the file.
+
+5. ```PACKAGE JSON LÀ GÌ```
+
+	Trong Node.js, file `package.json` là một tệp tin cấu hình quan trọng được sử dụng để định nghĩa thông tin về một dự án và quản lý các phụ thuộc của nó. Đây là một tệp tin JSON (JavaScript Object Notation) và thường được đặt trong thư mục gốc của dự án.
+
+	Tệp tin `package.json` chứa các thông tin như:
+
+	1. Tên dự án: Tên của dự án.
+
+	2. Phiên bản: Phiên bản hiện tại của dự án.
+
+	3. Mô tả: Mô tả ngắn về dự án.
+
+	4. Tác giả: Thông tin về tác giả của dự án.
+
+	5. Scripts: Các tác vụ (scripts) được định nghĩa để thực hiện các công việc như biên dịch, chạy các tệp tin, kiểm tra mã nguồn, và nhiều tác vụ khác.
+
+	6. Phụ thuộc: Danh sách các phụ thuộc của dự án, bao gồm các gói (packages) và phiên bản tương ứng.
+
+	7. DevDependencies: Danh sách các phụ thuộc chỉ dùng cho môi trường phát triển (development environment), bao gồm các công cụ hỗ trợ, thư viện kiểm thử, và các phụ thuộc khác không cần thiết trong quá trình triển khai.
+
+	8. Scripts: Định nghĩa các tác vụ (scripts) tùy chỉnh mà bạn có thể chạy thông qua lệnh `npm run <script-name>`.
+
+	File `package.json` được sử dụng để quản lý các phụ thuộc của dự án và cung cấp một cách tiện lợi để xây dựng, chạy, và triển khai ứng dụng Node.js. Bạn có thể sử dụng lệnh `npm` để cài đặt các phụ thuộc, xóa các phụ thuộc không cần thiết, chạy các tác vụ được định nghĩa trong `scripts`, và nhiều hơn nữa.
+
+6. ``` Why we always require modules at the top of a file? Can we require modules inside of functions? ```
+
+	`Yes, we can but we shall never do it`. Node.js always runs require `synchronously`. If you require an external module from within functions your module will be synchronously loaded when those functions run and this can cause two problems:
+	If that module is only needed in one route handler function it might take some time for the module to load synchronously. As a result, several users would be unable to get any access to your server and requests will queue up.
+	If the module you require causes an error and crashes the server you may not know about the error.
+
+7. `Khi chạy lệnh yarn trong một ứng dụng nodejs typescript thì compile sẽ làm các bước gì` 
+
+	Khi chạy lệnh `yarn` trong một ứng dụng Node.js TypeScript, thông thường các bước sau sẽ được thực hiện:
+
+	1. Kiểm tra cú pháp (Linting): Mã nguồn TypeScript của bạn sẽ được kiểm tra cú pháp để đảm bảo tuân thủ quy tắc viết mã.
+
+	2. Kiểm tra kiểu (Type Checking): TypeScript Compiler (tsc) sẽ kiểm tra kiểu dữ liệu trong mã nguồn TypeScript để phát hiện và báo lỗi các sai sót liên quan đến kiểu dữ liệu.
+
+	3. Biên dịch TypeScript thành JavaScript: Sau khi kiểm tra kiểu, mã nguồn TypeScript sẽ được biên dịch thành mã JavaScript. Quá trình này sử dụng TypeScript Compiler (tsc) để chuyển đổi mã nguồn TypeScript thành mã JavaScript tương ứng.
+
+	4. Xử lý các tệp tĩnh và tài nguyên: Quá trình build có thể bao gồm xử lý các tệp tĩnh và tài nguyên, chẳng hạn như hình ảnh, tệp CSS, tệp HTML và các tệp tin khác. Các tệp tin này có thể được sao chép hoặc di chuyển vào thư mục đích trong cấu trúc thư mục của phiên bản sản phẩm.
+
+	5. Tối ưu và nén tệp tin: Trong quá trình build, bạn có thể áp dụng các quy tắc tối ưu và nén tệp tin để giảm kích thước và cải thiện hiệu suất của ứng dụng. Điều này có thể bao gồm việc loại bỏ mã không sử dụng, nén và tối ưu hóa các tệp tin CSS, JavaScript và tệp tin tĩnh khác.
+
+	6. Tạo phiên bản sản phẩm (distribution): Cuối cùng, quá trình build có thể tạo ra phiên bản sản phẩm (distribution) của ứng dụng Node.js TypeScript. Điều này thường bao gồm sao chép các tệp tin biên dịch và tệp tin tĩnh khác vào một thư mục hoặc cấu trúc thư mục đích chuẩn để triển khai ứng dụng.
+
+	Các bước và công đoạn trong quá trình build có thể thay đổi tùy thuộc vào cấu hình và yêu cầu của dự án cụ thể.
+
+8. `Các điểm tối ưu của yarn`
+
+	Có một số điểm tối ưu của công cụ quản lý gói Yarn:
+
+	1. Hiệu suất tải xuống nhanh hơn: Yarn sử dụng quy trình tải xuống song song (parallel downloading) để đồng thời tải nhiều gói về cùng một lúc. Điều này giúp tăng tốc độ tải xuống gói và giảm thời gian cài đặt.
+
+	2. Quản lý cache tốt hơn: Yarn sử dụng bộ nhớ cache (cache) để lưu trữ các gói đã tải xuống. Khi cài đặt lại các gói, Yarn sẽ kiểm tra cache và sử dụng lại các gói đã tải trước đó thay vì tải xuống lại từ kho lưu trữ. Điều này giúp tiết kiệm băng thông và giảm thời gian cài đặt lần sau.
+
+	3. Giải quyết phụ thuộc chính xác: Yarn sử dụng lockfile (`yarn.lock`) để đảm bảo tính nhất quán trong việc giải quyết và cài đặt phiên bản phụ thuộc. Điều này đảm bảo rằng các gói được cài đặt với cùng phiên bản trên các môi trường khác nhau.
+
+	4. Hỗ trợ công cụ Workspaces: Yarn hỗ trợ công cụ Workspaces, cho phép quản lý các dự án đa-package có liên quan trong một kho lưu trữ. Workspaces giúp xử lý các phụ thuộc và tải xuống gói một cách hiệu quả hơn và đồng bộ giữa các dự án.
+
+	5. Giao diện người dùng tương tác: Yarn cung cấp một giao diện người dùng tương tác (interactive CLI) với các tùy chọn và thông báo chi tiết về quá trình cài đặt và xây dựng. Điều này giúp người dùng dễ dàng theo dõi và tùy chỉnh quá trình công việc.
+
+	6. Sự ổn định và độ tin cậy: Yarn đã được phát triển và sử dụng trong các dự án quy mô lớn và có cộng đồng hỗ trợ mạnh mẽ. Điều này giúp đảm bảo rằng Yarn là một công cụ ổn định và đáng tin cậy cho quản lý gói trong quá trình phát triển ứng dụng.
+
+	Tuy nhiên, cũng cần lưu ý rằng các điểm tối ưu này không đồng nghĩa với việc Yarn là lựa chọn tốt nhất cho mọi dự án. Sự lựa chọn giữa Yarn và công cụ quản lý gói khác (như npm) còn phụ thuộc vào yêu cầu và sở thích của dự án cụ thể.
+
+9. `Lệnh yarn clean dùng để làm gì ?`
+
+	Lệnh `yarn clean` không phải là một lệnh có sẵn trong `yarn` mà là một lệnh tùy chỉnh, tức là nó không có ý nghĩa tiêu chuẩn được xác định bởi `yarn` mà phụ thuộc vào cấu hình dự án cụ thể. Thông thường, lệnh `yarn clean` được sử dụng để xóa các tệp tin và thư mục tạm thời hoặc các tệp tin đã được tạo ra trong quá trình xây dựng hoặc biên dịch.
+
+	Ví dụ, trong một dự án Node.js TypeScript, lệnh `yarn clean` có thể được cấu hình để xóa các tệp tin biên dịch JavaScript, tệp tin tạm thời, bộ nhớ cache hoặc bất kỳ tệp tin khác không cần thiết nào mà bạn muốn loại bỏ để làm sạch dự án.
+
+	Tuy nhiên, cách cấu hình và hiệu thực lệnh `yarn clean` sẽ phụ thuộc vào cấu trúc thư mục và quy trình xây dựng của dự án cụ thể. Nếu bạn đang làm việc trên một dự án cụ thể, tốt nhất là xem tài liệu hoặc tìm hiểu từ nguồn gốc của dự án để biết cách lệnh `yarn clean` được sử dụng và được cấu hình như thế nào trong dự án của bạn.
+
+10. `So sánh LOOPBACK 4 và NESTJS`
+
+	Dưới đây là một so sánh chi tiết giữa NestJS và LoopBack 4, dựa trên các yếu tố chính của hai framework này:
+
+	1. **Kiến trúc và Triết lý:**
+		
+		- NestJS: Hướng tới cung cấp kiến trúc gọn gàng, cấu trúc rõ ràng và sử dụng Dependency Injection (DI) để quản lý các phụ thuộc giữa các phần của ứng dụng. NestJS khuyến khích việc chia ứng dụng thành các module nhỏ, giúp tạo sự tách biệt và dễ dàng bảo trì.
+		- LoopBack 4: Tập trung vào việc xây dựng các RESTful API nhanh chóng bằng cách sử dụng mô hình gắn liền với dữ liệu (data-bound model). LoopBack 4 hướng đến việc tạo các endpoint API dựa trên các nguồn dữ liệu một cách dễ dàng và tự động.
+
+	2. **ORM (Object-Relational Mapping) và ODM (Object-Document Mapping):**
+		- NestJS: Không tích hợp sẵn ORM/ODM, nhưng hỗ trợ tích hợp với các thư viện ORM/ODM như TypeORM hoặc Mongoose.
+		- LoopBack 4: Có sẵn một ORM tích hợp sẵn được gọi là "Repository pattern" để làm việc với các nguồn dữ liệu theo kiểu Model-Repository.
+
+	3. **Decorator và Metadata:**
+		- NestJS: Sử dụng Decorator và Metadata để định nghĩa các module, controller, service và các endpoint API. Điều này giúp ứng dụng có cấu trúc dễ đọc và dễ bảo trì.
+		- LoopBack 4: Cũng sử dụng Decorator và Metadata để định nghĩa các controller và các endpoint API. Decorator giúp khai báo thông tin về các class và property trong ứng dụng.
+
+	4. **Thư viện hỗ trợ:**
+		- NestJS: Có cộng đồng đông đảo, với nhiều tài liệu, ví dụ và plugin hữu ích, đồng thời sử dụng TypeScript mạnh mẽ để hỗ trợ phát triển ứng dụng.
+		- LoopBack 4: Cũng có một cộng đồng đáng kể, nhưng không phổ biến bằng NestJS. LoopBack 4 cũng hỗ trợ TypeScript.
+
+	5. **Xử lý dữ liệu:**
+		- NestJS: Hỗ trợ nhiều kiểu dữ liệu khác nhau và cho phép bạn xử lý dữ liệu một cách linh hoạt thông qua các resolver.
+		- LoopBack 4: Tập trung vào việc xử lý các nguồn dữ liệu gắn liền như cơ sở dữ liệu hay các dịch vụ từ xa và tự động tạo các endpoint API cho chúng.
+
+	6. **Phạm vi ứng dụng:**
+		- NestJS: Được sử dụng để xây dựng các ứng dụng phức tạp, quy mô lớn và yêu cầu kiến trúc có tổ chức tốt.
+		- LoopBack 4: Thích hợp cho việc xây dựng các RESTful API nhanh chóng và các ứng dụng truy cập dữ liệu đơn giản.
+
+	Tóm lại, NestJS thường được lựa chọn khi cần xây dựng các ứng dụng có kiến trúc phức tạp và quy mô lớn, trong khi LoopBack 4 phù hợp cho việc xây dựng nhanh chóng các RESTful API dựa trên các nguồn dữ liệu đã có sẵn.
+
+## LOOPBACK 
+
+LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
+
+1. Mô hình lập trình hướng cơ sở dữ liệu (DBMS-agnostic): LoopBack hỗ trợ nhiều loại cơ sở dữ liệu như MongoDB, PostgreSQL, MySQL và các cơ sở dữ liệu khác. Nó cho phép bạn xác định các mô hình dữ liệu và tự động tạo các API RESTful cho các mô hình đó.
+
+2. Tích hợp dữ liệu linh hoạt: LoopBack giúp bạn tạo ra các kết nối và tương tác với các nguồn dữ liệu khác nhau, bao gồm cơ sở dữ liệu, dịch vụ RESTful, SOAP, các trang web HTML và hơn thế nữa.
+
+3. Tạo API nhanh chóng: Với LoopBack, bạn có thể nhanh chóng tạo ra các API RESTful cho các mô hình dữ liệu mà bạn đã xác định. Framework này cung cấp các phương pháp CRUD (Create, Read, Update, Delete) tiêu chuẩn, cho phép bạn dễ dàng tạo, đọc, cập nhật và xóa dữ liệu.
+
+4. Tích hợp bảo mật: LoopBack cung cấp các tính năng bảo mật như xác thực người dùng, quản lý quyền truy cập và mã hóa dữ liệu. Bạn có thể dễ dàng xác định các quyền và phân quyền cho từng tài nguyên trong ứng dụng của mình.
+
+5. Hỗ trợ phát triển đa nền tảng: LoopBack hỗ trợ việc phát triển ứng dụng web và API trên nhiều nền tảng, bao gồm cả di động. Bạn có thể xây dựng ứng dụng dành cho các thiết bị di động sử dụng React Native hoặc NativeScript và tận dụng các tính năng của LoopBack.
+
+6. Thư viện mở rộng và tiện ích: LoopBack cung cấp nhiều thư viện mở rộng và tiện ích để giúp bạn phát triển ứng dụng một cách hiệu quả. Các module mở rộng cung cấp các tính năng như gửi email, xử lý ảnh, giao diện người dùng, và nhiều hơn nữa.
+
+Tóm lại, LoopBack là một framework mạnh mẽ cho phát triển ứng dụng web và API, với khả năng tích hợp dữ liệu linh hoạt, tạo API nhanh chóng và hỗ trợ bảo mật. Nó cũng cho phép phát triển trên nhiều nền tảng và cung cấp nhiều tiện ích và thư viện mở rộng để tăng cường khả năng phát triển của bạn.
+
+### INTERCEPTOR 
+Trong LoopBack 4, Interceptor là một khái niệm quan trọng để kiểm soát và thay đổi luồng xử lý của các yêu cầu và phản hồi trong ứng dụng. Interceptor cho phép bạn thực hiện các hành động trước và sau khi yêu cầu được xử lý bởi các thành phần khác trong ứng dụng.
+
+Interceptor có thể được sử dụng để thực hiện các tác vụ như:
+
+1. Xác thực: Kiểm tra xem người dùng đã được xác thực hay chưa trước khi cho phép truy cập vào tài nguyên.
+
+2. Ghi log: Ghi lại các thông tin quan trọng về yêu cầu và phản hồi để phân tích và theo dõi hoạt động của ứng dụng.
+
+3. Ghi lại thời gian: Đo và ghi lại thời gian xử lý yêu cầu để xác định hiệu suất và tối ưu hóa ứng dụng.
+
+4. Thêm thông tin phụ: Thêm thông tin bổ sung vào yêu cầu hoặc phản hồi, chẳng hạn như thông tin ngôn ngữ, thông tin phiên bản, v.v.
+
+5. Kiểm tra lỗi: Xử lý các lỗi xảy ra trong quá trình xử lý yêu cầu và phản hồi.
+
+Để triển khai một Interceptor trong LoopBack 4, bạn cần thực hiện các bước sau:
+
+1. Định nghĩa một lớp mới mở rộng từ `Interceptor` và triển khai các phương thức cần thiết, chẳng hạn `intercept()`.
+
+2. Trong phương thức `intercept()`, bạn có thể thực hiện các hành động của Interceptor, chẳng hạn như kiểm tra, ghi log, thay đổi yêu cầu và phản hồi, và gọi `next()` để chuyển giao quyền kiểm soát cho Interceptor tiếp theo hoặc thành phần cuối cùng trong chuỗi Interceptor.
+
+3. Đăng ký Interceptor trong ứng dụng bằng cách thêm nó vào phương thức `component()` trong file `application.ts`. Ví dụ:
+
+```typescript
+import { Interceptor } from '@loopback/core';
+
+export class MyInterceptor implements Interceptor {
+  async intercept(
+    invocationCtx: InvocationContext,
+    next: Next,
+  ): Promise<ValueOrPromise<InvocationResult>> {
+    // Thực hiện các hành động của Interceptor ở đây
+
+    // Gọi next() để chuyển giao quyền kiểm soát cho Interceptor tiếp theo hoặc thành phần cuối cùng
+    return await next();
+  }
+}
+```
+
+```typescript
+import { MyInterceptor } from './my-interceptor';
+
+export class MyApplication extends Application {
+  constructor(options: ApplicationConfig = {}) {
+    super
+
+(options);
+
+    // Đăng ký Interceptor trong ứng dụng
+    this.component(MyInterceptor);
+  }
+}
+```
+
+Lưu ý rằng Interceptor trong LoopBack 4 được thực hiện theo kiểu "Chuỗi Interceptor" (Interceptor Chain), trong đó mỗi Interceptor có thể được đăng ký và chạy tuần tự theo thứ tự xác định.
+
+
+
+	 
 # Database
 ## SQL  
 ### SQL (Structured Query Language) là một ngôn ngữ lập trình dùng để truy vấn và quản lý cơ sở dữ liệu quan hệ (Relational Database Management System - RDBMS). SQL được thiết kế để thao tác dữ liệu trong các hệ thống quản lý cơ sở dữ liệu quan hệ như MySQL, Oracle, SQL Server, PostgreSQL, và SQLite.
@@ -1910,80 +2192,6 @@ Tuy nhiên, cần lưu ý rằng việc chọn sử dụng NoSQL hay SQL phụ t
 
  của dữ liệu. Một số ứng dụng có thể sử dụng cả hai loại cơ sở dữ liệu để tận dụng lợi ích của cả hai hệ thống.
 
-# LOOPBACK 
-
-LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
-
-1. Mô hình lập trình hướng cơ sở dữ liệu (DBMS-agnostic): LoopBack hỗ trợ nhiều loại cơ sở dữ liệu như MongoDB, PostgreSQL, MySQL và các cơ sở dữ liệu khác. Nó cho phép bạn xác định các mô hình dữ liệu và tự động tạo các API RESTful cho các mô hình đó.
-
-2. Tích hợp dữ liệu linh hoạt: LoopBack giúp bạn tạo ra các kết nối và tương tác với các nguồn dữ liệu khác nhau, bao gồm cơ sở dữ liệu, dịch vụ RESTful, SOAP, các trang web HTML và hơn thế nữa.
-
-3. Tạo API nhanh chóng: Với LoopBack, bạn có thể nhanh chóng tạo ra các API RESTful cho các mô hình dữ liệu mà bạn đã xác định. Framework này cung cấp các phương pháp CRUD (Create, Read, Update, Delete) tiêu chuẩn, cho phép bạn dễ dàng tạo, đọc, cập nhật và xóa dữ liệu.
-
-4. Tích hợp bảo mật: LoopBack cung cấp các tính năng bảo mật như xác thực người dùng, quản lý quyền truy cập và mã hóa dữ liệu. Bạn có thể dễ dàng xác định các quyền và phân quyền cho từng tài nguyên trong ứng dụng của mình.
-
-5. Hỗ trợ phát triển đa nền tảng: LoopBack hỗ trợ việc phát triển ứng dụng web và API trên nhiều nền tảng, bao gồm cả di động. Bạn có thể xây dựng ứng dụng dành cho các thiết bị di động sử dụng React Native hoặc NativeScript và tận dụng các tính năng của LoopBack.
-
-6. Thư viện mở rộng và tiện ích: LoopBack cung cấp nhiều thư viện mở rộng và tiện ích để giúp bạn phát triển ứng dụng một cách hiệu quả. Các module mở rộng cung cấp các tính năng như gửi email, xử lý ảnh, giao diện người dùng, và nhiều hơn nữa.
-
-Tóm lại, LoopBack là một framework mạnh mẽ cho phát triển ứng dụng web và API, với khả năng tích hợp dữ liệu linh hoạt, tạo API nhanh chóng và hỗ trợ bảo mật. Nó cũng cho phép phát triển trên nhiều nền tảng và cung cấp nhiều tiện ích và thư viện mở rộng để tăng cường khả năng phát triển của bạn.
-
-### INTERCEPTOR 
-Trong LoopBack 4, Interceptor là một khái niệm quan trọng để kiểm soát và thay đổi luồng xử lý của các yêu cầu và phản hồi trong ứng dụng. Interceptor cho phép bạn thực hiện các hành động trước và sau khi yêu cầu được xử lý bởi các thành phần khác trong ứng dụng.
-
-Interceptor có thể được sử dụng để thực hiện các tác vụ như:
-
-1. Xác thực: Kiểm tra xem người dùng đã được xác thực hay chưa trước khi cho phép truy cập vào tài nguyên.
-
-2. Ghi log: Ghi lại các thông tin quan trọng về yêu cầu và phản hồi để phân tích và theo dõi hoạt động của ứng dụng.
-
-3. Ghi lại thời gian: Đo và ghi lại thời gian xử lý yêu cầu để xác định hiệu suất và tối ưu hóa ứng dụng.
-
-4. Thêm thông tin phụ: Thêm thông tin bổ sung vào yêu cầu hoặc phản hồi, chẳng hạn như thông tin ngôn ngữ, thông tin phiên bản, v.v.
-
-5. Kiểm tra lỗi: Xử lý các lỗi xảy ra trong quá trình xử lý yêu cầu và phản hồi.
-
-Để triển khai một Interceptor trong LoopBack 4, bạn cần thực hiện các bước sau:
-
-1. Định nghĩa một lớp mới mở rộng từ `Interceptor` và triển khai các phương thức cần thiết, chẳng hạn `intercept()`.
-
-2. Trong phương thức `intercept()`, bạn có thể thực hiện các hành động của Interceptor, chẳng hạn như kiểm tra, ghi log, thay đổi yêu cầu và phản hồi, và gọi `next()` để chuyển giao quyền kiểm soát cho Interceptor tiếp theo hoặc thành phần cuối cùng trong chuỗi Interceptor.
-
-3. Đăng ký Interceptor trong ứng dụng bằng cách thêm nó vào phương thức `component()` trong file `application.ts`. Ví dụ:
-
-```typescript
-import { Interceptor } from '@loopback/core';
-
-export class MyInterceptor implements Interceptor {
-  async intercept(
-    invocationCtx: InvocationContext,
-    next: Next,
-  ): Promise<ValueOrPromise<InvocationResult>> {
-    // Thực hiện các hành động của Interceptor ở đây
-
-    // Gọi next() để chuyển giao quyền kiểm soát cho Interceptor tiếp theo hoặc thành phần cuối cùng
-    return await next();
-  }
-}
-```
-
-```typescript
-import { MyInterceptor } from './my-interceptor';
-
-export class MyApplication extends Application {
-  constructor(options: ApplicationConfig = {}) {
-    super
-
-(options);
-
-    // Đăng ký Interceptor trong ứng dụng
-    this.component(MyInterceptor);
-  }
-}
-```
-
-Lưu ý rằng Interceptor trong LoopBack 4 được thực hiện theo kiểu "Chuỗi Interceptor" (Interceptor Chain), trong đó mỗi Interceptor có thể được đăng ký và chạy tuần tự theo thứ tự xác định.
-
 
 # REDIS 
 
@@ -1998,3 +2206,24 @@ Redis cũng có khả năng bảo đảm tính toàn vẹn dữ liệu và khôi
 Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh mẽ và linh hoạt, thường được sử dụng để lưu trữ và truy xuất dữ liệu tạm thời một cách nhanh chóng và tin cậy.
 
 
+# GRAPHQL 	
+
+1. `GRAPHQL là gì ?`
+
+	GraphQL là một ngôn ngữ truy vấn dữ liệu và một lớp trung gian để truy cập dữ liệu cho ứng dụng web và di động. Nó đã được phát triển bởi Facebook và được công bố công khai vào năm 2015. GraphQL giúp cho việc truy vấn và cập nhật dữ liệu trở nên dễ dàng và hiệu quả hơn so với các giao thức truy vấn truyền thống như REST.
+
+	Một số khái niệm cơ bản trong GraphQL:
+
+	1. **Schema (Kiểu dữ liệu)**: Schema là phần quan trọng nhất của GraphQL. Nó xác định cách dữ liệu sẽ được truy vấn và cập nhật. Mỗi schema bao gồm các kiểu dữ liệu, các trường có thể truy vấn và các mối quan hệ giữa chúng.
+
+	2. **Query (Truy vấn)**: Truy vấn là một phương thức để đọc dữ liệu từ GraphQL server. Truy vấn được viết bằng ngôn ngữ GraphQL và có thể chỉ định chính xác các trường dữ liệu mà bạn muốn trả về từ server.
+
+	3. **Mutation (Điều chỉnh)**: Mutation cũng là một phương thức để thay đổi dữ liệu trên server. Bạn có thể sử dụng mutation để thêm, sửa đổi hoặc xóa dữ liệu.
+
+	4. **Subscription (Đăng ký)**: Subscription cho phép bạn theo dõi các thay đổi dữ liệu thời gian thực. Khi dữ liệu thay đổi, server sẽ thông báo cho client thông qua kết nối websocket hoặc một cơ chế theo dõi khác.
+
+	5. **Resolver (Trình giải mã)**: Resolver là một hàm hoặc phương thức trên server mà xử lý truy vấn và trả về kết quả. Mỗi trường trong schema có một resolver tương ứng.
+
+	6. **Fragment**: Fragment là một cách để tái sử dụng các phần truy vấn GraphQL. Bạn có thể định nghĩa một fragment và sau đó sử dụng nó trong nhiều truy vấn hoặc mutation khác nhau.
+
+	GraphQL cho phép bạn yêu cầu chính xác dữ liệu bạn cần, giúp tối ưu hóa hiệu suất ứng dụng và tránh over-fetching (lấy nhiều dữ liệu hơn cần thiết) và under-fetching (lấy ít dữ liệu hơn cần thiết). Điều này làm cho GraphQL trở thành một lựa chọn hấp dẫn cho việc phát triển ứng dụng hiện đại.
