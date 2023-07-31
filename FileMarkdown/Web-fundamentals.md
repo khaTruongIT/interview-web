@@ -1548,6 +1548,129 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
 	Chú ý: Khi sử dụng "setInterval", bạn cần đặc biệt lưu ý để dừng nó khi không cần thiết nữa, bằng cách sử dụng "clearInterval" để hủy lịch trình đã đặt trước đó.
 
+16. `Hash table trong javascript`
+
+	Để cài đặt một bảng băm (hash table) trong JavaScript, bạn có thể sử dụng đối tượng (object) hoặc một lớp tự định nghĩa. Dưới đây, tôi sẽ hướng dẫn bạn cách triển khai cả hai cách.
+
+	**1. Sử dụng đối tượng (object) trong JavaScript:**
+
+	Trong JavaScript, đối tượng là một cấu trúc dữ liệu có thể sử dụng như một bảng băm. Chúng ta có thể sử dụng các cặp key-value trong đối tượng để đại diện cho các phần tử trong bảng băm.
+
+	```javascript
+	// Khởi tạo bảng băm bằng đối tượng
+	const hashTable = {};
+
+	// Thêm phần tử vào bảng băm
+	hashTable["key1"] = "value1";
+	hashTable["key2"] = "value2";
+
+	// Truy xuất phần tử từ bảng băm
+	console.log(hashTable["key1"]); // Output: "value1"
+	console.log(hashTable["key2"]); // Output: "value2"
+
+	// Kiểm tra xem một key có tồn tại trong bảng băm hay không
+	if ("key1" in hashTable) {
+		console.log("Key1 exists!");
+	} else {
+		console.log("Key1 does not exist!");
+	}
+
+	// Xóa phần tử từ bảng băm
+	delete hashTable["key2"];
+	console.log(hashTable); // Output: { "key1": "value1" }
+	```
+
+	**2. Sử dụng lớp tự định nghĩa (ES6 class) trong JavaScript:**
+
+	Bạn cũng có thể triển khai bảng băm bằng cách sử dụng một lớp tự định nghĩa. Lớp này sẽ chứa các phương thức để thêm, lấy và xóa các phần tử trong bảng băm.
+
+	```javascript
+	class HashTable {
+		constructor() {
+			this.table = {};
+		}
+
+		// Thêm phần tử vào bảng băm
+		add(key, value) {
+			this.table[key] = value;
+		}
+
+		// Lấy phần tử từ bảng băm
+		get(key) {
+			return this.table[key];
+		}
+
+		// Kiểm tra sự tồn tại của một key trong bảng băm
+		has(key) {
+			return key in this.table;
+		}
+
+		// Xóa phần tử từ bảng băm
+		remove(key) {
+			delete this.table[key];
+		}
+	}
+
+	// Sử dụng lớp HashTable
+	const hashTable = new HashTable();
+	hashTable.add("key1", "value1");
+	hashTable.add("key2", "value2");
+
+	console.log(hashTable.get("key1")); // Output: "value1"
+	console.log(hashTable.get("key2")); // Output: "value2"
+
+	if (hashTable.has("key1")) {
+		console.log("Key1 exists!");
+	} else {
+		console.log("Key1 does not exist!");
+	}
+
+	hashTable.remove("key2");
+	console.log(hashTable); // Output: { "key1": "value1" }
+	```
+
+	Lưu ý rằng trong thực tế, khi triển khai một bảng băm phức tạp hơn, bạn nên xem xét các vấn đề như xử lý va chạm (collision handling), việc cải thiện hiệu suất, và các thuật toán hàm băm tốt hơn để giảm thiểu xung đột. Tuy nhiên, ví dụ trên cung cấp một cách đơn giản để bắt đầu làm việc với bảng băm trong JavaScript.
+
+17. `Set trong javascript`
+
+	Trong JavaScript, Set là một cấu trúc dữ liệu mà nó giữ các giá trị không trùng lặp, tức là mỗi giá trị trong Set chỉ xuất hiện một lần. Set giữ các giá trị theo thứ tự thêm vào, không có thứ tự sắp xếp cụ thể.
+
+	Để tạo một Set mới, bạn có thể sử dụng từ khoá `new` kèm theo lớp Set như sau:
+
+	```javascript
+	// Tạo một Set mới rỗng
+	const mySet = new Set();
+
+	// Tạo Set từ một mảng
+	const myArray = [1, 2, 3, 2, 1];
+	const mySetFromArr = new Set(myArray);
+	console.log(mySetFromArr); // Output: Set { 1, 2, 3 }
+
+	// Thêm giá trị vào Set
+	mySet.add(1);
+	mySet.add(2);
+	mySet.add(3);
+	mySet.add(2); // Giá trị 2 đã tồn tại, không thêm vào lại
+	console.log(mySet); // Output: Set { 1, 2, 3 }
+
+	// Kiểm tra sự tồn tại của một giá trị trong Set
+	console.log(mySet.has(2)); // Output: true
+	console.log(mySet.has(4)); // Output: false
+
+	// Xóa giá trị từ Set
+	mySet.delete(3);
+	console.log(mySet); // Output: Set { 1, 2 }
+
+	// Lấy số lượng các phần tử trong Set
+	console.log(mySet.size); // Output: 2
+
+	// Xóa tất cả các phần tử trong Set
+	mySet.clear();
+	console.log(mySet); // Output: Set {}
+	```
+
+	Set hữu ích khi bạn muốn lưu trữ các giá trị duy nhất và không cần quan tâm đến thứ tự của chúng. Bạn có thể sử dụng Set để loại bỏ các giá trị trùng lặp từ một mảng, thực hiện các phép toán tập hợp như hợp, giao, hiệu, và thực hiện các tác vụ khác liên quan đến các tập hợp duy nhất trong JavaScript.
+
 # Typescript 
 	
 Typescript compiles to Javascript và nó có thể execute bởi bất kỳ Javascript engine nào 
@@ -2322,7 +2445,7 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 
 	Event Loop trong Node.js giúp tận dụng tối đa tài nguyên của máy tính bằng cách xử lý nhiều yêu cầu I/O cùng một lúc và không chặn luồng chính. Điều này giúp tăng hiệu suất và khả năng phản hồi của ứng dụng Node.js trong khi giữ cho mã chương trình của bạn đơn giản và dễ đọc.
 
-1. ```NPM LÀ GÌ```
+10. ```NPM LÀ GÌ```
 
 	npm (Node Package Manager) là một công cụ quản lý gói và mô-đun trong môi trường Node.js. Nó được cài đặt cùng với Node.js và cung cấp cho người phát triển một cách tiện lợi để tìm kiếm, cài đặt, cập nhật và quản lý các gói mã nguồn mở đã được viết bằng JavaScript.
 
@@ -2340,7 +2463,7 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 
 	npm là một công cụ quan trọng trong cộng đồng Node.js và rất hữu ích để quản lý các phụ thuộc và gói mã nguồn mở trong quá trình phát triển ứng dụng JavaScript.
 
-2. ```Callback trong javascript là gì```
+11. ```Callback trong javascript là gì```
 	
 	Callback function là một hàm được gọi lại trong trời điểm hoàn thành một task. Việc này tránh bất kỳ blocking nào trong thời điểm code được chạy
 
@@ -2370,7 +2493,7 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 
 	Trong ví dụ trên, chúng ta có một hàm `fetchData` để giả lập một yêu cầu không đồng bộ và truyền kết quả vào một hàm callback. Hàm `processData` được truyền vào `fetchData` và sẽ được gọi lại với dữ liệu trả về khi yêu cầu hoàn thành.
 
-3. ```Các tính năng chính của Nodejs là gì```
+12. ```Các tính năng chính của Nodejs là gì```
 
 	Các tính năng chính của Node.js bao gồm:
 
@@ -2388,7 +2511,7 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 
 	Node.js đã trở thành một nền tảng phát triển phổ biến trong việc xây dựng các ứng dụng web, ứng dụng mạng và các dịch vụ máy chủ. Nó kết hợp tính linh hoạt và hiệu suất cao của JavaScript để mang lại trải nghiệm phát triển hiệu quả và mạnh mẽ.
 
-4. ```CALLBACK HELL LÀ GÌ ```
+13. ```CALLBACK HELL LÀ GÌ ```
 
 Asynchronous JavaScript, or JavaScript that uses callbacks, is hard to get right intuitively. A lot of code ends up looking like this:
 ```javascript
@@ -2420,7 +2543,7 @@ fs.readdir(source, function (err, files) {
 See the pyramid shape and all the `})` at the end? This is affectionately known as callback hell.
 The cause of callback hell is when people try to write JavaScript in a way where execution happens visually from top to bottom. Lots of people make this mistake! In other languages like C, Ruby or Python there is the expectation that whatever happens on line 1 will finish before the code on line 2 starts running and so on down the file.
 
-5. ```PACKAGE JSON LÀ GÌ```
+14. ```PACKAGE JSON LÀ GÌ```
 
 	Trong Node.js, file `package.json` là một tệp tin cấu hình quan trọng được sử dụng để định nghĩa thông tin về một dự án và quản lý các phụ thuộc của nó. Đây là một tệp tin JSON (JavaScript Object Notation) và thường được đặt trong thư mục gốc của dự án.
 
@@ -2444,13 +2567,13 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	File `package.json` được sử dụng để quản lý các phụ thuộc của dự án và cung cấp một cách tiện lợi để xây dựng, chạy, và triển khai ứng dụng Node.js. Bạn có thể sử dụng lệnh `npm` để cài đặt các phụ thuộc, xóa các phụ thuộc không cần thiết, chạy các tác vụ được định nghĩa trong `scripts`, và nhiều hơn nữa.
 
-6. ``` Why we always require modules at the top of a file? Can we require modules inside of functions? ```
+15. ``` Why we always require modules at the top of a file? Can we require modules inside of functions? ```
 
 	`Yes, we can but we shall never do it`. Node.js always runs require `synchronously`. If you require an external module from within functions your module will be synchronously loaded when those functions run and this can cause two problems:
 	If that module is only needed in one route handler function it might take some time for the module to load synchronously. As a result, several users would be unable to get any access to your server and requests will queue up.
 	If the module you require causes an error and crashes the server you may not know about the error.
 
-7. `Khi chạy lệnh yarn trong một ứng dụng nodejs typescript thì compile sẽ làm các bước gì` 
+16. `Khi chạy lệnh yarn trong một ứng dụng nodejs typescript thì compile sẽ làm các bước gì` 
 
 	Khi chạy lệnh `yarn` trong một ứng dụng Node.js TypeScript, thông thường các bước sau sẽ được thực hiện:
 
@@ -2468,7 +2591,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	Các bước và công đoạn trong quá trình build có thể thay đổi tùy thuộc vào cấu hình và yêu cầu của dự án cụ thể.
 
-8. `Các điểm tối ưu của yarn`
+17. `Các điểm tối ưu của yarn`
 
 	Có một số điểm tối ưu của công cụ quản lý gói Yarn:
 
@@ -2486,7 +2609,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	Tuy nhiên, cũng cần lưu ý rằng các điểm tối ưu này không đồng nghĩa với việc Yarn là lựa chọn tốt nhất cho mọi dự án. Sự lựa chọn giữa Yarn và công cụ quản lý gói khác (như npm) còn phụ thuộc vào yêu cầu và sở thích của dự án cụ thể.
 
-9. `Lệnh yarn clean dùng để làm gì ?`
+18. `Lệnh yarn clean dùng để làm gì ?`
 
 	Lệnh `yarn clean` không phải là một lệnh có sẵn trong `yarn` mà là một lệnh tùy chỉnh, tức là nó không có ý nghĩa tiêu chuẩn được xác định bởi `yarn` mà phụ thuộc vào cấu hình dự án cụ thể. Thông thường, lệnh `yarn clean` được sử dụng để xóa các tệp tin và thư mục tạm thời hoặc các tệp tin đã được tạo ra trong quá trình xây dựng hoặc biên dịch.
 
@@ -2494,7 +2617,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	Tuy nhiên, cách cấu hình và hiệu thực lệnh `yarn clean` sẽ phụ thuộc vào cấu trúc thư mục và quy trình xây dựng của dự án cụ thể. Nếu bạn đang làm việc trên một dự án cụ thể, tốt nhất là xem tài liệu hoặc tìm hiểu từ nguồn gốc của dự án để biết cách lệnh `yarn clean` được sử dụng và được cấu hình như thế nào trong dự án của bạn.
 
-10. `So sánh LOOPBACK 4 và NESTJS`
+19. `So sánh LOOPBACK 4 và NESTJS`
 
 	Dưới đây là một so sánh chi tiết giữa NestJS và LoopBack 4, dựa trên các yếu tố chính của hai framework này:
 
@@ -2525,7 +2648,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	Tóm lại, NestJS thường được lựa chọn khi cần xây dựng các ứng dụng có kiến trúc phức tạp và quy mô lớn, trong khi LoopBack 4 phù hợp cho việc xây dựng nhanh chóng các RESTful API dựa trên các nguồn dữ liệu đã có sẵn.
 
-11. `RestApi là gì, cho ví dụ dựa vào lb4`
+20. `RestApi là gì, cho ví dụ dựa vào lb4`
 
 	RESTful API (Representational State Transfer API) là một kiểu thiết kế API dựa trên các nguyên tắc của kiến trúc REST, một kiểu kiến trúc phổ biến trong việc phát triển các hệ thống web và ứng dụng web service. RESTful API được sử dụng để xác định cách các nguồn tài nguyên của hệ thống (thường là các đối tượng và dữ liệu) có thể được truy cập và tương tác thông qua các phương thức HTTP như GET, POST, PUT, DELETE, v.v.
 
@@ -2643,7 +2766,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	Lưu ý rằng ví dụ trên chỉ minh họa cơ bản về việc tạo một RESTful API bằng LoopBack 4. Trong thực tế, bạn có thể mở rộng và phức tạp hơn với nhiều model, controller, và tính năng khác để phát triển một ứng dụng hoàn chỉnh.
 
-11. `Phân biệt require và import trong nodejs`
+21. `Phân biệt require và import trong nodejs`
 
 	"Sự khác biệt giữa "require" và "import" liên quan đến cách Node.js và các phiên bản ECMAScript (ES) xử lý cú pháp và tải module trong mã nguồn.
 
@@ -2681,7 +2804,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 	**Lưu ý:**
 	- Nếu bạn sử dụng Node.js và muốn sử dụng "import" thay vì "require", bạn cần sử dụng flag `--experimental-modules` khi chạy Node.js. Tuy nhiên, trong nhiều trường hợp, người ta vẫn ưa thích sử dụng "require" trong Node.js để tránh vấn đề tương thích và không cần thiết phải cấu hình thêm.
 
-12. `Phân biệt promise và callback`
+22. `Phân biệt promise và callback`
 
 	"Sự khác biệt giữa callback và Promise trong Node.js" liên quan đến cách xử lý các hoạt động bất đồng bộ (asynchronous operations) trong mã nguồn.
 
@@ -2742,7 +2865,7 @@ The cause of callback hell is when people try to write JavaScript in a way where
 
 	Khi làm việc với Node.js và các hoạt động bất đồng bộ, việc sử dụng Promise là một lựa chọn tốt để làm mã nguồn của bạn dễ đọc và dễ quản lý hơn.
 
-13 .`Middleware trong Express.js là gì và cách sử dụng chúng?`
+23 .`Middleware trong Express.js là gì và cách sử dụng chúng?`
 
 Middleware trong Express.js là một cơ chế mà cho phép bạn thực hiện các hàm xử lý trung gian (middleware functions) trước khi xử lý các yêu cầu (requests) của người dùng hoặc trước khi gửi các phản hồi (responses) từ server. Middleware là một trong những tính năng quan trọng và mạnh mẽ của Express.js, cho phép bạn thêm các tính năng, kiểm tra yêu cầu, xử lý lỗi, kiểm soát quyền truy cập, v.v. trước khi nó đến các hàm xử lý chính của ứng dụng.
 
@@ -2810,7 +2933,7 @@ Lưu ý rằng trong hàm Middleware, chúng ta cần gọi hàm `next()` để 
 
 Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý trong việc xử lý yêu cầu của ứng dụng, cho phép chúng ta thêm các tính năng và kiểm soát các yêu cầu dễ dàng hơn.
 
-14. `Giải thích cơ bản về module trong nodejs`
+24. `Giải thích cơ bản về module trong nodejs`
 
 	Cơ bản về các module trong Node.js:
 
@@ -2870,7 +2993,7 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
 	Tóm lại, trong Node.js, các module là các phần mã có thể sử dụng lại để thực hiện các chức năng cụ thể. Bạn có thể sử dụng các module tích hợp sẵn của Node.js hoặc tự tạo module của riêng bạn và nhập chúng vào mã nguồn thông qua hàm `require()`. Việc sử dụng module giúp phân chia chương trình thành các phần nhỏ hơn và tăng tính tái sử dụng và tính linh hoạt trong mã nguồn Node.js.
 
-15. `Cách xử lý các biến môi trường (environment variables) trong Node.js và  khác biệt giữa "process.argv" và "process.env" trong Node.js.`
+25. `Cách xử lý các biến môi trường (environment variables) trong Node.js và  khác biệt giữa "process.argv" và "process.env" trong Node.js.`
 
 	Trong Node.js, có hai cách chính để xử lý các biến môi trường (environment variables):
 
@@ -2912,7 +3035,7 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 	- "process.argv" dùng để truyền các giá trị tham số khi chạy ứng dụng qua dòng lệnh.
 	- "process.env" dùng để truy cập các biến môi trường đã được cài đặt trước đó, thường được sử dụng để lưu trữ thông tin cấu hình, các khóa bí mật, v.v.
 
-16. `Cách sử dụng HTTP trong nodejs`
+26. `Cách sử dụng HTTP trong nodejs`
 
 	Trong Node.js, bạn có thể sử dụng và tạo các server HTTP bằng cách sử dụng module tích hợp sẵn "http". Module này cho phép bạn tạo các ứng dụng web và xử lý các yêu cầu HTTP đến server của bạn.
 
@@ -2964,7 +3087,7 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
 	Đây chỉ là ví dụ cơ bản về cách sử dụng và tạo server HTTP trong Node.js. Trong thực tế, bạn có thể mở rộng việc xử lý yêu cầu và phản hồi để xây dựng các ứng dụng web phức tạp hơn.
 
-17. `Cách xử lý lỗi trong nodejs`
+27. `Cách xử lý lỗi trong nodejs`
 
 	Xử lý lỗi trong Node.js là một quá trình quan trọng để đảm bảo ứng dụng của bạn hoạt động một cách đáng tin cậy và tránh các vấn đề không mong muốn. Việc đáp ứng và xử lý lỗi một cách tốt là điều cần thiết để cải thiện trải nghiệm người dùng, cung cấp thông tin hữu ích về các sự cố xảy ra và giúp bạn dễ dàng xác định và sửa lỗi trong mã nguồn của mình.
 
@@ -3032,6 +3155,20 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 	4. **Bảo mật và bảo vệ thông tin:** Xử lý lỗi đảm bảo việc xử lý dữ liệu nhạy cảm hoặc quan trọng được thực hiện một cách an toàn, tránh lộ thông tin quan trọng.
 
 	Tóm lại, xử lý lỗi là một khía cạnh quan trọng trong việc phát triển ứng dụng Node.js. Bằng cách đảm bảo việc xử lý lỗi tốt, bạn có thể cải thiện tính ổn định và đáng tin cậy
+
+
+28. `Cache trong javascript là gì`
+
+	Trong lập trình JavaScript, cache (bộ nhớ cache) là một cơ chế lưu trữ tạm thời dữ liệu để giảm thiểu thời gian truy cập và tải dữ liệu từ nguồn gốc. Cơ chế cache giúp cải thiện hiệu suất và giảm tải cho máy chủ bằng cách lưu trữ phiên bản của các tài nguyên trên trình duyệt hoặc máy tính của người dùng.
+
+	Có hai loại chính của cache trong JavaScript:
+
+	1. Cache trình duyệt (Browser cache): Trình duyệt lưu trữ tạm thời các tệp tài nguyên như hình ảnh, CSS, JavaScript, v.v. từ các trang web mà bạn đã truy cập. Khi bạn truy cập lại trang web đó, trình duyệt sẽ sử dụng bản sao được lưu trữ trong cache thay vì tải lại từ máy chủ. Điều này giúp giảm thời gian tải trang và tiết kiệm lưu lượng mạng. Để quản lý cache trình duyệt, bạn có thể sử dụng HTTP Cache-Control headers hoặc các công cụ lập trình viên, chẳng hạn như Service Workers để điều khiển cách cache được quản lý.
+
+	2. Cache dữ liệu trong ứng dụng JavaScript: Trong các ứng dụng web hoặc ứng dụng đơn trang (SPA), bạn có thể sử dụng cache để lưu trữ kết quả phức tạp tính toán, dữ liệu từ máy chủ, hoặc bất kỳ dữ liệu nào mà bạn muốn lưu trữ tạm thời để tránh tính toán lặp lại hoặc tải dữ liệu lần nữa từ máy chủ. Điều này có thể giúp cải thiện hiệu suất ứng dụng và trải nghiệm người dùng. Bạn có thể sử dụng các cơ chế cache như LocalStorage, SessionStorage, IndexedDB hoặc các thư viện bên thứ ba để quản lý cache dữ liệu trong ứng dụng JavaScript của mình.
+
+	Cần lưu ý rằng việc sử dụng cache cần được thực hiện cẩn thận để đảm bảo rằng dữ liệu được cập nhật đúng mức và không bị lỗi vì việc lưu trữ tạm thời. Việc quản lý cache đòi hỏi một cân nhắc cẩn thận giữa hiệu suất và độ chính xác của dữ liệu trong ứng dụng của bạn.
+
 
 ## LOOPBACK 
 
