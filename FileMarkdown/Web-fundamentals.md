@@ -180,6 +180,21 @@ Web Fundamentals
 	- 
 - Front-end Development
 	- Ưu và nhược của SPA & SSR:
+		Server Side Rendering (SSR) và Client Side Rendering (CSR) là hai phương pháp khác nhau để tạo và hiển thị giao diện người dùng (UI) trong ứng dụng web. Dưới đây là sự so sánh giữa Server Side Rendering và Client Side Rendering:
+
+	1. **Server Side Rendering (SSR):**
+   - SSR là quá trình tạo và hiển thị giao diện người dùng trên máy chủ trước khi trình duyệt của người dùng nhận được nội dung.
+   - Khi một trang web sử dụng SSR, trình duyệt yêu cầu trang từ máy chủ, máy chủ xử lý yêu cầu và tạo ra trang hoàn chỉnh (bao gồm dữ liệu và giao diện) trước khi gửi trả về trình duyệt.
+   - Vì trang web đã được tạo sẵn tại máy chủ, nên thời gian tải trang đầu tiên có thể lâu hơn so với CSR. Tuy nhiên, người dùng thường nhận được nội dung cơ bản ngay từ đầu.
+   - SSR thích hợp cho các trang web có nội dung tĩnh hoặc ít thay đổi, hoặc khi cần tối ưu hóa SEO.
+
+	2. **Client Side Rendering (CSR):**
+   - CSR là quá trình tạo và hiển thị giao diện người dùng trong trình duyệt của người dùng bằng cách sử dụng JavaScript sau khi trang web đã tải xong.
+   - Khi một trang web sử dụng CSR, trình duyệt tải các tệp HTML, CSS và JavaScript cơ bản từ máy chủ, sau đó sử dụng JavaScript để tạo và điều khiển giao diện người dùng.
+   - Với CSR, trang web có thể cảm thấy nhanh và tương tác, nhưng việc trang web cần phải tải và xử lý dữ liệu sau khi tải xong có thể dẫn đến một khoảng thời gian trống trước khi nội dung xuất hiện.
+   - CSR thích hợp cho các ứng dụng web động, có nhiều tương tác và thay đổi dữ liệu thường xuyên.
+
+		Tóm lại, sự lựa chọn giữa SSR và CSR phụ thuộc vào loại ứng dụng bạn đang phát triển và yêu cầu cụ thể của nó. SSR thường phù hợp cho việc tối ưu hóa SEO và cung cấp nội dung cơ bản ngay từ đầu, trong khi CSR thường phù hợp cho việc xây dựng các ứng dụng web động và tương tác cao.
 		- Single Page Application: 
 			- Ưu:
 				- Tăng trải nghiệm người dùng khi sử dụng, cho phép người dùng update content mà không phải reload lại cả page
@@ -201,12 +216,15 @@ Web Fundamentals
 				- Hạn chế thao tác trên client-side.
 				- Framework, thư viên còn hạn chế.
 		- -> Chọn SPA khi cần tăng trải nghiệm ng dùng, real-time updates, UI đẹp :)), chọn SSR khi ưu tiên việc load ban đầu, SEO và khả năng truy cập, cân nhắc kết hợp cả 2 cũng được, SSR cho mấy trang crit còn SPA cho mấy trang user interactive nhiều.
+	
+	
 	- JS module: là cơ chế để chia các ứng dụng JS thành các đoạn mã riêng biệt, có thể tái sử dụng và load độc lập
 	- Vì sao JS, CSS, HTML trình duyệt tự hiểu được nma vẫn cần build tool, vì sao cái này cần thiết?:
 		- Code Optimization & Transformation: build tool có thể tối ưu hoá code bằng cách nén và chuyển đổi, đồng thời cho phép viết code JS hiện đại sau đó chuyển đổi thành phiên bản tương thích với các trình duyệt cũ . Cải thiện thời gian và hiệu suất tải.
 		- Assets Management & Transformation: FE build tool giúp quản lý và tối ưu nhiều loại tài nguyên như ảnh font chữ, stylesheeets. Có thể tự động nén ảnh và sinh ra bản tối ưu hơn cho kích thước của màn hình
 		- Development Workflow Enhancements: build tools cung cấp những feature như hot reloading (browser tự động refresh khi có thay đổi), hot module replacement (chỉ update module thay vì reload lại cả page), error reporting để cải thiện quá trình code của developer.
 		- Cross-Browser Compatibility: tự động add các prefix cần thiết cho CSS properties, đảm báo style correct khi dùng giữa các browser khác nhau.
+
 
 
 	1. ``Những điểm khác nhau giữa NEXTJS và REACTJS là gì ``\
@@ -231,7 +249,9 @@ Web Fundamentals
 			- React.js: Đa phần sử dụng trong môi trường phát triển trình duyệt (client-side) và cần phải tích hợp thêm các công nghệ khác nhau để triển khai ứng dụng vào máy chủ (server).
 			- Next.js: Được xây dựng sẵn với SSR, giúp dễ dàng triển khai ứng dụng lên máy chủ hoặc nền tảng dịch vụ đám mây.
 
-		Tóm lại, Next.js là một framework xây dựng trên nền tảng React.js, bổ sung các tính năng quan trọng như SSR và định tuyến tích hợp sẵn để giúp bạn dễ dàng xây dựng các ứng dụng web với hiệu suất cao và trải nghiệm người dùng tốt hơn. 
+		Tóm lại, Next.js là một framework xây dựng trên nền tảng React.js, bổ sung các tính năng quan trọng như SSR và định tuyến tích hợp sẵn để giúp bạn dễ dàng xây dựng các ứng dụng web với hiệu suất cao và trải nghiệm người dùng tốt hơn.
+
+
 	2. 	``Component life cycle trong react là gì ? ``
 			
 		Trong React, các component life cycle (vòng đời của component) là chuỗi các phương thức mà component của bạn sẽ thông qua trong quá trình khởi tạo, cập nhật và hủy bỏ. Các phương thức này cho phép bạn thực hiện các hành động cụ thể tại các giai đoạn khác nhau trong quá trình mà component được tạo ra, hiển thị và biến đổi.
@@ -244,7 +264,7 @@ Web Fundamentals
 		2. **Updating (Cập nhật):**
 			- `shouldComponentUpdate()`: Được gọi trước khi component được cập nhật. Bạn có thể kiểm tra xem liệu việc cập nhật có cần thiết hay không bằng cách so sánh props mới và props hiện tại, hoặc state mới và state hiện tại.
 			- `getSnapshotBeforeUpdate()`: Được gọi trước khi các thay đổi được áp dụng vào DOM. Phương thức này cho phép bạn lấy thông tin từ DOM (ví dụ: vị trí cuộn) trước khi cập nhật để sau đó dùng trong `componentDidUpdate()`.
-			- `componentDidUpdate()`: Được gọi sau khi component đã được cập nhật. Ở đây, bạn có thể thực hiện các thao tác sau khi cập nhật xảy ra, như làm sạch dữ liệu không cần thiết hoặc tương tác với DOM.
+ 				- `componentDidUpdate()`: Được gọi sau khi component đã được cập nhật. Ở đây, bạn có thể thực hiện các thao tác sau khi cập nhật xảy ra, như làm sạch dữ liệu không cần thiết hoặc tương tác với DOM.
 
 		3. **Unmounting (Hủy bỏ):**
 			- `componentWillUnmount()`: Được gọi trước khi component bị hủy bỏ và bị gỡ khỏi DOM. Bạn nên dọn dẹp các tài nguyên không cần thiết ở đây, như huỷ các subscriptions, hủy các kết nối mạng, v.v.
@@ -424,6 +444,61 @@ Trong các phiên bản mới nhất của React, bạn cũng có thể sử d�
 	```
 
 	Khi component bị hủy bỏ, `useEffect` sẽ gọi hàm clean-up trước khi nó bị hủy, cho phép bạn làm sạch dữ liệu và huỷ các subscriptions hoặc đăng ký sự kiện.
+
+5. `Virtual dom trong reactjs là gì`
+
+	Trong ReactJS, Virtual DOM (DOM ảo) là một khái niệm quan trọng và là một phần chính của cách React hoạt động. Virtual DOM là một biểu diễn ảo (bản sao) của cấu trúc DOM thực tế trên trình duyệt và được React sử dụng để quản lý sự thay đổi và cập nhật giao diện người dùng một cách hiệu quả.
+
+	Khi bạn xây dựng một ứng dụng React, React sẽ sử dụng Virtual DOM để theo dõi trạng thái (state) của ứng dụng và xác định sự thay đổi nào cần được cập nhật trên giao diện người dùng. Quá trình này giúp tối ưu hóa hiệu suất bằng cách giảm số lượng lần thay đổi trực tiếp trên DOM thực tế.
+
+	Cơ chế hoạt động của Virtual DOM như sau:
+
+	1. Bắt đầu với trạng thái ban đầu: React sử dụng dữ liệu trạng thái hiện tại để xây dựng một Virtual DOM ban đầu.
+
+	2. Render Virtual DOM: React sử dụng thông tin từ Virtual DOM để tạo ra một cấu trúc DOM ảo, mô tả cách giao diện người dùng sẽ được hiển thị.
+
+	3. So sánh với DOM trước: Sau mỗi lần render, React so sánh Virtual DOM mới với Virtual DOM trước đó.
+
+	4. Xác định sự thay đổi: React tìm ra sự khác biệt giữa Virtual DOM mới và Virtual DOM cũ. Điều này giúp xác định những phần tử nào thực sự cần được cập nhật lên DOM thực tế.
+
+	5. Thực hiện cập nhật: React chỉ cập nhật các phần tử thay đổi mà không cần phải làm lại toàn bộ DOM. Điều này giúp giảm thiểu tải lên trình duyệt và cải thiện hiệu suất.
+
+	Nhờ sử dụng Virtual DOM, React giúp tối ưu hóa quá trình cập nhật giao diện người dùng và cải thiện hiệu suất ứng dụng. Khi bạn cập nhật trạng thái của ứng dụng trong React, React sẽ xây dựng một Virtual DOM mới, so sánh với Virtual DOM cũ và chỉ cập nhật những phần thay đổi thực sự lên DOM thực tế. Điều này giúp giảm thiểu overhead và làm cho ứng dụng chạy nhanh hơn và mượt mà hơn.
+
+6. `useState trong react là gì`
+
+	Trong React, "useState" là một trong những Hook (cụ thể là State Hook) được cung cấp bởi thư viện React Hooks. Nó cho phép bạn sử dụng trạng thái (state) trong các thành phần hàm (functional components) của ứng dụng React. Trước khi có Hook, trạng thái chỉ có thể được sử dụng trong các thành phần dựa trên lớp (class components), nhưng giờ đây với Hook, bạn có thể sử dụng trạng thái trong cả hai loại thành phần (hàm và lớp).
+
+	Để sử dụng useState trong một thành phần hàm, bạn cần import nó từ thư viện React và sau đó gọi nó trong cơ thể của thành phần. useState trả về một mảng với hai phần tử: giá trị trạng thái hiện tại và hàm để cập nhật trạng thái đó.
+
+	Dưới đây là cách sử dụng useState trong một thành phần hàm:
+
+	```jsx
+	import React, { useState } from 'react';
+
+	function ExampleComponent() {
+		// Khai báo trạng thái (state) bằng cách sử dụng useState
+		const [count, setCount] = useState(0);
+
+		// Hàm xử lý sự kiện để tăng giá trị count lên 1
+		const handleIncrement = () => {
+			setCount(count + 1);
+		};
+
+		return (
+			<div>
+				<p>Giá trị count: {count}</p>
+				<button onClick={handleIncrement}>Tăng</button>
+			</div>
+		);
+	}
+
+	export default ExampleComponent;
+	```
+
+	Trong ví dụ trên, chúng ta sử dụng useState để khai báo một trạng thái có tên là "count" và khởi tạo giá trị ban đầu của nó là 0. useState trả về một mảng với hai phần tử: "count" là giá trị trạng thái hiện tại và "setCount" là hàm để cập nhật trạng thái đó. Chúng ta sử dụng setCount để tăng giá trị "count" lên 1 mỗi khi người dùng nhấn vào nút "Tăng".
+
+	Khi người dùng nhấn nút, React sẽ tự động kích hoạt lại hàm ExampleComponent với giá trị trạng thái mới, và giao diện người dùng sẽ được cập nhật với giá trị "count" mới.
 
 # Javascripts
 
@@ -655,6 +730,12 @@ ES7 (ECMAScript 2016) là một phiên bản tiêu chuẩn của ngôn ngữ Jav
 	const myString = "   Hello, world!   ";
 	const trimmedString = myString.trim();
 	console.log(trimmedString); // Output: "Hello, world!"
+	```
+
+	11. **charAt**: Trả về ký tự trong chuỗi
+	```javascript 
+	const str = "Hello, World!";
+	console.log(str.charAt(0)); // Output: "H"
 	```
 
 	Đây là một số string method trong JavaScript. Có nhiều method khác nữa, hãy tìm hiểu thêm để sử dụng chúng trong công việc của bạn.
@@ -1671,6 +1752,284 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
 	Set hữu ích khi bạn muốn lưu trữ các giá trị duy nhất và không cần quan tâm đến thứ tự của chúng. Bạn có thể sử dụng Set để loại bỏ các giá trị trùng lặp từ một mảng, thực hiện các phép toán tập hợp như hợp, giao, hiệu, và thực hiện các tác vụ khác liên quan đến các tập hợp duy nhất trong JavaScript.
 
+18. `Map trong javascript`
+
+	Trong JavaScript, "Map" là một loại cấu trúc dữ liệu hữu ích để lưu trữ các cặp key-value (khóa-giá trị) và cho phép bạn thực hiện các thao tác thêm, xóa, tìm kiếm và truy xuất giá trị dựa vào khóa. Một điểm mạnh của Map là nó cho phép sử dụng bất kỳ kiểu dữ liệu nào làm khóa, bao gồm cả đối tượng và hàm.
+
+	Để sử dụng Map trong JavaScript, bạn có thể sử dụng cú pháp sau:
+
+	```javascript
+	const map = new Map();
+	```
+
+	Dưới đây là một số phương thức cơ bản của Map:
+
+	1. `set(key, value)`: Thêm một cặp khóa-giá trị vào Map.
+
+	```javascript
+	map.set('name', 'John');
+	map.set(1, 'One');
+	```
+
+	2. `get(key)`: Trả về giá trị tương ứng với khóa được chỉ định, nếu không tồn tại trả về undefined.
+
+	```javascript
+	const nameValue = map.get('name'); // 'John'
+	const oneValue = map.get(1); // 'One'
+	const nonExistentValue = map.get('nonExistentKey'); // undefined
+	```
+
+	3. `has(key)`: Kiểm tra xem khóa có tồn tại trong Map hay không.
+
+	```javascript
+	const hasName = map.has('name'); // true
+	const hasNonExistentKey = map.has('nonExistentKey'); // false
+	```
+
+	4. `delete(key)`: Xóa cặp khóa-giá trị với khóa được chỉ định khỏi Map.
+
+	```javascript
+	map.delete('name');
+	```
+
+	5. `size`: Trả về số lượng cặp khóa-giá trị trong Map.
+
+	```javascript
+	const size = map.size; // 1
+	```
+
+	6. `clear()`: Xóa tất cả các cặp khóa-giá trị trong Map.
+
+	```javascript
+	map.clear();
+	```
+
+	Map cũng hỗ trợ việc duyệt qua các cặp khóa-giá trị thông qua các phương thức `forEach`, `keys`, `values`, và `entries`.
+
+	```javascript
+	map.set('name', 'John');
+	map.set('age', 30);
+
+	// Duyệt qua các cặp khóa-giá trị
+	map.forEach((value, key) => {
+		console.log(`${key}: ${value}`);
+	});
+
+	// Duyệt qua các khóa
+	for (const key of map.keys()) {
+		console.log(key);
+	}
+
+	// Duyệt qua các giá trị
+	for (const value of map.values()) {
+		console.log(value);
+	}
+
+	// Duyệt qua các cặp khóa-giá trị sử dụng destructuring
+	for (const [key, value] of map.entries()) {
+		console.log(`${key}: ${value}`);
+	}
+	```
+
+	Map là một cấu trúc dữ liệu mạnh mẽ và linh hoạt trong JavaScript, và nó rất hữu ích khi bạn cần lưu trữ dữ liệu theo kiểu key-value.
+
+19. `Hoisting trong javascript là gì ?`
+
+	Hoisting là một cơ chế JavaScript trong đó các biến, khai báo hàm và lớp được di chuyển lên đầu phạm vi của chúng trước khi thực thi mã. Hãy nhớ rằng JavaScript chỉ nâng các khai báo, không khởi tạo. Hãy lấy một ví dụ đơn giản về cẩu biến
+	
+	EX: 
+	```typescript
+	console.log(message); //output : undefined
+	var message = "The variable Has been hoisted";
+
+	var message;
+	console.log(message);
+	message = "The variable Has been hoisted";
+
+	message("Good morning"); //Good morning
+	function message(name) {
+  	console.log(name);
+	}
+	```
+
+20. `Closure trong javascript là gì`
+	
+	Closure trong JavaScript là một khái niệm quan trọng trong việc quản lý phạm vi (scope) của các biến và hàm. Closure xảy ra khi một hàm bên trong có khả năng truy cập và sử dụng các biến từ phạm vi của hàm bên ngoài mà nó được định nghĩa trong.
+
+	Một closure được tạo ra khi một hàm bên trong được trả về từ một hàm bên ngoài và nó vẫn có thể truy cập các biến của hàm bên ngoài ngay cả khi hàm bên ngoài đã kết thúc thực thi. Điều này cho phép bạn tạo ra các biến "private" và "persistent" trong JavaScript.
+
+	Ví dụ:
+
+	```javascript
+	function outerFunction() {
+		var outerVariable = 'I am from the outer function';
+
+		function innerFunction() {
+			console.log(outerVariable); // Inner function can access outerVariable
+		}
+
+		return innerFunction;
+	}
+
+	var closureExample = outerFunction();
+	closureExample(); // This will log "I am from the outer function"
+	```
+
+	Trong ví dụ trên, `innerFunction` là một closure vì nó có thể truy cập biến `outerVariable` của hàm `outerFunction` ngay cả sau khi `outerFunction` đã thực thi xong và trả về. Các closure rất hữu ích trong việc quản lý state, tạo ra các biến private, và thực hiện các pattern như module trong JavaScript.
+
+21. `Modules là gì và tại sao cần phải có modules `
+
+	Trong ngữ cảnh lập trình, modules (còn gọi là module) là một cách tổ chức mã nguồn thành các phần riêng biệt và độc lập, giúp tách biệt các chức năng khác nhau và quản lý phạm vi (scope) của biến và hàm trong một cách có tổ chức. Modules giúp giảm thiểu xung đột tên biến, tạo ra các biến "private", và tạo ra cơ chế tái sử dụng mã nguồn.
+
+	Các lý do cần phải sử dụng modules trong lập trình bao gồm:
+
+	1. **Tách biệt chức năng:** Modules cho phép bạn tách biệt các chức năng khác nhau của ứng dụng vào các phần riêng biệt. Điều này giúp mã nguồn dễ đọc, dễ hiểu và dễ bảo trì hơn.
+
+	2. **Quản lý phạm vi (scope):** Các biến và hàm trong một module thường chỉ có phạm vi trong module đó, tránh việc xung đột tên biến với các phần khác trong ứng dụng.
+
+	3. **Bảo mật và ẩn thông tin:** Các biến và hàm được định nghĩa trong module có thể được bảo vệ và không thể truy cập từ bên ngoài module, tạo ra các biến "private" và giúp ẩn thông tin quan trọng.
+
+	4. **Tái sử dụng:** Các modules có thể được sử dụng lại trong nhiều dự án khác nhau, giúp tiết kiệm thời gian và công sức trong việc phát triển.
+
+	5. **Quản lý dependencies:** Modules giúp quản lý các phụ thuộc (dependencies) của ứng dụng một cách có tổ chức, giúp kiểm soát và cập nhật các thư viện và thành phần dễ dàng hơn.
+
+	6. **Hiệu suất tải trang:** Modules cho phép tải lần đầu chỉ những phần cần thiết của ứng dụng, giúp tối ưu hóa hiệu suất tải trang.
+
+	Trong JavaScript, trước khi có hỗ trợ chính thức cho ES6 Modules (EcmaScript 2015), các nhà phát triển đã sử dụng các kỹ thuật như IIFE (Immediately Invoked Function Expression) và CommonJS để tạo ra modules. Tuy nhiên, với sự phát triển của ngôn ngữ, ES6 Modules đã trở thành một phần quan trọng của ngôn ngữ và giúp quản lý modules một cách rõ ràng hơn và hiệu quả hơn.
+
+22. `Scope trong javascript là gì ?`
+
+	Trong lập trình JavaScript, scope (phạm vi) là vùng mà các biến và hàm có thể được truy cập và sử dụng. Scope xác định phạm vi của biến, quyết định biến nào có thể được truy cập từ đâu và trong thời gian nào. JavaScript sử dụng các khối mã như hàm và khối if để tạo ra các phạm vi khác nhau.
+
+	Có hai loại scope chính trong JavaScript:
+
+	1. **Global Scope (Phạm vi toàn cục):** Biến được khai báo ở ngoài bất kỳ hàm nào hoặc khối mã nào sẽ nằm trong phạm vi toàn cục. Điều này có nghĩa là biến có thể được truy cập từ bất kỳ đâu trong mã JavaScript, bất kể nằm trong hàm hay ngoài hàm.
+
+	```javascript
+	var globalVariable = 'I am a global variable';
+
+	function someFunction() {
+		console.log(globalVariable); // Có thể truy cập globalVariable ở đây
+	}
+
+	someFunction();
+	console.log(globalVariable); // Có thể truy cập globalVariable ở đây
+	```
+
+	2. **Local Scope (Phạm vi cục bộ):** Biến được khai báo trong một hàm hoặc khối mã cụ thể chỉ có thể được truy cập từ bên trong phạm vi của nó. Điều này giúp giới hạn tác động của biến chỉ trong phạm vi nhất định và tránh xung đột với các biến khác nằm trong các phạm vi khác.
+
+	```javascript
+	function someFunction() {
+		var localVariable = 'I am a local variable';
+		console.log(localVariable); // Có thể truy cập localVariable ở đây
+	}
+
+	someFunction();
+	console.log(localVariable); // Lỗi: Không thể truy cập localVariable ở đây
+	```
+
+	Khi truy cập biến, JavaScript sẽ tìm kiếm biến đó từ trong phạm vi gần nhất trước khi tiến xa ra các phạm vi khác. Điều này được gọi là "scope chain" (chuỗi phạm vi). Nếu biến không được tìm thấy trong phạm vi hiện tại hoặc các phạm vi cha, JavaScript sẽ tạo biến mới trong phạm vi toàn cục (nếu chế độ "strict mode" không được sử dụng) hoặc sẽ ném ra lỗi (nếu chế độ "strict mode" được sử dụng).
+
+23. `Nan là gì`
+
+	Hàm isNaN() được sử dụng để xác định xem một giá trị có phải là số không hợp lệ (Không phải là số) hay không. tức là, Hàm này trả về true nếu giá trị bằng NaN. Nếu không, nó trả về false.
+
+	```javascript
+	isNaN("Hello"); //true
+	isNaN("100"); //false
+	```
+
+24. `Global varaiables là gì`
+
+	Biến toàn cục là những biến có sẵn trong suốt chiều dài của mã mà không có bất kỳ phạm vi nào. Từ khóa var dùng để khai báo biến cục bộ nhưng nếu bạn bỏ nó đi thì nó sẽ trở thành biến toàn cục
+	```typescript
+	msg = "Hello"; // var is missing, it becomes global variable
+	```
+
+25. `Phân biệt let,const,var`
+
+	Trong JavaScript, `let`, `var`, và `const` là các từ khóa được sử dụng để khai báo biến, nhưng chúng có sự khác nhau về phạm vi (scope) và khả năng thay đổi giá trị. Dưới đây là sự phân biệt giữa chúng:
+
+	1. **var:**
+		- Trước khi ES6 (ES2015) ra đời, `var` là cách duy nhất để khai báo biến trong JavaScript.
+		- Biến khai báo bằng `var` có phạm vi là phạm vi hàm (function scope). Điều này có nghĩa là biến chỉ có thể truy cập được từ bên trong hàm mà nó được khai báo.
+		- Biến khai báo bằng `var` sẽ không bị lỗi nếu được khai báo lại trong cùng một phạm vi.
+		- Biến khai báo bằng `var` sẽ tồn tại cả trong phạm vi block (`{ ... }`) mà biến đó được khai báo, không phụ thuộc vào block scope.
+
+	```javascript
+	function example() {
+		if (true) {
+			var x = 10;
+		}
+		console.log(x); // 10 (var không có block scope)
+	}
+	```
+
+	2. **let:**
+		- `let` cũng được giới thiệu trong ES6 và cải thiện khả năng quản lý biến so với `var`.
+		- Biến khai báo bằng `let` có phạm vi là block scope (phạm vi khối), nghĩa là biến chỉ có thể truy cập được từ bên trong khối mà nó được khai báo.
+		- Biến khai báo bằng `let` không thể khai báo lại trong cùng một phạm vi.
+		- Một biến khai báo bằng `let` có thể thay đổi giá trị sau khi được khởi tạo.
+
+		```javascript
+		if (true) {
+			let y = 20;
+		}
+		console.log(y); // Lỗi: y is not defined (do y chỉ có block scope)
+		```
+
+	3. **const:**
+		- `const` cũng giới thiệu trong ES6 và thường được sử dụng để khai báo các hằng số.
+		- Biến khai báo bằng `const` cũng có block scope giống như `let`.
+		- Biến khai báo bằng `const` không thể khai báo lại hoặc thay đổi giá trị sau khi được gán.
+
+		```javascript
+		const z = 30;
+		z = 40; // Lỗi: Assignment to constant variable
+		```
+
+	Tóm lại, `let` được ưu tiên sử dụng hơn `var` trong các tình huống mới, vì nó giúp tránh một số vấn đề liên quan đến scope và tái sử dụng biến. `const` thường được sử dụng khi bạn muốn tạo ra một biến không thể thay đổi giá trị sau khi gán.Trong JavaScript, `let`, `var`, và `const` là các từ khóa được sử dụng để khai báo biến, nhưng chúng có sự khác nhau về phạm vi (scope) và khả năng thay đổi giá trị. Dưới đây là sự phân biệt giữa chúng:
+
+	1. **var:**
+		- Trước khi ES6 (ES2015) ra đời, `var` là cách duy nhất để khai báo biến trong JavaScript.
+		- Biến khai báo bằng `var` có phạm vi là phạm vi hàm (function scope). Điều này có nghĩa là biến chỉ có thể truy cập được từ bên trong hàm mà nó được khai báo.
+		- Biến khai báo bằng `var` sẽ không bị lỗi nếu được khai báo lại trong cùng một phạm vi.
+		- Biến khai báo bằng `var` sẽ tồn tại cả trong phạm vi block (`{ ... }`) mà biến đó được khai báo, không phụ thuộc vào block scope.
+
+		```javascript
+			function example() {
+				if (true) {
+					var x = 10;
+				}
+				console.log(x); // 10 (var không có block scope)
+			}
+		```
+
+	2. **let:**
+		- `let` cũng được giới thiệu trong ES6 và cải thiện khả năng quản lý biến so với `var`.
+		- Biến khai báo bằng `let` có phạm vi là block scope (phạm vi khối), nghĩa là biến chỉ có thể truy cập được từ bên trong khối mà nó được khai báo.
+		- Biến khai báo bằng `let` không thể khai báo lại trong cùng một phạm vi.
+		- Một biến khai báo bằng `let` có thể thay đổi giá trị sau khi được khởi tạo.
+
+		```javascript
+		if (true) {
+			let y = 20;
+		}
+		console.log(y); // Lỗi: y is not defined (do y chỉ có block scope)
+		```
+
+	3. **const:**
+		- `const` cũng giới thiệu trong ES6 và thường được sử dụng để khai báo các hằng số.
+		- Biến khai báo bằng `const` cũng có block scope giống như `let`.
+		- Biến khai báo bằng `const` không thể khai báo lại hoặc thay đổi giá trị sau khi được gán.
+
+		```javascript
+		const z = 30;
+		z = 40; // Lỗi: Assignment to constant variable
+		```
+
+	Tóm lại, `let` được ưu tiên sử dụng hơn `var` trong các tình huống mới, vì nó giúp tránh một số vấn đề liên quan đến scope và tái sử dụng biến. `const` thường được sử dụng khi bạn muốn tạo ra một biến không thể thay đổi giá trị sau khi gán.
+
 # Typescript 
 	
 Typescript compiles to Javascript và nó có thể execute bởi bất kỳ Javascript engine nào 
@@ -2124,6 +2483,42 @@ Lợi ích của Typescript
 	- Promise cho phép bạn xử lý các kết quả thành công và thất bại một cách dễ dàng và tuần tự hơn.
 
 	Khi làm việc với Node.js và các hoạt động bất đồng bộ, việc sử dụng Promise là một lựa chọn tốt để làm mã nguồn của bạn dễ đọc và dễ quản lý hơn.
+
+13. `Mapped type trong typescript`
+
+	Trong TypeScript, "Mapped type" là một tính năng mạnh mẽ cho phép bạn tạo ra các loại mới dựa trên một loại đã tồn tại. Điều này cho phép bạn tạo ra các loại mới với các thuộc tính được thay đổi hoặc tùy chỉnh từ loại gốc mà không cần phải viết lại mã lặp đi lặp lại.
+
+	Để sử dụng Mapped type, bạn sử dụng cú pháp `{ [P in K]: T }`, trong đó:
+
+	- `[P in K]` là phần dựng loại, cho phép bạn duyệt qua tất cả các thuộc tính trong loại K (thường là một chuỗi đại diện cho tên thuộc tính).
+	- `T` là loại dữ liệu mới bạn muốn sử dụng cho các thuộc tính.
+
+	Ví dụ, giả sử bạn có một interface "Person" như sau:
+
+	```typescript
+	interface Person {
+		name: string;
+		age: number;
+		email: string;
+	}
+	```
+
+	Bạn muốn tạo một phiên bản của "Person" nhưng loại "age" và "email" sẽ trở thành tùy chọn. Bạn có thể sử dụng Mapped type để làm điều này:
+
+	```typescript
+	type PartialPerson = { [P in 'name' | 'age' | 'email']?: Person[P] };
+	```
+
+	Trong ví dụ trên, "PartialPerson" sẽ có cùng các thuộc tính như "Person", nhưng tất cả các thuộc tính đều trở thành tùy chọn (thêm "?" trước mỗi thuộc tính).
+
+	Bây giờ, bạn có thể sử dụng "PartialPerson" như sau:
+
+	```typescript
+	const person: PartialPerson = { name: 'John' };
+	```
+
+	Lưu ý rằng, bạn có thể sử dụng Mapped type không chỉ với các union types (như trong ví dụ trên), mà cũng với các loại động được xác định bởi keyof và các thuộc tính của loại gốc. Điều này cho phép bạn tạo các loại mới dựa trên bất kỳ loại nào và sử dụng lại các loại phức tạp mà không cần phải viết lại mã. Mapped type là một công cụ mạnh mẽ trong TypeScript giúp tăng tính tái sử dụng mã và tăng cường tính linh hoạt của mã TypeScript.
+
 
 # Test
 - UnitTest:  Bảo vệ code khi sửa code trong tương lai, tránh lỗi của quá khứ', mục tiêu của unit test là cô lập một phần code và xác minh tính chính xác của đoạn code đó 
@@ -3169,6 +3564,92 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
 	Cần lưu ý rằng việc sử dụng cache cần được thực hiện cẩn thận để đảm bảo rằng dữ liệu được cập nhật đúng mức và không bị lỗi vì việc lưu trữ tạm thời. Việc quản lý cache đòi hỏi một cân nhắc cẩn thận giữa hiệu suất và độ chính xác của dữ liệu trong ứng dụng của bạn.
 
+29. `Bodyparser trong nodejs`
+
+	Trong Node.js, "body-parser" là một middleware được sử dụng để xử lý dữ liệu gửi từ client đến server qua phương thức POST, PUT, PATCH và các phương thức khác có thể chứa dữ liệu trong phần thân (body) của yêu cầu HTTP.
+
+	Khi bạn gửi dữ liệu từ client đến server thông qua phương thức POST hoặc PUT, dữ liệu đó thường được đính kèm trong phần thân của yêu cầu HTTP. Để truy cập và xử lý dữ liệu này trong Node.js, bạn cần sử dụng "body-parser" để giải mã dữ liệu từ phần thân yêu cầu thành các đối tượng JavaScript có thể truy cập và sử dụng dễ dàng.
+
+	Để sử dụng "body-parser" trong ứng dụng Node.js của bạn, bạn cần thực hiện các bước sau:
+
+	1. Cài đặt gói "body-parser" thông qua npm (Node.js Package Manager):
+		```
+		npm install body-parser
+		```
+
+	2. Sử dụng "body-parser" như một middleware trong mã Express.js của bạn:
+
+		```javascript
+		const express = require('express');
+		const bodyParser = require('body-parser');
+
+		const app = express();
+
+		// Sử dụng middleware bodyParser để xử lý dữ liệu từ phần thân yêu cầu
+		app.use(bodyParser.urlencoded({ extended: false }));
+		app.use(bodyParser.json());
+
+		// Các route và xử lý yêu cầu khác ở đây...
+
+		const port = 3000;
+		app.listen(port, () => {
+			console.log(`Server is running on port ${port}`);
+		});
+		```
+
+	Sau khi cài đặt và sử dụng "body-parser", bạn có thể truy cập dữ liệu gửi từ client thông qua các thuộc tính như `req.body` trong mã route của bạn:
+
+	```javascript
+	app.post('/api/data', (req, res) => {
+		const data = req.body; // Truy cập dữ liệu từ phần thân yêu cầu
+		console.log(data);
+		// Xử lý và trả về phản hồi
+	});
+	```
+
+	Lưu ý rằng cần chắc chắn sử dụng "body-parser" trước khi định nghĩa các route mà bạn muốn xử lý dữ liệu từ phần thân yêu cầu.
+
+
+30. `Cors trong nodejs`
+
+	CORS (Cross-Origin Resource Sharing) là một cơ chế bảo mật trong trình duyệt web, cho phép các trang web từ một nguồn gốc (origin) có thể yêu cầu tài nguyên từ một nguồn gốc khác. Một nguồn gốc là một tập hợp gồm ba yếu tố: giao thức (http, https), tên miền và cổng. Nếu hai trang web có cùng giao thức, tên miền và cổng, chúng được coi là cùng một nguồn gốc (same-origin). CORS giúp ngăn chặn các cuộc yêu cầu không an toàn từ các nguồn gốc khác nhau, nhưng vẫn cho phép các trang web tương tác với nhau một cách an toàn.
+
+	Khi sử dụng Express.js (một framework Node.js phổ biến) để xây dựng ứng dụng web, bạn cần xử lý các yêu cầu CORS nếu ứng dụng của bạn chạy trên một máy chủ (origin) khác với máy chủ chứa tài nguyên mà bạn muốn yêu cầu. Điều này phổ biến khi bạn phát triển các ứng dụng đơn trang (SPA) sử dụng JavaScript để gọi API từ một máy chủ khác.
+
+	Để hỗ trợ CORS trong Express.js, bạn cần thêm middleware có thể xử lý các yêu cầu CORS. Một trong những cách thông thường để làm điều này là sử dụng middleware "cors" của Express.js.
+
+	Để cài đặt middleware cors, bạn cần thực hiện các bước sau:
+
+	1. Cài đặt gói cors thông qua npm (Node.js Package Manager):
+		```
+		npm install cors
+		```
+
+	2. Sử dụng middleware cors trong mã Express.js của bạn:
+
+		```javascript
+		const express = require('express');
+		const cors = require('cors');
+
+		const app = express();
+
+		// Sử dụng middleware cors cho tất cả các yêu cầu đến máy chủ
+		app.use(cors());
+
+		// Hoặc có thể chỉ áp dụng cho các route cụ thể
+		// app.get('/api/data', cors(), (req, res) => {
+		//   // Xử lý yêu cầu và trả về dữ liệu
+		// });
+
+		// Các route và xử lý yêu cầu khác ở đây...
+
+		const port = 3000;
+		app.listen(port, () => {
+			console.log(`Server is running on port ${port}`);
+		});
+		```
+
+	Middleware cors sẽ thêm các tiêu đề cần thiết vào các yêu cầu và phản hồi để cho phép hoặc từ chối các yêu cầu từ các nguồn gốc khác nhau. Nó giúp xác định quyền truy cập trên máy chủ và đảm bảo rằng các yêu cầu từ các nguồn không được phép sẽ bị chặn để tránh các vấn đề bảo mật.
 
 ## LOOPBACK 
 
