@@ -51,7 +51,7 @@ Web Fundamentals
 			- 2xx (Success): status code trong range này chỉ ra server đã nhận được request, hiểu và đã xử lý thành công request.
 				- Code: 200 OK
 			- 3xx (Redirection): để chỉ rằng cái request trước đó cần action của client để complete, bình thường là cho những action redirect.
-				- Code 304: Not Modified (cache của client vẫn còn khả dụng server báo người dùng có thể dùng bản copy của cache)
+				- Code 304: Not Modified (cache của client vẫn còa	n khả dụng server báo người dùng có thể dùng bản copy của cache)
 			- 4xx (Client errors): chỉ ra có lỗi từ phía clients
 				- Code: 404 Not found
 				- Code: 401 Bad request (wrong or invalid parameters)
@@ -540,9 +540,39 @@ ES7 (ECMAScript 2016) là một phiên bản tiêu chuẩn của ngôn ngữ Jav
 
 
 1.  ```Explain Null and Undefined in JavaScript```  
-	JavaScript (and by extension TypeScript) has two bottom types: null and undefined. They are intended to mean different things:
-	Something hasn't been initialised : undefined.
-	Something is currently unavailable: null.
+	Trong nhiều ngôn ngữ lập trình, bao gồm JavaScript, "null" và "undefined" là hai giá trị đặc biệt được sử dụng để biểu thị sự thiếu vắng của dữ liệu hoặc trạng thái không xác định. Mặc dù chúng có thể có sự tương đồng, nhưng cũng có sự khác biệt quan trọng giữa chúng:
+
+	1. **Undefined (Không xác định):**
+		- "Undefined" là giá trị mà một biến có thể có khi nó đã được khai báo, nhưng chưa được gán giá trị.
+		- Một biến có thể trở thành "undefined" khi được khai báo nhưng không được gán giá trị hoặc khi truy cập vào một thuộc tính không tồn tại của một đối tượng.
+		- Ví dụ:
+
+			```javascript
+			let x;
+			console.log(x); // undefined
+
+			let obj = {};
+			console.log(obj.property); // undefined
+			```
+
+	2. **Null (Trống):**
+		- "Null" là giá trị biểu thị một biến đã được khởi tạo và gán giá trị là "null".
+		- Điều này thường được sử dụng khi bạn muốn rõ ràng chỉ định rằng một biến không có giá trị hoặc chưa có dữ liệu.
+		- "Null" thường được sử dụng trong các tình huống ngữ cảnh hợp lý, ví dụ như khi bạn muốn đặt một biến trạng thái của đối tượng thành "không có dữ liệu".
+		- Ví dụ:
+
+			```javascript
+			let y = null;
+			console.log(y); // null
+
+			let user = {
+				name: null,
+				age: 25
+			};
+			console.log(user.name); // null
+			```
+
+	Tóm lại, "undefined" thường xuất hiện khi một biến không có giá trị hoặc khi truy cập vào thuộc tính không tồn tại của đối tượng, trong khi "null" thường được sử dụng để biểu thị rõ ràng sự thiếu vắng của dữ liệu hoặc trạng thái không xác định.
 
 2. ```What is strict mode```
 
@@ -1854,28 +1884,28 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
 20. `Closure trong javascript là gì`
 	
-	Closure trong JavaScript là một khái niệm quan trọng trong việc quản lý phạm vi (scope) của các biến và hàm. Closure xảy ra khi một hàm bên trong có khả năng truy cập và sử dụng các biến từ phạm vi của hàm bên ngoài mà nó được định nghĩa trong.
+	Closure trong JavaScript là một khái niệm quan trọng, đề cập đến khả năng của một hàm có thể truy cập và sử dụng các biến được định nghĩa trong phạm vi của hàm cha của nó, ngay cả khi hàm cha đã thực thi xong và đã ra khỏi ngữ cảnh.
 
-	Một closure được tạo ra khi một hàm bên trong được trả về từ một hàm bên ngoài và nó vẫn có thể truy cập các biến của hàm bên ngoài ngay cả khi hàm bên ngoài đã kết thúc thực thi. Điều này cho phép bạn tạo ra các biến "private" và "persistent" trong JavaScript.
-
-	Ví dụ:
+	Một ví dụ cơ bản về closure trong JavaScript như sau:
 
 	```javascript
 	function outerFunction() {
-		var outerVariable = 'I am from the outer function';
+		var outerVariable = "I am from outer";
 
 		function innerFunction() {
-			console.log(outerVariable); // Inner function can access outerVariable
+			console.log(outerVariable);
 		}
 
 		return innerFunction;
 	}
 
-	var closureExample = outerFunction();
-	closureExample(); // This will log "I am from the outer function"
+	var closureFunc = outerFunction();
+	closureFunc(); // Kết quả: "I am from outer"
 	```
 
-	Trong ví dụ trên, `innerFunction` là một closure vì nó có thể truy cập biến `outerVariable` của hàm `outerFunction` ngay cả sau khi `outerFunction` đã thực thi xong và trả về. Các closure rất hữu ích trong việc quản lý state, tạo ra các biến private, và thực hiện các pattern như module trong JavaScript.
+	Trong ví dụ trên, chúng ta có một hàm `outerFunction` chứa một biến cục bộ là `outerVariable` và một hàm con là `innerFunction`. Hàm `innerFunction` có thể truy cập vào biến `outerVariable`, mặc dù hàm `outerFunction` đã thực thi xong. Khi gọi `outerFunction`, nó trả về `innerFunction`, và sau đó khi gọi `closureFunc`, nó vẫn có thể truy cập và hiển thị giá trị của `outerVariable`. Đây chính là closure.
+
+	Với closure, ta có thể tạo ra các biến ẩn (private variables), quản lý trạng thái, triển khai các pattern như module pattern để kiểm soát phạm vi và tránh xung đột biến toàn cục, v.v.
 
 21. `Modules là gì và tại sao cần phải có modules `
 
@@ -1990,45 +2020,43 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
 	Tóm lại, `let` được ưu tiên sử dụng hơn `var` trong các tình huống mới, vì nó giúp tránh một số vấn đề liên quan đến scope và tái sử dụng biến. `const` thường được sử dụng khi bạn muốn tạo ra một biến không thể thay đổi giá trị sau khi gán.Trong JavaScript, `let`, `var`, và `const` là các từ khóa được sử dụng để khai báo biến, nhưng chúng có sự khác nhau về phạm vi (scope) và khả năng thay đổi giá trị. Dưới đây là sự phân biệt giữa chúng:
 
-	1. **var:**
-		- Trước khi ES6 (ES2015) ra đời, `var` là cách duy nhất để khai báo biến trong JavaScript.
-		- Biến khai báo bằng `var` có phạm vi là phạm vi hàm (function scope). Điều này có nghĩa là biến chỉ có thể truy cập được từ bên trong hàm mà nó được khai báo.
-		- Biến khai báo bằng `var` sẽ không bị lỗi nếu được khai báo lại trong cùng một phạm vi.
-		- Biến khai báo bằng `var` sẽ tồn tại cả trong phạm vi block (`{ ... }`) mà biến đó được khai báo, không phụ thuộc vào block scope.
-
-		```javascript
-			function example() {
-				if (true) {
-					var x = 10;
-				}
-				console.log(x); // 10 (var không có block scope)
-			}
-		```
-
-	2. **let:**
-		- `let` cũng được giới thiệu trong ES6 và cải thiện khả năng quản lý biến so với `var`.
-		- Biến khai báo bằng `let` có phạm vi là block scope (phạm vi khối), nghĩa là biến chỉ có thể truy cập được từ bên trong khối mà nó được khai báo.
-		- Biến khai báo bằng `let` không thể khai báo lại trong cùng một phạm vi.
-		- Một biến khai báo bằng `let` có thể thay đổi giá trị sau khi được khởi tạo.
-
-		```javascript
-		if (true) {
-			let y = 20;
-		}
-		console.log(y); // Lỗi: y is not defined (do y chỉ có block scope)
-		```
-
-	3. **const:**
-		- `const` cũng giới thiệu trong ES6 và thường được sử dụng để khai báo các hằng số.
-		- Biến khai báo bằng `const` cũng có block scope giống như `let`.
-		- Biến khai báo bằng `const` không thể khai báo lại hoặc thay đổi giá trị sau khi được gán.
-
-		```javascript
-		const z = 30;
-		z = 40; // Lỗi: Assignment to constant variable
-		```
-
 	Tóm lại, `let` được ưu tiên sử dụng hơn `var` trong các tình huống mới, vì nó giúp tránh một số vấn đề liên quan đến scope và tái sử dụng biến. `const` thường được sử dụng khi bạn muốn tạo ra một biến không thể thay đổi giá trị sau khi gán.
+
+26.`Phân biệt null và undefined`
+
+Trong nhiều ngôn ngữ lập trình, bao gồm JavaScript, "null" và "undefined" là hai giá trị đặc biệt được sử dụng để biểu thị sự thiếu vắng của dữ liệu hoặc trạng thái không xác định. Mặc dù chúng có thể có sự tương đồng, nhưng cũng có sự khác biệt quan trọng giữa chúng:
+
+1. **Undefined (Không xác định):**
+   - "Undefined" là giá trị mà một biến có thể có khi nó đã được khai báo, nhưng chưa được gán giá trị.
+   - Một biến có thể trở thành "undefined" khi được khai báo nhưng không được gán giá trị hoặc khi truy cập vào một thuộc tính không tồn tại của một đối tượng.
+   - Ví dụ:
+
+     ```javascript
+     let x;
+     console.log(x); // undefined
+
+     let obj = {};
+     console.log(obj.property); // undefined
+     ```
+
+2. **Null (Trống):**
+   - "Null" là giá trị biểu thị một biến đã được khởi tạo và gán giá trị là "null".
+   - Điều này thường được sử dụng khi bạn muốn rõ ràng chỉ định rằng một biến không có giá trị hoặc chưa có dữ liệu.
+   - "Null" thường được sử dụng trong các tình huống ngữ cảnh hợp lý, ví dụ như khi bạn muốn đặt một biến trạng thái của đối tượng thành "không có dữ liệu".
+   - Ví dụ:
+
+     ```javascript
+     let y = null;
+     console.log(y); // null
+
+     let user = {
+       name: null,
+       age: 25
+     };
+     console.log(user.name); // null
+     ```
+
+Tóm lại, "undefined" thường xuất hiện khi một biến không có giá trị hoặc khi truy cập vào thuộc tính không tồn tại của đối tượng, trong khi "null" thường được sử dụng để biểu thị rõ ràng sự thiếu vắng của dữ liệu hoặc trạng thái không xác định.
 
 # Typescript 
 	
@@ -2822,6 +2850,20 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 	Lưu ý rằng, bạn cũng có thể áp dụng Guard ở cấp module hoặc cấp handler thay vì áp dụng trực tiếp trên cấp controller.
 
 	Trên thực tế, bạn có thể tạo nhiều loại Guard khác nhau để xác thực người dùng, kiểm tra quyền truy cập, kiểm tra token xác thực, và nhiều điều kiện khác. NestJS cung cấp sự linh hoạt cao khi sử dụng Guard để đảm bảo an toàn cho ứng dụng của bạn.
+
+10. `DTO trong nestjs`
+
+	Trong NestJS, Data Transfer Object (DTO) là một khái niệm được sử dụng để quản lý việc truyền dữ liệu giữa các lớp hoặc module khác nhau trong ứng dụng của bạn. DTOs là một phần quan trọng của việc thiết kế API và hệ thống ứng dụng chất lượng. Dưới đây là một số mục đích chính mà DTOs được sử dụng trong NestJS:
+
+	1. **Validation and Transformation**: DTOs cho phép bạn kiểm tra và xác thực dữ liệu đầu vào từ người dùng trước khi nó được sử dụng bởi các phần khác của ứng dụng. Bằng cách định nghĩa các quy tắc kiểm tra và xác thực trong DTO, bạn có thể đảm bảo rằng dữ liệu được gửi đến API là hợp lệ và an toàn.
+
+	2. **Decoupling Layers**: DTOs giúp tách biệt các lớp khác nhau trong ứng dụng, chẳng hạn như lớp Controller và Service. Bằng cách sử dụng DTOs, bạn có thể xác định rõ ràng các dạng dữ liệu mà các API endpoints chấp nhận và trả về. Điều này giúp giảm thiểu sự phụ thuộc giữa các phần khác nhau của ứng dụng và tạo ra một cơ chế truyền tải dữ liệu đáng tin cậy.
+
+	3. **Versioning and Compatibility**: Khi bạn phát triển ứng dụng và cần thay đổi cấu trúc dữ liệu của các API endpoints, việc sử dụng DTOs giúp bạn duy trì sự tương thích ngược với các phiên bản API cũ hơn. Thay vì thay đổi trực tiếp cấu trúc dữ liệu trả về từ Service, bạn có thể tạo ra các phiên bản DTO khác nhau để hỗ trợ các phiên bản API khác nhau.
+
+	4. **Reducing Overfetching and Underfetching**: DTOs cho phép bạn tinh chỉnh dữ liệu mà bạn trả về từ API để đảm bảo rằng người dùng chỉ nhận được những thông tin mà họ cần. Điều này giúp tránh tình trạng overfetching (nhận quá nhiều dữ liệu không cần thiết) và underfetching (không nhận đủ thông tin cần thiết) từ phía người dùng.
+
+	Tóm lại, trong NestJS, Data Transfer Objects (DTOs) được sử dụng để định nghĩa cách dữ liệu được truyền qua lại giữa các thành phần khác nhau của ứng dụng, đảm bảo tính xác thực, tương thích và tách biệt giữa các lớp. Điều này giúp cải thiện cấu trúc ứng dụng và hiệu suất API.
 	## NODEJS 
 
 	Node.js là một nền tảng phát triển dựa trên Chrome V8 JavaScript runtime để xây dựng các ứng dụng mạng và ứng dụng máy chủ. Một trong những yếu tố quan trọng của Node.js là sự tồn tại của Event Loop (vòng lặp sự kiện).
@@ -3651,6 +3693,174 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
 	Middleware cors sẽ thêm các tiêu đề cần thiết vào các yêu cầu và phản hồi để cho phép hoặc từ chối các yêu cầu từ các nguồn gốc khác nhau. Nó giúp xác định quyền truy cập trên máy chủ và đảm bảo rằng các yêu cầu từ các nguồn không được phép sẽ bị chặn để tránh các vấn đề bảo mật.
 
+31. `Các moudle thường hay sử dụng trong nodejs là gì ?`
+
+	Có rất nhiều module và thư viện được sử dụng trong Node.js để giúp phát triển ứng dụng dễ dàng hơn và mở rộng khả năng của chúng. Dưới đây là một số module phổ biến mà bạn có thể sử dụng trong dự án Node.js:
+
+	1. **Express:** Một framework web cho Node.js giúp xây dựng các ứng dụng web và API dễ dàng bằng cách cung cấp các tính năng quản lý định tuyến, middleware, và xử lý yêu cầu.
+
+	2. **Mongoose:** Thư viện hỗ trợ tương tác với cơ sở dữ liệu MongoDB, cung cấp các công cụ để định nghĩa các kiểu dữ liệu, tạo các mô hình và thực hiện các truy vấn dữ liệu.
+
+	3. **Axios:** Thư viện HTTP client cho Node.js, giúp thực hiện các yêu cầu HTTP đến các API hoặc máy chủ khác.
+
+	4. **Socket.io:** Thư viện cho phép giao tiếp realtime thông qua WebSocket, hữu ích cho việc xây dựng các ứng dụng chat, game thời gian thực và các ứng dụng realtime khác.
+
+	5. **Lodash:** Thư viện utility cung cấp nhiều hàm hỗ trợ xử lý mảng, đối tượng, chuỗi, và các tác vụ khác.
+
+	6. **jsonwebtoken:** Cho phép tạo và xác minh các JSON Web Tokens (JWT), thường được sử dụng để xác thực người dùng trong các ứng dụng web.
+
+	7. **dotenv:** Cho phép bạn quản lý các biến môi trường trong các tệp `.env` và dễ dàng sử dụng chúng trong ứng dụng của bạn.
+
+	8. **Multer:** Thư viện giúp xử lý việc tải lên (upload) và lưu trữ tệp tin từ yêu cầu HTTP, thường được sử dụng để xử lý tải lên hình ảnh và tệp đính kèm.
+
+	9. **Joi:** Thư viện để xác thực và kiểm tra dữ liệu đầu vào, thường được sử dụng trong API để đảm bảo dữ liệu đầu vào hợp lệ.
+
+	10. **Passport:** Thư viện hỗ trợ xác thực người dùng trong ứng dụng, cung cấp các chiến lược xác thực khác nhau như Local, OAuth, JWT, và nhiều chiến lược khác.
+
+	11. **Sequelize:** Thư viện ORM (Object-Relational Mapping) giúp tương tác với cơ sở dữ liệu quan hệ như MySQL, PostgreSQL, SQLite, v.v.
+
+	12. **Nodemailer:** Cho phép gửi email từ ứng dụng Node.js.
+
+	13. **Redis:** Thư viện để tương tác với cơ sở dữ liệu in-memory Redis, thường được sử dụng cho việc lưu trữ bộ nhớ tạm thời và caching.
+
+	14. **Winston:** Thư viện logging mạnh mẽ giúp quản lý và ghi lại thông tin từ ứng dụng.
+
+	Đây chỉ là một số ví dụ về các module phổ biến được sử dụng trong Node.js. Tùy theo yêu cầu cụ thể của dự án, bạn có thể sử dụng nhiều thư viện và module khác nữa.
+
+32. `Middleware function trong nodejs là gì ?`
+
+	Trong Node.js, middleware là các chương trình con (functions) hoặc các plugins được thực thi trong quá trình xử lý của một ứng dụng web. Chúng được gọi liên tiếp theo một thứ tự nhất định, giúp thực hiện các nhiệm vụ như xử lý yêu cầu (request), kiểm tra dữ liệu, thực hiện xác thực, logging, và nhiều chức năng khác mà không phải là chức năng chính của ứng dụng.
+
+	Middleware cho phép bạn tách biệt các phần khác nhau của logic ứng dụng thành các lớp riêng biệt, làm cho mã nguồn dễ đọc, dễ bảo trì và dễ mở rộng.
+
+	Trong Node.js, các framework như Express cung cấp hỗ trợ middleware mạnh mẽ. Ví dụ, để sử dụng middleware trong Express, bạn có thể sử dụng phương thức `.use()`:
+
+	```javascript
+	const express = require('express');
+	const app = express();
+
+	// Middleware example
+	app.use((req, res, next) => {
+		console.log('This is a middleware function.');
+		next(); // Chuyển quyền kiểm soát cho middleware tiếp theo
+	});
+
+	// Route handler
+	app.get('/', (req, res) => {
+		res.send('Hello, World!');
+	});
+
+	app.listen(3000, () => {
+		console.log('Server is running on port 3000');
+	});
+	```
+
+	Trong ví dụ trên, middleware function sẽ được gọi mỗi khi có một yêu cầu tới ứng dụng. Sau khi middleware đã hoàn thành công việc của nó, `next()` được gọi để chuyển quyền kiểm soát sang middleware tiếp theo hoặc đến route handler.
+
+	Có thể có nhiều middleware được áp dụng trong cùng một ứng dụng Express, và chúng sẽ được thực thi theo thứ tự bạn khai báo. Middleware có thể thực hiện các nhiệm vụ như kiểm tra xác thực, xử lý dữ liệu đầu vào, bắt lỗi, cài đặt headers, và nhiều chức năng khác tùy theo mục đích của bạn.
+
+33. `Giải thích cách sử dụng next trong nodejs`
+
+	Trong Node.js và các framework như Express, `next` là một tham số được truyền vào trong các middleware functions và route handlers để chuyển quyền kiểm soát từ một middleware hoặc route handler sang middleware hoặc route handler tiếp theo trong chuỗi xử lý. 
+
+	Khi một middleware function hoặc route handler hoàn thành công việc của mình và sẵn sàng để chuyển quyền kiểm soát cho middleware tiếp theo, bạn gọi hàm `next()` để thực hiện việc chuyển này. Nếu không gọi `next()`, quyền kiểm soát sẽ không chuyển tiếp và các middleware hoặc route handler tiếp theo sẽ không được thực thi.
+
+	Dưới đây là một ví dụ minh họa cách sử dụng `next` trong Express middleware và route handlers:
+
+	```javascript
+	const express = require('express');
+	const app = express();
+
+	// Middleware example
+	app.use((req, res, next) => {
+		console.log('This is the first middleware.');
+		next(); // Chuyển quyền kiểm soát cho middleware tiếp theo
+	});
+
+	app.use((req, res, next) => {
+		console.log('This is the second middleware.');
+		next(); // Chuyển quyền kiểm soát cho route handler
+	});
+
+	// Route handler
+	app.get('/', (req, res, next) => {
+		console.log('This is the route handler.');
+		res.send('Hello, World!');
+	});
+
+	app.listen(3000, () => {
+		console.log('Server is running on port 3000');
+	});
+	```
+
+	Trong ví dụ này, khi một yêu cầu đến, quá trình xử lý sẽ được thực hiện theo thứ tự sau:
+	1. Đầu tiên, middleware thứ nhất được gọi và sau khi hoàn thành, nó gọi `next()`.
+	2. Middleware thứ hai được gọi và sau khi hoàn thành, nó gọi `next()`.
+	3. Route handler được gọi và sau khi hoàn thành, yêu cầu được xử lý hoàn toàn.
+
+	Lưu ý rằng việc sử dụng `next()` để chuyển quyền kiểm soát là quan trọng để đảm bảo các middleware và route handler tiếp theo trong chuỗi xử lý cũng được thực thi. Nếu bạn không gọi `next()` trong middleware, hoặc bạn quên gọi nó, quá trình xử lý sẽ bị block và không thể tiếp tục sang các bước tiếp theo.
+
+34. `Tại sao lại chia cấu trúc express app và server`
+
+	Trong Node.js và framework Express, việc chia thành cấu trúc `app` và `server` có thể xuất phát từ việc quản lý mã nguồn và tách biệt các chức năng khác nhau trong ứng dụng. Dưới đây là một số lý do bạn có thể muốn chia cấu trúc như vậy:
+
+	1. **Tách biệt logic ứng dụng và logic server:** Trong ứng dụng Express, `app` thường chứa tất cả các định nghĩa route handlers, middleware và cấu hình khác của ứng dụng. Trong khi đó, `server` chứa mã để khởi động và lắng nghe máy chủ (server). Việc này giúp bạn tách biệt logic của ứng dụng (như xử lý yêu cầu, xử lý dữ liệu) và logic của máy chủ (như cài đặt port, lắng nghe kết nối).
+
+	2. **Dễ quản lý khi phát triển:** Chia thành `app` và `server` giúp bạn dễ dàng quản lý mã nguồn và logic của ứng dụng. Khi bạn cần thay đổi cấu hình server, bạn chỉ cần chỉnh sửa trong file `server.js` hoặc tệp tương tự. Khi bạn cần thay đổi logic xử lý ứng dụng, bạn chỉ cần thay đổi trong file `app.js` hoặc tệp tương tự.
+
+	3. **Dễ dàng kiểm soát và kiểm tra:** Tách biệt `app` và `server` giúp bạn kiểm soát và kiểm tra các khía cạnh khác nhau của ứng dụng một cách riêng biệt. Bạn có thể kiểm tra các route handlers và middleware trong `app` mà không cần phải lo lắng về cấu hình máy chủ. Ngược lại, bạn có thể kiểm tra cấu hình máy chủ mà không cần phải xem xét logic của ứng dụng.
+
+	Dưới đây là ví dụ cách chia thành `app` và `server` trong một ứng dụng Express:
+
+	Trong file `app.js` (hoặc tương tự):
+	```javascript
+	const express = require('express');
+	const app = express();
+
+	// Định nghĩa route handlers và middleware ở đây
+
+	module.exports = app; // Xuất app để sử dụng ở các file khác
+	```
+
+	Trong file `server.js` (hoặc tương tự):
+	```javascript
+	const app = require('./app'); // Import app từ file app.js
+	const port = process.env.PORT || 3000;
+
+	app.listen(port, () => {
+		console.log(`Server is running on port ${port}`);
+	});
+	```
+
+	Tóm lại, việc chia thành `app` và `server` giúp bạn tách biệt logic ứng dụng và logic máy chủ, dễ quản lý khi phát triển, và dễ dàng kiểm soát và kiểm tra từng khía cạnh của ứng dụng.
+
+35. `npm shrinkwrap là gì? cách sử dụng`
+
+	`npm shrinkwrap` là một công cụ trong Node Package Manager (npm) cho phép bạn kiểm soát và bảo đảm rằng các phiên bản của các gói npm được sử dụng trong dự án của bạn được giữ cố định. Khi bạn chạy `npm shrinkwrap`, npm sẽ tạo ra một tệp có tên `npm-shrinkwrap.json` (hoặc `npm-shrinkwrap.yaml` đối với các dự án sử dụng Yarn) để lưu trữ thông tin về phiên bản chính xác của các gói, bao gồm cả phiên bản con (sub-dependencies) của chúng.
+
+	Việc sử dụng `npm shrinkwrap` giúp đảm bảo rằng mọi người trong dự án sẽ sử dụng cùng một phiên bản của các gói npm, ngay cả khi bạn thêm hoặc cập nhật các gói mới vào dự án. Điều này ngăn ngừa các tình huống không mong muốn xảy ra khi phiên bản của một gói thay đổi và gây ra sự không tương thích hoặc lỗi trong dự án của bạn.
+
+	Cách sử dụng `npm shrinkwrap`:
+
+	1. **Cài đặt các gói trong dự án của bạn:**
+		Đảm bảo rằng bạn đã cài đặt tất cả các gói cần thiết cho dự án của mình bằng cách chạy lệnh sau:
+		```
+		npm install
+		```
+
+	2. **Chạy `npm shrinkwrap`:**
+		Sau khi đã cài đặt các gói, bạn có thể chạy lệnh sau để tạo tệp `npm-shrinkwrap.json`:
+		```
+		npm shrinkwrap
+		```
+
+	3. **Lưu tệp `npm-shrinkwrap.json` vào kho dự án:**
+		Tệp `npm-shrinkwrap.json` sẽ được tạo ra trong thư mục gốc của dự án. Bạn cần đảm bảo tệp này được lưu vào kho dự án (repository) cùng với mã nguồn để đảm bảo rằng mọi người khác trong dự án cũng sẽ sử dụng cùng một phiên bản gói.
+
+	4. **Commit và push thay đổi:**
+		Sau khi đã thêm tệp `npm-shrinkwrap.json` vào kho dự án, bạn cần commit và push thay đổi lên repository để các thành viên khác trong dự án có thể sử dụng tệp này.
+
+	Khi ai đó khác trong dự án chạy `npm install`, npm sẽ sử dụng thông tin trong `npm-shrinkwrap.json` để cài đặt các phiên bản gói chính xác như đã định nghĩa. Điều này giúp đảm bảo tính nhất quán về phiên bản gói giữa các máy tính và môi trường phát triển.
 ## LOOPBACK 
 
 LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
@@ -3800,7 +4010,7 @@ Thuật toán đánh index trong sql là gì
 - Bản chất của quá trình index là việc chuyển đổi một hoặc nhiều column sang table mới (DB system sẽ quản lý table này) với các tính chất 
 	-	Table index được sắp xếp theo thứ tự, giá trị của column là giá trị của một hoặc nhiều column được đánh index 
 	- Tìm kiếm nhanh hơn với một vài điều kiện trên column được đánh index
-	- Mỗi iondex được ánh xạ sang một hoặc nhiều row trong table chính 
+	- Mỗi index được ánh xạ sang một hoặc nhiều row trong table chính 
 	- Có thể index được nhiều cột cùng lúc 
 - Thay vì scanning trên table chính, ta sẽ scanning trên table index
 	- DB engine sẽ kiểm tra column với Where condition được đánh index hay không, nếu có nó chỉ lấy column được index để thực hiện trên việc scan trên index table thay vì scan trên table chính, giảm tải lượng data phải read từ disk 
@@ -4149,3 +4359,280 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 	6. **Fragment**: Fragment là một cách để tái sử dụng các phần truy vấn GraphQL. Bạn có thể định nghĩa một fragment và sau đó sử dụng nó trong nhiều truy vấn hoặc mutation khác nhau.
 
 	GraphQL cho phép bạn yêu cầu chính xác dữ liệu bạn cần, giúp tối ưu hóa hiệu suất ứng dụng và tránh over-fetching (lấy nhiều dữ liệu hơn cần thiết) và under-fetching (lấy ít dữ liệu hơn cần thiết). Điều này làm cho GraphQL trở thành một lựa chọn hấp dẫn cho việc phát triển ứng dụng hiện đại.
+
+# LY THUYET CO BAN 
+
+1. `Giái thích mô hình TCP/IP`
+
+	Mô hình TCP/IP (Transmission Control Protocol/Internet Protocol) là một mô hình tham chiếu dùng để mô tả cách các thiết bị trong mạng giao tiếp với nhau trên Internet. Mô hình này được chia thành các lớp, mỗi lớp có một nhiệm vụ cụ thể trong quá trình truyền thông. Mô hình TCP/IP gồm 4 lớp chính:
+
+	1. **Application Layer (Lớp ứng dụng):** Lớp này chứa các ứng dụng và dịch vụ mà người dùng tương tác trực tiếp. Điều này bao gồm các giao thức như HTTP, FTP, SMTP, POP3, Telnet, và nhiều giao thức khác. Nhiệm vụ chính của lớp này là quản lý giao tiếp giữa người dùng và các ứng dụng trên Internet.
+
+	2. **Transport Layer (Lớp vận chuyển):** Lớp này xử lý việc truyền tải dữ liệu từ một điểm đến điểm khác. Giao thức TCP (Transmission Control Protocol) hoạt động ở lớp này để cung cấp truyền tải đáng tin cậy, đảm bảo dữ liệu không bị mất hoặc lỗi. Giao thức UDP (User Datagram Protocol) cũng là một phần của lớp này, nhưng nó không đảm bảo tính tin cậy như TCP.
+
+	3. **Internet Layer (Lớp Internet):** Lớp này quản lý việc định tuyến (routing) dữ liệu qua các mạng và định nghĩa địa chỉ IP để xác định các thiết bị trong mạng. Giao thức IP (Internet Protocol) là trung tâm của lớp này, và nó quản lý việc gửi và nhận các gói dữ liệu giữa các thiết bị trong mạng.
+
+	4. **Link Layer (Lớp liên kết):** Lớp này quản lý giao tiếp trực tiếp với phần vật lý của mạng. Nó xác định cách dữ liệu được đóng gói và truyền qua phương tiện truyền thông như Ethernet, Wi-Fi, hay các phương tiện khác. Giao thức ARP (Address Resolution Protocol) cũng hoạt động ở lớp này để ánh xạ địa chỉ IP thành địa chỉ vật lý (MAC address).
+
+	Mỗi lớp trong mô hình TCP/IP có nhiệm vụ cụ thể và tương tác với các lớp khác để cung cấp quá trình truyền thông toàn diện. Tổng cộng, mô hình TCP/IP giúp các thiết bị trong mạng Internet có thể giao tiếp và truyền tải dữ liệu một cách hiệu quả.
+
+2. `Phân biệt các loại vùng nhớ và cho ví dụ bằng typescript`
+
+	Dưới đây là phân biệt các loại vùng nhớ lập trình và ví dụ sử dụng TypeScript để minh họa:
+
+	1. **Stack Memory (Bộ nhớ ngăn xếp):** Sử dụng để lưu trữ các biến cục bộ, tham số hàm và giá trị trả về của hàm. Thường có vòng đời ngắn hơn, do bộ nhớ được tự động giải phóng khi một hàm kết thúc.
+
+	```typescript
+	function exampleStackMemory(x: number): number {
+		const localVar = x + 10;
+		return localVar;
+	}
+
+	const result = exampleStackMemory(5);
+	console.log(result); // Kết quả là 15
+	// localVar đã bị giải phóng sau khi hàm kết thúc
+	```
+
+	2. **Heap Memory (Bộ nhớ heap):** Sử dụng để cấp phát và giải phóng bộ nhớ động, thường cần người lập trình quản lý. Dữ liệu trong heap có thể được truy cập từ nhiều phạm vi khác nhau.
+
+	```typescript
+	class Person {
+		constructor(public name: string) {}
+	}
+
+	const person1 = new Person("Alice"); // Đối tượng person1 nằm trong heap
+	const person2 = person1; // person2 tham chiếu đến cùng một đối tượng trong heap
+	person1.name = "Bob";
+
+	console.log(person2.name); // Kết quả là "Bob"
+	```
+
+	3. **Data Memory (Bộ nhớ dữ liệu):** Sử dụng để lưu trữ dữ liệu tĩnh, biến toàn cục và hằng số. Dữ liệu trong bộ nhớ này không thay đổi trong quá trình chạy chương trình.
+
+	```typescript
+	const globalVariable = "I am a global variable"; // Lưu trong bộ nhớ dữ liệu
+
+	function accessGlobalVariable(): void {
+		console.log(globalVariable);
+	}
+
+	accessGlobalVariable(); // Kết quả là "I am a global variable"
+	```
+
+	4. **Code Memory (Bộ nhớ mã nguồn):** Chứa mã máy của chương trình được lưu trữ trong bộ nhớ.
+
+	```typescript
+	function add(a: number, b: number): number {
+		return a + b;
+	}
+
+	console.log(add(3, 5)); // Kết quả là 8
+	// Mã máy của hàm add được lưu trong bộ nhớ mã nguồn
+	```
+
+	5. **Memory-Mapped I/O (I/O được ánh xạ vào bộ nhớ):** Không phải loại vùng nhớ trong lập trình thông thường, nhưng ví dụ có thể là sử dụng các thư viện cho việc tương tác với các thiết bị ngoại vi như cổng COM hoặc GPIO thông qua cách ánh xạ địa chỉ I/O vào bộ nhớ.
+
+	```typescript
+	// Ví dụ về cách sử dụng thư viện để tương tác với GPIO qua ánh xạ vào bộ nhớ
+	// (Đây chỉ là một giả định và không hoạt động trong thực tế)
+	const GPIO_ADDRESS = 0x1234; // Địa chỉ I/O được ánh xạ vào bộ nhớ
+
+	function writeToGPIO(value: number): void {
+		// Ghi giá trị vào địa chỉ I/O ánh xạ vào bộ nhớ
+		memoryWrite(GPIO_ADDRESS, value);
+	}
+
+	writeToGPIO(1); // Ghi giá trị 1 vào địa chỉ GPIO
+	```
+
+	Vui lòng lưu ý rằng các ví dụ trên là giả định và dựa trên nguyên tắc. Trong thực tế, các cách thức giao tiếp và quản lý bộ nhớ có thể phức tạp hơn và phụ thuộc vào ngôn ngữ lập trình và hệ điều hành được sử dụng.
+
+3. `Phân biệt biến tham chiếu và tham trị trong lập trình`
+
+	Trong lập trình, biến tham chiếu và tham trị đều liên quan đến cách tham số hoặc giá trị được truyền vào hàm hoặc phương thức. Sự khác biệt giữa chúng nằm ở cách chúng xử lý dữ liệu.
+
+	**Biến tham trị (Pass by Value):**
+	- Khi bạn truyền một biến tham trị vào một hàm hoặc phương thức, một bản sao của giá trị của biến được tạo ra.
+	- Bất kỳ thay đổi nào đối với tham số trong hàm không ảnh hưởng đến giá trị ban đầu của biến bên ngoài hàm.
+	- Tham trị thường được sử dụng cho các kiểu dữ liệu nguyên thủy (primitive data types) như số nguyên, số thực, ký tự, boolean, v.v.
+
+	**Biến tham chiếu (Pass by Reference):**
+	- Khi bạn truyền một biến tham chiếu vào một hàm hoặc phương thức, thực tế bạn đang truyền tham chiếu đến vùng nhớ của biến.
+	- Bất kỳ thay đổi nào đối với tham số trong hàm cũng ảnh hưởng trực tiếp đến biến ban đầu ngoài hàm.
+	- Tham chiếu thường được sử dụng cho các kiểu dữ liệu không nguyên thủy (reference data types) như mảng, danh sách liên kết, đối tượng.
+
+	Dưới đây là ví dụ để minh họa:
+
+	```java
+	// Pass by Value
+	public void modifyValue(int x) {
+			x = x + 10;
+			System.out.println("Inside function: " + x);
+	}
+
+	public static void main(String[] args) {
+			int value = 5;
+			modifyValue(value);
+			System.out.println("Outside function: " + value);
+	}
+
+	// Output:
+	// Inside function: 15
+	// Outside function: 5
+
+	// Pass by Reference
+	public void modifyArray(int[] arr) {
+			arr[0] = arr[0] + 10;
+			System.out.println("Inside function: " + arr[0]);
+	}
+
+	public static void main(String[] args) {
+			int[] array = {5};
+			modifyArray(array);
+			System.out.println("Outside function: " + array[0]);
+	}
+
+	// Output:
+	// Inside function: 15
+	// Outside function: 15
+	```
+
+	Như ví dụ trên, biến `value` trong hàm `modifyValue` không ảnh hưởng đến biến `value` trong `main`, trong khi mảng `array` trong hàm `modifyArray` ảnh hưởng đến mảng `array` trong `main`.
+
+4. `Con trỏ là gì ? Cho ví dụ về con trỏ`
+
+	Trong lập trình, con trỏ là một biến đặc biệt mà chứa địa chỉ của một vùng nhớ trong bộ nhớ máy tính. Con trỏ cho phép bạn truy cập và thay đổi dữ liệu tại vùng nhớ đó thông qua địa chỉ. Con trỏ thường được sử dụng trong ngôn ngữ lập trình như C và C++.
+
+	Dưới đây là một ví dụ về việc sử dụng con trỏ trong ngôn ngữ C++:
+
+	```cpp
+	#include <iostream>
+
+	int main() {
+			int num = 42;
+			int* ptr; // Khai báo một con trỏ kiểu int
+
+			ptr = &num; // Gán địa chỉ của biến num cho con trỏ
+
+			std::cout << "Value of num: " << num << std::endl;
+			std::cout << "Address of num: " << &num << std::endl;
+			std::cout << "Value pointed by ptr: " << *ptr << std::endl; // Sử dụng * để truy cập giá trị theo địa chỉ
+			std::cout << "Address stored in ptr: " << ptr << std::endl;
+
+			*ptr = 99; // Thay đổi giá trị tại địa chỉ mà con trỏ trỏ đến
+
+			std::cout << "Value of num after modification: " << num << std::endl;
+
+			return 0;
+	}
+	```
+
+	Kết quả:
+
+	```
+	Value of num: 42
+	Address of num: 0x7ffdcb5b6d3c
+	Value pointed by ptr: 42
+	Address stored in ptr: 0x7ffdcb5b6d3c
+	Value of num after modification: 99
+	```
+
+	Trong ví dụ trên, biến `num` chứa giá trị 42. Con trỏ `ptr` trỏ tới địa chỉ của `num`, và khi chúng ta sử dụng `*ptr`, nó truy cập và trả về giá trị tại địa chỉ mà con trỏ trỏ đến.
+
+	Vui lòng lưu ý rằng việc sử dụng con trỏ đòi hỏi sự cẩn trọng và quản lý bộ nhớ thủ công để tránh rò rỉ bộ nhớ hoặc xung đột bộ nhớ. 
+
+
+	# DOCKER 
+
+	1. `Docker là gì ?`
+
+	Docker là một nền tảng ảo hóa cấp phối (containerization platform), cho phép bạn đóng gói ứng dụng và tất cả các phụ thuộc của nó - bao gồm mã nguồn, thư viện, biến môi trường và tệp cấu hình - vào một gói duy nhất gọi là container. Container là một hình thức tiêu chuẩn hóa cho việc đóng gói phần mềm, giúp đảm bảo rằng ứng dụng của bạn có thể chạy một cách đáng tin cậy và nhất quán trên môi trường khác nhau.
+
+	Một số điểm chính về Docker bao gồm:
+
+	1. **Portability (Khả năng di động):** Containers cho phép bạn đóng gói tất cả các yếu tố cần thiết để chạy ứng dụng vào một gói duy nhất. Điều này giúp đảm bảo rằng ứng dụng của bạn sẽ hoạt động giống nhau trên mọi nền tảng mà Docker hỗ trợ.
+
+	2. **Isolation (Cách ly):** Mỗi container hoạt động như một môi trường độc lập, cách ly khỏi các container khác và hệ thống host. Điều này giúp ngăn chặn các xung đột và ảnh hưởng tới nhau.
+
+	3. **Tích hợp và triển khai dễ dàng:** Các container có thể được đóng gói và chia sẻ dễ dàng thông qua các hệ thống quản lý phiên bản như Docker Hub. Điều này giúp tăng tốc quá trình triển khai và đảm bảo sự nhất quán giữa môi trường phát triển và môi trường sản xuất.
+
+	4. **Hiệu suất:** So với máy ảo truyền thống, container thường có hiệu suất tốt hơn, vì chúng chia sẻ hạ tầng hệ thống của máy chủ host và sử dụng tài nguyên hệ thống hiệu quả hơn.
+
+	5. **Quản lý tài nguyên:** Docker cung cấp các công cụ để quản lý tài nguyên của các container, cho phép bạn xác định và kiểm soát việc sử dụng CPU, bộ nhớ và các tài nguyên khác.
+
+	Docker đã đạt được sự phổ biến rộng rãi trong việc triển khai ứng dụng và dịch vụ, từ các dự án nhỏ đến các hệ thống quy mô lớn, do tính đơn giản, khả năng di động và khả năng cách ly môi trường của nó.
+
+	2. `Setup docker cho một ứng dụng nodejs express postgres redis cơ bản`
+
+		Dưới đây là hướng dẫn cơ bản để bạn thiết lập một ứng dụng Node.js Express với PostgreSQL và Redis sử dụng Docker.
+
+		**Bước 1: Tạo dự án Node.js Express:**
+		1. Tạo thư mục cho dự án của bạn và di chuyển vào thư mục đó.
+		2. Khởi tạo dự án Node.js bằng cách chạy lệnh: `npm init -y`.
+		3. Cài đặt các module cần thiết bằng lệnh: `npm install express pg redis`.
+
+		**Bước 2: Tạo file `Dockerfile` cho ứng dụng:**
+		Tạo một file có tên `Dockerfile` trong thư mục gốc của dự án với nội dung sau:
+
+		```Dockerfile
+		# Sử dụng image base của Node.js
+		FROM node:14
+
+		# Thiết lập thư mục làm việc trong container
+		WORKDIR /app
+
+		# Sao chép package.json và package-lock.json vào thư mục /app
+		COPY package*.json ./
+
+		# Cài đặt các dependencies
+		RUN npm install
+
+		# Sao chép tất cả mã nguồn ứng dụng vào thư mục /app
+		COPY . .
+
+		# Expose port của ứng dụng
+		EXPOSE 3000
+
+		# Khởi chạy ứng dụng khi container được chạy
+		CMD ["node", "app.js"]
+		```
+
+		**Bước 3: Tạo file `docker-compose.yml`:**
+		Tạo một file có tên `docker-compose.yml` trong thư mục gốc của dự án với nội dung sau:
+
+		```yaml
+		version: "3"
+		services:
+			app:
+				build:
+					context: .
+					dockerfile: Dockerfile
+				ports:
+					- "3000:3000"
+				links:
+					- postgres
+					- redis
+
+			postgres:
+				image: postgres
+				environment:
+					POSTGRES_DB: mydb
+					POSTGRES_USER: myuser
+					POSTGRES_PASSWORD: mypassword
+
+			redis:
+				image: redis
+		```
+
+		**Bước 4: Khởi chạy ứng dụng bằng Docker Compose:**
+		Mở terminal và di chuyển vào thư mục của dự án, sau đó chạy lệnh sau để khởi chạy các dịch vụ:
+
+		```
+		docker-compose up
+		```
+
+		Docker Compose sẽ tải về và thiết lập các images cần thiết, sau đó khởi động các containers cho ứng dụng Node.js, PostgreSQL và Redis.
+
+		Ứng dụng Node.js sẽ chạy trên `http://localhost:3000`, PostgreSQL sẽ sẵn sàng để kết nối trên `localhost` cổng `5432`, và Redis sẽ sẵn sàng trên `localhost` cổng `6379`.
+
+		Lưu ý rằng đây chỉ là một hướng dẫn cơ bản để bắt đầu với Docker và Docker Compose. Trong thực tế, bạn có thể cần cấu hình thêm cho các dịch vụ như biến môi trường, mạng, quản lý dữ liệu lưu trữ, và nhiều thứ khác.
