@@ -1978,49 +1978,70 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
 25. `Phân biệt let,const,var`
 
-	Trong JavaScript, `let`, `var`, và `const` là các từ khóa được sử dụng để khai báo biến, nhưng chúng có sự khác nhau về phạm vi (scope) và khả năng thay đổi giá trị. Dưới đây là sự phân biệt giữa chúng:
+	Trong JavaScript, `var`, `let`, và `const` là ba từ khóa được sử dụng để khai báo biến. Mỗi loại biến này có cách hoạt động và phạm vi sử dụng khác nhau trong quá trình thực thi mã.
 
 	1. **var:**
-		- Trước khi ES6 (ES2015) ra đời, `var` là cách duy nhất để khai báo biến trong JavaScript.
-		- Biến khai báo bằng `var` có phạm vi là phạm vi hàm (function scope). Điều này có nghĩa là biến chỉ có thể truy cập được từ bên trong hàm mà nó được khai báo.
-		- Biến khai báo bằng `var` sẽ không bị lỗi nếu được khai báo lại trong cùng một phạm vi.
-		- Biến khai báo bằng `var` sẽ tồn tại cả trong phạm vi block (`{ ... }`) mà biến đó được khai báo, không phụ thuộc vào block scope.
+	Trước khi có `let` và `const`, `var` là từ khóa chính để khai báo biến trong JavaScript. Biến được khai báo bằng `var` có phạm vi (scope) là hàm (function scope) hoặc toàn cục (global scope), tùy thuộc vào nơi chúng được khai báo.
+
+	Ví dụ:
 
 	```javascript
 	function example() {
+		var x = 10;
 		if (true) {
-			var x = 10;
+			var y = 20;
+			console.log(x); // 10
 		}
-		console.log(x); // 10 (var không có block scope)
+		console.log(y); // 20
 	}
+
+	console.log(x); // Lỗi: x is not defined
 	```
 
 	2. **let:**
-		- `let` cũng được giới thiệu trong ES6 và cải thiện khả năng quản lý biến so với `var`.
-		- Biến khai báo bằng `let` có phạm vi là block scope (phạm vi khối), nghĩa là biến chỉ có thể truy cập được từ bên trong khối mà nó được khai báo.
-		- Biến khai báo bằng `let` không thể khai báo lại trong cùng một phạm vi.
-		- Một biến khai báo bằng `let` có thể thay đổi giá trị sau khi được khởi tạo.
+	`let` được giới thiệu trong ES6 để giải quyết một số vấn đề với cách `var` hoạt động. Biến khai báo bằng `let` có phạm vi là khối (block scope), nghĩa là chúng chỉ có thể truy cập được trong khối mà chúng được khai báo.
 
-		```javascript
+	Ví dụ:
+
+	```javascript
+	function example() {
+		let x = 10;
 		if (true) {
 			let y = 20;
+			console.log(x); // 10
 		}
-		console.log(y); // Lỗi: y is not defined (do y chỉ có block scope)
-		```
+		console.log(y); // Lỗi: y is not defined
+	}
+
+	console.log(x); // Lỗi: x is not defined
+	```
 
 	3. **const:**
-		- `const` cũng giới thiệu trong ES6 và thường được sử dụng để khai báo các hằng số.
-		- Biến khai báo bằng `const` cũng có block scope giống như `let`.
-		- Biến khai báo bằng `const` không thể khai báo lại hoặc thay đổi giá trị sau khi được gán.
+	`const` cũng được giới thiệu trong ES6 và tương tự như `let`, ngoại trừ biến được khai báo bằng `const` không thể thay đổi giá trị sau khi được gán một lần. Biến khai báo bằng `const` cũng có phạm vi là khối.
 
-		```javascript
-		const z = 30;
-		z = 40; // Lỗi: Assignment to constant variable
-		```
+	Ví dụ:
 
-	Tóm lại, `let` được ưu tiên sử dụng hơn `var` trong các tình huống mới, vì nó giúp tránh một số vấn đề liên quan đến scope và tái sử dụng biến. `const` thường được sử dụng khi bạn muốn tạo ra một biến không thể thay đổi giá trị sau khi gán.Trong JavaScript, `let`, `var`, và `const` là các từ khóa được sử dụng để khai báo biến, nhưng chúng có sự khác nhau về phạm vi (scope) và khả năng thay đổi giá trị. Dưới đây là sự phân biệt giữa chúng:
+	```javascript
+	function example() {
+		const x = 10;
+		if (true) {
+			const y = 20;
+			console.log(x); // 10
+		}
+		console.log(y); // Lỗi: y is not defined
+	}
 
-	Tóm lại, `let` được ưu tiên sử dụng hơn `var` trong các tình huống mới, vì nó giúp tránh một số vấn đề liên quan đến scope và tái sử dụng biến. `const` thường được sử dụng khi bạn muốn tạo ra một biến không thể thay đổi giá trị sau khi gán.
+	console.log(x); // Lỗi: x is not defined
+	```
+
+	Tóm lại:
+
+	- `var` có phạm vi là hàm hoặc toàn cục.
+	- `let` và `const` có phạm vi là khối.
+	- `let` cho phép thay đổi giá trị sau khi được gán.
+	- `const` yêu cầu giữ nguyên giá trị sau khi được gán.
+
+	Lựa chọn giữa `let` và `const` phụ thuộc vào việc bạn có muốn biến thay đổi giá trị sau khi gán hay không. Sử dụng `const` khi bạn biết biến không nên thay đổi giá trị và `let` khi bạn cần thay đổi giá trị.
 
 26.`Phân biệt null và undefined`
 
@@ -4304,6 +4325,30 @@ Tóm lại, DDL được sử dụng để định nghĩa cấu trúc dữ liệ
 	Tóm lại:
 	- UNION được sử dụng để kết hợp các kết quả của các truy vấn SELECT có cấu trúc giống nhau và loại bỏ các bản sao dữ liệu.
 	- UNION ALL được sử dụng để kết hợp các kết quả của các truy vấn SELECT có cấu trúc giống nhau và giữ lại tất cả các bản sao dữ liệu.
+
+8. `Phân biệt fetch và limit`
+
+	Trong ngữ cảnh của PostgreSQL, "FETCH" và "LIMIT" là hai từ khóa có liên quan đến truy vấn dữ liệu. Chúng có chức năng tương tự nhau nhưng có một số điểm khác biệt quan trọng.
+
+	1. **LIMIT:**
+	LIMIT là một mệnh đề trong SQL (Structured Query Language) được sử dụng để giới hạn số lượng hàng trả về từ kết quả truy vấn. Điều này rất hữu ích khi bạn muốn truy vấn dữ liệu từ một bảng nhưng chỉ cần một số lượng hạn chế các hàng.
+
+	Ví dụ:
+	```sql
+	SELECT * FROM employees LIMIT 10;
+	```
+	Lệnh trên sẽ trả về tối đa 10 hàng từ bảng "employees".
+
+	2. **FETCH:**
+	FETCH cũng liên quan đến giới hạn số lượng hàng trả về từ một kết quả truy vấn, tuy nhiên, FETCH thường được sử dụng khi bạn muốn điều khiển việc lấy hàng dựa trên số lượng và vị trí. Nó được thường được sử dụng trong kết hợp với lệnh ORDER BY để xác định thứ tự của các hàng được trả về.
+
+	Ví dụ:
+	```sql
+	SELECT * FROM employees ORDER BY last_name FETCH FIRST 10 ROWS ONLY;
+	```
+	Lệnh trên sẽ trả về 10 hàng đầu tiên từ bảng "employees" sau khi đã sắp xếp chúng theo trường "last_name".
+
+	Tóm lại, cả LIMIT và FETCH đều liên quan đến việc giới hạn số lượng hàng trả về từ một kết quả truy vấn, nhưng FETCH thường được sử dụng để điều khiển việc lấy hàng dựa trên vị trí và thứ tự. Trong khi LIMIT thường được sử dụng để đơn giản hóa việc trả về một số lượng hạn chế các hàng từ kết quả truy vấn.
 
 ## NOSQL 
 NoSQL (Not Only SQL) là một thuật ngữ dùng để chỉ các hệ thống quản lý cơ sở dữ liệu không phụ thuộc vào mô hình quan hệ (relational model) như các hệ thống SQL truyền thống. NoSQL là một loại cơ sở dữ liệu phi quan hệ (non-relational database) được thiết kế để đáp ứng các yêu cầu đặc biệt như khả năng mở rộng, xử lý dữ liệu phi cấu trúc, hiệu suất cao và độ tin cậy.
