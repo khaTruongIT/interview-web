@@ -63,7 +63,7 @@ Web Fundamentals
         - Đều là thành phần có trong request và response
       - Khác nhau:
         - HTTP headers: kèm theo trong request gồm header metadata, instruction và context, lên server và nhận lại từ server, quản lý thông tin liên quan đến request và response.
-        - Body: chứa dữ liệu thực tế của request, chẳng hạn nhưu form data hoặc media file
+        - Body: chứa dữ liệu thực tế của request, chẳng hạn nhưu form data hoặc media file  
     - Common headers và mục đích:
       - Content-Type: định nghĩa media type của request và response body, examples "Content-Type: application/json" chỉ ra content ở format là JSON.
       - User-Agent: định danh client hay user đã gọi request, thông thường là thông tin web browser hoặc application, giúp server hiểu được loại client và dự theo đó để optimize response.
@@ -2071,43 +2071,6 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
     Lựa chọn giữa `let` và `const` phụ thuộc vào việc bạn có muốn biến thay đổi giá trị sau khi gán hay không. Sử dụng `const` khi bạn biết biến không nên thay đổi giá trị và `let` khi bạn cần thay đổi giá trị.
 
-26.`Phân biệt null và undefined`
-
-Trong nhiều ngôn ngữ lập trình, bao gồm JavaScript, "null" và "undefined" là hai giá trị đặc biệt được sử dụng để biểu thị sự thiếu vắng của dữ liệu hoặc trạng thái không xác định. Mặc dù chúng có thể có sự tương đồng, nhưng cũng có sự khác biệt quan trọng giữa chúng:
-
-1. **Undefined (Không xác định):**
-
-   - "Undefined" là giá trị mà một biến có thể có khi nó đã được khai báo, nhưng chưa được gán giá trị.
-   - Một biến có thể trở thành "undefined" khi được khai báo nhưng không được gán giá trị hoặc khi truy cập vào một thuộc tính không tồn tại của một đối tượng.
-   - Ví dụ:
-
-     ```javascript
-     let x;
-     console.log(x); // undefined
-
-     let obj = {};
-     console.log(obj.property); // undefined
-     ```
-
-2. **Null (Trống):**
-
-   - "Null" là giá trị biểu thị một biến đã được khởi tạo và gán giá trị là "null".
-   - Điều này thường được sử dụng khi bạn muốn rõ ràng chỉ định rằng một biến không có giá trị hoặc chưa có dữ liệu.
-   - "Null" thường được sử dụng trong các tình huống ngữ cảnh hợp lý, ví dụ như khi bạn muốn đặt một biến trạng thái của đối tượng thành "không có dữ liệu".
-   - Ví dụ:
-
-     ```javascript
-     let y = null;
-     console.log(y); // null
-
-     let user = {
-       name: null,
-       age: 25,
-     };
-     console.log(user.name); // null
-     ```
-
-Tóm lại, "undefined" thường xuất hiện khi một biến không có giá trị hoặc khi truy cập vào thuộc tính không tồn tại của đối tượng, trong khi "null" thường được sử dụng để biểu thị rõ ràng sự thiếu vắng của dữ liệu hoặc trạng thái không xác định.
 
 # Typescript
 
@@ -2668,17 +2631,19 @@ Lợi ích của Typescript
 - Middleware: Là một hàm trung gian được gọi trước hoặc sau khi đi qua một endpoint. Middleware có thể thay đổi yêu cầu (request) hoặc phản hồi (response), và có khả năng chuyển quyền điều khiển cho middleware tiếp theo trong chuỗi middleware.
 - Interceptor: Là một lớp hoạt động như một bộ lọc cho yêu cầu và phản hồi. Nó có thể thực hiện các thao tác trước và sau khi xử lý yêu cầu. Interceptor không thay đổi yêu cầu hoặc phản hồi, nhưng có thể thực hiện các hành động bổ sung như ghi log, xử lý lỗi, thêm thông tin, vv.
 
-4. `Trong Nestjs, decorator là gì`
+4. `Trong Nestjs, decorator là gì`  
 
 - Trong NestJS, Decorator là một tính năng của TypeScript cho phép bạn thêm metadata và mở rộng hoặc thay đổi hành vi của các class, phương thức, thuộc tính và tham số.
   Một decorator hoạt động bằng cách áp dụng một hàm hoặc một class decorator lên một class, phương thức hoặc thuộc tính cụ thể. Decorator được áp dụng bằng cách đặt nó trước đối tượng mà bạn muốn thay đổi hoặc mở rộng. Decorator có thể thay đổi các thuộc tính, thêm chức năng hoặc thực hiện các logic bổ sung trước hoặc sau khi đối tượng được khởi tạo hoặc gọi.
   8a. Một decorator phổ biến trong NestJS là `@Injectable()`. Decorator này được sử dụng để đánh dấu một class là một provider có thể được inject vào các class khác thông qua dependency injection của NestJS. Ví dụ:
-  `typescript
+
+  ```typescript
 			@Injectable()
 			export class UserService {
-				// ...
+		  		// ...
 			}
-	`
+	```
+
   Trong ví dụ trên, `@Injectable()` được áp dụng lên class `UserService` để đánh dấu nó là một provider có thể được inject vào các thành phần khác trong ứng dụng NestJS.
 
 5. `Sequence trong nodejs là gì ?`
@@ -3028,44 +2993,58 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 
 14. `CALLBACK HELL LÀ GÌ `
 
-Asynchronous JavaScript, or JavaScript that uses callbacks, is hard to get right intuitively. A lot of code ends up looking like this:
+    A "Callback hell" là một thuật ngữ được sử dụng trong lập trình JavaScript để mô tả tình trạng khi có nhiều hàm callback lồng nhau, làm cho mã trở nên khó hiểu, khó bảo trì và dễ dẫn đến lỗi. Điều này thường xảy ra khi bạn phải thực hiện nhiều công việc bất đồng bộ tuần tự trong JavaScript, ví dụ như đọc và ghi dữ liệu từ cơ sở dữ liệu, tải tệp tin từ máy chủ, hoặc gửi các yêu cầu HTTP.
 
-```javascript
-fs.readdir(source, function (err, files) {
-  if (err) {
-    console.log("Error finding files: " + err);
-  } else {
-    files.forEach(function (filename, fileIndex) {
-      console.log(filename);
-      gm(source + filename).size(function (err, values) {
-        if (err) {
-          console.log("Error identifying file size: " + err);
-        } else {
-          console.log(filename + " : " + values);
-          aspect = values.width / values.height;
-          widths.forEach(
-            function (width, widthIndex) {
-              height = Math.round(width / aspect);
-              console.log(
-                "resizing " + filename + "to " + height + "x" + height
-              );
-              this.resize(width, height).write(
-                dest + "w" + width + "_" + filename,
-                function (err) {
-                  if (err) console.log("Error writing file: " + err);
-                }
-              );
-            }.bind(this)
-          );
-        }
+    Dưới đây là một ví dụ về callback hell:
+
+    ```javascript
+    asyncFunc1((result1) => {
+      asyncFunc2(result1, (result2) => {
+        asyncFunc3(result2, (result3) => {
+          // Và cứ tiếp tục lồng nhau...
+        });
       });
     });
-  }
-});
-```
+    ```
 
-See the pyramid shape and all the `})` at the end? This is affectionately known as callback hell.
-The cause of callback hell is when people try to write JavaScript in a way where execution happens visually from top to bottom. Lots of people make this mistake! In other languages like C, Ruby or Python there is the expectation that whatever happens on line 1 will finish before the code on line 2 starts running and so on down the file.
+    Khi bạn gặp callback hell, mã JavaScript của bạn trở nên khó đọc và khó bảo trì do cấu trúc lồng nhau này.
+
+    Để giải quyết vấn đề callback hell, bạn có thể sử dụng các phương pháp sau:
+
+    1. **Sử dụng Promise**: Promise là một cơ chế cho phép bạn xử lý các tác vụ bất đồng bộ một cách dễ đọc hơn và tránh callback hell. Sử dụng Promise, bạn có thể sắp xếp các tác vụ theo dạng chuỗi hoặc song song một cách dễ dàng.
+
+    ```javascript
+    asyncFunc1()
+      .then(result1 => asyncFunc2(result1))
+      .then(result2 => asyncFunc3(result2))
+      .then(result3 => {
+        // Xử lý kết quả ở đây
+      })
+      .catch(error => {
+        // Xử lý lỗi nếu có
+      });
+    ```
+
+    2. **Sử dụng async/await**: Async/await là một cú pháp trong JavaScript giúp bạn viết mã bất đồng bộ dễ đọc hơn. Bạn có thể sử dụng async/await với Promise để loại bỏ callback hell.
+
+    ```javascript
+    async function processData() {
+      try {
+        const result1 = await asyncFunc1();
+        const result2 = await asyncFunc2(result1);
+        const result3 = await asyncFunc3(result2);
+        // Xử lý kết quả ở đây
+      } catch (error) {
+        // Xử lý lỗi nếu có
+      }
+    }
+
+    processData();
+    ```
+
+    3. **Sử dụng thư viện hoặc framework**: Có nhiều thư viện và framework như `async.js`, `bluebird`, hoặc `RxJS` có thể giúp bạn quản lý các tác vụ bất đồng bộ một cách dễ dàng hơn và tránh callback hell.
+
+    Việc lựa chọn phương pháp nào phụ thuộc vào dự án cụ thể của bạn và sự thoải mái của bạn với cú pháp và công nghệ. Tuy nhiên, sử dụng Promise và async/await là hai phương pháp phổ biến và mạnh mẽ để giải quyết vấn đề callback hell trong JavaScript.
 
 14. `PACKAGE JSON LÀ GÌ`
 
@@ -4213,6 +4192,182 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
 	Lưu ý rằng đây chỉ là một hướng dẫn cơ bản về cách tạo dự án Node.js về thương mại điện tử. Một ứng dụng thương mại điện tử thực sự sẽ phức tạp hơn với các chức năng như đăng ký, đăng nhập, xem sản phẩm, thêm vào giỏ hàng, thanh toán, vv. Bạn có thể mở rộng dự án này bằng cách thêm các chức năng và tính năng phức tạp hơn.
 
+40. `Refresh token là gì`
+
+  Refresh token là một loại mã thông báo (token) được sử dụng trong quá trình xác thực và ủy quyền. Nó được sử dụng để tái cấp phát một mã thông báo truy cập (access token) sau khi mã thông báo truy cập đã hết hạn. Điều này giúp duy trì tính bảo mật và kiểm soát quá trình xác thực trong các ứng dụng web và di động.
+
+  Dưới đây là một ví dụ về cách sử dụng refresh token trong một ứng dụng Node.js và Express để tái cấp phát mã thông báo truy cập:
+
+  1. Cài đặt các thư viện cần thiết:
+    Đảm bảo bạn đã cài đặt các gói npm cần thiết như `express`, `jsonwebtoken`, và `body-parser` bằng cách chạy các lệnh sau:
+    ```
+    npm install express jsonwebtoken body-parser
+    ```
+
+  2. Tạo một ứng dụng Express và cấu hình xác thực JWT:
+
+  ```javascript
+  const express = require('express');
+  const jwt = require('jsonwebtoken');
+  const bodyParser = require('body-parser');
+
+  const app = express();
+  const port = 3000;
+  const secretKey = 'your_secret_key';
+
+  app.use(bodyParser.json());
+
+  // Dùng để lưu trữ refresh token (thường sẽ lưu vào cơ sở dữ liệu)
+  const refreshTokens = [];
+
+  // Route để tạo mã thông báo truy cập và refresh token
+  app.post('/login', (req, res) => {
+    // Thông tin người dùng (thường sẽ kiểm tra trong cơ sở dữ liệu)
+    const user = {
+      id: 1,
+      username: 'example_user',
+    };
+
+    // Tạo mã thông báo truy cập
+    const accessToken = jwt.sign(user, secretKey, { expiresIn: '15m' });
+
+    // Tạo refresh token
+    const refreshToken = jwt.sign(user, secretKey);
+
+    // Lưu trữ refresh token (trong thực tế, bạn sẽ lưu vào cơ sở dữ liệu)
+    refreshTokens.push(refreshToken);
+
+    res.json({ accessToken, refreshToken });
+  });
+
+  // Route để tái cấp phát mã thông báo truy cập bằng refresh token
+  app.post('/refresh', (req, res) => {
+    const refreshToken = req.body.refreshToken;
+
+    if (!refreshToken || !refreshTokens.includes(refreshToken)) {
+      return res.status(401).json({ message: 'Invalid refresh token' });
+    }
+
+    jwt.verify(refreshToken, secretKey, (err, user) => {
+      if (err) {
+        return res.status(403).json({ message: 'Invalid refresh token' });
+      }
+
+      const accessToken = jwt.sign({ id: user.id, username: user.username }, secretKey, {
+        expiresIn: '15m',
+      });
+
+      res.json({ accessToken });
+    });
+  });
+
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+  ```
+
+  Trong ví dụ này, chúng ta tạo một mã thông báo truy cập và refresh token trong route `/login` và tái cấp phát mã thông báo truy cập sử dụng refresh token trong route `/refresh`. Refresh token được lưu trữ trong một mảng tạm thời để kiểm tra tính hợp lệ. Trong thực tế, bạn nên lưu trữ refresh token trong cơ sở dữ liệu và thực hiện các kiểm tra bảo mật thích hợp.
+
+41. `Load balancer là gì, cho ví dụ về việc sử dụng load balancner`
+
+  Load balancer là một thành phần trong kiến trúc hệ thống máy chủ mạng, được sử dụng để phân phối tải (load) đến các máy chủ khác nhau để cải thiện hiệu suất và khả năng mở rộng của hệ thống. Nó giúp đảm bảo rằng không có máy chủ nào bị quá tải trong khi các máy chủ khác có sẵn để xử lý các yêu cầu từ người dùng hoặc các yêu cầu khác.
+
+  Dưới đây là một ví dụ về cách sử dụng một load balancer đơn giản trong một ứng dụng Node.js Express bằng cách sử dụng một thư viện của bên thứ ba có tên là "http-proxy" để phân phối lưu lượng đến nhiều máy chủ.
+
+  1. Cài đặt các thư viện cần thiết:
+    Đảm bảo bạn đã cài đặt gói `express` và `http-proxy` bằng cách chạy các lệnh sau:
+    ```
+    npm install express http-proxy
+    ```
+
+  2. Tạo ứng dụng Express và cấu hình load balancer:
+
+  ```javascript
+  const express = require('express');
+  const httpProxy = require('http-proxy');
+
+  const app = express();
+  const port = 3000;
+
+  // Danh sách các máy chủ back-end
+  const servers = [
+    { host: 'localhost', port: 4000 },
+    { host: 'localhost', port: 4001 },
+    { host: 'localhost', port: 4002 },
+  ];
+
+  // Tạo một load balancer sử dụng http-proxy
+  const proxy = httpProxy.createProxyServer();
+
+  // Xử lý yêu cầu đến load balancer
+  app.use((req, res) => {
+    // Chọn một máy chủ ngẫu nhiên từ danh sách máy chủ
+    const server = servers[Math.floor(Math.random() * servers.length)];
+
+    // Forward yêu cầu đến máy chủ được chọn
+    proxy.web(req, res, { target: `http://${server.host}:${server.port}` });
+  });
+
+  app.listen(port, () => {
+    console.log(`Load balancer is running on port ${port}`);
+  });
+  ```
+
+  Trong ví dụ này, chúng ta đã tạo một ứng dụng Express và sử dụng thư viện `http-proxy` để tạo một load balancer đơn giản. Load balancer này sẽ chuyển tiếp yêu cầu đến một trong các máy chủ back-end được xác định trong danh sách `servers`. Mỗi yêu cầu sẽ được chuyển tiếp đến một máy chủ ngẫu nhiên trong danh sách, giúp phân phối tải một cách đều đặn.
+
+  Lưu ý rằng đây chỉ là một ví dụ đơn giản. Trong môi trường sản phẩm, bạn sẽ cần xác định chi tiết hơn về cách phân phối tải, kiểm soát phiên, xử lý lỗi và bảo mật cho load balancer của bạn.
+
+42. `Ví dụ về cách thu hồi access token sử dụng nodejs express`
+
+  Để thu hồi access token trong một ứng dụng Node.js sử dụng Express và các thư viện xác thực, bạn có thể sử dụng OAuth 2.0 hoặc JWT (JSON Web Tokens) tùy vào cơ chế xác thực bạn đang sử dụng. Dưới đây là một ví dụ cơ bản về cách thu hồi access token khi sử dụng OAuth 2.0 và thư viện `passport` trong một ứng dụng Node.js:
+
+  ```javascript
+  const express = require('express');
+  const passport = require('passport');
+  const OAuth2Strategy = require('passport-oauth2').Strategy;
+
+  const app = express();
+
+  // Định cấu hình OAuth 2.0
+  passport.use(new OAuth2Strategy({
+    authorizationURL: 'https://example.com/oauth2/authorize',
+    tokenURL: 'https://example.com/oauth2/token',
+    clientID: 'your-client-id',
+    clientSecret: 'your-client-secret',
+    callbackURL: 'http://localhost:3000/callback', // Đường dẫn callback của ứng dụng
+  },
+  (accessToken, refreshToken, profile, done) => {
+    // Xác thực và lấy thông tin người dùng
+    // Lưu ý: Trong ví dụ này, chúng tôi không sử dụng thông tin người dùng, nhưng bạn có thể lưu thông tin này vào cơ sở dữ liệu nếu cần.
+    return done(null, { accessToken, refreshToken });
+  }));
+
+  app.use(passport.initialize());
+
+  // Đường dẫn để bắt đầu xác thực
+  app.get('/auth', passport.authenticate('oauth2'));
+
+  // Đường dẫn callback sau khi xác thực thành công
+  app.get('/callback',
+    passport.authenticate('oauth2', { session: false }),
+    (req, res) => {
+      // Khi xác thực thành công, bạn có thể thu hồi access token
+      const accessToken = req.user.accessToken;
+      
+      // TODO: Thực hiện logic để thu hồi access token ở đây
+      
+      // Gửi phản hồi cho người dùng
+      res.send('Access token đã được thu hồi.');
+    });
+
+  app.listen(3000, () => {
+    console.log('Server đang lắng nghe trên cổng 3000');
+  });
+  ```
+
+  Trong ví dụ trên, chúng tôi sử dụng thư viện `passport-oauth2` để xác thực và thu hồi access token từ một dịch vụ OAuth 2.0 bất kỳ. Sau khi xác thực thành công, trong callback route (`/callback`), bạn có thể thực hiện logic để thu hồi access token theo nhu cầu của bạn.
+
+  Lưu ý rằng mã mẫu này chỉ mang tính chất tham khảo và phải được tùy chỉnh cho cơ cấu xác thực và yêu cầu bảo mật của ứng dụng cụ thể.
 ## LOOPBACK
 
 LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
