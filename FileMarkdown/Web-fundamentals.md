@@ -2583,6 +2583,127 @@ Lợi ích của Typescript
 
     Lưu ý rằng, bạn có thể sử dụng Mapped type không chỉ với các union types (như trong ví dụ trên), mà cũng với các loại động được xác định bởi keyof và các thuộc tính của loại gốc. Điều này cho phép bạn tạo các loại mới dựa trên bất kỳ loại nào và sử dụng lại các loại phức tạp mà không cần phải viết lại mã. Mapped type là một công cụ mạnh mẽ trong TypeScript giúp tăng tính tái sử dụng mã và tăng cường tính linh hoạt của mã TypeScript.
 
+14. `Symbol trong typescript là gì ?`
+
+    Trong TypeScript và JavaScript, `Symbol` là một kiểu dữ liệu mới được giới thiệu trong ECMAScript 6 (ES6). `Symbol` được sử dụng để tạo ra một giá trị không trùng lặp, duy nhất, không thể thay đổi và không có ý nghĩa (anonymous) được sử dụng như một thuộc tính key cho các đối tượng.
+
+    ### Tạo một Symbol
+
+    ```typescript
+    const mySymbol: symbol = Symbol('mySymbol');
+    ```
+
+    Trong đoạn mã trên:
+
+    - `Symbol('mySymbol')` tạo một `Symbol` với mô tả là `'mySymbol'`.
+    - `const mySymbol: symbol` khai báo một biến có kiểu dữ liệu là `symbol` và gán giá trị `Symbol('mySymbol')` cho nó.
+
+    ### Ứng Dụng Của Symbol
+
+    #### Sử dụng Symbol trong Đối Tượng
+
+    ```typescript
+    const uniqueKey = Symbol('uniqueKey');
+
+    let obj = {
+        name: 'John',
+        [uniqueKey]: 'hiddenValue'
+    };
+
+    console.log(obj[uniqueKey]); // Output: 'hiddenValue'
+    ```
+
+    Trong ví dụ trên, `uniqueKey` là một `Symbol` được sử dụng như một key cho đối tượng `obj`. Do `Symbol` là giá trị không trùng lặp, việc sử dụng nó như là một key đảm bảo rằng không ai có thể ghi đè hay truy cập giá trị dựa trên key này một cách dễ dàng.
+
+    #### Symbol trong Kế Thừa (Inheritance)
+
+    `Symbol` cũng thường được sử dụng để định nghĩa các methods hoặc các thuộc tính private trong kế thừa.
+
+    ```typescript
+    const mySymbol = Symbol('mySymbol');
+
+    class MyClass {
+        [mySymbol](): void {
+            console.log('This is a private method');
+        }
+    }
+
+    const myInstance = new MyClass();
+    myInstance[mySymbol](); // Output: 'This is a private method'
+    ```
+
+    Trong ví dụ trên, `mySymbol` được sử dụng để định nghĩa một phương thức private của lớp `MyClass`.
+
+    Tóm lại, `Symbol` trong TypeScript cung cấp một cách để tạo ra các keys không trùng lặp cho các thuộc tính của đối tượng, giúp tránh xung đột tên thuộc tính và giúp định nghĩa các thuộc tính hay methods private trong các class.
+
+15. `So sánh this trong javascirpt và this trong oop`
+
+    `this` trong JavaScript và TypeScript hoạt động tương tự, nhưng TypeScript hỗ trợ các tính năng được kiểm soát hơn để xác định loại của `this` trong các hàm và phương thức. Dưới đây là một số điểm khác biệt và tính năng của `this` trong cả hai ngôn ngữ:
+
+    ### 1. **`this` trong JavaScript:**
+
+    - **Dynamic Binding:** `this` trong JavaScript được đánh giá tại thời điểm chạy (runtime). Giá trị của `this` phụ thuộc vào cách hàm được gọi và nơi chúng được gọi.
+      
+    - **Lexical Scope:** Trong các hàm thông thường, giá trị của `this` phụ thuộc vào cách hàm đó được khai báo, không phải cách hàm đó được gọi.
+
+    ```javascript
+    function Person(name) {
+        this.name = name;
+        this.sayHello = function() {
+            console.log(`Hello, my name is ${this.name}`);
+        };
+    }
+
+    const person = new Person('Alice');
+    const helloFunction = person.sayHello;
+    helloFunction(); // Trong ngữ cảnh này, 'this' trỏ đến global object (hoặc 'undefined' trong strict mode) trong JavaScript
+    ```
+
+    ### 2. **`this` trong TypeScript:**
+
+    - **Arrow Functions:** Arrow functions không tạo ra một `this` mới. Thay vào đó, chúng dựa vào giá trị `this` của hàm gần nhất mà không phải là hàm của chúng.
+
+    ```typescript
+    class MyClass {
+        private value: number = 42;
+
+        // Arrow function không tạo ra một 'this' mới
+        printValue = () => {
+            console.log(this.value); // 'this' ở đây trỏ đến instance của MyClass
+        }
+    }
+
+    const obj = new MyClass();
+    obj.printValue(); // Output: 42
+    ```
+
+    - **Explicit `this` Parameters:** TypeScript cho phép bạn xác định rõ `this` bằng cách sử dụng tham số đặc biệt có tên `this`.
+
+    ```typescript
+    function sayHello(this: { name: string }) {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+
+    sayHello.call({ name: "Bob" }); // Output: "Hello, my name is Bob"
+    ```
+
+    - **Binding trong Callbacks:** Khi sử dụng các callbacks, TypeScript cung cấp cú pháp để xác định rõ ngữ cảnh của `this`.
+
+    ```typescript
+    class Button {
+        constructor(private label: string) {}
+
+        onClick(this: Button) {
+            console.log(`Button "${this.label}" clicked.`);
+        }
+    }
+
+    const button = new Button("Submit");
+    document.querySelector('button')?.addEventListener('click', button.onClick.bind(button));
+    ```
+
+    Trong TypeScript, bạn có nhiều cách để xác định `this` hơn và tránh được nhiều lỗi liên quan đến `this` mà thường gặp trong JavaScript.
+
 # Test
 
 - UnitTest: Bảo vệ code khi sửa code trong tương lai, tránh lỗi của quá khứ', mục tiêu của unit test là cô lập một phần code và xác minh tính chính xác của đoạn code đó
@@ -5292,6 +5413,266 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 
 	Điều này sẽ tạo ra một container chạy ứng dụng Node.js và ánh xạ cổng 3000 của container với cổng 3000 của máy host.
 
+# RXJS
+
+1. `Rxjs là gì ?`
+
+    RxJS là một thư viện lập trình reative programming (lập trình phản ứng) được viết bằng TypeScript, dựa trên cú pháp của JavaScript. Nó hỗ trợ việc xử lý các luồng dữ liệu và sự kiện không đồng bộ một cách dễ dàng. RxJS là một phần của ReactiveX, một dự án open-source cung cấp một chuẩn giao diện để xử lý dữ liệu tuần tự (sequence of data) bằng cách sử dụng Observables, một kiểu dữ liệu giống như Promise nhưng mạnh mẽ hơn.
+
+    RxJS giúp bạn xử lý các tác vụ không đồng bộ bằng cách sử dụng các luồng dữ liệu (streams) được gọi là Observables. Các Observables có thể phát ra các giá trị hoặc sự kiện theo thời gian, và bạn có thể đăng ký (subscribe) vào các Observables để lắng nghe và xử lý các giá trị hoặc sự kiện này.
+
+    RxJS cung cấp các toán tử (operators) mạnh mẽ để chuyển đổi, kết hợp, lọc và xử lý dữ liệu từ các Observables một cách linh hoạt và hiệu quả. Điều này giúp làm giảm phức tạp của việc xử lý luồng dữ liệu, làm cho việc quản lý luồng dữ liệu trở nên dễ dàng hơn.
+
+    Một số khái niệm quan trọng trong RxJS bao gồm:
+
+    1. **Observable**: Đại diện cho một dãy sự kiện hoặc giá trị thay đổi trong thời gian.
+
+    2. **Observer**: Đại diện cho một đối tượng có khả năng lắng nghe các giá trị hoặc sự kiện từ một Observable.
+
+    3. **Operator**: Các hàm giúp biến đổi, kết hợp hoặc lọc dữ liệu từ các Observables.
+
+    4. **Subscription**: Đại diện cho quan hệ giữa Observer và Observable, cho phép lắng nghe sự kiện và hủy đăng ký khi không cần thiết nữa.
+
+    RxJS được sử dụng rộng rãi trong việc xử lý dữ liệu không đồng bộ trong ứng dụng web, đặc biệt là các ứng dụng Angular, một framework phát triển web được xây dựng dựa trên TypeScript.
+
+2. `Observable là gì ?`
+
+    Observable trong RxJS là một đối tượng đại diện cho một dãy sự kiện hoặc giá trị thay đổi trong thời gian. RxJS là một thư viện lập trình reative programming được xây dựng trên cú pháp của JavaScript, giúp quản lý các luồng dữ liệu và xử lý các sự kiện không đồng bộ một cách dễ dàng.
+
+    Observable có thể phát ra các giá trị (hoặc các sự kiện) trong quá trình thực hiện các tác vụ không đồng bộ. Có thể hiểu Observable như một nguồn dữ liệu có thể đối mặt với một số sự kiện trong tương lai. Khi bạn đăng ký (subscribe) vào một Observable, bạn có thể lắng nghe và xử lý các giá trị hoặc sự kiện mà Observable phát ra.
+
+    Dưới đây là một ví dụ đơn về cách tạo và sử dụng một Observable trong RxJS:
+
+    ```javascript
+    // Import RxJS library
+    const { Observable } = require('rxjs');
+
+    // Tạo một Observable phát ra các số từ 1 đến 5
+    const observable = new Observable(observer => {
+      observer.next(1);
+      observer.next(2);
+      observer.next(3);
+      observer.next(4);
+      observer.next(5);
+      observer.complete(); // Kết thúc Observable
+    });
+
+    // Đăng ký (subscribe) vào Observable để lắng nghe các giá trị
+    observable.subscribe({
+      next: value => console.log(value), // Xử lý giá trị khi nhận được
+      complete: () => console.log('Observable đã kết thúc') // Thông báo khi Observable kết thúc
+    });
+    ```
+
+    Trong ví dụ trên, `observable` phát ra các giá trị từ 1 đến 5 và sau đó kết thúc. Phương thức `subscribe` được sử dụng để lắng nghe các giá trị được phát ra bởi Observable. Mỗi giá trị sẽ được in ra màn hình, và khi Observable kết thúc, một thông báo sẽ được hiển thị.
+
+3. `Observer trong rxjs là gì ?`
+
+    Trong RxJS, một `Observer` là một đối tượng có khả năng lắng nghe các giá trị hoặc sự kiện được phát ra bởi một Observable và xử lý chúng khi chúng được phát ra. Một Observer bao gồm các phương thức để xử lý các loại thông tin khác nhau từ một Observable:
+
+    1. **next(value)**: Phương thức này được gọi khi một giá trị mới hoặc một sự kiện mới được phát ra bởi Observable. Giá trị hoặc sự kiện này được truyền vào như một đối số cho phương thức `next`.
+
+    2. **error(error)**: Phương thức này được gọi khi có một lỗi xảy ra trong quá trình phát ra giá trị từ Observable. Lỗi này được truyền vào như một đối số cho phương thức `error`.
+
+    3. **complete()**: Phương thức này được gọi khi Observable kết thúc, tức là khi không còn giá trị hoặc sự kiện nào được phát ra nữa. Nó chỉ đơn giản là một thông báo cho Observer biết rằng không cần lắng nghe thêm dữ liệu từ Observable.
+
+    Khi bạn đăng ký (subscribe) vào một Observable, bạn cần cung cấp một hoặc nhiều hàm callback để xử lý các giá trị hoặc sự kiện từ Observable. Ví dụ:
+
+    ```javascript
+    const { Observable } = require('rxjs');
+
+    const observable = new Observable(observer => {
+      observer.next(1);
+      observer.next(2);
+      observer.complete();
+    });
+
+    const observer = {
+      next: value => console.log(value), // Xử lý giá trị
+      error: error => console.error(error), // Xử lý lỗi (nếu có)
+      complete: () => console.log('Observable đã kết thúc') // Thông báo khi kết thúc
+    };
+
+    observable.subscribe(observer);
+    ```
+
+    Trong ví dụ trên, `observer` là một đối tượng có các phương thức `next`, `error`, và `complete`. Khi bạn gọi `observable.subscribe(observer)`, các phương thức này sẽ được gọi khi có giá trị hoặc lỗi được phát ra hoặc khi Observable kết thúc.
+4. `Operator trong rxjs là gì ?`
+
+    Operators trong RxJS là các hàm được sử dụng để xử lý dữ liệu từ Observables, chẳng hạn như biến đổi, kết hợp, lọc hoặc thậm chí tạo ra các Observables mới. RxJS cung cấp một loạt các operators để giúp bạn làm điều này một cách dễ dàng và linh hoạt.
+
+    Dưới đây là một số ví dụ về việc sử dụng operators trong RxJS:
+
+    ### Ví dụ 1: Filter Operator
+
+    Filter operator được sử dụng để lọc các giá trị từ một Observable dựa trên một điều kiện nhất định.
+
+    ```javascript
+    const { from } = require('rxjs');
+    const { filter } = require('rxjs/operators');
+
+    const numbers = from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+    // Lọc các số chẵn
+    const evenNumbers = numbers.pipe(
+      filter(number => number % 2 === 0)
+    );
+
+    evenNumbers.subscribe(console.log); // Output: 2, 4, 6, 8, 10
+    ```
+
+    Trong ví dụ này, `filter` operator được sử dụng để lọc các số chẵn từ một Observable chứa các số từ 1 đến 10.
+
+    ### Ví dụ 2: Map Operator
+
+    Map operator được sử dụng để biến đổi giá trị từ một Observable thành giá trị mới.
+
+    ```javascript
+    const { from } = require('rxjs');
+    const { map } = require('rxjs/operators');
+
+    const numbers = from([1, 2, 3, 4, 5]);
+
+    // Bình phương các số
+    const squaredNumbers = numbers.pipe(
+      map(number => number * number)
+    );
+
+    squaredNumbers.subscribe(console.log); // Output: 1, 4, 9, 16, 25
+    ```
+
+    Trong ví dụ này, `map` operator được sử dụng để bình phương các số từ một Observable chứa các số từ 1 đến 5.
+
+    ### Ví dụ 3: Merge Operator
+
+    Merge operator được sử dụng để kết hợp nhiều Observables thành một Observable.
+
+    ```javascript
+    const { interval, merge } = require('rxjs');
+    const { mapTo } = require('rxjs/operators');
+
+    const source1 = interval(1000).pipe(mapTo('Source 1'));
+    const source2 = interval(1500).pipe(mapTo('Source 2'));
+
+    const mergedObservable = merge(source1, source2);
+
+    mergedObservable.subscribe(console.log);
+    // Output: 'Source 1' sau mỗi giây, 'Source 2' sau mỗi 1.5 giây
+    ```
+
+    Trong ví dụ này, `merge` operator được sử dụng để kết hợp hai Observables: `source1` và `source2`. Khi bất kỳ Observable nào phát ra giá trị, nó sẽ được chuyển tiếp đến Observer của `mergedObservable`.
+
+    Các operators này chỉ là một số ví dụ cơ bản, RxJS cung cấp nhiều operators khác để giúp bạn xử lý dữ liệu từ Observables theo nhiều cách khác nhau.
+
+5. `Subscription trong rxjs là gì ?`
+
+    Trong RxJS, `Subscription` là một đối tượng biểu diễn cho quan hệ giữa một Observer và một Observable. Khi bạn đăng ký (subscribe) vào một Observable, nó trả về một Subscription, giúp bạn quản lý việc lắng nghe các giá trị và sự kiện từ Observable. Subscription này cũng cung cấp phương thức để hủy đăng ký và giải phóng tài nguyên khi bạn không cần lắng nghe các giá trị nữa.
+
+    Dưới đây là một ví dụ chi tiết về cách sử dụng Subscription trong RxJS:
+
+    ```javascript
+    const { Observable } = require('rxjs');
+
+    // Tạo một Observable phát ra các số từ 1 đến 5 mỗi giây
+    const observable = new Observable(observer => {
+      let count = 1;
+      const interval = setInterval(() => {
+        observer.next(count++);
+        if (count > 5) {
+          observer.complete();
+          clearInterval(interval);
+        }
+      }, 1000);
+    });
+
+    // Đăng ký (subscribe) vào Observable và nhận về một Subscription
+    const subscription = observable.subscribe({
+      next: value => console.log(value), // Xử lý giá trị khi nhận được
+      complete: () => console.log('Observable đã kết thúc'), // Thông báo khi Observable kết thúc
+      error: error => console.error(error) // Xử lý lỗi (nếu có)
+    });
+
+    // Hủy đăng ký sau 3 giây
+    setTimeout(() => {
+      subscription.unsubscribe();
+      console.log('Đã hủy đăng ký');
+    }, 3000);
+    ```
+
+    Trong ví dụ trên:
+
+    1. Một Observable được tạo để phát ra các số từ 1 đến 5 mỗi giây bằng cách sử dụng `setInterval`.
+    2. Observable này được đăng ký bằng cách sử dụng phương thức `subscribe`, trả về một Subscription.
+    3. Sau 3 giây, Subscription được hủy bằng cách sử dụng phương thức `unsubscribe()`. Khi đó, việc lắng nghe các giá trị từ Observable sẽ bị ngừng lại và tài nguyên được giải phóng.
+
+    Lưu ý rằng việc sử dụng `unsubscribe()` là quan trọng để tránh rò rỉ bộ nhớ khi bạn không cần lắng nghe các giá trị từ Observable nữa.
+
+6. `Cho ví dụ về cách sử dụng rxjs trong một dự án nodejs express`
+
+    Để sử dụng RxJS trong một dự án Node.js Express, bạn cần thêm RxJS vào dự án của mình thông qua npm hoặc yarn. Đầu tiên, hãy đảm bảo bạn đã cài đặt RxJS:
+
+    ```bash
+    npm install rxjs
+    # hoặc
+    yarn add rxjs
+    ```
+
+    Dưới đây là một ví dụ cách sử dụng RxJS trong một ứng dụng Node.js Express để xử lý các yêu cầu HTTP.
+
+    1. **Tạo Một Ứng Dụng Express**:
+
+    Tạo một tệp `app.js` hoặc `server.js` và tạo một ứng dụng Express cơ bản.
+
+    ```javascript
+    const express = require('express');
+    const app = express();
+    const port = 3000;
+
+    app.use(express.json());
+    ```
+
+    2. **Sử Dụng RxJS Trong Xử Lý Yêu Cầu HTTP**:
+
+    Dưới đây là một ví dụ về việc sử dụng RxJS để xử lý yêu cầu HTTP. Trong ví dụ này, chúng ta sẽ sử dụng RxJS để xử lý yêu cầu POST để lưu trữ dữ liệu từ yêu cầu vào một mảng.
+
+    ```javascript
+    const { Observable } = require('rxjs');
+    const { map } = require('rxjs/operators');
+
+    // Một mảng để lưu trữ dữ liệu
+    const data = [];
+
+    // Observable để xử lý yêu cầu POST
+    const postData$ = new Observable(observer => {
+      app.post('/data', (req, res) => {
+        const { body } = req;
+        observer.next(body); // Gửi dữ liệu từ yêu cầu đến Observer
+      });
+    });
+
+    // Sử dụng operator để xử lý dữ liệu từ Observable
+    const subscription = postData$.pipe(
+      map(body => {
+        data.push(body); // Lưu trữ dữ liệu vào mảng
+        return 'Data stored successfully';
+      })
+    ).subscribe(response => {
+      console.log(response);
+    });
+
+    // Khởi chạy ứng dụng Express
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+    ```
+
+    Trong ví dụ trên:
+
+    - `postData$` là một Observable sẽ nhận yêu cầu POST và gửi dữ liệu từ yêu cầu đến Observer.
+    - Sử dụng operator `map` để xử lý dữ liệu từ Observable. Trong trường hợp này, chúng ta lưu trữ dữ liệu vào mảng `data`.
+    - `subscribe` để lắng nghe các giá trị từ Observable.
+
+    Nhớ rằng trong một ứng dụng thực tế, bạn có thể muốn sử dụng RxJS để xử lý các yêu cầu và phản hồi phức tạp hơn, bao gồm xử lý lỗi, kết hợp nhiều Observables, và sử dụng các operators mạnh mẽ để xử lý dữ liệu.
 # REGEX
 
 1. `Kiến thức cơ bản về regex`
