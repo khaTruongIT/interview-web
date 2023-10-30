@@ -3286,7 +3286,7 @@ Như vậy, sử dụng pipe trong NestJS giúp bạn kiểm tra và tiêu chu�
 
     2.  Sử dụng các phương thức HTTP một cách ngữ nghĩa: Phương thức HTTP xác định hành động sẽ được thực hiện trên tài nguyên. Các phương thức thường sử dụng trong RESTful API bao gồm GET (để lấy dữ liệu), POST (để tạo mới tài nguyên), PUT (để cập nhật tài nguyên), DELETE (để xóa tài nguyên).
 
-    3.  Sử dụng các trạng thái HTTP một cách thích hợp: Trạng thái HTTP được sử dụng để thể hiện kết quả của các yêu cầu API, ví dụ: 200 OK, 201 Created, 404 Not Found, 500 Internal Server Error, v.v.
+    3.  Sử dụng các trạng thái HTTP một cách thích hợp: Trạng thái HTTP được sử dụng để thể hiện kết quả của các yêu cầu API, ví dụ: 200 OK, 201 Created, 40  4 Not Found, 500 Internal Server Error, v.v.
 
     4.  Sử dụng các định dạng dữ liệu chuẩn: Dữ liệu trả về từ API thường được định dạng bằng JSON hoặc XML.
 
@@ -4553,6 +4553,40 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
     Ở đây, route `/login` sẽ sử dụng Passport để xác thực thông tin người dùng. Nếu xác thực thành công, người dùng sẽ được chuyển hướng về trang chính (`successRedirect`), nếu không sẽ được chuyển hướng về trang đăng nhập (`failureRedirect`).
 
     Lưu ý rằng việc xử lý kiểm tra thông tin người dùng và các chiến lược xác thực thực tế (ví dụ: sử dụng cơ sở dữ liệu để kiểm tra người dùng) sẽ được thực hiện trong hàm callback của `LocalStrategy` hoặc các chiến lược xác thực khác.
+
+44. `Module system trong nodejs la gi`
+
+    Trong Node.js, "module system" (hệ thống module) là cách Node.js quản lý mã nguồn và tách nó thành các phần nhỏ hơn gọi là các module. Mỗi module chứa các hàm, biến và các tác vụ khác liên quan, giúp tăng tính tổ chức, sử dụng lại mã nguồn và duy trì dễ dàng của mã.
+
+    Node.js sử dụng CommonJS làm hệ thống module mặc định. Theo CommonJS, mỗi tệp JavaScript là một module và các biến, hàm, và các đối tượng được định nghĩa trong module này không tự động trở thành biến toàn cục; chúng chỉ có thể được truy cập từ bên trong module đó.
+
+    Để sử dụng các module trong Node.js, bạn có thể sử dụng từ khóa `require` để nhập module và `module.exports` hoặc `exports` để xuất các biến, hàm hoặc đối tượng từ module hiện tại để chúng có thể được sử dụng trong các module khác.
+
+    Ví dụ, nếu bạn có một tệp `math.js` với nội dung như sau:
+
+    ```javascript
+    // math.js
+    const add = (a, b) => a + b;
+    const subtract = (a, b) => a - b;
+
+    module.exports = {
+      add,
+      subtract
+    };
+    ```
+
+    Sau đó, bạn có thể sử dụng module này trong một tệp JavaScript khác như sau:
+
+    ```javascript
+    // app.js
+    const math = require('./math.js');
+
+    console.log(math.add(5, 3)); // Kết quả: 8
+    console.log(math.subtract(10, 4)); // Kết quả: 6
+    ```
+
+    Trong ví dụ này, `math.js` là một module chứa các hàm `add` và `subtract`, và nó được sử dụng trong tệp `app.js` bằng cách sử dụng `require`.
+
 ## LOOPBACK
 
 LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
@@ -6072,3 +6106,259 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 	```
 
 	Đây chỉ là những ví dụ cơ bản. Regular expressions rất mạnh mẽ và có nhiều tính năng phức tạp khác nhau như quantifiers, anchors, groups, lookaheads, và nhiều khái niệm khác. Bạn có thể tìm hiểu thêm trong tài liệu chính thức của JavaScript hoặc các nguồn học khác về regex.
+
+# ELASTIC SEARCH 
+
+1. `Elastic search la gi ?`
+
+    Elasticsearch là một hệ thống tìm kiếm và phân tích dữ liệu phân tán mã nguồn mở. Nó được thiết kế để lưu trữ, tìm kiếm và phân tích lượng lớn dữ liệu một cách nhanh chóng và hiệu quả. Elasticsearch sử dụng mô hình tìm kiếm ngôn ngữ tự nhiên, cho phép người dùng tìm kiếm thông tin trong dữ liệu một cách dễ dàng và linh hoạt.
+
+    Dữ liệu được lưu trữ trong Elasticsearch dưới dạng các tài liệu JSON, và mỗi tài liệu thuộc về một loại (type) cụ thể và một chỉ mục (index) cụ thể. Elasticsearch sử dụng các thuật toán tìm kiếm phân tán để tìm kiếm thông tin trong các tài liệu một cách nhanh chóng, kể cả khi có hàng triệu hoặc thậm chí hàng tỷ tài liệu.
+
+    Elasticsearch cung cấp các chức năng tìm kiếm phức tạp, bao gồm tìm kiếm đầy đủ văn bản, tìm kiếm theo từ khóa, tìm kiếm dựa trên ngôn ngữ tự nhiên, tìm kiếm đa truy vấn, và nhiều chức năng khác. Nó cũng hỗ trợ các tính năng phân tích dữ liệu như tổng hợp (aggregation) để phân tích số liệu thống kê, lọc dữ liệu và hiển thị kết quả dưới dạng biểu đồ.
+
+    Elasticsearch thường được sử dụng trong các ứng dụng web, ứng dụng tìm kiếm, và các hệ thống phân tích dữ liệu để tìm kiếm và phân tích lượng lớn dữ liệu một cách hiệu quả và nhanh chóng. Nó là một phần của dự án Elastic Stack, bao gồm các thành phần như Logstash (để xử lý và chuyển đổi dữ liệu), Kibana (để trực quan hóa dữ liệu và xem biểu đồ), và Beats (để thu thập dữ liệu từ nhiều nguồn khác nhau).
+
+2. `Term va terms trong elastic search la gi ?`
+
+    Trong Elasticsearch, `term` và `terms` là hai loại truy vấn được sử dụng để tìm kiếm dữ liệu dựa trên các giá trị chính xác của trường trong một chỉ mục. Dưới đây là sự giải thích chi tiết về cách chúng hoạt động và cách chúng được sử dụng trong truy vấn Elasticsearch:
+
+    ### 1. `term` Query:
+    Truy vấn `term` được sử dụng để tìm kiếm các giá trị chính xác của một trường trong chỉ mục. Nó không thực hiện bất kỳ quá trình phân tích nào trên giá trị tìm kiếm.
+
+    #### Ví dụ:
+    Giả sử bạn có một chỉ mục chứa tài liệu về sách, và trong tài liệu đó có trường "genre.keyword" chứa thể loại của sách. Bạn muốn tìm các sách thuộc thể loại "Fiction". Bạn có thể sử dụng truy vấn `term` như sau:
+
+    ```json
+    {
+      "query": {
+        "term": {
+          "genre.keyword": "Fiction"
+        }
+      }
+    }
+    ```
+
+    ### 2. `terms` Query:
+    Truy vấn `terms` cho phép bạn tìm kiếm các tài liệu mà giá trị của một trường nằm trong danh sách các giá trị cho trước.
+
+    #### Ví dụ:
+    Nếu bạn muốn tìm các sách thuộc thể loại "Fiction" hoặc "Mystery", bạn có thể sử dụng truy vấn `terms` như sau:
+
+    ```json
+    {
+      "query": {
+        "terms": {
+          "genre.keyword": ["Fiction", "Mystery"]
+        }
+      }
+    }
+    ```
+
+    Trong ví dụ này, Elasticsearch sẽ tìm các tài liệu có giá trị của trường "genre.keyword" là "Fiction" hoặc "Mystery".
+
+    Lưu ý rằng `terms` query cho phép bạn tìm kiếm theo một danh sách các giá trị, trong khi `term` query chỉ cho phép bạn tìm kiếm theo một giá trị cụ thể.
+3. `Shard trong elastic search la gi ?` 
+
+    Trong Elasticsearch, "shard" (hoặc "phân vùng") là một phần nhỏ của một chỉ mục (index). Khi bạn lưu trữ dữ liệu trong Elasticsearch, dữ liệu đó được chia thành các shard để tăng hiệu suất và có thể được phân tán trên nhiều máy chủ (nodes). Mỗi shard là một đơn vị tự chủ quản và có thể được lưu trữ trên một node Elasticsearch riêng biệt.
+
+    Sự chia nhỏ dữ liệu thành các shard có một số lợi ích, bao gồm:
+
+    1. **Phân tán dữ liệu:** Dữ liệu được chia thành các shard có thể được lưu trữ trên nhiều máy chủ khác nhau. Điều này giúp tăng cường khả năng chịu lỗi và tăng hiệu suất tìm kiếm.
+
+    2. **Tăng hiệu suất tìm kiếm:** Elasticsearch có thể tìm kiếm song song trên các shard. Khi bạn thực hiện một truy vấn tìm kiếm, Elasticsearch có thể gửi truy vấn đến tất cả các shard đồng thời, giảm thời gian tìm kiếm.
+
+    3. **Dễ dàng mở rộng:** Bạn có thể dễ dàng thêm mới các node Elasticsearch vào cluster và chia thêm shard để mở rộng khả năng lưu trữ và tìm kiếm.
+
+    Khi bạn tạo một chỉ mục mới trong Elasticsearch, bạn cần xác định số lượng primary shard và optional số lượng replica shard. Primary shard chịu trách nhiệm cho các tài liệu và các replica shard là các bản sao dự phòng của primary shard. Việc này giúp đảm bảo rằng nếu một primary shard hoặc node bị lỗi, replica shard hoặc các node khác vẫn có thể tiếp tục phục vụ các yêu cầu.
+
+    Quyết định về số lượng primary và replica shard nên dựa trên nhu cầu và yêu cầu cụ thể của ứng dụng của bạn, cũng như trên nguồn lực và khả năng của cluster Elasticsearch của bạn.
+
+4. `Must trong elastic search la gi`
+
+    Trong Elasticsearch, `must` là một trong các điều kiện tìm kiếm (query context) được sử dụng trong truy vấn tìm kiếm để đảm bảo rằng một tài liệu phải đáp ứng tất cả các điều kiện được chỉ định trong `must` để được coi là kết quả hợp lý.
+
+    Khi bạn sử dụng `must` trong một truy vấn tìm kiếm, Elasticsearch sẽ trả về các tài liệu chỉ nếu chúng đáp ứng tất cả các điều kiện được xác định trong mệnh đề `must`. Điều này tương đương với việc sử dụng "và" logic trong tìm kiếm: tài liệu phải thỏa mãn tất cả các điều kiện `must` được xác định.
+
+    Dưới đây là một ví dụ về cách sử dụng `must` trong một truy vấn tìm kiếm Elasticsearch:
+
+    Giả sử bạn có một chỉ mục chứa thông tin về các sách và bạn muốn tìm các sách có tiêu đề là "Elasticsearch" và thể loại là "Technology". Bạn có thể sử dụng truy vấn tìm kiếm với điều kiện `must` như sau:
+
+    ```json
+    {
+      "query": {
+        "bool": {
+          "must": [
+            { "match": { "title": "Elasticsearch" } },
+            { "match": { "genre": "Technology" } }
+          ]
+        }
+      }
+    }
+    ```
+
+    Trong truy vấn này:
+
+    - `"bool"` là một loại truy vấn kết hợp trong Elasticsearch, cho phép bạn kết hợp nhiều điều kiện với nhau.
+    - `"must"` là một mảng chứa các điều kiện mà tài liệu phải đáp ứng.
+    - Đầu tiên, Elasticsearch sẽ tìm các tài liệu có tiêu đề là "Elasticsearch".
+    - Sau đó, nó sẽ lọc kết quả để chỉ bao gồm các tài liệu có thể loại là "Technology".
+
+    Kết quả sẽ chứa các tài liệu chỉ khi chúng đáp ứng cả hai điều kiện được xác định trong mệnh đề `must`.
+
+
+5. `Aggs trong elastic search la gi`
+
+    Trong Elasticsearch, `aggs` (viết tắt của "aggregations") là một chức năng mạnh mẽ giúp bạn thực hiện các phép tổng hợp dữ liệu trên tập dữ liệu tìm kiếm. Điều này bao gồm việc tính toán tổng, trung bình, tìm giá trị lớn nhất/nhỏ nhất, và nhiều phép toán thống kê khác trên dữ liệu được trả về từ các truy vấn tìm kiếm.
+
+    Dưới đây là một ví dụ về việc sử dụng `aggs` trong Elasticsearch:
+
+    Giả sử bạn có một chỉ mục chứa thông tin về các sản phẩm trong một cửa hàng trực tuyến. Mỗi sản phẩm có một trường "price" để đại diện cho giá sản phẩm. Bạn muốn biết giá trung bình của các sản phẩm trong mỗi danh mục. Bạn có thể sử dụng `aggs` như sau:
+
+    ```json
+    {
+      "size": 0,
+      "aggs": {
+        "danhmuc": {
+          "terms": {
+            "field": "category.keyword"
+          },
+          "aggs": {
+            "gia_trung_binh": {
+              "avg": {
+                "field": "price"
+              }
+            }
+          }
+        }
+      }
+    }
+    ```
+
+    Trong truy vấn này:
+
+    - `"size": 0` là để chỉ định rằng chúng ta không quan tâm đến các tài liệu tìm kiếm, chỉ quan tâm đến kết quả của `aggs`.
+    - `"aggs"` là khối chứa các phép tổng hợp.
+    - `"danhmuc"` là tên cho bucket (phần nhóm) của `terms aggregation`, chúng ta đang nhóm các sản phẩm theo trường "category.keyword".
+    - `"gia_trung_binh"` là tên của phép tổng hợp `avg aggregation`, chúng ta đang tính giá trung bình của các sản phẩm trong mỗi danh mục.
+
+    Kết quả sẽ trả về một danh sách các danh mục (buckets) và giá trung bình của các sản phẩm trong mỗi danh mục. Điều này giúp bạn hiểu được mức giá trung bình của các sản phẩm trong từng danh mục khác nhau.
+  
+6. `Must not trong elastic search la gi`
+
+    Trong Elasticsearch, `must_not` là một điều kiện tìm kiếm (query context) được sử dụng để loại bỏ các tài liệu không đáp ứng một hoặc nhiều điều kiện được chỉ định. Điều này giống như việc sử dụng "không" logic trong tìm kiếm: tài liệu không nên đáp ứng các điều kiện được xác định trong mệnh đề `must_not`.
+
+    Dưới đây là một ví dụ về cách sử dụng `must_not` trong một truy vấn tìm kiếm Elasticsearch:
+
+    Giả sử bạn có một chỉ mục chứa thông tin về các sách, và bạn muốn tìm các sách có tiêu đề là "Elasticsearch" nhưng không thuộc thể loại "Fiction". Bạn có thể sử dụng truy vấn `must_not` để đạt được điều này:
+
+    ```json
+    {
+      "query": {
+        "bool": {
+          "must": [
+            { "match": { "title": "Elasticsearch" } }
+          ],
+          "must_not": [
+            { "match": { "genre": "Fiction" } }
+          ]
+        }
+      }
+    }
+    ```
+
+    Trong truy vấn này:
+
+    - `"bool"` là một loại truy vấn kết hợp trong Elasticsearch, cho phép bạn kết hợp nhiều điều kiện với nhau.
+    - `"must"` là một mảng chứa các điều kiện mà tài liệu phải đáp ứng (trong trường hợp này, tiêu đề phải là "Elasticsearch").
+    - `"must_not"` là một mảng chứa các điều kiện mà tài liệu không nên đáp ứng (trong trường hợp này, thể loại không nên là "Fiction").
+
+    Kết quả sẽ chứa các tài liệu có tiêu đề là "Elasticsearch" nhưng không thuộc thể loại "Fiction".
+7. `Should trong elastic search la gi`
+
+    Trong Elasticsearch, `should` là một điều kiện tìm kiếm (query context) được sử dụng để chỉ định các điều kiện tìm kiếm tùy chọn. Khi bạn sử dụng `should`, Elasticsearch sẽ trả về các tài liệu đáp ứng ít nhất một trong các điều kiện được xác định trong mệnh đề `should`. Điều này tương đương với việc sử dụng "hoặc" logic trong tìm kiếm: tài liệu có thể đáp ứng một hoặc nhiều điều kiện `should`.
+
+    Dưới đây là một ví dụ về cách sử dụng `should` trong một truy vấn tìm kiếm Elasticsearch:
+
+    Giả sử bạn có một chỉ mục chứa thông tin về các sách và bạn muốn tìm các sách có tiêu đề là "Elasticsearch" hoặc "Kibana". Bạn có thể sử dụng `should` để thực hiện điều này:
+
+    ```json
+    {
+      "query": {
+        "bool": {
+          "should": [
+            { "match": { "title": "Elasticsearch" } },
+            { "match": { "title": "Kibana" } }
+          ]
+        }
+      }
+    }
+    ```
+
+    Trong truy vấn này:
+
+    - `"bool"` là một loại truy vấn kết hợp trong Elasticsearch, cho phép bạn kết hợp nhiều điều kiện với nhau.
+    - `"should"` là một mảng chứa các điều kiện mà tài liệu có thể đáp ứng (trong trường hợp này, tiêu đề có thể là "Elasticsearch" hoặc "Kibana").
+
+    Kết quả sẽ chứa các tài liệu có tiêu đề là "Elasticsearch" hoặc "Kibana". Lưu ý rằng, mặc dù một tài liệu có thể đáp ứng cả hai điều kiện `should`, nó sẽ không được đánh giá cao hơn trong kết quả trả về.
+  
+  8.`From va size trong elastic search`
+
+  Trong Elasticsearch, `from` và `size` là hai tham số quan trọng được sử dụng để kiểm soát kết quả trả về từ một truy vấn tìm kiếm.
+
+  - **`from`:** Tham số `from` xác định bắt đầu lấy kết quả từ tài liệu nào trong kết quả tìm kiếm. Nếu bạn có một kết quả tìm kiếm có nhiều tài liệu, `from` xác định vị trí bắt đầu trong tập kết quả. Giá trị của `from` thường được sử dụng để xác định số lượng tài liệu bị "bỏ qua" trước khi bắt đầu lấy kết quả. Ví dụ, nếu bạn đặt `from` thành 10, Elasticsearch sẽ bắt đầu trả kết quả từ tài liệu thứ 11 trong tập kết quả tìm kiếm.
+
+  - **`size`:** Tham số `size` xác định số lượng tài liệu mà bạn muốn nhận trong kết quả trả về. Nếu bạn chỉ định một giá trị cho `size`, Elasticsearch sẽ trả về đúng số lượng tài liệu bạn yêu cầu. Nếu bạn không chỉ định `size`, Elasticsearch sẽ trả về một số lượng tài liệu mặc định (thường là 10) trong kết quả.
+
+  Dưới đây là một ví dụ về việc sử dụng `from` và `size` trong một truy vấn Elasticsearch:
+
+  ```json
+  {
+    "query": {
+      "match": {
+        "title": "Elasticsearch"
+      }
+    },
+    "from": 10,
+    "size": 20
+  }
+  ```
+
+  Trong truy vấn này:
+
+  - Truy vấn sẽ tìm các tài liệu có trường "title" chứa từ khóa "Elasticsearch".
+  - `from` được đặt thành 10, vì vậy Elasticsearch sẽ bắt đầu lấy kết quả từ tài liệu thứ 11 trong tập kết quả tìm kiếm.
+  - `size` được đặt thành 20, vì vậy Elasticsearch sẽ trả về tổng cộng 20 tài liệu từ kết quả tìm kiếm, bắt đầu từ tài liệu thứ 11.
+
+9. `Bool query trong elastic search la gi`
+
+    Truy vấn boolean (hoặc `bool query`) trong Elasticsearch cho phép bạn kết hợp nhiều điều kiện tìm kiếm để tìm các tài liệu phù hợp với các quy tắc logic AND, OR, NOT. Dưới đây là một ví dụ chi tiết về cách sử dụng `bool query` trong Elasticsearch:
+
+    Giả sử bạn có một chỉ mục chứa thông tin về sách và mỗi tài liệu có các trường `title` (tiêu đề của sách) và `genre` (thể loại của sách). Bạn muốn tìm các sách có tiêu đề chứa "Elasticsearch" và thuộc thể loại "Technology" hoặc "Science". Bạn muốn loại bỏ các sách có tiêu đề chứa "Tutorial". Dưới đây là cách sử dụng `bool query` để thực hiện điều này:
+
+    ```json
+    {
+      "query": {
+        "bool": {
+          "must": [
+            { "match": { "title": "Elasticsearch" } }
+          ],
+          "filter": [
+            { "terms": { "genre.keyword": ["Technology", "Science"] } }
+          ],
+          "must_not": [
+            { "match": { "title": "Tutorial" } }
+          ]
+        }
+      }
+    }
+    ```
+
+    Trong truy vấn này:
+
+    - `"bool"` là loại truy vấn boolean.
+    - `"must"` chứa các điều kiện phải đáp ứng (AND logic). Trong trường hợp này, sách phải có tiêu đề là "Elasticsearch".
+    - `"filter"` chứa các điều kiện không ảnh hưởng đến điểm số (tính bằng filter context, AND logic). Trong trường hợp này, sách phải thuộc thể loại "Technology" hoặc "Science".
+    - `"must_not"` chứa các điều kiện không nên đáp ứng (NOT logic). Trong trường hợp này, sách không nên có tiêu đề là "Tutorial".
+
+    Kết quả sẽ chứa các tài liệu thỏa mãn các điều kiện trên và không chứa sách với tiêu đề "Tutorial".
