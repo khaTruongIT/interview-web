@@ -2071,6 +2071,157 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
     Lựa chọn giữa `let` và `const` phụ thuộc vào việc bạn có muốn biến thay đổi giá trị sau khi gán hay không. Sử dụng `const` khi bạn biết biến không nên thay đổi giá trị và `let` khi bạn cần thay đổi giá trị.
 
+26. `Decorator trong javascript là gì ?` 
+
+    Trong JavaScript, bạn có thể sử dụng các decorators bằng cách sử dụng các higher-order functions. Một higher-order function là một hàm mà nhận một hàm khác làm tham số và thường trả về một hàm mới hoặc mở rộng chức năng của hàm đầu vào. Dưới đây là một ví dụ đơn giản về decorator function trong JavaScript:
+
+    ```javascript
+    // Decorator function
+    function myDecorator(func) {
+      return function() {
+        console.log("Something is happening before the function is called.");
+        func();
+        console.log("Something is happening after the function is called.");
+      };
+    }
+
+    // Hàm mục tiêu
+    function myFunction() {
+      console.log("This is my function!");
+    }
+
+    // Sử dụng decorator
+    const decoratedFunction = myDecorator(myFunction);
+
+    // Gọi hàm đã được decorate
+    decoratedFunction();
+    ```
+
+    Trong ví dụ trên, `myDecorator` là một decorator function. Nó nhận một hàm `func` làm tham số, và trả về một hàm mới mà khi được gọi, nó sẽ thực hiện một số công việc trước và sau khi gọi hàm `func`. Khi chúng ta gọi `decoratedFunction()`, nó sẽ xuất ra các dòng thông báo từ decorator function và sau đó gọi hàm `myFunction`.
+
+    Lưu ý rằng từ ECMAScript 2016 (ES7) trở đi, có kế hoạch để thêm native support cho decorators trong JavaScript thông qua các proposals, nhưng tính năng này chưa chính thức được thêm vào ngôn ngữ. Tuy nhiên, bạn có thể sử dụng các công cụ như Babel để sử dụng tính năng decorator theo cách không chính thức.
+
+27. `Pipe function trong javascript là gì ?`
+
+    Trong ngữ cảnh của JavaScript, "pipe function" thường đề cập đến một kỹ thuật lập trình chức năng (functional programming) được gọi là "function composition", hay "hàm hợp thành". Mục tiêu của function composition là kết hợp nhiều hàm nhỏ thành một chuỗi dài các hàm để thực hiện một loạt các thao tác trên dữ liệu.
+
+    Trong JavaScript, bạn có thể viết một hàm pipe để thực hiện function composition. Một hàm pipe nhận vào một danh sách các hàm và trả về một hàm mới. Khi hàm mới được gọi, nó sẽ chạy lần lượt qua các hàm đã được định nghĩa, sử dụng kết quả của hàm trước làm đầu vào cho hàm tiếp theo.
+
+    Dưới đây là một ví dụ về cách triển khai hàm pipe trong JavaScript:
+
+    ```javascript
+    // Hàm pipe nhận vào một danh sách các hàm và trả về một hàm mới
+    function pipe(...functions) {
+      return function(input) {
+        // Sử dụng reduce để chạy qua danh sách các hàm và áp dụng chúng lần lượt lên input
+        return functions.reduce(function(result, func) {
+          return func(result);
+        }, input);
+      };
+    }
+
+    // Ví dụ các hàm để sử dụng trong pipe
+    function double(x) {
+      return x * 2;
+    }
+
+    function square(x) {
+      return x * x;
+    }
+
+    function addTen(x) {
+      return x + 10;
+    }
+
+    // Sử dụng hàm pipe để kết hợp các hàm trên
+    const combinedFunction = pipe(double, square, addTen);
+
+    // Kết quả: (((5 * 2) * 2) + 10) = 30
+    console.log(combinedFunction(5)); // Output: 30
+    ```
+
+    Trong ví dụ trên, `pipe` là một hàm nhận vào một danh sách các hàm (`double`, `square`, và `addTen`) và trả về một hàm mới. Khi gọi `combinedFunction(5)`, nó chạy qua các hàm theo thứ tự và trả về kết quả cuối cùng là 30.
+
+28. `Shallow copy và deep copy ở trong javascript ?`
+
+    Trong JavaScript, khi bạn gán một biến hoặc một đối tượng cho một biến khác, có hai cách để thực hiện sao chép giá trị từ biến nguồn sang biến đích: shallow copy (sao chép nông) và deep copy (sao chép sâu).
+
+    ### Shallow Copy (Sao Chép Nông):
+
+    Shallow copy chỉ sao chép các giá trị của các thuộc tính của đối tượng nguồn sang đối tượng đích. Nếu thuộc tính của đối tượng là một giá trị nguyên thủy (primitive value) như số, chuỗi hoặc boolean, shallow copy sẽ sao chép giá trị đó. Nếu thuộc tính của đối tượng là một đối tượng con (nested object), shallow copy chỉ sao chép tham chiếu đến đối tượng con đó, chứ không sao chép đối tượng con đó một cách sâu hơn.
+
+    Ví dụ về shallow copy:
+
+    ```javascript
+    // Shallow copy
+    const obj1 = { a: 1, b: { c: 2 } };
+    const obj2 = Object.assign({}, obj1);
+
+    obj2.b.c = 3;
+
+    console.log(obj1); // Output: { a: 1, b: { c: 3 } } (Đối tượng nguồn bị ảnh hưởng)
+    console.log(obj2); // Output: { a: 1, b: { c: 3 } }
+    ```
+
+    Trong ví dụ trên, khi thay đổi giá trị của `obj2.b.c`, giá trị tương ứng trong `obj1` cũng bị thay đổi.
+
+    ### Deep Copy (Sao Chép Sâu):
+
+    Deep copy, ngược lại, tạo ra một bản sao hoàn toàn mới của đối tượng nguồn cùng với tất cả các đối tượng con của nó. Điều này đảm bảo rằng các thay đổi trong đối tượng sao chép không ảnh hưởng đến đối tượng nguồn.
+
+    Để thực hiện deep copy trong JavaScript, bạn cần sử dụng các phương pháp như JSON.parse() hoặc các thư viện bên ngoài như Lodash:
+
+    Sử dụng JSON.parse() (Lưu ý: Phương pháp này chỉ hoạt động với đối tượng không chứa các thuộc tính là hàm hoặc undefined):
+
+    ```javascript
+    const obj1 = { a: 1, b: { c: 2 } };
+    const obj2 = JSON.parse(JSON.stringify(obj1));
+
+    obj2.b.c = 3;
+
+    console.log(obj1); // Output: { a: 1, b: { c: 2 } } (Đối tượng nguồn không bị ảnh hưởng)
+    console.log(obj2); // Output: { a: 1, b: { c: 3 } }
+    ```
+
+    Sử dụng Lodash (thư viện phổ biến cho các thao tác xử lý dữ liệu):
+
+    ```javascript
+    const _ = require('lodash');
+
+    const obj1 = { a: 1, b: { c: 2 } };
+    const obj2 = _.cloneDeep(obj1);
+
+    obj2.b.c = 3;
+
+    console.log(obj1); // Output: { a: 1, b: { c: 2 } } (Đối tượng nguồn không bị ảnh hưởng)
+    console.log(obj2); // Output: { a: 1, b: { c: 3 } }
+    ```
+
+    Trong cả hai ví dụ deep copy trên, thay đổi giá trị của `obj2.b.c` không ảnh hưởng đến `obj1`.
+
+29. `Pure function trong javascript là gì ?`
+
+    Trong lập trình hàm (functional programming), một **pure function** là một loại hàm đặc biệt trong JavaScript (hoặc bất kỳ ngôn ngữ lập trình hàm nào khác) mà khi được gọi với một đầu vào cụ thể, luôn trả về cùng một giá trị và không có bất kỳ tác động phụ (side effects) nào xảy ra. Điều này có nghĩa là pure function không thay đổi bất kỳ biến hoặc dữ liệu nào bên ngoài hàm, không đọc dữ liệu từ bất kỳ nguồn dữ liệu nào khác ngoài các tham số được truyền vào hàm.
+
+    Một số đặc điểm của pure function:
+
+    1. **Deterministic (Xác định):** Một pure function, khi được gọi với cùng một đầu vào, sẽ luôn trả về cùng một kết quả, không phụ thuộc vào trạng thái của hệ thống hoặc bất kỳ điều kiện ngoại vi nào khác.
+
+    2. **No Side Effects (Không có Tác Động Phụ):** Pure function không thay đổi bất kỳ biến hoặc dữ liệu nào bên ngoài hàm, và cũng không gây ra các tác động phụ như việc ghi dữ liệu vào cơ sở dữ liệu, gọi API, hoặc thay đổi trạng thái của các biến toàn cục.
+
+    3. **Referential Transparency (Tính Trung Thành):** Một hàm được coi là pure nếu nó có tính chất referential transparency. Điều này có nghĩa là bạn có thể thay thế mọi cuộc gọi của hàm bằng giá trị mà hàm trả về mà không làm thay đổi hành vi của chương trình.
+
+    Pure functions giúp tăng tính dễ dàng kiểm tra, tái sử dụng và chia sẻ mã nguồn. Chúng cũng giúp trong việc quản lý trạng thái (state management) trong ứng dụng, giảm thiểu lỗi và tạo ra mã linh hoạt và dễ bảo trì hơn.
+
+    Ví dụ về một pure function:
+
+    ```javascript
+    function add(a, b) {
+      return a + b;
+    }
+    ```
+
+    Hàm `add` là một pure function vì nó chỉ sử dụng các tham số được truyền vào để trả về kết quả và không có tác động phụ nào.
 
 # Typescript
 
@@ -4538,55 +4689,66 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
     Sử dụng Passport trong các routes để kiểm tra xác thực người dùng:
 
     ```javascript
-    app.post('/login', 
-      passport.authenticate('local', { successRedirect: '/',
-                                      failureRedirect: '/login',
-                                      failureFlash: true })
-    );
+      app.post('/login', 
+        passport.authenticate('local', { successRedirect: '/',
+                                        failureRedirect: '/login',
+                                        failureFlash: true })
+      );
 
-    app.get('/logout', function(req, res){
-      req.logout();
-      res.redirect('/');
-    });
+      app.get('/logout', function(req, res){
+        req.logout();
+        res.redirect('/');
+      });
     ```
 
     Ở đây, route `/login` sẽ sử dụng Passport để xác thực thông tin người dùng. Nếu xác thực thành công, người dùng sẽ được chuyển hướng về trang chính (`successRedirect`), nếu không sẽ được chuyển hướng về trang đăng nhập (`failureRedirect`).
 
     Lưu ý rằng việc xử lý kiểm tra thông tin người dùng và các chiến lược xác thực thực tế (ví dụ: sử dụng cơ sở dữ liệu để kiểm tra người dùng) sẽ được thực hiện trong hàm callback của `LocalStrategy` hoặc các chiến lược xác thực khác.
 
-44. `Module system trong nodejs la gi`
+44. `Rate limiter dùng để làm gì`
 
-    Trong Node.js, "module system" (hệ thống module) là cách Node.js quản lý mã nguồn và tách nó thành các phần nhỏ hơn gọi là các module. Mỗi module chứa các hàm, biến và các tác vụ khác liên quan, giúp tăng tính tổ chức, sử dụng lại mã nguồn và duy trì dễ dàng của mã.
+    Trong ứng dụng web, `rate limiter` (hoặc `rate limiting`) là một kỹ thuật được sử dụng để hạn chế số lượng yêu cầu mà một người dùng hoặc một địa chỉ IP có thể gửi đến máy chủ trong một khoảng thời gian cụ thể. Mục tiêu của rate limiter là ngăn chặn các loại tấn công như DDoS (Distributed Denial of Service) và giữ cho máy chủ không bị quá tải do các yêu cầu đến đồng loạt.
 
-    Node.js sử dụng CommonJS làm hệ thống module mặc định. Theo CommonJS, mỗi tệp JavaScript là một module và các biến, hàm, và các đối tượng được định nghĩa trong module này không tự động trở thành biến toàn cục; chúng chỉ có thể được truy cập từ bên trong module đó.
+    Trong Node.js, bạn có thể triển khai rate limiter bằng cách sử dụng các thư viện như `express-rate-limit` hoặc `express-brute`. Dưới đây là một số lợi ích và cách rate limiter được sử dụng:
 
-    Để sử dụng các module trong Node.js, bạn có thể sử dụng từ khóa `require` để nhập module và `module.exports` hoặc `exports` để xuất các biến, hàm hoặc đối tượng từ module hiện tại để chúng có thể được sử dụng trong các module khác.
+    ### 1. **Bảo Vệ Quá Tải:**
+      Rate limiter giúp ngăn chặn máy chủ bị quá tải do việc nhận nhiều yêu cầu trong khoảng thời gian ngắn. Nếu một người dùng hoặc một địa chỉ IP gửi quá nhiều yêu cầu trong một khoảng thời gian nhất định, các yêu cầu vượt quá giới hạn sẽ bị từ chối hoặc chậm trễ.
 
-    Ví dụ, nếu bạn có một tệp `math.js` với nội dung như sau:
+    ### 2. **Bảo Mật:**
+      Rate limiter giúp bảo vệ ứng dụng của bạn khỏi các cuộc tấn công brute force, trong đó kẻ tấn công thử đăng nhập hoặc gửi yêu cầu hàng loạt để tìm ra mật khẩu hoặc các điểm yếu của ứng dụng.
 
-    ```javascript
-    // math.js
-    const add = (a, b) => a + b;
-    const subtract = (a, b) => a - b;
+    ### 3. **Tuân Thủ Quy Định Thứ Tự:**
+      Rate limiter cũng có thể được sử dụng để đảm bảo rằng các yêu cầu được xử lý theo đúng thứ tự mà chúng được gửi đến máy chủ, thay vì bị đẩy lên đầu hàng đợi do việc gửi yêu cầu quá nhiều.
 
-    module.exports = {
-      add,
-      subtract
-    };
-    ```
+    ### 4. **Quản Lý API Usage:**
+      Đối với các API, rate limiter giúp quản lý việc sử dụng API, giữ cho việc sử dụng tài nguyên được phân phối đồng đều và không bị lạm dụng.
 
-    Sau đó, bạn có thể sử dụng module này trong một tệp JavaScript khác như sau:
+    ### Cách Sử Dụng Rate Limiter Trong Express với `express-rate-limit`:
 
     ```javascript
-    // app.js
-    const math = require('./math.js');
+    const express = require('express');
+    const rateLimit = require('express-rate-limit');
 
-    console.log(math.add(5, 3)); // Kết quả: 8
-    console.log(math.subtract(10, 4)); // Kết quả: 6
+    const app = express();
+
+    const limiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100, // số lượng yêu cầu tối đa trong khoảng thời gian trên
+      message: 'Too many requests from this IP, please try again after 15 minutes'
+    });
+
+    app.use(limiter);
+
+    app.get('/api', (req, res) => {
+      res.send('API response');
+    });
+
+    app.listen(3000, () => {
+      console.log('Server is running on port 3000');
+    });
     ```
 
-    Trong ví dụ này, `math.js` là một module chứa các hàm `add` và `subtract`, và nó được sử dụng trong tệp `app.js` bằng cách sử dụng `require`.
-
+    Trong ví dụ trên, `express-rate-limit` được sử dụng để giới hạn số lượng yêu cầu đối với tất cả các route của ứng dụng Express. Nếu một địa chỉ IP gửi quá 100 yêu cầu trong khoảng thời gian 15 phút, các yêu cầu tiếp theo sẽ nhận được thông báo lỗi được đặt trong thuộc tính `message`.
 ## LOOPBACK
 
 LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
@@ -5292,6 +5454,197 @@ của dữ liệu. Một số ứng dụng có thể sử dụng cả hai loại
     Trong ví dụ trên, `orders` collection có một trường `product_id` tham chiếu đến `_id` trong collection `products`. Phần `$lookup` được sử dụng để kết hợp dữ liệu từ `orders` và `products`, `$unwind` dùng để giải quyết mảng được tạo bởi `$lookup`, và `$project` được sử dụng để chọn ra các trường cần thiết trong kết quả cuối cùng.
 
     Lưu ý rằng việc lựa chọn phương pháp nào nên dựa trên yêu cầu cụ thể của ứng dụng và cách mà dữ liệu được truy cập và sử dụng.
+
+5. `Populate là gì ? Cho ví dụ vể cách sử dụng populate trong ứng dụng nodejs, express`
+
+    Trong MongoDB, `populate` là một tính năng cho phép bạn kết hợp dữ liệu từ nhiều bảng (collections) bằng cách tham chiếu giữa chúng. Nó cho phép bạn thay thế các trường tham chiếu trong một collection với các tài liệu thực tế từ một collection khác.
+
+    Dưới đây là một ví dụ về cách sử dụng `populate` trong ứng dụng Node.js Express với MongoDB, sử dụng thư viện `mongoose` để tạo và quản lý các schema (mô hình dữ liệu) và các relationship giữa chúng.
+
+    ### Cài Đặt và Kết Nối MongoDB với Mongoose:
+
+    Đầu tiên, bạn cần cài đặt `mongoose`:
+
+    ```bash
+    npm install mongoose
+    ```
+
+    Sau đó, kết nối với MongoDB:
+
+    ```javascript
+    const mongoose = require('mongoose');
+    mongoose.connect('mongodb://localhost:27017/mydatabase', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    ```
+
+    ### Định Nghĩa Schema và Relationship:
+
+    ```javascript
+    const mongoose = require('mongoose');
+    const Schema = mongoose.Schema;
+
+    // Schema cho tài liệu 1
+    const userSchema = new Schema({
+      name: String,
+      email: String,
+    });
+
+    // Schema cho tài liệu 2 với reference đến userSchema
+    const postSchema = new Schema({
+      title: String,
+      content: String,
+      author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User', // Tên của collection muốn tham chiếu
+      },
+    });
+
+    const User = mongoose.model('User', userSchema);
+    const Post = mongoose.model('Post', postSchema);
+    ```
+
+    ### Sử Dụng Populate Trong Route:
+
+    ```javascript
+    const express = require('express');
+    const app = express();
+
+    app.get('/posts/:id', async (req, res) => {
+      try {
+        const postId = req.params.id;
+        const post = await Post.findById(postId).populate('author', 'name email');
+        res.json(post);
+      } catch (error) {
+        res.status(500).json({ error: 'Lỗi khi lấy dữ liệu' });
+      }
+    });
+
+    app.listen(3000, () => {
+      console.log('Server is running on port 3000');
+    });
+    ```
+
+    Trong ví dụ trên, chúng ta có một tài liệu `Post` với một trường `author` là một ObjectId tham chiếu đến tài liệu trong collection `User`. Khi chúng ta truy vấn một `Post`, chúng ta sử dụng `.populate('author', 'name email')` để thay thế `author` ObjectId với dữ liệu từ collection `User` chỉ lấy `name` và `email` của tác giả.
+
+    Khi bạn truy cập `GET /posts/:id`, ứng dụng sẽ trả về thông tin về bài viết với thông tin tác giả được thay thế từ ObjectId thành dữ liệu thực tế của người dùng.
+  
+  6. `Phân biệt databse, collection và document trong mongodb`
+
+  Trong MongoDB, các khái niệm cơ bản bao gồm **database**, **collection**, và **document**:
+
+  1. **Database (Cơ Sở Dữ Liệu):**
+      - **Database** trong MongoDB tương tự như cơ sở dữ liệu trong hệ thống quan hệ SQL như MySQL hoặc PostgreSQL.
+      - Một MongoDB server có thể chứa nhiều **databases**. Mỗi **database** chứa một hoặc nhiều **collections**.
+
+  2. **Collection (Bộ Sưu Tập):**
+      - **Collection** trong MongoDB tương tự như bảng (table) trong hệ thống quan hệ SQL.
+      - Một **collection** là một nhóm các **document** (tài liệu) không cố định về cấu trúc, có thể chứa các trường dữ liệu khác nhau.
+      - Mỗi **collection** thuộc về một **database** và không yêu cầu định trước cấu trúc của các **document**.
+
+  3. **Document (Tài Liệu):**
+      - **Document** trong MongoDB tương tự như một dòng (row) trong bảng của hệ thống quan hệ SQL.
+      - Mỗi **document** là một bản ghi dữ liệu được biểu diễn dưới dạng JSON-like (BSON - Binary JSON), có thể chứa các trường và giá trị khác nhau.
+      - Các **documents** được lưu trữ trong các **collections**.
+
+  Ví dụ, giả sử bạn đang xây dựng một ứng dụng ghi chú. Bạn có thể có một **database** tên là "NotesDB". Bên trong **NotesDB**, bạn có thể có nhiều **collections**, ví dụ như "PersonalNotes" và "WorkNotes". Mỗi **collection** chứa các **documents** biểu diễn các ghi chú cụ thể. Ví dụ về **document** trong **PersonalNotes** collection có thể trông như sau:
+
+  ```json
+    {
+      "_id": ObjectId("5f5a75c0c843c0b4a8660ea1"),
+      "title": "Meeting Notes",
+      "content": "Discussed project plans for the upcoming release.",
+      "timestamp": ISODate("2023-10-17T08:30:00Z")
+    }
+    
+  ```
+
+  Trong đó:
+  - **"_id"** là một trường đặc biệt chứa ID độc nhất của **document**.
+  - **"title"** chứa tiêu đề của ghi chú.
+  - **"content"** chứa nội dung của ghi chú.
+  - **"timestamp"** chứa thời gian ghi chú được tạo.
+
+7. `$project trong mongodb nodejs dùng để làm gì ?`
+
+    `$project` trong MongoDB được sử dụng trong pha `aggregation pipeline` để chọn các trường dữ liệu (fields) cụ thể mà bạn muốn xuất ra từ kết quả truy vấn. 
+
+    Khi bạn thực hiện một truy vấn aggregation trong MongoDB, dữ liệu thường trải qua một chuỗi các giai đoạn xử lý. Trong giai đoạn `$project`, bạn có thể chỉ định các trường mà bạn quan tâm để xuất ra từ kết quả truy vấn, và loại bỏ các trường không mong muốn.
+
+    Dưới đây là một ví dụ đơn giản về cách sử dụng `$project` trong MongoDB aggregation pipeline để chọn và xuất ra chỉ các trường `name` và `age` từ một collection:
+
+    ```javascript
+    db.collectionName.aggregate([
+        {
+            $project: {
+                name: 1,
+                age: 1
+            }
+        }
+    ]);
+    ```
+
+    Trong truy vấn trên:
+
+    - `$project` là giai đoạn trong pipeline.
+    - `name: 1` và `age: 1` chỉ định rằng bạn muốn xuất ra các trường `name` và `age`. Giá trị `1` ở đây đại diện cho việc bao gồm trường trong kết quả, trong khi `0` sẽ loại bỏ trường đó khỏi kết quả.
+
+    Ví dụ, nếu bạn có các bản ghi như sau:
+
+    ```javascript
+    {
+        "_id": 1,
+        "name": "Alice",
+        "age": 30,
+        "city": "New York"
+    }
+    ```
+
+    Kết quả của truy vấn trên sẽ trả về:
+
+    ```javascript
+    {
+        "_id": 1,
+        "name": "Alice",
+        "age": 30
+    }
+    ```
+
+    Như vậy, chỉ các trường `name` và `age` được xuất ra trong kết quả, còn trường `city` đã bị loại bỏ.
+8. `Cách tính trung bình trong mongoose`
+
+
+    Sau khi bạn đã định nghĩa schema và model, bạn có thể sử dụng aggregation để tính trung bình của trường dữ liệu. Dưới đây là cách bạn có thể thực hiện điều này:
+
+    ```javascript
+    const YourModel = require('./path/to/your/model');
+
+    YourModel.aggregate([
+        {
+            $group: {
+                _id: null,
+                averageField: { $avg: "$fieldName" }
+            }
+        }
+    ]).then((result) => {
+        if (result.length > 0) {
+            const averageValue = result[0].averageField;
+            console.log("Trung bình của trường fieldName là: ", averageValue);
+        } else {
+            console.log("Không có dữ liệu để tính trung bình.");
+        }
+    }).catch((error) => {
+        console.error("Lỗi khi tính trung bình: ", error);
+    });
+    ```
+
+    - Trong `$group`, `_id: null` được sử dụng để nhóm tất cả các bản ghi thành một nhóm duy nhất.
+    - `$avg: "$fieldName"` tính trung bình của trường `fieldName`.
+
+    Kết quả sẽ chứa một mảng với một đối tượng có thuộc tính `averageField` chứa giá trị trung bình. Bạn có thể xử lý kết quả này theo nhu cầu của bạn, ví dụ, gửi giá trị trung bình qua HTTP response hoặc thực hiện các thao tác khác với nó.
+
+
 # REDIS
 
 Redis là một hệ thống cơ sở dữ liệu in-memory (dữ liệu lưu trữ trong bộ nhớ RAM) mã nguồn mở. Tên gốc của Redis là "Remote Dictionary Server" (Redis) vì nó được thiết kế để lưu trữ và truy xuất dữ liệu từ một cấu trúc dữ liệu key-value (từ điển) được lưu trữ trên một máy chủ từ xa.
@@ -5706,6 +6059,51 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 
 	Điều này sẽ tạo ra một container chạy ứng dụng Node.js và ánh xạ cổng 3000 của container với cổng 3000 của máy host.
 
+6. `So sánh VM và Dokcer`
+
+    Virtual Machine (VM) và Docker là hai công nghệ phổ biến trong lĩnh vực ảo hóa và triển khai ứng dụng. Dưới đây là một so sánh giữa chúng về các điểm giống và khác nhau chính:
+
+    ### Các Điểm Giống Nhau:
+
+    1. **Ổn Định Môi Trường:**
+      - **VM:** Mỗi máy ảo chạy trên một hệ điều hành độc lập, cung cấp một môi trường ổn định và độc lập.
+      - **Docker:** Các container Docker cũng cung cấp một môi trường ổn định, giúp đảm bảo rằng ứng dụng sẽ chạy đúng cách trên bất kỳ máy tính nào có Docker.
+
+    2. **Portability (Tính Di Động):**
+      - **VM và Docker:** Cả hai công nghệ đều cho phép di động ứng dụng giữa các môi trường máy tính một cách dễ dàng.
+
+    3. **Isolation (Cách Ly):**
+      - **VM:** Các máy ảo được cách ly hoàn toàn, không ảnh hưởng đến nhau.
+      - **Docker:** Các container Docker cũng được cách ly, nhưng chúng chia sẻ hạ tầng hệ thống và kernel với host OS.
+
+    ### Các Điểm Khác Nhau:
+
+    1. **Tài Nguyên:**
+      - **VM:** Cần nhiều tài nguyên hơn do mỗi VM chứa một hệ điều hành đầy đủ.
+      - **Docker:** Tiêu thụ ít tài nguyên hơn vì chúng chia sẻ kernel của host và chạy trên một hạ tầng gọn nhẹ gọi là Docker Engine.
+
+    2. **Khởi Động Nhanh:**
+      - **VM:** Khởi động VM thường mất thời gian, đặc biệt khi có nhiều VM trên cùng một máy chủ vật lý.
+      - **Docker:** Containers khởi động rất nhanh, trong vài giây, do chúng không cần chạy hệ điều hành đầy đủ.
+
+    3. **Quản Lý Tài Nguyên:**
+      - **VM:** Cần hệ thống quản lý tài nguyên phức tạp.
+      - **Docker:** Có các công cụ quản lý linh hoạt như Docker Compose và Kubernetes để quản lý containers và tài nguyên một cách dễ dàng.
+
+    4. **Kích Thước:**
+      - **VM:** Thường có kích thước lớn vì chúng chứa một hệ điều hành đầy đủ.
+      - **Docker:** Các container Docker nhẹ và có kích thước nhỏ, do chúng chia sẻ kernel của host.
+
+    5. **Network (Mạng):**
+      - **VM:** Cần cấu hình riêng cho mỗi VM.
+      - **Docker:** Containers có thể chia sẻ mạng với host hoặc với nhau thông qua các network namespaces.
+
+    6. **Tích Hợp:**
+      - **VM:** Cần cài đặt máy ảo và hệ điều hành trên đó.
+      - **Docker:** Cài đặt Docker và tạo container có thể được thực hiện nhanh chóng và dễ dàng.
+
+    Khi lựa chọn giữa VM và Docker, cần xem xét yêu cầu cụ thể của ứng dụng và môi trường triển khai để đưa ra quyết định tốt nhất.
+
 # RXJS
 
 1. `Rxjs là gì ?`
@@ -6107,258 +6505,804 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 
 	Đây chỉ là những ví dụ cơ bản. Regular expressions rất mạnh mẽ và có nhiều tính năng phức tạp khác nhau như quantifiers, anchors, groups, lookaheads, và nhiều khái niệm khác. Bạn có thể tìm hiểu thêm trong tài liệu chính thức của JavaScript hoặc các nguồn học khác về regex.
 
+# CLICKHOUSE
+
+1. `Clickhouse là gì`
+
+    ClickHouse là một hệ thống quản lý cơ sở dữ liệu (DBMS) mã nguồn mở phân tán, được thiết kế đặc biệt để xử lý và truy vấn dữ liệu lớn (big data) với tốc độ cao và hiệu suất mạnh mẽ. Nó được phát triển và duy trì bởi công ty Yandex, một công ty công nghệ hàng đầu tại Nga.
+
+    Đặc điểm chính của ClickHouse bao gồm:
+
+    1. **Xử lý Dữ liệu Lớn:** ClickHouse được thiết kế để xử lý các lượng dữ liệu lớn, từ hàng terabytes đến petabytes, với hiệu suất cao và thời gian truy vấn ngắn.
+
+    2. **Lưu Trữ Theo Cột (Columnar Storage):** ClickHouse lưu trữ dữ liệu theo cột thay vì theo hàng, điều này giúp tối ưu hóa việc đọc và ghi dữ liệu, đặc biệt là trong các truy vấn phức tạp trên dữ liệu lớn.
+
+    3. **Tính Phân Tán (Distributed Architecture):** ClickHouse có thể chạy trên nhiều node máy chủ, giúp phân tán dữ liệu và truy vấn, giúp tăng tốc độ xử lý dữ liệu khi cần mở rộng hệ thống.
+
+    4. **Hỗ Trợ SQL:** ClickHouse hỗ trợ ngôn ngữ truy vấn SQL tiêu chuẩn, điều này giúp người dùng quen thuộc với SQL có thể sử dụng hệ thống mà không cần học một ngôn ngữ truy vấn mới.
+
+    5. **Chỉ Số (Indexing):** ClickHouse hỗ trợ các loại chỉ số thông minh để tối ưu hóa truy cập dữ liệu, giúp giảm thời gian truy vấn và tăng tốc độ tìm kiếm.
+
+    6. **Các Codecs Chuyên Biệt (Specialized Codecs):** ClickHouse có khả năng sử dụng các codecs chuyên biệt để nén và lưu trữ dữ liệu một cách hiệu quả, giúp giảm dung lượng lưu trữ và tăng tốc độ truy vấn.
+
+    7. **Hỗ Trợ Dữ Liệu Thời Gian Thực (Real-time Data Support):** ClickHouse có thể xử lý dữ liệu thời gian thực và là lựa chọn phổ biến cho các ứng dụng yêu cầu xử lý dữ liệu thời gian thực và truy vấn dữ liệu lớn đồng thời.
+
+    ClickHouse đã trở thành một lựa chọn phổ biến trong các ứng dụng yêu cầu xử lý và truy vấn dữ liệu lớn một cách nhanh chóng và hiệu quả.
+
+2. `Tại sao clickhouse lại nhanh hơn so với các database management khác ?`
+
+    ClickHouse được thiết kế từ đầu để là một hệ thống quản lý cơ sở dữ liệu (DBMS) phân tán được tối ưu hóa cho việc xử lý truy vấn phức tạp trên lượng lớn dữ liệu. Có một số lý do giúp ClickHouse trở nên nhanh hơn so với các DBMS khác, đặc biệt là trong các tác vụ liên quan đến xử lý dữ liệu lớn:
+
+    1. **Kiến trúc dựa trên colunmar storage (lưu trữ theo cột):** ClickHouse lưu trữ dữ liệu theo cột thay vì theo hàng như các hệ thống cơ sở dữ liệu quan hệ thông thường. Điều này giúp ClickHouse tối ưu hóa việc đọc và xử lý dữ liệu liên quan đến các truy vấn phức tạp với số lượng lớn các cột.
+
+    2. **Cơ chế nén dữ liệu hiệu quả:** ClickHouse sử dụng các thuật toán nén dữ liệu hiệu quả, giúp giảm bớt lưu lượng mạng khi truyền dữ liệu qua mạng và giảm lượng dữ liệu cần đọc từ đĩa, điều này giúp tăng tốc độ truy vấn.
+
+    3. **Thực hiện các tối ưu hóa truy vấn tự động:** ClickHouse có khả năng tối ưu hóa truy vấn tự động mà không cần sự can thiệp của người dùng. Điều này giúp cải thiện hiệu suất tự động trong quá trình thực hiện các loại truy vấn.
+
+    4. **Parallel Processing (Xử lý song song):** ClickHouse có khả năng xử lý các truy vấn song song trên nhiều node, điều này cho phép nó mở rộng tốt trên các cụm máy chủ, giúp xử lý được lượng dữ liệu lớn.
+
+    5. **Chỉ số hiệu quả:** ClickHouse sử dụng các cấu trúc chỉ mục thông minh để tối ưu hóa việc tìm kiếm dữ liệu, giảm thời gian cần thiết để truy cập dữ liệu.
+
+    6. **Hỗ trợ các hoạt động phân tán (distributed operations):** ClickHouse được thiết kế để hoạt động trên các cụm máy chủ và hỗ trợ các truy vấn, cập nhật và xóa dữ liệu phân tán một cách hiệu quả.
+
+    Tóm lại, ClickHouse được thiết kế từ đầu với các tối ưu hóa dành cho việc xử lý dữ liệu lớn, và nó sử dụng nhiều kỹ thuật tiên tiến để đảm bảo hiệu suất cao khi thao tác với các lượng dữ liệu lớn và phức tạp. Điều này làm cho ClickHouse trở thành một lựa chọn mạnh mẽ cho các ứng dụng yêu cầu xử lý dữ liệu lớn và đòi hỏi hiệu suất cao.
+
+3. `Specialized Codecs trong clickhosue là gì ?`
+
+    Trong ClickHouse, "Specialized Codecs" (hoặc "codecs chuyên biệt") là một tính năng cho phép bạn lưu trữ và nén dữ liệu một cách hiệu quả bằng cách sử dụng các phương pháp nén tùy chỉnh cho các loại dữ liệu cụ thể. Các codecs chuyên biệt này được tối ưu hóa để giảm kích thước lưu trữ và tăng tốc độ truy vấn, đặc biệt là khi bạn có các loại dữ liệu cụ thể mà các codecs tiêu chuẩn không thể tối ưu hóa hiệu quả.
+
+    Một số ví dụ về các specialized codecs trong ClickHouse bao gồm:
+
+    1. **Delta Codec:** Delta Codec lưu trữ sự chênh lệch giữa giá trị hiện tại và giá trị trước đó trong một dãy số. Điều này thích hợp cho các trường dữ liệu mà giá trị thay đổi chậm và có sự tương quan cao giữa các giá trị liên tiếp.
+
+    2. **Double Delta Codec:** Double Delta Codec lưu trữ sự chênh lệch giữa các giá trị hiện tại và giá trị trước đó trong một dãy số, giống như Delta Codec. Tuy nhiên, nó còn giữ sự chênh lệch giữa giá trị hiện tại và giá trị trước đó của các sự chênh lệch đó, giúp giảm kích thước dữ liệu khi các giá trị chênh lệch không đều.
+
+    3. **Gorilla Codec:** Gorilla Codec được thiết kế đặc biệt cho việc nén dữ liệu chuỗi thời gian (time series data). Nó sử dụng các phương pháp nén bit (bit-packing) và sử dụng kỹ thuật XOR delta để giảm kích thước dữ liệu.
+
+    4. **Tributary Codec:** Tributary Codec tối ưu hóa việc nén các giá trị số nguyên có phạm vi nhỏ hoặc có các giá trị lặp lại nhiều lần.
+
+    5. **String Hash Codec:** String Hash Codec sử dụng hàm băm (hash function) để chuyển đổi chuỗi thành các giá trị số nguyên, giúp giảm kích thước dữ liệu của các chuỗi.
+
+    Các specialized codecs này giúp ClickHouse tối ưu hóa việc lưu trữ và xử lý dữ liệu cho các tình huống đặc biệt, giúp giảm dung lượng đĩa và tăng tốc độ truy vấn. Chúng cho phép người dùng tinh chỉnh việc lưu trữ dữ liệu theo nhu cầu cụ thể của họ, đặc biệt là khi làm việc với các dữ liệu có cấu trúc đặc biệt hoặc yêu cầu tối ưu hóa lưu trữ và hiệu suất.
+
+4. `Group by là gì ? Group by trong clickhosue khác gì so với group by trong các hệ thống quản lý cơ sở dữ liệu khác như postgres hay mysql`
+
+    Trong ngữ cảnh của cơ sở dữ liệu, `GROUP BY` là một câu lệnh SQL được sử dụng để nhóm các dòng dữ liệu theo các giá trị trong một hoặc nhiều cột và áp dụng các hàm tổng hợp như SUM, COUNT, AVG, MAX, MIN, vv. lên các nhóm đó. Điều này cho phép bạn thực hiện phân loại dữ liệu dựa trên các điều kiện xác định và thực hiện các phép toán tổng hợp trên các nhóm đó.
+
+    Khác biệt chính giữa `GROUP BY` trong ClickHouse và trong các hệ thống cơ sở dữ liệu như PostgreSQL hay MySQL là trong cách ClickHouse được thiết kế để xử lý dữ liệu lớn và phân tán. Dưới đây là một số điểm khác biệt chính:
+
+    1. **Xử Lý Dữ Liệu Lớn và Phân Tán:** ClickHouse được tối ưu hóa cho việc xử lý dữ liệu lớn và phức tạp trên các cụm máy chủ phân tán. Khi bạn sử dụng `GROUP BY` trong ClickHouse, nó có khả năng xử lý dữ liệu trên nhiều node, cho phép bạn thực hiện các phép toán tổng hợp trên lượng dữ liệu lớn một cách hiệu quả.
+
+    2. **Lưu Trữ Theo Cột (Columnar Storage):** ClickHouse lưu trữ dữ liệu theo cột, điều này giúp tối ưu hóa việc đọc và ghi dữ liệu, đặc biệt là trong các truy vấn sử dụng `GROUP BY`, bởi vì chỉ các cột liên quan đến truy vấn cần được đọc từ đĩa.
+
+    3. **Tối Ưu Hóa Các Loại Dữ Liệu:** ClickHouse có các codecs chuyên biệt (specialized codecs) để tối ưu hóa việc lưu trữ dữ liệu. Điều này giúp giảm kích thước dữ liệu và tăng tốc độ truy vấn, bao gồm cả trong các truy vấn `GROUP BY`.
+
+    4. **Parallel Processing (Xử Lý Song Song):** ClickHouse có khả năng xử lý các truy vấn `GROUP BY` song song trên nhiều node, giúp tối ưu hóa việc xử lý dữ liệu trên các cụm máy chủ.
+
+    5. **Chỉ Số Hiệu Quả (Efficient Indexing):** ClickHouse sử dụng các chỉ số thông minh để tối ưu hóa việc truy cập dữ liệu, giúp giảm thời gian truy vấn `GROUP BY` trên dữ liệu lớn.
+
+    Tóm lại, khi bạn sử dụng `GROUP BY` trong ClickHouse, các phép toán này được tối ưu hóa để hoạt động trên lượng dữ liệu lớn một cách hiệu quả, giúp ClickHouse trở thành một lựa chọn mạnh mẽ cho các tác vụ liên quan đến xử lý và truy vấn dữ liệu lớn.
+
+5. `Roll up là gì ? Roll up trong clickhouse khác gì so với roll up trong các hệ thống cơ sở dữ liệu khác ?`
+
+    `ROLLUP` là một toán tử trong SQL được sử dụng để tạo các tập hợp kết quả truy vấn phân cấp (hierarchical summary) dựa trên các cột được chỉ định. Khi sử dụng `ROLLUP`, bạn có thể nhóm các dữ liệu theo các cấp độ khác nhau của các cột được chỉ định, tạo ra các tập hợp kết quả phân cấp. Kết quả của một truy vấn `ROLLUP` bao gồm các tổng kết trên các cấp độ cột, bắt đầu từ cấp độ thấp nhất và tiếp tục lên cấp độ cao hơn.
+
+    Ví dụ, nếu bạn có một bảng dữ liệu `sales` có các cột `year`, `quarter`, `month`, và `amount`, bạn có thể sử dụng `ROLLUP` để tạo các tổng kết trên các cấp độ của năm (`year`), quý (`year`, `quarter`), và tháng (`year`, `quarter`, `month`).
+
+    **Ví dụ cú pháp SQL cho ROLLUP trong ClickHouse:**
+
+    ```sql
+    SELECT year, quarter, month, SUM(amount)
+    FROM sales
+    GROUP BY ROLLUP(year, quarter, month);
+    ```
+
+    **Khác Biệt trong ClickHouse:**
+
+    Trong ClickHouse, `ROLLUP` hoạt động tương tự như trong các hệ thống quản lý cơ sở dữ liệu khác. Tuy nhiên, ClickHouse được tối ưu hóa để xử lý dữ liệu lớn một cách hiệu quả, bao gồm cả khi sử dụng các toán tử như `ROLLUP`. Do ClickHouse được thiết kế để xử lý các truy vấn trên dữ liệu lớn và phức tạp, nó có khả năng xử lý các tập hợp kết quả từ truy vấn `ROLLUP` trên lượng dữ liệu lớn một cách nhanh chóng và hiệu quả.
+
+    Cụ thể, ClickHouse sử dụng các kỹ thuật như lưu trữ theo cột (columnar storage), xử lý song song (parallel processing), chỉ số thông minh (efficient indexing) và các codecs tối ưu (efficient codecs) để đảm bảo rằng các truy vấn `ROLLUP` trên dữ liệu lớn vẫn đáp ứng được yêu cầu về hiệu suất và thời gian phản hồi của người dùng.
+
+6. `Xây dựng một hàm để tránh sql injection trong clickhouse`
+
+    Để tránh SQL injection trong ứng dụng Node.js Express khi sử dụng ClickHouse hoặc bất kỳ hệ thống quản lý cơ sở dữ liệu nào, bạn nên sử dụng prepared statements hoặc các thư viện ORM (Object-Relational Mapping) để tương tác với cơ sở dữ liệu. Sử dụng prepared statements giúp bạn ngăn chặn SQL injection bằng cách phân biệt giữa câu lệnh SQL và dữ liệu, không cho phép dữ liệu người dùng xen vào câu lệnh SQL.
+
+    Dưới đây là cách sử dụng ClickHouse và thư viện `clickhouse` trong Node.js Express để thực hiện prepared statements:
+
+    1. **Cài đặt thư viện ClickHouse:**
+
+      Đầu tiên, bạn cần cài đặt thư viện `clickhouse` thông qua npm:
+
+      ```
+      npm install clickhouse
+      ```
+
+    2. **Sử dụng Prepared Statements trong Express:**
+
+      Dưới đây là một ví dụ về cách sử dụng prepared statements trong Express với ClickHouse:
+
+      ```javascript
+      const express = require('express');
+      const ClickHouse = require('clickhouse');
+
+      const app = express();
+      const clickhouse = new ClickHouse({
+        url: 'http://localhost:8123', // Địa chỉ ClickHouse server
+        format: 'json', // Định dạng kết quả truy vấn (json, csv, etc.)
+      });
+
+      app.get('/users/:id', (req, res) => {
+        const userId = req.params.id;
+
+        // Sử dụng prepared statement để tránh SQL injection
+        const query = 'SELECT * FROM users WHERE id = :userId';
+        const params = {
+          userId: parseInt(userId, 10), // Đảm bảo rằng userId là một số nguyên
+        };
+
+        clickhouse.query(query, params)
+          .toPromise()
+          .then(result => {
+            res.json(result);
+          })
+          .catch(error => {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+          });
+      });
+
+      app.listen(3000, () => {
+        console.log('Server is running on port 3000');
+      });
+      ```
+
+    Trong ví dụ trên, `:userId` là một tham số được truyền vào câu lệnh SQL và sử dụng prepared statement để ngăn chặn SQL injection. Tham số này sẽ được thay thế bằng giá trị thực từ `params` trước khi truy vấn được gửi đến ClickHouse. Điều này giúp ngăn chặn việc thực thi câu lệnh SQL động được tạo bởi dữ liệu người dùng, giảm nguy cơ SQL injection.
+  
+7. `Tạo một ứng dụng proxy đơn giản với nodejs express clickhouse`
+
+    Proxy là một trung gian hoạt động giữa người dùng và các dịch vụ trực tuyến khác. Trong ngữ cảnh mạng máy tính, một proxy server là một server hoạt động như một gateway giữa một máy tính cá nhân (hoặc một mạng nội bộ) và internet. Người dùng hoặc các ứng dụng có thể gửi yêu cầu thông qua proxy server, và proxy server sẽ gửi yêu cầu đó đến các server trên internet thay mặt cho người dùng hoặc ứng dụng. Điều này giúp bảo mật và ẩn danh thông tin người dùng, cũng như cải thiện hiệu suất thông qua caching và quản lý băng thông.
+
+    Dưới đây là một ví dụ về cách tạo một proxy đơn giản sử dụng Node.js và Express:
+
+    1. **Cài Đặt Express:**
+
+      Đầu tiên, bạn cần cài đặt thư viện Express thông qua npm:
+
+      ```
+      npm install express
+      ```
+
+    2. **Tạo Một Proxy Server Bằng Express:**
+
+      Dưới đây là một ví dụ đơn giản về cách tạo một proxy server bằng Express:
+
+      ```javascript
+      const express = require('express');
+      const httpProxy = require('http-proxy');
+
+      const app = express();
+      const proxy = httpProxy.createProxyServer();
+
+      // Middleware để xử lý yêu cầu proxy
+      app.use('/proxy', (req, res) => {
+        const targetUrl = 'https://example.com'; // Địa chỉ server mà chúng ta muốn truy cập thông qua proxy
+        proxy.web(req, res, { target: targetUrl });
+      });
+
+      // Bắt đầu server tại cổng 3000
+      app.listen(3000, () => {
+        console.log('Proxy server is running on port 3000');
+      });
+      ```
+
+      Trong ví dụ trên, mọi yêu cầu đến `http://localhost:3000/proxy` sẽ được chuyển tiếp đến `https://example.com`. Bạn có thể điều chỉnh địa chỉ `targetUrl` để trỏ đến bất kỳ server nào bạn muốn.
+
+    3. **Chạy Proxy Server:**
+
+      Chạy mã trên bằng Node.js:
+
+      ```
+      node proxy-server.js
+      ```
+
+    Bây giờ, khi bạn gửi yêu cầu đến `http://localhost:3000/proxy`, proxy server sẽ chuyển hướng yêu cầu đến `https://example.com` và trả về kết quả cho bạn. Đây chỉ là một ví dụ cơ bản; trong thực tế, proxy servers có thể được cấu hình để thực hiện nhiều chức năng phức tạp hơn, bao gồm xử lý yêu cầu và phản hồi, lọc nội dung, caching, và nhiều tính năng khác.
+
+8. `Table engine trong clickhouse dùng để làm gì ? Giải thích chi tiết`
+
+    Trong ClickHouse, **table engine** (hoặc **storage engine**) là một phần quan trọng của cấu trúc của bảng dữ liệu. Nó định nghĩa cách ClickHouse lưu trữ và quản lý dữ liệu. Table engine quyết định cách dữ liệu được lưu trữ, nén, và chỉ mục hóa. Có nhiều table engines khác nhau trong ClickHouse, và bạn có thể chọn một engine phù hợp với yêu cầu của mình.
+
+    Dựa trên [tài liệu chính thức của ClickHouse](https://clickhouse.com/docs/en/engines/table-engines), dưới đây là một số table engines quan trọng và chi tiết về chúng:
+
+    ### **MergeTree**
+
+    **Sử dụng:** MergeTree là một table engine phổ biến, được thiết kế đặc biệt để làm việc với dữ liệu chuỗi thời gian (time-series data).
+
+    **Đặc điểm:**
+    - **Sắp xếp theo Ngày và Thời Gian:** Dữ liệu được sắp xếp theo trường ngày và thời gian, điều này giúp tối ưu hóa việc thêm dữ liệu mới vào bảng.
+    - **Các Thay Đổi Nhỏ (Tiny Changes):** MergeTree hỗ trợ các cập nhật nhỏ (UPDATE) và các thay đổi nhỏ (ALTER).
+    - **Các chỉ số tự động (Automatic Indexes):** Các chỉ số tự động được xây dựng cho các trường tham gia `ORDER BY`.
+
+    ### **ReplacingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn duy trì lịch sử thay đổi của các bản ghi dựa trên khóa chính.
+
+    **Đặc Điểm:**
+    - **Sự Kết Hợp Của MergeTree và TinyLog:** Kết hợp sự ổn định của MergeTree và khả năng ghi nhật ký nhỏ của TinyLog.
+
+    ### **AggregatingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tự động thực hiện các phép toán tổng hợp khi thêm dữ liệu vào bảng.
+
+    **Đặc Điểm:**
+    - **Tự Động Tổng Hợp (Automatic Aggregation):** Dữ liệu được tự động tổng hợp dựa trên cấu trúc bảng và các hàm tổng hợp được đặt trước.
+
+    ### **CollapsingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tự động loại bỏ các bản ghi trùng lặp dựa trên một khóa chính.
+
+    **Đặc Điểm:**
+    - **Loại Bỏ Bản Ghi Trùng Lặp (Eliminating Duplicate Rows):** Bản ghi trùng lặp dựa trên các trường được loại bỏ tự động.
+
+    ### **SummingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tự động cập nhật tổng giá trị của các trường số khi thêm dữ liệu vào bảng.
+
+    **Đặc Điểm:**
+    - **Tự Động Tổng Hợp Giá Trị (Automatic Summing):** Tổng giá trị của các trường số được tự động cập nhật khi thêm dữ liệu mới vào bảng.
+
+    ### **Distributed**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tạo các bảng dữ liệu phân tán trên nhiều node máy chủ.
+
+    **Đặc Điểm:**
+    - **Phân Tán (Distributed):** Dữ liệu được phân tán trên nhiều máy chủ và có thể tự động chia nhỏ và kết hợp dữ liệu khi truy vấn.
+
+    Nhớ rằng, việc chọn table engine phù hợp rất quan trọng tùy thuộc vào yêu cầu cụ thể của ứng dụng và cách dữ liệu được sử dụng. ClickHouse cung cấp nhiều options để bạn có thể tối ưu hóa hiệu suất và tăng cường khả năng mở rộng của hệ thống của bạn.
+
+9. `Phân biệt merge tree và replacing merge tree trong clickhouse `
+
+    Trong ClickHouse, **table engine** (hoặc **storage engine**) là một phần quan trọng của cấu trúc của bảng dữ liệu. Nó định nghĩa cách ClickHouse lưu trữ và quản lý dữ liệu. Table engine quyết định cách dữ liệu được lưu trữ, nén, và chỉ mục hóa. Có nhiều table engines khác nhau trong ClickHouse, và bạn có thể chọn một engine phù hợp với yêu cầu của mình.
+
+    Dựa trên [tài liệu chính thức của ClickHouse](https://clickhouse.com/docs/en/engines/table-engines), dưới đây là một số table engines quan trọng và chi tiết về chúng:
+
+    ### **MergeTree**
+
+    **Sử dụng:** MergeTree là một table engine phổ biến, được thiết kế đặc biệt để làm việc với dữ liệu chuỗi thời gian (time-series data).
+
+    **Đặc điểm:**
+    - **Sắp xếp theo Ngày và Thời Gian:** Dữ liệu được sắp xếp theo trường ngày và thời gian, điều này giúp tối ưu hóa việc thêm dữ liệu mới vào bảng.
+    - **Các Thay Đổi Nhỏ (Tiny Changes):** MergeTree hỗ trợ các cập nhật nhỏ (UPDATE) và các thay đổi nhỏ (ALTER).
+    - **Các chỉ số tự động (Automatic Indexes):** Các chỉ số tự động được xây dựng cho các trường tham gia `ORDER BY`.
+
+    ### **ReplacingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn duy trì lịch sử thay đổi của các bản ghi dựa trên khóa chính.
+
+    **Đặc Điểm:**
+    - **Sự Kết Hợp Của MergeTree và TinyLog:** Kết hợp sự ổn định của MergeTree và khả năng ghi nhật ký nhỏ của TinyLog.
+
+    ### **AggregatingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tự động thực hiện các phép toán tổng hợp khi thêm dữ liệu vào bảng.
+
+    **Đặc Điểm:**
+    - **Tự Động Tổng Hợp (Automatic Aggregation):** Dữ liệu được tự động tổng hợp dựa trên cấu trúc bảng và các hàm tổng hợp được đặt trước.
+
+    ### **CollapsingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tự động loại bỏ các bản ghi trùng lặp dựa trên một khóa chính.
+
+    **Đặc Điểm:**
+    - **Loại Bỏ Bản Ghi Trùng Lặp (Eliminating Duplicate Rows):** Bản ghi trùng lặp dựa trên các trường được loại bỏ tự động.
+
+    ### **SummingMergeTree**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tự động cập nhật tổng giá trị của các trường số khi thêm dữ liệu vào bảng.
+
+    **Đặc Điểm:**
+    - **Tự Động Tổng Hợp Giá Trị (Automatic Summing):** Tổng giá trị của các trường số được tự động cập nhật khi thêm dữ liệu mới vào bảng.
+
+    ### **Distributed**
+
+    **Sử Dụng:** Sử dụng khi bạn muốn tạo các bảng dữ liệu phân tán trên nhiều node máy chủ.
+
+    **Đặc Điểm:**
+    - **Phân Tán (Distributed):** Dữ liệu được phân tán trên nhiều máy chủ và có thể tự động chia nhỏ và kết hợp dữ liệu khi truy vấn.
+
+    Nhớ rằng, việc chọn table engine phù hợp rất quan trọng tùy thuộc vào yêu cầu cụ thể của ứng dụng và cách dữ liệu được sử dụng. ClickHouse cung cấp nhiều options để bạn có thể tối ưu hóa hiệu suất và tăng cường khả năng mở rộng của hệ thống của bạn.
+
+10. `Cách đánh index dữ liệu trong clickhouse sử dụng nodejs express`
+
+    Trong ClickHouse, việc tạo chỉ mục (index) là quan trọng để tối ưu hóa tốc độ truy vấn. Chỉ mục giúp giảm thời gian tìm kiếm dữ liệu, đặc biệt là khi bạn có bảng dữ liệu lớn. Dưới đây là cách tạo chỉ mục cho dữ liệu trong ClickHouse sử dụng Node.js và Express:
+
+    ### Sử Dụng Thư Viện `clickhouse`:
+
+    Trước tiên, cài đặt thư viện `clickhouse` thông qua npm:
+
+    ```bash
+    npm install clickhouse
+    ```
+
+    Sau đó, trong mã Node.js của bạn, bạn có thể sử dụng thư viện này để tạo chỉ mục.
+
+    ### Ví Dụ Tạo Chỉ Mục Sử Dụng `clickhouse` trong Node.js Express:
+
+    ```javascript
+    const express = require('express');
+    const ClickHouse = require('clickhouse');
+
+    const app = express();
+    const ch = new ClickHouse({
+      url: 'http://localhost:8123', // Địa chỉ ClickHouse server
+      format: 'json', // Định dạng kết quả truy vấn (json, csv, etc.)
+    });
+
+    app.get('/create-index', (req, res) => {
+      // Tạo chỉ mục trên bảng 'my_table' cho cột 'column_to_index'
+      const query = 'ALTER TABLE my_table ADD INDEX index_name (column_to_index) TYPE minmax GRANULARITY 1';
+
+      ch.query(query)
+        .toPromise()
+        .then(result => {
+          res.json({ message: 'Chỉ mục đã được tạo thành công' });
+        })
+        .catch(error => {
+          console.error(error);
+          res.status(500).json({ error: 'Lỗi khi tạo chỉ mục' });
+        });
+    });
+
+    app.listen(3000, () => {
+      console.log('Server is running on port 3000');
+    });
+    ```
+
+    Trong ví dụ trên, chúng ta sử dụng route `/create-index` để tạo chỉ mục cho cột `column_to_index` trên bảng `my_table`. Câu lệnh SQL để tạo chỉ mục sử dụng `ALTER TABLE` và cú pháp `ADD INDEX`. Bạn có thể điều chỉnh tên chỉ mục (`index_name`) và cột cần được chỉ mục (`column_to_index`) theo nhu cầu của bạn.
+
+    Nhớ rằng, việc tạo chỉ mục đòi hỏi quyền truy cập và quyền hạn đủ đối với bảng và cột mà bạn muốn tạo chỉ mục.
+
+11. `Materialized views trong clickhouse là gì ?`
+
+    Trong ClickHouse, **materialized views** là một tính năng giúp bạn tạo ra các bảng chứa dữ liệu đã được xử lý và được lưu trữ vĩnh viễn. Dữ liệu trong materialized views không phải là kết quả của truy vấn thời gian thực, mà thay vào đó, chúng được tính toán trước và được lưu trữ dưới dạng bảng vật liệu.
+
+    ### Điểm Chính về Materialized Views:
+
+    1. **Xử Lý Dữ Liệu Trước:**
+      - Materialized views cho phép bạn xử lý dữ liệu trước khi lưu trữ, giúp giảm thiểu việc xử lý dữ liệu trong quá trình truy vấn.
+
+    2. **Lưu Trữ Dữ Liệu Tính Toán:**
+      - Dữ liệu trong materialized views không được tính toán mỗi khi truy vấn được thực hiện, mà thay vào đó, nó được tính toán trước và lưu trữ dưới dạng bảng, giúp tăng tốc độ truy vấn.
+
+    3. **Dữ Liệu Thường Xuyên Được Cập Nhật:**
+      - Materialized views có thể được cập nhật định kỳ dựa trên một lịch trình cụ thể hoặc khi có sự thay đổi trong dữ liệu nguồn.
+
+    4. **Sử Dụng Cho Báo Cáo và Thống Kê:**
+      - Materialized views thường được sử dụng cho các tác vụ như tạo báo cáo, thống kê, hoặc các truy vấn phức tạp đòi hỏi sự chuẩn bị và xử lý dữ liệu trước.
+
+    ### Cách Tạo Materialized Views Trong ClickHouse:
+
+    Dưới đây là một ví dụ cơ bản về cách tạo materialized view trong ClickHouse:
+
+    ```sql
+    -- Tạo materialized view từ bảng source_table
+    -- Kết quả là tổng của trường 'amount' được nhóm theo trường 'category'
+    CREATE MATERIALIZED VIEW my_materialized_view
+    ENGINE = SummingMergeTree()
+    PARTITION BY toYYYYMM(event_date)
+    ORDER BY (event_date, category)
+    AS
+    SELECT
+        event_date,
+        category,
+        sum(amount) as total_amount
+    FROM
+        source_table
+    GROUP BY
+        event_date,
+        category;
+    ```
+
+    Trong ví dụ trên, `my_materialized_view` là materialized view mới được tạo từ `source_table`. Trong materialized view này, dữ liệu đã được xử lý trước bằng cách tính tổng (`SUM(amount)`) của trường 'amount' dựa trên trường 'category'. Các kết quả được lưu trữ và sẵn sàng cho các truy vấn. Mỗi khi có dữ liệu mới được chèn vào `source_table`, materialized view sẽ được cập nhật tương ứng.
+
+12. `Array join trong clickhouse là gì ?`
+
+    Trong ClickHouse, **Array Join** là một tính năng cho phép bạn kết hợp dữ liệu từ các mảng (array) trong một cột thành các dữ liệu dạng bảng. Nó cho phép bạn chuyển đổi dữ liệu từ một cấu trúc mảng sang dạng bảng, giúp bạn thực hiện các phân tích và truy vấn dễ dàng hơn.
+
+    Khi bạn có một cột chứa mảng, việc sử dụng **Array Join** giúp bạn truy vấn dữ liệu trong các mảng đó một cách tiện lợi. Cú pháp cơ bản của `ARRAY JOIN` trong ClickHouse như sau:
+
+    ```sql
+    SELECT column_name, array_join(array_column, ', ') AS joined_values
+    FROM table_name;
+    ```
+
+    - `column_name`: Tên cột chứa mảng dữ liệu.
+    - `array_column`: Tên cột chứa các giá trị trong mảng.
+    - `joined_values`: Tên cho kết quả của `ARRAY JOIN`, nơi các giá trị từ mảng được kết hợp thành một chuỗi (hoặc một bảng nếu sử dụng trong kết hợp với các cột khác).
+
+    Dưới đây là một ví dụ chi tiết:
+
+    Giả sử bạn có một bảng `users` trong ClickHouse với cấu trúc như sau:
+
+    ```sql
+    CREATE TABLE users
+    (
+        id UInt64,
+        name String,
+        emails Array(String)
+    ) ENGINE = MergeTree()
+    ORDER BY id;
+    ```
+
+    Nếu bạn muốn kết hợp các địa chỉ email từ mảng `emails` thành một chuỗi được phân tách bởi dấu phẩy, bạn có thể sử dụng `ARRAY JOIN` như sau:
+
+    ```sql
+    SELECT id, name, array_join(emails, ', ') AS email_list
+    FROM users;
+    ```
+
+    Kết quả trả về sẽ chứa `id`, `name`, và một cột mới `email_list` chứa các địa chỉ email từ mảng được kết hợp thành chuỗi.
+
+    Lưu ý rằng việc sử dụng `ARRAY JOIN` rất hữu ích khi bạn cần truy vấn và phân tích dữ liệu trong các mảng trong ClickHouse.
+
+12. `Cách tạo index trong clickhouse khi sử dụng câu query ?`
+
+    Trong ClickHouse, bạn có thể tạo index khi tạo bảng bằng cách sử dụng phần cú pháp `INDEX` trong câu lệnh `CREATE TABLE`. Dưới đây là cách tạo một index khi bạn định nghĩa bảng trong ClickHouse:
+
+    ```sql
+    CREATE TABLE table_name
+    (
+        column1_name DataType,
+        column2_name DataType,
+        ...
+        INDEX index_name TYPE type_name GRANULARITY value
+    ) ENGINE = engine_name;
+    ```
+
+    - `table_name`: Tên của bảng bạn muốn tạo.
+    - `column1_name`, `column2_name`, ...: Tên các cột và kiểu dữ liệu của chúng.
+    - `INDEX index_name`: Định nghĩa index với tên `index_name`.
+    - `TYPE type_name`: Loại index bạn muốn tạo (ví dụ: `minmax`, `set(3)`, `bitmap`, ...).
+    - `GRANULARITY value`: Đối với một số loại index, bạn có thể xác định giá trị GRANULARITY. Nó quyết định cách dữ liệu được chia thành các khối để tạo index.
+
+    Dưới đây là một ví dụ cụ thể:
+
+    ```sql
+    CREATE TABLE example_table
+    (
+        id UInt64,
+        name String,
+        age UInt32,
+        INDEX idx_age TYPE minmax GRANULARITY 1
+    ) ENGINE = MergeTree()
+    ORDER BY id;
+    ```
+
+    Trong ví dụ này, chúng ta đang tạo một bảng có tên `example_table` với một index `idx_age` trên cột `age` với loại index là `minmax` và `GRANULARITY` được đặt là 1.
+
+    Nhớ rằng việc tạo index đòi hỏi cân nhắc kỹ lưỡng về cách dữ liệu của bạn sẽ được truy vấn. Việc chọn loại index và giá trị GRANULARITY đúng cách có thể cải thiện hiệu suất truy vấn của bạn.
+
+13. `Materialized view in clickhouse`
+
+    **Materialized Views** trong ClickHouse là một tính năng quan trọng giúp tối ưu hóa các truy vấn phức tạp và các thao tác tính toán. Materialized views cho phép bạn tạo ra các bảng "vật liệu" (materialized) từ kết quả của các truy vấn phức tạp hoặc các phép toán tính toán. Dữ liệu trong materialized views không được tính toán mỗi khi truy vấn được thực hiện, mà thay vào đó, nó được tính toán trước và được lưu trữ dưới dạng bảng. Khi dữ liệu nguồn (source data) thay đổi, materialized views có thể được cập nhật tự động.
+
+    ### Ưu Điểm của Materialized Views:
+
+    1. **Hiệu Suất Truy Vấn:** Dữ liệu trong materialized views đã được tính toán trước, giúp giảm độ phức tạp của các truy vấn và tăng tốc độ truy vấn.
+
+    2. **Sử Dụng Cho Báo Cáo và Phân Tích:** Materialized views thường được sử dụng cho việc tạo các báo cáo, thống kê và các truy vấn phức tạp đòi hỏi tính toán và xử lý trước.
+
+    3. **Dễ Dàng Cập Nhật:** Materialized views có thể được cập nhật định kỳ dựa trên lịch trình hoặc khi có sự thay đổi trong dữ liệu nguồn.
+
+    ### Cách Tạo Materialized Views Trong ClickHouse:
+
+    Dưới đây là cách tạo một materialized view trong ClickHouse:
+
+    ```sql
+    CREATE MATERIALIZED VIEW my_materialized_view
+    ENGINE = SummingMergeTree() 
+    PARTITION BY toYYYYMM(event_date)
+    ORDER BY (event_date, category)
+    AS
+    SELECT
+        event_date,
+        category,
+        sum(amount) as total_amount
+    FROM
+        source_table
+    GROUP BY
+        event_date,
+        category;
+    ```
+
+    Trong ví dụ trên, `my_materialized_view` là tên của materialized view mới, `SummingMergeTree()` là loại storage engine được sử dụng, `PARTITION BY` xác định cách dữ liệu được phân chia thành các partition, `ORDER BY` xác định thứ tự sắp xếp của dữ liệu, và `SELECT ... FROM ... GROUP BY ...` xác định truy vấn và phép toán tính toán mà materialized view này được tạo ra từ đó.
+
+14. `Lệnh final trong clickhouse dùng để làm gì ?`
+
+    Trong ClickHouse, khi bạn thực hiện một câu truy vấn SQL, câu lệnh "FINAL" được sử dụng để báo cho hệ thống biết rằng truy vấn đã kết thúc và kết quả được trả về cho người dùng hoặc ứng dụng.
+
+    Khi bạn thực hiện một truy vấn không chứa từ khóa "FINAL", ClickHouse sẽ trả về một tập hợp các dữ liệu tạm thời và chưa hoàn thiện. Điều này cho phép ClickHouse tiếp tục xử lý các yêu cầu truy vấn tiếp theo mà không chặn lại.
+
+    Tuy nhiên, nếu bạn sử dụng từ khóa "FINAL" trong truy vấn của mình, ClickHouse sẽ chờ đến khi truy vấn hoàn thành và sau đó trả về kết quả cuối cùng cho bạn. Điều này đảm bảo rằng bạn nhận được dữ liệu đã được xử lý đầy đủ và không bị chờ đợi các tác vụ xử lý thêm. Câu lệnh "FINAL" giúp bạn đồng bộ hóa việc trả về dữ liệu với việc kết thúc của quá trình xử lý.
+
+    Dưới đây là một ví dụ về việc sử dụng từ khóa "FINAL" trong câu truy vấn ClickHouse:
+
+    ```sql
+    -- Truy vấn không sử dụng FINAL, sẽ trả về kết quả tạm thời
+    SELECT * FROM my_table WHERE some_condition;
+
+    -- Truy vấn sử dụng FINAL, sẽ trả về kết quả cuối cùng khi truy vấn hoàn thành
+    SELECT * FROM my_table WHERE some_condition FINAL;
+    ```
+
+    Khi bạn thêm từ khóa "FINAL" vào truy vấn, ClickHouse sẽ chờ đến khi truy vấn hoàn thành và sau đó trả về kết quả cuối cùng.
+
+15. `CollaspingMergeTree dùng để làm gì ?`
+
+    Trong ClickHouse, `CollapsingMergeTree` là một loại bảng được thiết kế để xử lý dữ liệu dạng log. Cụ thể, nó được sử dụng để lưu trữ các bản ghi được ghi lại theo thời gian và chỉ giữ lại phiên bản mới nhất của các bản ghi có các giá trị trùng lặp trên các cột chỉ định (các cột khóa). Điều này giúp giảm lưu trữ và tăng tốc độ truy vấn khi bạn quan tâm chỉ đến dữ liệu mới nhất.
+
+    ### Cấu trúc của CollapsingMergeTree
+
+    Cú pháp tạo một bảng `CollapsingMergeTree` trong ClickHouse có thể trông giống như sau:
+
+    ```sql
+    CREATE TABLE table_name
+    (
+        column1_name DataType,
+        column2_name DataType,
+        ...
+        collapsing_column_name DataType,
+        version_column_name DataType,
+        sign_column_name DataType,
+        PRIMARY KEY (column1_name, column2_name, ...),
+        ...
+    ) ENGINE = CollapsingMergeTree(sign_column_name);
+    ```
+
+    - `column1_name, column2_name, ...`: Các cột trong bảng.
+    - `collapsing_column_name`: Cột dùng để xác định các giá trị trùng lặp.
+    - `version_column_name`: Cột dùng để xác định phiên bản của mỗi bản ghi.
+    - `sign_column_name`: Cột dùng để xác định trạng thái của bản ghi.
+
+    ### Ví dụ
+
+    Giả sử bạn muốn lưu trữ dữ liệu về việc truy cập trang web, bao gồm địa chỉ IP (`ip_address`), địa chỉ URL (`url`), thời gian (`timestamp`) và trình duyệt (`browser`). Bạn muốn chỉ giữ lại phiên bản mới nhất của các bản ghi có cùng địa chỉ IP, địa chỉ URL và trình duyệt. Bảng `CollapsingMergeTree` có thể được sử dụng như sau:
+
+    ```sql
+    CREATE TABLE access_logs
+    (
+        ip_address String,
+        url String,
+        timestamp DateTime,
+        browser String,
+        version UInt64,
+        sign Int8,
+        PRIMARY KEY (ip_address, url, browser, timestamp),
+        INDEX version_index (version) TYPE minmax GRANULARITY 1,
+        INDEX sign_index (sign) TYPE minmax GRANULARITY 1
+    ) ENGINE = CollapsingMergeTree(sign);
+    ```
+
+    Trong ví dụ này:
+    - `ip_address`, `url`, và `browser` là các cột khóa để xác định các bản ghi trùng lặp.
+    - `timestamp` là thời gian khi bản ghi được ghi lại.
+    - `version` xác định phiên bản của mỗi bản ghi.
+    - `sign` được sử dụng để xác định trạng thái của bản ghi, nếu `sign = 1` thì bản ghi được coi là hợp lệ và được giữ lại.
+
+    Khi dữ liệu được ghi vào bảng này, các bản ghi có cùng `ip_address`, `url`, và `browser` sẽ được chỉ giữ lại phiên bản mới nhất dựa trên cột `timestamp`. Các bản ghi không hợp lệ (với `sign = 0`) sẽ được loại bỏ khỏi bảng.
+
+16. `VersionedCollaspingMergeTree dùng để làm gì ? Cho ví dụ chi tiết cách sử dụng`
+
+    `VersionedCollapsingMergeTree` trong ClickHouse là một loại bảng được thiết kế để lưu trữ dữ liệu dạng log và chỉ giữ lại phiên bản mới nhất của các bản ghi có các giá trị trùng lặp trên các cột chỉ định (các cột khóa). Ngoài ra, nó còn giữ lại lịch sử của các phiên bản đã bị xóa, giúp bạn theo dõi các thay đổi trong dữ liệu theo thời gian.
+
+    ### Cấu trúc của VersionedCollapsingMergeTree
+
+    Cú pháp tạo một bảng `VersionedCollapsingMergeTree` trong ClickHouse có thể trông giống như sau:
+
+    ```sql
+    CREATE TABLE table_name
+    (
+        column1_name DataType,
+        column2_name DataType,
+        ...
+        version_column_name DataType,
+        PRIMARY KEY (column1_name, column2_name, ...),
+        ...
+    ) ENGINE = VersionedCollapsingMergeTree(sign_column_name, version_column_name);
+    ```
+
+    - `column1_name, column2_name, ...`: Các cột trong bảng.
+    - `version_column_name`: Cột dùng để xác định phiên bản của mỗi bản ghi.
+    - `sign_column_name`: Cột dùng để xác định trạng thái của bản ghi.
+
+    ### Ví dụ
+
+    Giả sử bạn muốn lưu trữ dữ liệu về người dùng, bao gồm `user_id`, `name`, `email` và `timestamp` để theo dõi các thay đổi trong thông tin người dùng theo thời gian. Bạn muốn chỉ giữ lại phiên bản mới nhất của các bản ghi có cùng `user_id`. Bảng `VersionedCollapsingMergeTree` có thể được sử dụng như sau:
+
+    ```sql
+    CREATE TABLE users
+    (
+        user_id UInt64,
+        name String,
+        email String,
+        timestamp DateTime,
+        version UInt64,
+        sign Int8,
+        PRIMARY KEY (user_id),
+        INDEX version_index (version) TYPE minmax GRANULARITY 1,
+        INDEX sign_index (sign) TYPE minmax GRANULARITY 1
+    ) ENGINE = VersionedCollapsingMergeTree(sign, version);
+    ```
+
+    Trong ví dụ này:
+
+    - `user_id` là khóa chính xác định người dùng.
+    - `name`, `email` là các thông tin của người dùng.
+    - `timestamp` là thời gian khi bản ghi được ghi lại.
+    - `version` xác định phiên bản của mỗi bản ghi.
+    - `sign` được sử dụng để xác định trạng thái của bản ghi, nếu `sign = 1` thì bản ghi được coi là hợp lệ và được giữ lại.
+
+    Khi dữ liệu được ghi vào bảng này, các bản ghi có cùng `user_id` sẽ được chỉ giữ lại phiên bản mới nhất dựa trên cột `version`. Các bản ghi không hợp lệ (với `sign = 0`) sẽ được loại bỏ khỏi bảng. Đồng thời, bạn có thể theo dõi các phiên bản đã bị xóa của dữ liệu thông qua cột `sign`, giúp bạn duy trì lịch sử thay đổi của dữ liệu theo thời gian.
+
 # ELASTIC SEARCH 
 
-1. `Elastic search la gi ?`
+1. `So sánh elastic search và meilisearch`
 
-    Elasticsearch là một hệ thống tìm kiếm và phân tích dữ liệu phân tán mã nguồn mở. Nó được thiết kế để lưu trữ, tìm kiếm và phân tích lượng lớn dữ liệu một cách nhanh chóng và hiệu quả. Elasticsearch sử dụng mô hình tìm kiếm ngôn ngữ tự nhiên, cho phép người dùng tìm kiếm thông tin trong dữ liệu một cách dễ dàng và linh hoạt.
+    **Elasticsearch** và **MeiliSearch** đều là các hệ thống tìm kiếm, nhưng chúng có các đặc điểm và mục tiêu sử dụng khác nhau. Dưới đây là sự so sánh giữa Elasticsearch và MeiliSearch:
 
-    Dữ liệu được lưu trữ trong Elasticsearch dưới dạng các tài liệu JSON, và mỗi tài liệu thuộc về một loại (type) cụ thể và một chỉ mục (index) cụ thể. Elasticsearch sử dụng các thuật toán tìm kiếm phân tán để tìm kiếm thông tin trong các tài liệu một cách nhanh chóng, kể cả khi có hàng triệu hoặc thậm chí hàng tỷ tài liệu.
+    ### Elasticsearch:
 
-    Elasticsearch cung cấp các chức năng tìm kiếm phức tạp, bao gồm tìm kiếm đầy đủ văn bản, tìm kiếm theo từ khóa, tìm kiếm dựa trên ngôn ngữ tự nhiên, tìm kiếm đa truy vấn, và nhiều chức năng khác. Nó cũng hỗ trợ các tính năng phân tích dữ liệu như tổng hợp (aggregation) để phân tích số liệu thống kê, lọc dữ liệu và hiển thị kết quả dưới dạng biểu đồ.
+      1. **Kiến Trúc và Mục Tiêu:**
+        - **Elasticsearch:** Elasticsearch là một hệ thống tìm kiếm và phân tích dữ liệu phân tán và mã nguồn mở. Nó được xây dựng trên nền tảng Apache Lucene và được thiết kế để xử lý các tập dữ liệu lớn và phức tạp, hỗ trợ các truy vấn phức tạp và tìm kiếm theo văn bản, số liệu và các loại dữ liệu phức tạp khác.
 
-    Elasticsearch thường được sử dụng trong các ứng dụng web, ứng dụng tìm kiếm, và các hệ thống phân tích dữ liệu để tìm kiếm và phân tích lượng lớn dữ liệu một cách hiệu quả và nhanh chóng. Nó là một phần của dự án Elastic Stack, bao gồm các thành phần như Logstash (để xử lý và chuyển đổi dữ liệu), Kibana (để trực quan hóa dữ liệu và xem biểu đồ), và Beats (để thu thập dữ liệu từ nhiều nguồn khác nhau).
+      2. **Cộng Đồng và Thư Viện:**
+        - **Elasticsearch:** Elasticsearch có một cộng đồng lớn và đầy đủ tài liệu hỗ trợ. Nó cung cấp các client library cho nhiều ngôn ngữ lập trình.
 
-2. `Term va terms trong elastic search la gi ?`
+      3. **Tính Linh Hoạt và Tùy Chỉnh:**
+        - **Elasticsearch:** Elasticsearch cho phép bạn tùy chỉnh và cấu hình các chỉ mục, ánh xạ dữ liệu và truy vấn theo nhu cầu của ứng dụng.
 
-    Trong Elasticsearch, `term` và `terms` là hai loại truy vấn được sử dụng để tìm kiếm dữ liệu dựa trên các giá trị chính xác của trường trong một chỉ mục. Dưới đây là sự giải thích chi tiết về cách chúng hoạt động và cách chúng được sử dụng trong truy vấn Elasticsearch:
+      4. **Hiệu Suất và Tính Khả Dụng:**
+        - **Elasticsearch:** Elasticsearch được thiết kế để xử lý các tập dữ liệu lớn và có các cơ chế như sharding và replication để cải thiện hiệu suất và khả năng sẵn sàng (availability).
 
-    ### 1. `term` Query:
-    Truy vấn `term` được sử dụng để tìm kiếm các giá trị chính xác của một trường trong chỉ mục. Nó không thực hiện bất kỳ quá trình phân tích nào trên giá trị tìm kiếm.
+      ### MeiliSearch:
 
-    #### Ví dụ:
-    Giả sử bạn có một chỉ mục chứa tài liệu về sách, và trong tài liệu đó có trường "genre.keyword" chứa thể loại của sách. Bạn muốn tìm các sách thuộc thể loại "Fiction". Bạn có thể sử dụng truy vấn `term` như sau:
+      1. **Kiến Trúc và Mục Tiêu:**
+        - **MeiliSearch:** MeiliSearch là một hệ thống tìm kiếm mã nguồn mở nhẹ nhàng được thiết kế để tập trung vào việc cung cấp trải nghiệm tìm kiếm nhanh và dễ sử dụng. Nó tập trung vào việc cung cấp tìm kiếm văn bản chính xác và hiệu quả.
 
-    ```json
-    {
-      "query": {
-        "term": {
-          "genre.keyword": "Fiction"
-        }
-      }
-    }
+      2. **Cộng Đồng và Thư Viện:**
+        - **MeiliSearch:** Mặc dù cộng đồng của MeiliSearch đang phát triển, nhưng nó không lớn như Elasticsearch. Tuy nhiên, MeiliSearch cung cấp các client library cho nhiều ngôn ngữ.
+
+      3. **Tính Linh Hoạt và Tùy Chỉnh:**
+        - **MeiliSearch:** So với Elasticsearch, MeiliSearch có ít tùy chỉnh hơn. Nó tập trung vào việc cung cấp một giao diện đơn giản và dễ sử dụng, giảm bớt sự phức tạp của việc cấu hình.
+
+      4. **Hiệu Suất và Tính Khả Dụng:**
+        - **MeiliSearch:** MeiliSearch được thiết kế để tập trung vào hiệu suất tìm kiếm nhanh và đơn giản cho các ứng dụng web hoặc di động. Điều này làm cho nó trở thành một lựa chọn tốt cho các ứng dụng đòi hỏi hiệu suất tìm kiếm cao mà không cần các tính năng phức tạp.
+
+      Tóm lại, Elasticsearch thích hợp cho các ứng dụng phức tạp, có nhu cầu về tìm kiếm đa dạng và cần các tính năng tùy chỉnh cao. Trong khi đó, MeiliSearch là một lựa chọn tốt cho các ứng dụng đơn giản hoặc cần một giải pháp tìm kiếm dễ sử dụng và hiệu quả.
+
+2. `Cho ví dụ minh họa về sử dụng elastic search trong ứng dụng nodejs express`
+
+    Để sử dụng Elasticsearch trong một ứng dụng Node.js Express, bạn cần sử dụng một thư viện kết nối với Elasticsearch. Một trong những thư viện phổ biến nhất là `elasticsearch-js`, cho phép bạn tương tác với Elasticsearch từ Node.js.
+
+    Trước tiên, cài đặt `elasticsearch-js` thông qua npm:
+
+    ```bash
+    npm install @elastic/elasticsearch
     ```
 
-    ### 2. `terms` Query:
-    Truy vấn `terms` cho phép bạn tìm kiếm các tài liệu mà giá trị của một trường nằm trong danh sách các giá trị cho trước.
+    Sau đó, dưới đây là một ví dụ minh họa cách sử dụng Elasticsearch trong một ứng dụng Node.js Express:
 
-    #### Ví dụ:
-    Nếu bạn muốn tìm các sách thuộc thể loại "Fiction" hoặc "Mystery", bạn có thể sử dụng truy vấn `terms` như sau:
+    ### Kết Nối với Elasticsearch:
 
-    ```json
-    {
-      "query": {
-        "terms": {
-          "genre.keyword": ["Fiction", "Mystery"]
-        }
-      }
-    }
+    ```javascript
+    const { Client } = require('@elastic/elasticsearch');
+    const client = new Client({ node: 'http://localhost:9200' }); // Địa chỉ Elasticsearch server
     ```
 
-    Trong ví dụ này, Elasticsearch sẽ tìm các tài liệu có giá trị của trường "genre.keyword" là "Fiction" hoặc "Mystery".
+    ### Tạo Index và Đưa Dữ Liệu vào Elasticsearch:
 
-    Lưu ý rằng `terms` query cho phép bạn tìm kiếm theo một danh sách các giá trị, trong khi `term` query chỉ cho phép bạn tìm kiếm theo một giá trị cụ thể.
-3. `Shard trong elastic search la gi ?` 
-
-    Trong Elasticsearch, "shard" (hoặc "phân vùng") là một phần nhỏ của một chỉ mục (index). Khi bạn lưu trữ dữ liệu trong Elasticsearch, dữ liệu đó được chia thành các shard để tăng hiệu suất và có thể được phân tán trên nhiều máy chủ (nodes). Mỗi shard là một đơn vị tự chủ quản và có thể được lưu trữ trên một node Elasticsearch riêng biệt.
-
-    Sự chia nhỏ dữ liệu thành các shard có một số lợi ích, bao gồm:
-
-    1. **Phân tán dữ liệu:** Dữ liệu được chia thành các shard có thể được lưu trữ trên nhiều máy chủ khác nhau. Điều này giúp tăng cường khả năng chịu lỗi và tăng hiệu suất tìm kiếm.
-
-    2. **Tăng hiệu suất tìm kiếm:** Elasticsearch có thể tìm kiếm song song trên các shard. Khi bạn thực hiện một truy vấn tìm kiếm, Elasticsearch có thể gửi truy vấn đến tất cả các shard đồng thời, giảm thời gian tìm kiếm.
-
-    3. **Dễ dàng mở rộng:** Bạn có thể dễ dàng thêm mới các node Elasticsearch vào cluster và chia thêm shard để mở rộng khả năng lưu trữ và tìm kiếm.
-
-    Khi bạn tạo một chỉ mục mới trong Elasticsearch, bạn cần xác định số lượng primary shard và optional số lượng replica shard. Primary shard chịu trách nhiệm cho các tài liệu và các replica shard là các bản sao dự phòng của primary shard. Việc này giúp đảm bảo rằng nếu một primary shard hoặc node bị lỗi, replica shard hoặc các node khác vẫn có thể tiếp tục phục vụ các yêu cầu.
-
-    Quyết định về số lượng primary và replica shard nên dựa trên nhu cầu và yêu cầu cụ thể của ứng dụng của bạn, cũng như trên nguồn lực và khả năng của cluster Elasticsearch của bạn.
-
-4. `Must trong elastic search la gi`
-
-    Trong Elasticsearch, `must` là một trong các điều kiện tìm kiếm (query context) được sử dụng trong truy vấn tìm kiếm để đảm bảo rằng một tài liệu phải đáp ứng tất cả các điều kiện được chỉ định trong `must` để được coi là kết quả hợp lý.
-
-    Khi bạn sử dụng `must` trong một truy vấn tìm kiếm, Elasticsearch sẽ trả về các tài liệu chỉ nếu chúng đáp ứng tất cả các điều kiện được xác định trong mệnh đề `must`. Điều này tương đương với việc sử dụng "và" logic trong tìm kiếm: tài liệu phải thỏa mãn tất cả các điều kiện `must` được xác định.
-
-    Dưới đây là một ví dụ về cách sử dụng `must` trong một truy vấn tìm kiếm Elasticsearch:
-
-    Giả sử bạn có một chỉ mục chứa thông tin về các sách và bạn muốn tìm các sách có tiêu đề là "Elasticsearch" và thể loại là "Technology". Bạn có thể sử dụng truy vấn tìm kiếm với điều kiện `must` như sau:
-
-    ```json
-    {
-      "query": {
-        "bool": {
-          "must": [
-            { "match": { "title": "Elasticsearch" } },
-            { "match": { "genre": "Technology" } }
-          ]
-        }
-      }
-    }
-    ```
-
-    Trong truy vấn này:
-
-    - `"bool"` là một loại truy vấn kết hợp trong Elasticsearch, cho phép bạn kết hợp nhiều điều kiện với nhau.
-    - `"must"` là một mảng chứa các điều kiện mà tài liệu phải đáp ứng.
-    - Đầu tiên, Elasticsearch sẽ tìm các tài liệu có tiêu đề là "Elasticsearch".
-    - Sau đó, nó sẽ lọc kết quả để chỉ bao gồm các tài liệu có thể loại là "Technology".
-
-    Kết quả sẽ chứa các tài liệu chỉ khi chúng đáp ứng cả hai điều kiện được xác định trong mệnh đề `must`.
-
-
-5. `Aggs trong elastic search la gi`
-
-    Trong Elasticsearch, `aggs` (viết tắt của "aggregations") là một chức năng mạnh mẽ giúp bạn thực hiện các phép tổng hợp dữ liệu trên tập dữ liệu tìm kiếm. Điều này bao gồm việc tính toán tổng, trung bình, tìm giá trị lớn nhất/nhỏ nhất, và nhiều phép toán thống kê khác trên dữ liệu được trả về từ các truy vấn tìm kiếm.
-
-    Dưới đây là một ví dụ về việc sử dụng `aggs` trong Elasticsearch:
-
-    Giả sử bạn có một chỉ mục chứa thông tin về các sản phẩm trong một cửa hàng trực tuyến. Mỗi sản phẩm có một trường "price" để đại diện cho giá sản phẩm. Bạn muốn biết giá trung bình của các sản phẩm trong mỗi danh mục. Bạn có thể sử dụng `aggs` như sau:
-
-    ```json
-    {
-      "size": 0,
-      "aggs": {
-        "danhmuc": {
-          "terms": {
-            "field": "category.keyword"
+    ```javascript
+    // Tạo một index và đưa dữ liệu vào Elasticsearch
+    async function createIndex() {
+      try {
+        await client.indices.create({
+          index: 'products',
+          body: {
+            mappings: {
+              properties: {
+                name: { type: 'text' },
+                price: { type: 'float' },
+                // Thêm các trường khác của sản phẩm tại đây
+              },
+            },
           },
-          "aggs": {
-            "gia_trung_binh": {
-              "avg": {
-                "field": "price"
-              }
-            }
-          }
-        }
+        });
+
+        // Đưa dữ liệu vào index
+        await client.index({
+          index: 'products',
+          id: '1',
+          body: {
+            name: 'Product 1',
+            price: 100,
+            // Thêm các trường khác của sản phẩm tại đây
+          },
+        });
+
+        console.log('Index created and data inserted successfully.');
+      } catch (error) {
+        console.error('Error creating index or inserting data:', error);
       }
     }
+
+    createIndex();
     ```
 
-    Trong truy vấn này:
+    ### Tìm Kiếm Trong Elasticsearch:
 
-    - `"size": 0` là để chỉ định rằng chúng ta không quan tâm đến các tài liệu tìm kiếm, chỉ quan tâm đến kết quả của `aggs`.
-    - `"aggs"` là khối chứa các phép tổng hợp.
-    - `"danhmuc"` là tên cho bucket (phần nhóm) của `terms aggregation`, chúng ta đang nhóm các sản phẩm theo trường "category.keyword".
-    - `"gia_trung_binh"` là tên của phép tổng hợp `avg aggregation`, chúng ta đang tính giá trung bình của các sản phẩm trong mỗi danh mục.
+    ```javascript
+    // Tìm kiếm sản phẩm trong Elasticsearch
+    async function searchProducts(query) {
+      try {
+        const { body } = await client.search({
+          index: 'products',
+          body: {
+            query: {
+              match: {
+                name: query,
+              },
+            },
+          },
+        });
 
-    Kết quả sẽ trả về một danh sách các danh mục (buckets) và giá trung bình của các sản phẩm trong mỗi danh mục. Điều này giúp bạn hiểu được mức giá trung bình của các sản phẩm trong từng danh mục khác nhau.
-  
-6. `Must not trong elastic search la gi`
-
-    Trong Elasticsearch, `must_not` là một điều kiện tìm kiếm (query context) được sử dụng để loại bỏ các tài liệu không đáp ứng một hoặc nhiều điều kiện được chỉ định. Điều này giống như việc sử dụng "không" logic trong tìm kiếm: tài liệu không nên đáp ứng các điều kiện được xác định trong mệnh đề `must_not`.
-
-    Dưới đây là một ví dụ về cách sử dụng `must_not` trong một truy vấn tìm kiếm Elasticsearch:
-
-    Giả sử bạn có một chỉ mục chứa thông tin về các sách, và bạn muốn tìm các sách có tiêu đề là "Elasticsearch" nhưng không thuộc thể loại "Fiction". Bạn có thể sử dụng truy vấn `must_not` để đạt được điều này:
-
-    ```json
-    {
-      "query": {
-        "bool": {
-          "must": [
-            { "match": { "title": "Elasticsearch" } }
-          ],
-          "must_not": [
-            { "match": { "genre": "Fiction" } }
-          ]
-        }
+        return body.hits.hits;
+      } catch (error) {
+        console.error('Error searching products:', error);
+        return [];
       }
     }
+
+    // Sử dụng trong route của Express
+    app.get('/search', async (req, res) => {
+      const query = req.query.q;
+
+      if (!query) {
+        return res.status(400).json({ error: 'Missing query parameter.' });
+      }
+
+      const results = await searchProducts(query);
+      res.json(results);
+    });
     ```
 
-    Trong truy vấn này:
+    Trong ví dụ trên, chúng ta đã kết nối với Elasticsearch, tạo một index với tên `products`, đưa dữ liệu vào index và sau đó tìm kiếm các sản phẩm dựa trên một truy vấn.
 
-    - `"bool"` là một loại truy vấn kết hợp trong Elasticsearch, cho phép bạn kết hợp nhiều điều kiện với nhau.
-    - `"must"` là một mảng chứa các điều kiện mà tài liệu phải đáp ứng (trong trường hợp này, tiêu đề phải là "Elasticsearch").
-    - `"must_not"` là một mảng chứa các điều kiện mà tài liệu không nên đáp ứng (trong trường hợp này, thể loại không nên là "Fiction").
+    Lưu ý rằng việc quản lý lỗi, xử lý tìm kiếm phức tạp và các chức năng liên quan đến Elasticsearch như lọc, sắp xếp, và phân trang nên được xem xét thêm trong ứng dụng thực tế của bạn.
 
-    Kết quả sẽ chứa các tài liệu có tiêu đề là "Elasticsearch" nhưng không thuộc thể loại "Fiction".
-7. `Should trong elastic search la gi`
+3. `Shards và replica trong elastic search là gì ?`
 
-    Trong Elasticsearch, `should` là một điều kiện tìm kiếm (query context) được sử dụng để chỉ định các điều kiện tìm kiếm tùy chọn. Khi bạn sử dụng `should`, Elasticsearch sẽ trả về các tài liệu đáp ứng ít nhất một trong các điều kiện được xác định trong mệnh đề `should`. Điều này tương đương với việc sử dụng "hoặc" logic trong tìm kiếm: tài liệu có thể đáp ứng một hoặc nhiều điều kiện `should`.
+    Trong Elasticsearch, **shards** và **replica** liên quan đến cách dữ liệu được phân phối, sao chép và đảm bảo sẵn sàng (availability) trong hệ thống. Dưới đây là giải thích chi tiết về chúng:
 
-    Dưới đây là một ví dụ về cách sử dụng `should` trong một truy vấn tìm kiếm Elasticsearch:
+    ### Shards:
 
-    Giả sử bạn có một chỉ mục chứa thông tin về các sách và bạn muốn tìm các sách có tiêu đề là "Elasticsearch" hoặc "Kibana". Bạn có thể sử dụng `should` để thực hiện điều này:
+    1. **Khái Niệm:**
+      - **Shard:** Shard là một phần nhỏ của một index. Elasticsearch chia mỗi index thành các shard để tăng hiệu suất và có thể phân tán dữ liệu trên nhiều node.
 
-    ```json
-    {
-      "query": {
-        "bool": {
-          "should": [
-            { "match": { "title": "Elasticsearch" } },
-            { "match": { "title": "Kibana" } }
-          ]
-        }
-      }
-    }
-    ```
+    2. **Tại Sao Sử Dụng Shards:**
+      - Sử dụng shards cho phép Elasticsearch phân chia dữ liệu thành các phần nhỏ hơn có thể xử lý độc lập trên các node khác nhau. Điều này cải thiện hiệu suất tìm kiếm và tăng khả năng mở rộng của hệ thống.
 
-    Trong truy vấn này:
+    3. **Cấu Hình Số Lượng Shards:**
+      - Số lượng shards được cấu hình khi bạn tạo index. Mặc định, một index có một shard duy nhất. Số lượng shards không nên thay đổi sau khi index đã được tạo vì nó ảnh hưởng đến cấu trúc lưu trữ dữ liệu.
 
-    - `"bool"` là một loại truy vấn kết hợp trong Elasticsearch, cho phép bạn kết hợp nhiều điều kiện với nhau.
-    - `"should"` là một mảng chứa các điều kiện mà tài liệu có thể đáp ứng (trong trường hợp này, tiêu đề có thể là "Elasticsearch" hoặc "Kibana").
+    ### Replicas:
 
-    Kết quả sẽ chứa các tài liệu có tiêu đề là "Elasticsearch" hoặc "Kibana". Lưu ý rằng, mặc dù một tài liệu có thể đáp ứng cả hai điều kiện `should`, nó sẽ không được đánh giá cao hơn trong kết quả trả về.
-  
-  8.`From va size trong elastic search`
+    1. **Khái Niệm:**
+      - **Replica:** Replica là một bản sao của một shard. Elasticsearch cho phép bạn tạo các bản sao của shards để đảm bảo sự sẵn sàng (availability) và chịu chấp nhận của hệ thống.
 
-  Trong Elasticsearch, `from` và `size` là hai tham số quan trọng được sử dụng để kiểm soát kết quả trả về từ một truy vấn tìm kiếm.
+    2. **Tại Sao Sử Dụng Replicas:**
+      - Khi bạn có các replica, nếu một shard hoặc node bị lỗi, Elasticsearch có thể sử dụng bản sao (replica) để đảm bảo rằng dữ liệu vẫn có thể được truy cập và tìm kiếm. Replicas cũng cải thiện hiệu suất đọc vì các yêu cầu đọc có thể được chia đều giữa các bản sao.
 
-  - **`from`:** Tham số `from` xác định bắt đầu lấy kết quả từ tài liệu nào trong kết quả tìm kiếm. Nếu bạn có một kết quả tìm kiếm có nhiều tài liệu, `from` xác định vị trí bắt đầu trong tập kết quả. Giá trị của `from` thường được sử dụng để xác định số lượng tài liệu bị "bỏ qua" trước khi bắt đầu lấy kết quả. Ví dụ, nếu bạn đặt `from` thành 10, Elasticsearch sẽ bắt đầu trả kết quả từ tài liệu thứ 11 trong tập kết quả tìm kiếm.
+    3. **Cấu Hình Số Lượng Replicas:**
+      - Số lượng replicas cũng được cấu hình khi tạo index. Thông thường, một index có ít nhất một replica để đảm bảo sự sẵn sàng và độ tin cậy. Số lượng replicas càng lớn, hệ thống có thêm nhiều bản sao và có khả năng chịu chấp nhận lỗi của nhiều node hơn.
 
-  - **`size`:** Tham số `size` xác định số lượng tài liệu mà bạn muốn nhận trong kết quả trả về. Nếu bạn chỉ định một giá trị cho `size`, Elasticsearch sẽ trả về đúng số lượng tài liệu bạn yêu cầu. Nếu bạn không chỉ định `size`, Elasticsearch sẽ trả về một số lượng tài liệu mặc định (thường là 10) trong kết quả.
-
-  Dưới đây là một ví dụ về việc sử dụng `from` và `size` trong một truy vấn Elasticsearch:
-
-  ```json
-  {
-    "query": {
-      "match": {
-        "title": "Elasticsearch"
-      }
-    },
-    "from": 10,
-    "size": 20
-  }
-  ```
-
-  Trong truy vấn này:
-
-  - Truy vấn sẽ tìm các tài liệu có trường "title" chứa từ khóa "Elasticsearch".
-  - `from` được đặt thành 10, vì vậy Elasticsearch sẽ bắt đầu lấy kết quả từ tài liệu thứ 11 trong tập kết quả tìm kiếm.
-  - `size` được đặt thành 20, vì vậy Elasticsearch sẽ trả về tổng cộng 20 tài liệu từ kết quả tìm kiếm, bắt đầu từ tài liệu thứ 11.
-
-9. `Bool query trong elastic search la gi`
-
-    Truy vấn boolean (hoặc `bool query`) trong Elasticsearch cho phép bạn kết hợp nhiều điều kiện tìm kiếm để tìm các tài liệu phù hợp với các quy tắc logic AND, OR, NOT. Dưới đây là một ví dụ chi tiết về cách sử dụng `bool query` trong Elasticsearch:
-
-    Giả sử bạn có một chỉ mục chứa thông tin về sách và mỗi tài liệu có các trường `title` (tiêu đề của sách) và `genre` (thể loại của sách). Bạn muốn tìm các sách có tiêu đề chứa "Elasticsearch" và thuộc thể loại "Technology" hoặc "Science". Bạn muốn loại bỏ các sách có tiêu đề chứa "Tutorial". Dưới đây là cách sử dụng `bool query` để thực hiện điều này:
-
-    ```json
-    {
-      "query": {
-        "bool": {
-          "must": [
-            { "match": { "title": "Elasticsearch" } }
-          ],
-          "filter": [
-            { "terms": { "genre.keyword": ["Technology", "Science"] } }
-          ],
-          "must_not": [
-            { "match": { "title": "Tutorial" } }
-          ]
-        }
-      }
-    }
-    ```
-
-    Trong truy vấn này:
-
-    - `"bool"` là loại truy vấn boolean.
-    - `"must"` chứa các điều kiện phải đáp ứng (AND logic). Trong trường hợp này, sách phải có tiêu đề là "Elasticsearch".
-    - `"filter"` chứa các điều kiện không ảnh hưởng đến điểm số (tính bằng filter context, AND logic). Trong trường hợp này, sách phải thuộc thể loại "Technology" hoặc "Science".
-    - `"must_not"` chứa các điều kiện không nên đáp ứng (NOT logic). Trong trường hợp này, sách không nên có tiêu đề là "Tutorial".
-
-    Kết quả sẽ chứa các tài liệu thỏa mãn các điều kiện trên và không chứa sách với tiêu đề "Tutorial".
+    **Lưu ý:**
+    - Số lượng shards và replicas nên được thiết lập cẩn thận tùy thuộc vào nhu cầu và tài nguyên hệ thống của bạn. Quyết định về số lượng shards và replicas ảnh hưởng đến hiệu suất và sự sẵn sàng của hệ thống Elasticsearch của bạn.
