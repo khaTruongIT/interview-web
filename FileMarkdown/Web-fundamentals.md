@@ -5861,6 +5861,38 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
    Trong ví dụ trên, biến `num` chứa giá trị 42. Con trỏ `ptr` trỏ tới địa chỉ của `num`, và khi chúng ta sử dụng `*ptr`, nó truy cập và trả về giá trị tại địa chỉ mà con trỏ trỏ đến.
 
    Vui lòng lưu ý rằng việc sử dụng con trỏ đòi hỏi sự cẩn trọng và quản lý bộ nhớ thủ công để tránh rò rỉ bộ nhớ hoặc xung đột bộ nhớ.
+  
+  5. `Đường dẫn tương đối và tuyệt đối`
+
+      Trong lập trình và quản lý tệp tin trên hệ thống máy tính, đường dẫn là thông tin chỉ định vị trí của một tệp tin hoặc thư mục. Có hai loại đường dẫn chính: đường dẫn tương đối và đường dẫn tuyệt đối. Dưới đây là sự so sánh giữa chúng:
+
+      ### 1. **Đường dẫn Tương đối:**
+      - **Định nghĩa:** Đường dẫn tương đối chỉ định vị trí của một tệp hoặc thư mục dựa trên vị trí hiện tại của chương trình hoặc tệp tin đang thực thi.
+      - **Tương đối với gì:** Đường dẫn tương đối không phụ thuộc vào một vị trí cố định trên hệ thống tệp tin. Thay vào đó, nó được xác định dựa trên vị trí hiện tại của chương trình đang chạy.
+      - **Thí dụ:** Nếu bạn có một tệp tin `file.txt` trong thư mục con tên là `documents`, đường dẫn tương đối đến `file.txt` từ thư mục cha có thể là `documents/file.txt`.
+
+      ### 2. **Đường dẫn Tuyệt đối:**
+      - **Định nghĩa:** Đường dẫn tuyệt đối chỉ định vị trí của một tệp hoặc thư mục dựa trên vị trí cố định trên hệ thống tệp tin.
+      - **Tương đối với gì:** Đường dẫn tuyệt đối không phụ thuộc vào vị trí hiện tại của chương trình hoặc tệp tin đang chạy. Nó cung cấp địa chỉ cụ thể của tệp tin hoặc thư mục trên hệ thống tệp tin.
+      - **Thí dụ:** Đường dẫn tuyệt đối có thể là như `C:/Users/User/Documents/file.txt` trên hệ thống Windows hoặc `/home/user/documents/file.txt` trên hệ thống Linux.
+
+      ### So Sánh:
+      1. **Độ Di Động:**
+        - **Tương đối:** Đường dẫn tương đối linh hoạt hơn vì nó có thể di động giữa các môi trường và hệ thống máy tính mà không cần sửa đổi đường dẫn.
+        - **Tuyệt đối:** Đường dẫn tuyệt đối là cố định và không thay đổi, điều này có thể gây ra vấn đề khi di chuyển ứng dụng hoặc tệp tin sang các môi trường khác nhau.
+
+      2. **Bảo Mật và Ổn Định:**
+        - **Tương đối:** Đường dẫn tương đối không cung cấp mức độ bảo mật cao vì nó có thể dễ dàng bị thay đổi hoặc tấn công bởi các hacker hoặc phần mềm độc hại.
+        - **Tuyệt đối:** Đường dẫn tuyệt đối cung cấp mức độ bảo mật cao hơn vì nó không thay đổi và chỉ trỏ đến vị trí cụ thể trên hệ thống tệp tin.
+
+      3. **Dễ Đọc và Hiểu:**
+        - **Tương đối:** Đường dẫn tương đối thường ngắn gọn và dễ hiểu hơn, đặc biệt khi làm việc với các dự án nhỏ hoặc tệp tin có tổ chức tốt.
+        - **Tuyệt đối:** Đường dẫn tuyệt đối có thể trở nên dài và khó hiểu, đặc biệt khi làm việc với các dự án lớn hoặc có cấu trúc phức tạp.
+
+      ### Kết luận:
+      Sự chọn lựa giữa đường dẫn tương đối và tuyệt đối phụ thuộc vào yêu cầu cụ thể của dự án. Trong nhiều trường hợp, việc sử dụng đường dẫn tương đối là lựa chọn phổ biến vì sự linh hoạt và dễ quản lý. Tuy nhiên, trong các tình huống đòi hỏi độ chính xác cao hoặc an toàn thông tin, đường dẫn tuyệt đối thường được ưu tiên.
+
+
 
    # DOCKER
 
@@ -7220,7 +7252,7 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
         // Đưa dữ liệu vào index
         await client.index({
           index: 'products',
-          id: '1',
+          id: '1',     x``
           body: {
             name: 'Product 1',
             price: 100,
