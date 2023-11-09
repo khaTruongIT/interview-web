@@ -509,6 +509,57 @@ Trong các phiên bản mới nhất của React, bạn cũng có thể sử d�
 
    Khi người dùng nhấn nút, React sẽ tự động kích hoạt lại hàm ExampleComponent với giá trị trạng thái mới, và giao diện người dùng sẽ được cập nhật với giá trị "count" mới.
 
+7. `useContext trong Reactjs là gì ? cho ví dụ về cách sử dụng useContext`
+
+    `useContext` là một hook trong React.js giúp bạn truy cập giá trị của một context trong một component function. Context giúp bạn truyền dữ liệu xuống các component con mà không cần truyền dữ liệu qua props từng bước một. `useContext` giúp bạn đơn giản hóa quá trình này.
+
+    Dưới đây là một ví dụ cách sử dụng `useContext` trong React.js:
+
+    1. Đầu tiên, bạn cần tạo một context bằng cách sử dụng hàm `createContext`:
+
+    ```jsx
+    import React, { createContext, useContext, useState } from 'react';
+
+    // Tạo một context với giá trị mặc định là null
+    const MyContext = createContext(null);
+
+    // Component cha chứa context provider
+    const MyContextProvider = ({ children }) => {
+      const [value, setValue] = useState('Default Value');
+
+      return (
+        <MyContext.Provider value={value}>
+          {children}
+        </MyContext.Provider>
+      );
+    };
+
+    // Component con sử dụng useContext để truy cập giá trị của context
+    const ChildComponent = () => {
+      const contextValue = useContext(MyContext);
+
+      return <div>Giá trị từ context: {contextValue}</div>;
+    };
+
+    // App component sử dụng MyContextProvider để bao bọc component con
+    const App = () => {
+      return (
+        <MyContextProvider>
+          <ChildComponent />
+        </MyContextProvider>
+      );
+    };
+
+    export default App;
+    ```
+
+    Trong ví dụ trên:
+    - `MyContext` là một context được tạo ra bằng `createContext`.
+    - `MyContextProvider` là một component chứa `MyContext.Provider`, cung cấp giá trị cho context bên trong nó. Bất kỳ component con nào được bao bọc bởi `MyContextProvider` đều có thể truy cập giá trị của context bằng cách sử dụng `useContext(MyContext)`.
+    - `ChildComponent` là một component con sử dụng hook `useContext` để lấy giá trị từ context và hiển thị nó.
+
+    Khi bạn chạy ứng dụng React này, `ChildComponent` sẽ hiển thị giá trị được cung cấp từ `MyContextProvider`. Điều này cho phép bạn truy cập giá trị của context một cách tiện lợi mà không cần truyền giá trị qua props qua nhiều lớp component.
+
 # Javascripts
 
 ## ES6 trong Javascript
@@ -2222,6 +2273,76 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
     ```
 
     Hàm `add` là một pure function vì nó chỉ sử dụng các tham số được truyền vào để trả về kết quả và không có tác động phụ nào.
+
+30. `Higher order function trong javascript là gì ? Cho ví dụ về cách sử dụng`
+
+    Trong lập trình JavaScript, higher-order function (hàm bậc cao) là một hàm mà nhận một hoặc nhiều hàm khác làm đối số hoặc trả về một hàm khác. Điều này có nghĩa là bạn có thể sử dụng hàm như là giá trị, truyền chúng như đối số, hoặc trả về chúng từ một hàm khác. Higher-order functions là một trong những khái niệm quan trọng trong lập trình hàm (functional programming) và giúp bạn viết mã gọn gàng, dễ đọc và dễ bảo trì.
+
+    Dưới đây là một số ví dụ về higher-order functions trong JavaScript:
+
+    ### 1. Hàm nhận hàm làm đối số:
+
+    ```javascript
+    function greeting(name) {
+      return function(message) {
+        console.log(`${message}, ${name}!`);
+      };
+    }
+
+    const greetJohn = greeting("John");
+    greetJohn("Hello"); // Output: "Hello, John!"
+    greetJohn("Good morning"); // Output: "Good morning, John!"
+    ```
+
+    Trong ví dụ này, hàm `greeting` nhận một tham số `name` và trả về một hàm nhận tham số `message` để in ra lời chào với `name`.
+
+    ### 2. Hàm trả về hàm:
+
+    ```javascript
+    function multiplier(factor) {
+      return function(x) {
+        return x * factor;
+      };
+    }
+
+    const double = multiplier(2);
+    const triple = multiplier(3);
+
+    console.log(double(5)); // Output: 10 (2 * 5)
+    console.log(triple(5)); // Output: 15 (3 * 5)
+    ```
+
+    Trong ví dụ này, hàm `multiplier` nhận một tham số `factor` và trả về một hàm nhận tham số `x` để nhân `x` với `factor`.
+
+    ### 3. Sử dụng `map` để thao tác mảng:
+
+    ```javascript
+    const numbers = [1, 2, 3, 4, 5];
+
+    const squaredNumbers = numbers.map(function(num) {
+      return num * num;
+    });
+
+    console.log(squaredNumbers); // Output: [1, 4, 9, 16, 25]
+    ```
+
+    Trong ví dụ này, `map` là một higher-order function. Nó nhận một hàm callback và áp dụng hàm này cho từng phần tử trong mảng `numbers`.
+
+    ### 4. Sử dụng `filter` để lọc mảng:
+
+    ```javascript
+    const numbers = [1, 2, 3, 4, 5];
+
+    const evenNumbers = numbers.filter(function(num) {
+      return num % 2 === 0;
+    });
+
+    console.log(evenNumbers); // Output: [2, 4]
+    ```
+
+    Trong ví dụ này, `filter` là một higher-order function. Nó nhận một hàm callback và trả về một mảng mới chứa các phần tử thỏa mãn điều kiện trong hàm callback.
+
+    Những ví dụ trên giúp bạn hiểu rõ về higher-order functions và cách chúng có thể được sử dụng trong JavaScript để làm cho mã của bạn linh hoạt và dễ đọc.
 
 # Typescript
 
