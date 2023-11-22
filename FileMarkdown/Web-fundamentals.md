@@ -177,8 +177,7 @@ Web Fundamentals
       - Oauth support nhiều grant type như Authorization code, Implicitm Client credentials, and refresh token tuỳ theo yêu cầu hệ thống
 - Security
   - HTTPS là gì?
-    - HTTPS là phiên bản mã hoá HTTP, mục đích của HTTPS là đảm bảo những content được vận chuyển trong request hay response sẽ không thể bị đọc nếu bị chặn bởi hacker.
-  -
+    - HTTPS là phiên bản mã hoá HTTP, mục đích của HTTPS là đảm bảo những content được vận chuyển trong request hay response sẽ không thể bị đọc nếu bị chặn bởi hacker
 - Front-end Development
 
   - Ưu và nhược của SPA & SSR:
@@ -735,7 +734,110 @@ ES7 (ECMAScript 2016) là một phiên bản tiêu chuẩn của ngôn ngữ Jav
     console.log(allEvenNumbers); // Output: false
     ```
 
-    Đây chỉ là một số ví dụ về array method trong JavaScript. Có nhiều array method khác nữa, hãy tìm hiểu thêm để tận dụng tối đa các tính năng mạnh mẽ của mảng trong JavaScript.
+    9. **Array.prototype.splice**
+
+    `splice` là một phương thức trong JavaScript được sử dụng để thay đổi nội dung của mảng bằng cách loại bỏ hoặc thêm phần tử từ mảng. Phương thức này có thể được sử dụng để cắt một phần của mảng và thay thế nó bằng các phần tử mới hoặc để chèn các phần tử mới vào vị trí cụ thể của mảng.
+
+    ### Cú pháp của phương thức `splice`:
+
+    ```javascript
+    array.splice(start, deleteCount, item1, item2, ...);
+    ```
+
+    - `start`: Chỉ mục (index) bắt đầu thay đổi mảng.
+    - `deleteCount`: Số lượng phần tử sẽ bị loại bỏ từ mảng, bắt đầu từ vị trí `start`.
+    - `item1, item2, ...`: Các phần tử sẽ được thêm vào mảng từ vị trí `start`.
+
+    ### Ví dụ sử dụng `splice`:
+
+    1. **Loại bỏ phần tử từ mảng:**
+      ```javascript
+      let fruits = ['apple', 'banana', 'cherry', 'date'];
+
+      // Loại bỏ 1 phần tử từ vị trí index 1
+      fruits.splice(1, 1);
+
+      console.log(fruits); // Output: ['apple', 'cherry', 'date']
+      ```
+
+    2. **Thay thế phần tử trong mảng:**
+      ```javascript
+      let fruits = ['apple', 'banana', 'cherry', 'date'];
+
+      // Thay thế 2 phần tử từ vị trí index 1 bằng 'orange', 'grape'
+      fruits.splice(1, 2, 'orange', 'grape');
+
+      console.log(fruits); // Output: ['apple', 'orange', 'grape', 'date']
+      ```
+
+    3. **Chèn phần tử vào mảng:**
+      ```javascript
+      let fruits = ['apple', 'banana', 'cherry', 'date'];
+
+      // Chèn 'kiwi' và 'lemon' vào vị trí index 2, không loại bỏ phần tử nào
+      fruits.splice(2, 0, 'kiwi', 'lemon');
+
+      console.log(fruits); // Output: ['apple', 'banana', 'kiwi', 'lemon', 'cherry', 'date']
+      ```
+
+    Phương thức `splice` có thể được sử dụng để thực hiện nhiều tác vụ khác nhau trên mảng và là một công cụ mạnh mẽ khi bạn cần thay đổi động nội dung của mảng trong JavaScript.
+
+    10. **Array.prototype.slice** 
+
+      `slice` là một phương thức trong JavaScript được sử dụng để tạo ra một bản sao (copy) của mảng hoặc để cắt một phần của mảng và trả về một mảng mới chứa phần được cắt. Phương thức này không làm thay đổi mảng gốc, mà tạo ra một mảng mới dựa trên điều kiện được chỉ định.
+
+    ### Cú pháp của phương thức `slice`:
+
+    ```javascript
+    array.slice(start, end);
+    ```
+
+    - `start`: Chỉ mục (index) bắt đầu cắt mảng (được bao gồm).
+    - `end`: Chỉ mục (index) kết thúc cắt mảng (không được bao gồm).
+
+    ### Ví dụ sử dụng `slice`:
+
+    1. **Tạo bản sao của mảng:**
+      ```javascript
+      let fruits = ['apple', 'banana', 'cherry', 'date'];
+
+      let copyFruits = fruits.slice();
+
+      console.log(copyFruits); // Output: ['apple', 'banana', 'cherry', 'date']
+      ```
+
+    2. **Cắt mảng từ một vị trí đến cuối mảng:**
+      ```javascript
+      let fruits = ['apple', 'banana', 'cherry', 'date'];
+
+      let slicedFruits = fruits.slice(1);
+
+      console.log(slicedFruits); // Output: ['banana', 'cherry', 'date']
+      ```
+
+    3. **Cắt mảng từ một vị trí đến vị trí khác:**
+      ```javascript
+      let fruits = ['apple', 'banana', 'cherry', 'date'];
+
+      let slicedFruits = fruits.slice(1, 3);
+
+      console.log(slicedFruits); // Output: ['banana', 'cherry']
+      ```
+
+    4. **Sử dụng `slice` để copy mảng và thực hiện thay đổi mảng mới mà không ảnh hưởng đến mảng gốc:**
+      ```javascript
+      let originalArray = [1, 2, 3, 4, 5];
+      let modifiedArray = originalArray.slice();
+
+      modifiedArray.push(6);
+
+      console.log(originalArray); // Output: [1, 2, 3, 4, 5]
+      console.log(modifiedArray); // Output: [1, 2, 3, 4, 5, 6]
+      ```
+
+    Phương thức `slice` là một công cụ hữu ích khi bạn muốn làm việc với mảng mà không muốn ảnh hưởng đến mảng gốc và chỉ quan tâm đến một phần nhỏ của mảng.
+
+Đây chỉ là một số ví dụ về array method trong JavaScript. Có nhiều array method khác nữa, hãy tìm hiểu thêm để tận dụng tối đa các tính năng mạnh mẽ của mảng trong JavaScript.
 
 4.  `String method trong javascript ? `
 
@@ -2344,6 +2446,41 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
     Những ví dụ trên giúp bạn hiểu rõ về higher-order functions và cách chúng có thể được sử dụng trong JavaScript để làm cho mã của bạn linh hoạt và dễ đọc.
 
+31. `Factory function trong javascript là gì ?`
+
+    Trong JavaScript, một factory function là một hàm chuyên dụng để tạo và trả về một đối tượng mới. Thay vì sử dụng từ khóa `class` như trong OOP (Object-Oriented Programming), factory function sử dụng hàm để tạo đối tượng và thường được sử dụng để tạo nhiều đối tượng giống nhau hoặc có cấu trúc tương tự.
+
+    Dưới đây là một ví dụ đơn giản về factory function:
+
+    ```javascript
+    function createPerson(name, age) {
+      // Tạo một đối tượng mới
+      const person = {};
+
+      // Gán các thuộc tính cho đối tượng
+      person.name = name;
+      person.age = age;
+
+      // Thêm một phương thức cho đối tượng
+      person.sayHello = function() {
+        console.log(`Hello, my name is ${person.name} and I am ${person.age} years old.`);
+      };
+
+      // Trả về đối tượng đã tạo
+      return person;
+    }
+
+    // Sử dụng factory function để tạo đối tượng person
+    const person1 = createPerson("John", 25);
+    const person2 = createPerson("Jane", 30);
+
+    // Gọi phương thức sayHello cho mỗi đối tượng
+    person1.sayHello(); // Output: Hello, my name is John and I am 25 years old.
+    person2.sayHello(); // Output: Hello, my name is Jane and I am 30 years old.
+    ```
+
+    Factory function có thể giúp bạn tái sử dụng logic tạo đối tượng mà không cần phải sử dụng `class`. Nó cũng có thể được kết hợp với các khái niệm khác như closure để tạo ra các đối tượng có trạng thái ẩn.
+
 # Typescript
 
 Typescript compiles to Javascript và nó có thể execute bởi bất kỳ Javascript engine nào
@@ -2976,6 +3113,245 @@ Lợi ích của Typescript
 
     Trong TypeScript, bạn có nhiều cách để xác định `this` hơn và tránh được nhiều lỗi liên quan đến `this` mà thường gặp trong JavaScript.
 
+16. `Record trong typescript là gì, cách sử dụng Record trong typescript`
+
+    Trong TypeScript, `Record` là một kiểu dữ liệu được sử dụng để mô tả một đối tượng với các khóa và giá trị có kiểu dữ liệu cụ thể. Điều này giúp bạn định nghĩa các đối tượng có cấu trúc động mà không cần xác định từng khóa một trong quá trình phát triển.
+
+    Cú pháp của `Record` là:
+
+    ```typescript
+    type Record<K extends keyof any, T> = {
+        [P in K]: T;
+    };
+    ```
+
+    Trong đó:
+    - `K` là kiểu của các khóa trong đối tượng.
+    - `T` là kiểu của giá trị ứng với từng khóa.
+
+    Dưới đây là một ví dụ về cách sử dụng `Record`:
+
+    ```typescript
+    type Car = {
+      make: string;
+      model: string;
+      year: number;
+    };
+
+    // Sử dụng Record để tạo một đối tượng CarCollection với khóa là tên của các mẫu xe và giá trị là đối tượng Car
+    type CarCollection = Record<string, Car>;
+
+    const cars: CarCollection = {
+      civic: { make: 'Honda', model: 'Civic', year: 2022 },
+      accord: { make: 'Honda', model: 'Accord', year: 2022 },
+      camry: { make: 'Toyota', model: 'Camry', year: 2022 }
+    };
+
+    // Hoặc có thể sử dụng Record để chỉ định các giá trị cố định cho mỗi khóa
+    type FruitPrices = Record<'apple' | 'banana' | 'orange', number>;
+
+    const fruitPrices: FruitPrices = {
+      apple: 1.0,
+      banana: 0.75,
+      orange: 1.25
+    };
+    ```
+
+    Trong ví dụ trên, `CarCollection` là một đối tượng có các khóa là tên của các mẫu xe và giá trị là đối tượng `Car`. `FruitPrices` là một đối tượng có các khóa là tên của các loại trái cây và giá trị là số lượng tiền tương ứng.
+
+17. `Omit trong typescript dùng để làm gì`
+
+    Trong TypeScript, `Record` là một kiểu dữ liệu được sử dụng để mô tả một đối tượng với các khóa và giá trị có kiểu dữ liệu cụ thể. Điều này giúp bạn định nghĩa các đối tượng có cấu trúc động mà không cần xác định từng khóa một trong quá trình phát triển.
+
+    Cú pháp của `Record` là:
+
+    ```typescript
+    type Record<K extends keyof any, T> = {
+        [P in K]: T;
+    };
+    ```
+
+    Trong đó:
+    - `K` là kiểu của các khóa trong đối tượng.
+    - `T` là kiểu của giá trị ứng với từng khóa.
+
+    Dưới đây là một ví dụ về cách sử dụng `Record`:
+
+    ```typescript
+    type Car = {
+      make: string;
+      model: string;
+      year: number;
+    };
+
+    // Sử dụng Record để tạo một đối tượng CarCollection với khóa là tên của các mẫu xe và giá trị là đối tượng Car
+    type CarCollection = Record<string, Car>;
+
+    const cars: CarCollection = {
+      civic: { make: 'Honda', model: 'Civic', year: 2022 },
+      accord: { make: 'Honda', model: 'Accord', year: 2022 },
+      camry: { make: 'Toyota', model: 'Camry', year: 2022 }
+    };
+
+    // Hoặc có thể sử dụng Record để chỉ định các giá trị cố định cho mỗi khóa
+    type FruitPrices = Record<'apple' | 'banana' | 'orange', number>;
+
+    const fruitPrices: FruitPrices = {
+      apple: 1.0,
+      banana: 0.75,
+      orange: 1.25
+    };
+    ```
+
+    Trong ví dụ trên, `CarCollection` là một đối tượng có các khóa là tên của các mẫu xe và giá trị là đối tượng `Car`. `FruitPrices` là một đối tượng có các khóa là tên của các loại trái cây và giá trị là số lượng tiền tương ứng.
+
+18. `Pick trong typescript dùng để làm gì, cách sử dụng pick trong typescript`
+
+    Trong TypeScript, `Pick` là một utility type (kiểu tiện ích) giúp bạn tạo một phiên bản mới của một kiểu dữ liệu chỉ chứa các thuộc tính được chọn. Điều này giúp bạn tạo ra các kiểu dữ liệu mới mà chỉ chứa những thuộc tính cụ thể bạn quan tâm.
+
+    Cú pháp của `Pick` là:
+
+    ```typescript
+    type Pick<T, K extends keyof T> = {
+      [P in K]: T[P];
+    };
+    ```
+
+    Trong đó:
+    - `T` là kiểu dữ liệu bạn muốn chọn các thuộc tính từ.
+    - `K` là union type của các thuộc tính bạn muốn chọn.
+
+    Dưới đây là một ví dụ để minh họa cách sử dụng `Pick`:
+
+    ```typescript
+    interface User {
+      id: number;
+      name: string;
+      email: string;
+      age: number;
+    }
+
+    // Tạo một phiên bản mới của kiểu User chỉ chứa các thuộc tính 'id' và 'name'
+    type UserBasicInfo = Pick<User, 'id' | 'name'>;
+
+    const userBasicInfo: UserBasicInfo = {
+      id: 1,
+      name: 'John Doe'
+    };
+    ```
+
+    Trong ví dụ này, `UserBasicInfo` là một phiên bản mới của `User` chỉ chứa các thuộc tính 'id' và 'name'. `userBasicInfo` là một đối tượng thuộc kiểu `UserBasicInfo`.
+
+    Sử dụng `Pick` làm cho mã nguồn của bạn linh hoạt hơn và giúp bạn tái sử dụng kiểu dữ liệu một cách hiệu quả. Đặc biệt là khi bạn chỉ quan tâm đến một số thuộc tính cụ thể của một đối tượng và muốn tạo ra một phiên bản mới chỉ chứa những thông tin đó.
+
+19. `Cách setup một project nodejs express typesrcipt cơ bản`
+
+    Để thiết lập một dự án Node.js Express với TypeScript, bạn có thể thực hiện các bước sau:
+
+    1. **Khởi tạo dự án:**
+      Mở terminal và tạo một thư mục mới cho dự án của bạn. Sau đó, chạy lệnh `npm init` để tạo file `package.json`:
+
+      ```bash
+      mkdir my-express-app
+      cd my-express-app
+      npm init -y
+      ```
+
+    2. **Cài đặt TypeScript và các gói liên quan:**
+      Cài đặt TypeScript và các gói liên quan bằng cách chạy lệnh sau:
+
+      ```bash
+      npm install typescript ts-node @types/node @types/express --save-dev
+      ```
+
+      - `typescript`: Gói TypeScript chính.
+      - `ts-node`: Cho phép chạy file TypeScript trực tiếp thông qua Node.js.
+      - `@types/node` và `@types/express`: Các định nghĩa TypeScript cho Node.js và Express.
+
+    3. **Tạo file `tsconfig.json`:**
+      Tạo một file `tsconfig.json` để cấu hình TypeScript:
+
+      ```json
+      {
+        "compilerOptions": {
+          "target": "es6",
+          "module": "commonjs",
+          "outDir": "./dist",
+          "rootDir": "./src",
+          "strict": true,
+          "esModuleInterop": true,
+          "skipLibCheck": true,
+          "forceConsistentCasingInFileNames": true,
+          "moduleResolution": "node",
+          "resolveJsonModule": true,
+          "isolatedModules": true,
+          "noEmit": true
+        },
+        "include": ["src/**/*.ts"],
+        "exclude": ["node_modules"]
+      }
+      ```
+
+      - `target`: Phiên bản ECMAScript được chọn.
+      - `module`: Loại module sử dụng (ở đây là CommonJS).
+      - `outDir`: Thư mục đầu ra cho các file biên dịch.
+      - `rootDir`: Thư mục chứa code nguồn TypeScript.
+      - `strict`: Bật chế độ kiểm tra nghiêm ngặt.
+      - `esModuleInterop`: Hỗ trợ import module từ CommonJS.
+      - `skipLibCheck`: Bỏ qua kiểm tra đối với file .d.ts.
+      - `forceConsistentCasingInFileNames`: Kiểm tra tên file không phân biệt chữ hoa/thường.
+      - `moduleResolution`: Cách TypeScript giải quyết module (ở đây là `node`).
+      - `resolveJsonModule`: Cho phép import JSON như một module.
+      - `isolatedModules`: Chế độ cô lập module.
+
+    4. **Tạo thư mục và file cơ bản:**
+      Tạo thư mục `src` trong dự án và tạo một file `app.ts`:
+
+      ```typescript
+      // src/app.ts
+      import express from 'express';
+
+      const app = express();
+      const port = 3000;
+
+      app.get('/', (req, res) => {
+        res.send('Hello, TypeScript with Express!');
+      });
+
+      app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+      });
+      ```
+
+    5. **Chỉnh sửa scripts trong `package.json`:**
+      Mở file `package.json` và thêm scripts sau:
+
+      ```json
+      "scripts": {
+        "start": "ts-node src/app.ts",
+        "build": "tsc"
+      }
+      ```
+
+      - `start`: Sử dụng `ts-node` để chạy ứng dụng.
+      - `build`: Biên dịch TypeScript thành JavaScript.
+
+    6. **Chạy ứng dụng:**
+      Bây giờ bạn có thể chạy ứng dụng của mình bằng cách sử dụng lệnh:
+
+      ```bash
+      npm start
+      ```
+
+      Hoặc nếu bạn muốn biên dịch TypeScript thành JavaScript trước khi chạy:
+
+      ```bash
+      npm run build
+      node dist/app.js
+      ```
+
+    Bây giờ, bạn đã thiết lập một dự án Node.js Express sử dụng TypeScript. Hãy chắc chắn rằng bạn đã cài đặt Node.js trên máy tính của mình và có kết nối internet để tải về các gói npm cần thiết.
+
 # Test
 
 - UnitTest: Bảo vệ code khi sửa code trong tương lai, tránh lỗi của quá khứ', mục tiêu của unit test là cô lập một phần code và xác minh tính chính xác của đoạn code đó
@@ -2988,7 +3364,7 @@ Lợi ích của Typescript
 
    - Microservice: Trong kiến trúc Microservice, ứng dụng được chia thành các thành phần nhỏ gọn và độc lập, được gọi là microservice, mỗi service có thể triển khai và quản lý riêng biệt. Các microservice giao tiếp thông qua các giao thức như HTTP hoặc message queue. Ưu điểm của Microservice là khả năng mở rộng linh hoạt, dễ dàng thay đổi và triển khai các thành phần riêng lẻ, khả năng phân tán phát triển và tối ưu hóa hiệu suất. Nhược điểm là phức tạp hóa quản lý, khó khăn trong việc điều phối các service và tăng khả năng lỗi do mạng hoặc sự phụ thuộc giữa các service.
 
-2. ` Clean architecture là gì ? ví dụ về clean architecture`
+2. ` Clean architecture là gì ? ví dụ về clean architecture trong javascript`
 
    Clean Architecture là một kiến trúc phần mềm đề xuất bởi Robert C. Martin (còn được gọi là Uncle Bob). Nó tách biệt các thành phần của một ứng dụng thành các lớp độc lập và định nghĩa rõ ràng các quy tắc và giới hạn giữa chúng. Mục tiêu chính của Clean Architecture là tạo ra một hệ thống dễ bảo trì, dễ mở rộng và độc lập với các công nghệ cụ thể.
 
@@ -3017,6 +3393,48 @@ Lợi ích của Typescript
   4.  Nguyên tắc phân tách giao diện (Interface Segregation Principle - ISP): Nguyên tắc này khuyến khích chia các giao diện lớn thành các giao diện nhỏ, cụ thể và đồng nhất để các lớp chỉ triển khai các giao diện cần thiết cho họ. Điều này giúp tránh việc các lớp phải triển khai các phương thức không liên quan đến mục đích của chúng.
 
   5.  Nguyên tắc độc lập với kiểu (Dependency Inversion Principle - DIP): Nguyên tắc này tập trung vào việc giảm sự phụ thuộc trực tiếp giữa các lớp và module. Thay vào đó, các module nên phụ thuộc vào một giao diện chung thay vì một lớp cụ thể. Điều này giúp giảm thiểu tác động khi thay đổi mã nguồn và tăng tính linh hoạt trong hệ thống.
+
+      Trong lập trình, nguyên tắc SOLID là một tập hợp các nguyên tắc thiết kế phần mềm giúp tạo ra mã nguồn dễ bảo trì, mở rộng và tái sử dụng. SOLID là một viết tắt của năm nguyên tắc sau đây: Single Responsibility Principle (Nguyên tắc Trách nhiệm Đơn), Open/Closed Principle (Nguyên tắc Mở/Đóng), Liskov Substitution Principle (Nguyên tắc Thay thế Liskov), Interface Segregation Principle (Nguyên tắc Chia tách Giao diện), và Dependency Inversion Principle (Nguyên tắc Đảo ngược Phụ thuộc).
+
+      Dưới đây là một ví dụ cơ bản về Nguyên tắc Trách nhiệm Đơn (Single Responsibility Principle) trong JavaScript:
+
+      ```javascript
+      // Không tuân theo nguyên tắc Trách nhiệm Đơn
+      class User {
+        constructor(name) {
+          this.name = name;
+        }
+
+        saveToDatabase(user) {
+          // Lưu người dùng vào cơ sở dữ liệu
+        }
+
+        sendEmail(user) {
+          // Gửi email xác nhận cho người dùng
+        }
+      }
+
+      // Tuân theo nguyên tắc Trách nhiệm Đơn
+      class User {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+
+      class UserRepository {
+        saveToDatabase(user) {
+          // Lưu người dùng vào cơ sở dữ liệu
+        }
+      }
+
+      class EmailService {
+        sendEmail(user) {
+          // Gửi email xác nhận cho người dùng
+        }
+      }
+      ```
+
+      Trong ví dụ này, ta đã tách thành ba lớp riêng biệt: `User` chỉ chịu trách nhiệm về dữ liệu người dùng, `UserRepository` chịu trách nhiệm lưu trữ và truy xuất dữ liệu từ cơ sở dữ liệu, và `EmailService` chịu trách nhiệm gửi email. Điều này giúp mỗi lớp chỉ có một trách nhiệm cụ thể và dễ dàng bảo trì, mở rộng, và tái sử dụng hơn.
 
 3. `Phân biệt middleware và interceptor trong nestjs`
 
@@ -4870,6 +5288,115 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
     ```
 
     Trong ví dụ trên, `express-rate-limit` được sử dụng để giới hạn số lượng yêu cầu đối với tất cả các route của ứng dụng Express. Nếu một địa chỉ IP gửi quá 100 yêu cầu trong khoảng thời gian 15 phút, các yêu cầu tiếp theo sẽ nhận được thông báo lỗi được đặt trong thuộc tính `message`.
+
+45. `Json web token là gì, cách sử dụng jsonwebtoken`
+
+    Thư viện `jsonwebtoken` trong Node.js và Express được sử dụng để tạo và xác nhận JSON Web Tokens (JWT). JWT là một tiêu chuẩn mở (RFC 7519) định nghĩa cách truyền thông tin an toàn giữa các bên dưới dạng đối tượng JSON. JWT thường được sử dụng để xác thực người dùng và gửi thông tin xác thực giữa các bên một cách an toàn.
+
+    Dưới đây là một số công việc phổ biến mà thư viện `jsonwebtoken` thường được sử dụng trong ứng dụng Node.js Express:
+
+    1. **Tạo JWT (Signing):** Bạn có thể sử dụng `jsonwebtoken` để tạo JWT bằng cách ký một đối tượng JSON với một secret key hoặc một private key. JWT có thể chứa thông tin như id người dùng, vai trò, hạn sử dụng (expiration), và nhiều thông tin khác.
+
+        ```javascript
+        const jwt = require('jsonwebtoken');
+        
+        const payload = { userId: 123, role: 'admin' };
+        const secretKey = 'your_secret_key';
+        
+        const token = jwt.sign(payload, secretKey);
+        ```
+
+    2. **Xác nhận JWT (Verifying):** Khi bạn nhận được một JWT từ client, bạn có thể sử dụng `jsonwebtoken` để kiểm tra tính hợp lệ của JWT và giải mã nó để có thể sử dụng thông tin bên trong.
+
+        ```javascript
+        const jwt = require('jsonwebtoken');
+        
+        const token = 'received_jwt_token';
+        const secretKey = 'your_secret_key';
+        
+        jwt.verify(token, secretKey, (err, decoded) => {
+            if (err) {
+                // JWT không hợp lệ
+            } else {
+                // JWT hợp lệ, decoded chứa thông tin bên trong
+                console.log(decoded);
+            }
+        });
+        ```
+
+    3. **Middleware cho Xác thực (Authentication Middleware):** Bạn có thể sử dụng JWT để xác thực người dùng trong các tuyến đường (routes) của ứng dụng Express bằng cách sử dụng một middleware.
+
+        ```javascript
+        const jwt = require('jsonwebtoken');
+        
+        const secretKey = 'your_secret_key';
+        
+        const authenticateMiddleware = (req, res, next) => {
+            const token = req.headers.authorization;
+            if (!token) {
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
+        
+            jwt.verify(token, secretKey, (err, decoded) => {
+                if (err) {
+                    return res.status(401).json({ message: 'Unauthorized' });
+                } else {
+                    req.user = decoded;
+                    next();
+                }
+            });
+        };
+        
+        // Sử dụng middleware trong route
+        app.get('/secure-route', authenticateMiddleware, (req, res) => {
+            // Nếu mã xác thực hợp lệ, tiếp tục xử lý
+            res.json({ message: 'Authorized', user: req.user });
+        });
+        ```
+
+    Tóm lại, `jsonwebtoken` là một thư viện quan trọng trong việc xác thực và bảo mật trong ứng dụng Node.js Express thông qua việc sử dụng JSON Web Tokens.
+
+46. `Proxy là gì, cách sử dụng proxy`
+
+    Proxy là một dịch vụ trung gian giữa client và server, giúp client tương tác với server thông qua proxy mà không cần kết nối trực tiếp đến server. Proxy có thể thực hiện nhiều chức năng như bộ lọc nội dung, chuyển đổi giao thức, ẩn địa chỉ IP của client, và nhiều tính năng khác.
+
+    Trong Node.js và Express, bạn có thể sử dụng proxy để chuyển tiếp (forward) các yêu cầu từ client đến server và ngược lại. Điều này có thể hữu ích trong nhiều trường hợp, chẳng hạn như khi bạn muốn chạy một ứng dụng frontend tại một cổng cụ thể và có một ứng dụng backend chạy tại một cổng khác.
+
+    Dưới đây là cách bạn có thể sử dụng proxy trong một ứng dụng Node.js Express, sử dụng thư viện `http-proxy-middleware`:
+
+    1. **Cài đặt thư viện:**
+
+        ```bash
+        npm install http-proxy-middleware
+        ```
+
+    2. **Sử dụng trong mã nguồn của bạn:**
+
+        ```javascript
+        const express = require('express');
+        const { createProxyMiddleware } = require('http-proxy-middleware');
+
+        const app = express();
+
+        // Thiết lập proxy cho các yêu cầu đến '/api'
+        const apiProxy = createProxyMiddleware('/api', { target: 'http://backend-server:port' });
+
+        // Sử dụng middleware proxy cho tất cả các yêu cầu '/api'
+        app.use('/api', apiProxy);
+
+        // Các tuyến đường và xử lý khác ở đây...
+
+        const port = 3000;
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+        ```
+
+        Trong đoạn mã trên, tất cả các yêu cầu đến `'/api'` sẽ được chuyển tiếp đến server ở `http://backend-server:port`. Bạn có thể cấu hình nhiều middleware proxy cho nhiều đích đến khác nhau.
+
+    Lưu ý rằng `http-proxy-middleware` có thể được cấu hình với nhiều tùy chọn khác nhau để điều chỉnh hành vi proxy, chẳng hạn như `pathRewrite`, `changeOrigin`, và nhiều tùy chọn khác. Hãy kiểm tra tài liệu của thư viện để biết thêm chi tiết: [http-proxy-middleware](https://www.npmjs.com/package/http-proxy-middleware).
+
+
 ## LOOPBACK
 
 LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
@@ -5359,6 +5886,69 @@ Tóm lại, DDL được sử dụng để định nghĩa cấu trúc dữ liệ
    Lệnh trên sẽ trả về 10 hàng đầu tiên từ bảng "employees" sau khi đã sắp xếp chúng theo trường "last_name".
 
    Tóm lại, cả LIMIT và FETCH đều liên quan đến việc giới hạn số lượng hàng trả về từ một kết quả truy vấn, nhưng FETCH thường được sử dụng để điều khiển việc lấy hàng dựa trên vị trí và thứ tự. Trong khi LIMIT thường được sử dụng để đơn giản hóa việc trả về một số lượng hạn chế các hàng từ kết quả truy vấn.
+
+9. `Transaction trong database là gì, các mức cô lập trong transactions ví dụ trong postgres và cho ví dụ chi tiết đối với từng mức cô lập`
+
+    Transaction trong cơ sở dữ liệu là một chuỗi các hoạt động cơ sở dữ liệu (như đọc, ghi, cập nhật) được thực hiện bởi một ứng dụng hoặc người dùng và được xem xét như một đơn vị không thể chia nhỏ. Mục tiêu chính của transaction là bảo đảm tính nhất quán và độ tin cậy của dữ liệu, ngay cả khi xảy ra sự cố.
+
+    Các mức cô lập trong transactions đề cập đến cách mà các transactions đồng thời thực hiện trên cùng một cơ sở dữ liệu tương tác với nhau. Các mức cô lập thường được xác định bằng các khái niệm như đọc bẩn (dirty read), đọc lặp lại (phantom read), và độ cô lập.
+
+    Dưới đây là các mức cô lập trong transactions và ví dụ chi tiết cho từng mức cô lập, sử dụng PostgreSQL:
+
+    ### 1. Read Uncommitted (Mức cô lập 0 - Read Uncommitted):
+    - **Mô tả:** Bất kỳ transaction nào cũng có thể đọc dữ liệu đang được ghi bởi các transaction khác trước khi chúng được commit.
+    - **Ví dụ trong PostgreSQL:**
+      ```sql
+      -- Session 1
+      BEGIN;
+      UPDATE products SET price = price * 1.1 WHERE category = 'Electronics';
+
+      -- Session 2
+      BEGIN ISOLATION LEVEL READ UNCOMMITTED;
+      SELECT * FROM products WHERE category = 'Electronics'; -- Có thể đọc giá đã được update, nhưng transaction 1 chưa commit
+      ```
+
+    ### 2. Read Committed (Mức cô lập 1 - Read Committed):
+    - **Mô tả:** Transaction chỉ đọc dữ liệu đã được commit bởi các transaction khác.
+    - **Ví dụ trong PostgreSQL:**
+      ```sql
+      -- Session 1
+      BEGIN;
+      UPDATE products SET price = price * 1.1 WHERE category = 'Electronics';
+      COMMIT;
+
+      -- Session 2
+      BEGIN ISOLATION LEVEL READ COMMITTED;
+      SELECT * FROM products WHERE category = 'Electronics'; -- Chỉ đọc giá sau khi transaction 1 commit
+      ```
+
+    ### 3. Repeatable Read (Mức cô lập 2 - Repeatable Read):
+    - **Mô tả:** Transaction đọc dữ liệu đã được commit và không bao giờ nhìn thấy sự thay đổi của các transaction khác đang diễn ra.
+    - **Ví dụ trong PostgreSQL:**
+      ```sql
+      -- Session 1
+      BEGIN;
+      UPDATE products SET price = price * 1.1 WHERE category = 'Electronics';
+      
+      -- Session 2
+      BEGIN ISOLATION LEVEL REPEATABLE READ;
+      SELECT * FROM products WHERE category = 'Electronics'; -- Không thấy sự thay đổi của transaction 1
+      ```
+
+    ### 4. Serializable (Mức cô lập 3 - Serializable):
+    - **Mô tả:** Transaction đọc dữ liệu như nếu nó là duy nhất trên thế giới, không bao giờ nhìn thấy sự thay đổi của các transaction khác đang diễn ra.
+    - **Ví dụ trong PostgreSQL:**
+      ```sql
+      -- Session 1
+      BEGIN;
+      UPDATE products SET price = price * 1.1 WHERE category = 'Electronics';
+      
+      -- Session 2
+      BEGIN ISOLATION LEVEL SERIALIZABLE;
+      SELECT * FROM products WHERE category = 'Electronics'; -- Không thấy sự thay đổi của transaction 1
+      ```
+
+    Lưu ý rằng càng tăng cấp độ cô lập, càng có thể gặp phải tăng độ trễ và giảm hiệu suất do cần phải thực hiện nhiều công đoạn kiểm tra và đồng bộ hóa hơn. Do đó, việc chọn mức cô lập phù hợp cần cân nhắc giữa tính nhất quán và hiệu suất của hệ thống.
 
 ## NOSQL
 
@@ -6013,7 +6603,33 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
       ### Kết luận:
       Sự chọn lựa giữa đường dẫn tương đối và tuyệt đối phụ thuộc vào yêu cầu cụ thể của dự án. Trong nhiều trường hợp, việc sử dụng đường dẫn tương đối là lựa chọn phổ biến vì sự linh hoạt và dễ quản lý. Tuy nhiên, trong các tình huống đòi hỏi độ chính xác cao hoặc an toàn thông tin, đường dẫn tuyệt đối thường được ưu tiên.
 
+  6. `TCP là gì, UDP là gì`
 
+  TCP (Transmission Control Protocol) và UDP (User Datagram Protocol) là hai giao thức truyền dữ liệu cấp độ diễn đàn (transport layer) trong mô hình OSI (Open Systems Interconnection). Dưới đây là một số điểm phân biệt giữa TCP và UDP:
+
+  ### TCP (Transmission Control Protocol):
+  1. **Kết nối hướng đa chiều (Connection-Oriented):** TCP yêu cầu thiết lập kết nối trước khi truyền dữ liệu. Quá trình này bao gồm ba bước: thiết lập kết nối, truyền dữ liệu, và đóng kết nối.
+    
+  2. **Đảm bảo độ tin cậy (Reliable):** TCP đảm bảo rằng dữ liệu được chuyển giao một cách đúng đắn và đầy đủ mà không bị mất mát hay bị thay đổi. Nếu có lỗi, nó sẽ cố gắng khắc phục bằng cách gửi lại dữ liệu.
+
+  3. **Kiểm soát luồng (Flow Control):** TCP sử dụng cơ chế kiểm soát luồng để đảm bảo rằng máy chủ và máy khách có thể điều chỉnh tốc độ truyền dữ liệu.
+
+  4. **Đánh số thứ tự (Sequence Number):** Mỗi gói tin được đánh số thứ tự để đảm bảo rằng chúng được sắp xếp đúng thứ tự khi đến nơi đích.
+
+  5. **Tốn kém về băng thông và độ trễ (Bandwidth and Latency):** Do có nhiều quá trình kiểm soát và đảm bảo độ tin cậy, TCP có thể tốn kém hơn về băng thông và độ trễ so với UDP.
+
+  ### UDP (User Datagram Protocol):
+  1. **Không kết nối (Connectionless):** UDP không yêu cầu thiết lập kết nối trước khi truyền dữ liệu. Nó chỉ gửi gói tin mà không quan tâm đến việc chúng có được nhận hay không.
+
+  2. **Không đảm bảo độ tin cậy (Unreliable):** UDP không đảm bảo rằng dữ liệu sẽ đến nơi an toàn và đầy đủ. Nếu có lỗi, nó không cố gắng gửi lại dữ liệu.
+
+  3. **Không có kiểm soát luồng (No Flow Control):** UDP không thực hiện kiểm soát luồng, cho phép gửi dữ liệu với bất kỳ tốc độ nào.
+
+  4. **Không có đánh số thứ tự (No Sequence Number):** Gói tin UDP không được đánh số thứ tự, và chúng có thể đến nơi đích theo bất kỳ thứ tự nào.
+
+  5. **Hiệu suất cao, ít tốn kém về băng thông và độ trễ (High Performance, Low Overhead):** UDP thường được ưa chuộng trong các ứng dụng yêu cầu hiệu suất cao và chấp nhận mất mát dữ liệu như truyền media trực tiếp, trò chơi trực tuyến.
+
+  Tùy thuộc vào yêu cầu cụ thể của ứng dụng, lựa chọn giữa TCP và UDP sẽ phụ thuộc vào các yếu tố như độ tin cậy, hiệu suất, và đặc tính của ứng dụng.
 
    # DOCKER
 
@@ -6084,7 +6700,7 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
       		ports:
       			- "3000:3000"
       		links:
-      			- postgres
+      			- SQL
       			- redis
 
       	postgres:
@@ -6111,71 +6727,62 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 
       Lưu ý rằng đây chỉ là một hướng dẫn cơ bản để bắt đầu với Docker và Docker Compose. Trong thực tế, bạn có thể cần cấu hình thêm cho các dịch vụ như biến môi trường, mạng, quản lý dữ liệu lưu trữ, và nhiều thứ khác.
 
-	3.`Image trong docker là gì ?`
+  3 .`Image trong docker là gì ?`
+  
+  Trong Docker, "image" là một gói đóng gói chứa mọi thứ cần thiết để chạy một ứng dụng, bao gồm mã nguồn, các thư viện, biến môi trường, tệp cấu hình và các tài nguyên khác cần thiết. Images được sử dụng để tạo các container, là các phiên bản thực tế của ứng dụng chạy trong môi trường cô lập.
+  Một image Docker có thể được coi như một bản "template" hoặc "nguyên mẫu" cho một container. Bạn có thể tạo nhiều container từ một image cụ thể, và mỗi container sẽ chia sẻ cùng một cấu trúc cơ bản từ image nhưng có thể có các biến môi trường, dữ liệu, và trạng thái riêng biệt.
 
-	Trong Docker, "image" là một gói đóng gói chứa mọi thứ cần thiết để chạy một ứng dụng, bao gồm mã nguồn, các thư viện, biến môi trường, tệp cấu hình và các tài nguyên khác cần thiết. Images được sử dụng để tạo các container, là các phiên bản thực tế của ứng dụng chạy trong môi trường cô lập.
+  Dưới đây là một số khái niệm quan trọng liên quan đến image trong Docker:
 
-	Một image Docker có thể được coi như một bản "template" hoặc "nguyên mẫu" cho một container. Bạn có thể tạo nhiều container từ một image cụ thể, và mỗi container sẽ chia sẻ cùng một cấu trúc cơ bản từ image nhưng có thể có các biến môi trường, dữ liệu, và trạng thái riêng biệt.
+   - **Docker Hub:** Nơi lưu trữ và chia sẻ images. Docker Hub là một dịch vụ trực tuyến cho phép bạn tìm kiếm, chia sẻ và lấy images từ cộng đồng hoặc từ dịch vụ lưu trữ riêng.
 
-	Dưới đây là một số khái niệm quan trọng liên quan đến image trong Docker:
+      - **Dockerfile:** Một tệp văn bản chứa các chỉ thị để xây dựng một image Docker. Dockerfile mô tả cách thức sắp xếp và cấu hình ứng dụng và môi trường trong image.
 
-	- **Docker Hub:** Nơi lưu trữ và chia sẻ images. Docker Hub là một dịch vụ trực tuyến cho phép bạn tìm kiếm, chia sẻ và lấy images từ cộng đồng hoặc từ dịch vụ lưu trữ riêng.
+      - **Layer:** Mỗi thay đổi được thực hiện trong Dockerfile hoặc trên image sẽ tạo ra một layer mới trong image. Các layer là các phần nhỏ có thể được chia sẻ giữa các image khác nhau, làm cho việc chia sẻ và quản lý images hiệu quả hơn.
 
-	- **Dockerfile:** Một tệp văn bản chứa các chỉ thị để xây dựng một image Docker. Dockerfile mô tả cách thức sắp xếp và cấu hình ứng dụng và môi trường trong image.
+      - **Base Image:** Đây là image cơ bản mà bạn dựa trên để xây dựng image của mình. Base image có thể là các hệ điều hành như Ubuntu, CentOS, hoặc image đã được tạo sẵn từ Docker Hub.
 
-	- **Layer:** Mỗi thay đổi được thực hiện trong Dockerfile hoặc trên image sẽ tạo ra một layer mới trong image. Các layer là các phần nhỏ có thể được chia sẻ giữa các image khác nhau, làm cho việc chia sẻ và quản lý images hiệu quả hơn.
+      - **Registry:** Nơi lưu trữ các images. Docker Hub là một registry. Bạn cũng có thể tạo và quản lý các registry riêng nếu muốn.
 
-	- **Base Image:** Đây là image cơ bản mà bạn dựa trên để xây dựng image của mình. Base image có thể là các hệ điều hành như Ubuntu, CentOS, hoặc image đã được tạo sẵn từ Docker Hub.
+      Để tạo một image Docker, bạn thường viết một Dockerfile định nghĩa cách cài đặt và cấu hình ứng dụng của bạn. Sau đó, bạn có thể sử dụng lệnh `docker build` để xây dựng image từ Dockerfile, và lệnh `docker run` để chạy container từ image đã tạo.     
 
-	- **Registry:** Nơi lưu trữ các images. Docker Hub là một registry. Bạn cũng có thể tạo và quản lý các registry riêng nếu muốn.
-
-	Để tạo một image Docker, bạn thường viết một Dockerfile định nghĩa cách cài đặt và cấu hình ứng dụng của bạn. Sau đó, bạn có thể sử dụng lệnh `docker build` để xây dựng image từ Dockerfile, và lệnh `docker run` để chạy container từ image đã tạo.
 
 	4. `Container trong docker là gì`
 
-		Trong Docker, "container" là một phiên bản thực tế của một image Docker. Nó là một môi trường cô lập chứa tất cả những gì cần thiết để chạy một ứng dụng cụ thể, bao gồm mã nguồn, thư viện, biến môi trường, tệp cấu hình và các tài nguyên khác.
+  Trong Docker, "container" là một phiên bản thực tế của một image Docker. Nó là một môi trường cô lập chứa tất cả những gì cần thiết để chạy một ứng dụng cụ thể, bao gồm mã nguồn, thư viện, biến môi trường, tệp cấu hình và các tài nguyên khác.
 
-		Các điểm quan trọng về container trong Docker:
-
-		1. **Cô lập:** Mỗi container được cô lập với các container khác và môi trường chủ nhân (host). Điều này đảm bảo rằng các ứng dụng trong các container không ảnh hưởng lẫn nhau và không ảnh hưởng tới hệ thống host.
-
-		2. **Portability (Khả chuyển):** Containers là di động và khả chuyển. Một ứng dụng container có thể chạy trên bất kỳ máy tính hoặc môi trường nào mà Docker có sẵn mà không cần thay đổi.
-
-		3. **Lightweight (Nhẹ):** Containers sử dụng chia sẻ kernel với hệ điều hành host, làm cho chúng nhẹ hơn và tiết kiệm tài nguyên hơn so với máy ảo truyền thống.
-
-		4. **Tích hợp và triển khai dễ dàng:** Containers có thể được đóng gói, triển khai và quản lý dễ dàng. Docker cung cấp các công cụ và lệnh để tạo, lưu trữ, và chia sẻ images, tạo và chạy containers, cũng như quản lý vòng đời của chúng.
-
-		5. **Scalability (Khả năng mở rộng):** Containers cho phép bạn mở rộng dễ dàng các ứng dụng của mình bằng cách tạo nhiều bản sao của một container cùng một image.
-
-		6. **Snapshot (Ảnh chụp):** Bạn có thể tạo snapshot của một container tại một thời điểm cụ thể để làm việc và kiểm tra. Snapshot này có thể được chia sẻ, sao lưu và khôi phục.
-
-		Để chạy một container từ một image Docker, bạn sử dụng lệnh `docker run` và chỉ định image cần chạy. Ví dụ:
+  Các điểm quan trọng về container trong Docker:
+  1. **Cô lập:** Mỗi container được cô lập với các container khác và môi trường chủ nhân (host). Điều này đảm bảo rằng các ứng dụng trong các container không ảnh hưởng lẫn nhau và không ảnh hưởng tới hệ thống host.
+  2. **Portability (Khả chuyển):** Containers là di động và khả chuyển. Một ứng dụng container có thể chạy trên bất kỳ máy tính hoặc môi trường nào mà Docker có sẵn mà không cần thay đổi.
+  3. **Lightweight (Nhẹ):** Containers sử dụng chia sẻ kernel với hệ điều hành host, làm cho chúng nhẹ hơn và tiết kiệm tài nguyên hơn so với máy ảo truyền thống.
+  4. **Tích hợp và triển khai dễ dàng:** Containers có thể được đóng gói, triển khai và quản lý dễ dàng. Docker cung cấp các công cụ và lệnh để tạo, lưu trữ, và chia sẻ images, tạo và chạy containers, cũng như quản lý vòng đời của chúng.
+  5. **Scalability (Khả năng mở rộng):** Containers cho phép bạn mở rộng dễ dàng các ứng dụng của mình bằng cách tạo nhiều bản sao của một container cùng một image.
+  6. **Snapshot (Ảnh chụp):** Bạn có thể tạo snapshot của một container tại một thời điểm cụ thể để làm việc và kiểm tra. Snapshot này có thể được chia sẻ, sao lưu và khôi phục.
+  Để chạy một container từ một image Docker, bạn sử dụng lệnh `docker run` và chỉ định image cần chạy. Ví dụ:
 
 		```bash
 		docker run -d -p 8080:80 nginx
 		```
+  Trong ví dụ này, lệnh trên sẽ chạy một container từ image "nginx" và ánh xạ cổng 80 của container với cổng 8080 của máy host. Container này sẽ chạy web server Nginx.
 
-		Trong ví dụ này, lệnh trên sẽ chạy một container từ image "nginx" và ánh xạ cổng 80 của container với cổng 8080 của máy host. Container này sẽ chạy web server Nginx.
+5. `Dockerfile trong nodejs là gì?`
+  
+  Trong Docker, `Dockerfile` là một tệp văn bản chứa các chỉ thị và hướng dẫn để xây dựng một image Docker. Dockerfile mô tả cách thức cài đặt và cấu hình ứng dụng cùng với môi trường mà ứng dụng sẽ chạy trong image.
+  
+  Một Dockerfile đơn giản thường bao gồm các bước sau:
+  
+  1. **Chọn một base image:** Đầu tiên, bạn phải chọn một base image từ Docker Hub hoặc một registry khác. Base image chứa hệ điều hành cơ bản và các công cụ cần thiết để chạy ứng dụng của bạn.
+  
+  2. **Cài đặt các phụ thuộc:** Sử dụng các chỉ thị như `RUN` để cài đặt các phần mềm, thư viện, và các phụ thuộc cần thiết cho ứng dụng của bạn.
+  3. **Cấu hình môi trường:** Sử dụng chỉ thị `ENV` để định nghĩa các biến môi trường mà ứng dụng của bạn cần để hoạt động.
+  
+  4. **Mở cổng:** Sử dụng chỉ thị `EXPOSE` để định nghĩa các cổng mà ứng dụng của bạn sẽ lắng nghe trên container.
+  
+  5. **Khởi chạy ứng dụng:** Sử dụng chỉ thị `CMD` hoặc `ENTRYPOINT` để chỉ định lệnh mà container sẽ thực thi khi được khởi chạy.
+  
+  Ví dụ về một Dockerfile đơn giản để tạo một image cho một ứng dụng Node.js:
 
-	5. `Dockerfile trong nodejs là gì?`
-
-		Trong Docker, `Dockerfile` là một tệp văn bản chứa các chỉ thị và hướng dẫn để xây dựng một image Docker. Dockerfile mô tả cách thức cài đặt và cấu hình ứng dụng cùng với môi trường mà ứng dụng sẽ chạy trong image.
-
-	Một Dockerfile đơn giản thường bao gồm các bước sau:
-
-	1. **Chọn một base image:** Đầu tiên, bạn phải chọn một base image từ Docker Hub hoặc một registry khác. Base image chứa hệ điều hành cơ bản và các công cụ cần thiết để chạy ứng dụng của bạn.
-
-	2. **Cài đặt các phụ thuộc:** Sử dụng các chỉ thị như `RUN` để cài đặt các phần mềm, thư viện, và các phụ thuộc cần thiết cho ứng dụng của bạn.
-
-	3. **Cấu hình môi trường:** Sử dụng chỉ thị `ENV` để định nghĩa các biến môi trường mà ứng dụng của bạn cần để hoạt động.
-
-	4. **Mở cổng:** Sử dụng chỉ thị `EXPOSE` để định nghĩa các cổng mà ứng dụng của bạn sẽ lắng nghe trên container.
-
-	5. **Khởi chạy ứng dụng:** Sử dụng chỉ thị `CMD` hoặc `ENTRYPOINT` để chỉ định lệnh mà container sẽ thực thi khi được khởi chạy.
-
-	Ví dụ về một Dockerfile đơn giản để tạo một image cho một ứng dụng Node.js:
-
-	```Dockerfile
+```Dockerfile
 	# Sử dụng Node.js làm base image
 	FROM node:14
 
@@ -6208,9 +6815,8 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 
 	```bash
 	docker run -p 3000:3000 my-node-app
-	```
-
-	Điều này sẽ tạo ra một container chạy ứng dụng Node.js và ánh xạ cổng 3000 của container với cổng 3000 của máy host.
+```
+  Điều này sẽ tạo ra một container chạy ứng dụng Node.js và ánh xạ cổng 3000 của container với cổng 3000 của máy host.
 
 6. `So sánh VM và Dokcer`
 
