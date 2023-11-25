@@ -7285,6 +7285,123 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
     Trong ví dụ này, mỗi khi có một yêu cầu đến đường dẫn `'/'`, sự kiện `customEvent` được phát ra, và một listener đăng ký trước đó reagiert bằng cách in ra thông điệp và dữ liệu của sự kiện.
 
+53. `Garbage collection trong nodejs là gì`
+
+    **Garbage Collection (Thu gom rác) trong Node.js**
+
+    ### Tiếng Anh:
+
+    **Definition:**
+    Garbage collection is a process in programming languages that automatically reclaims memory occupied by objects that are no longer in use or referenced by the program. It helps manage memory efficiently and prevents memory leaks.
+
+    **How it Works:**
+    In Node.js, the V8 JavaScript engine uses a garbage collector to identify and collect unreferenced objects. The garbage collector periodically scans the heap (memory space) to find objects that are no longer reachable and frees up the memory they occupy.
+
+    **Example:**
+    Consider the following Node.js code snippet:
+
+    ```javascript
+    let obj1 = { name: "John" };
+    let obj2 = { name: "Jane" };
+
+    obj1 = null; // obj1 is no longer reachable
+    // At this point, the garbage collector can reclaim the memory occupied by obj1
+
+    // Perform other operations...
+
+    // The garbage collector may run in the background and free up memory.
+    ```
+
+    In this example, when `obj1` is set to `null`, it is no longer reachable, and the garbage collector can identify it as an object to be reclaimed.
+
+    ### Tiếng Việt:
+
+    **Định nghĩa:**
+    Thu gom rác là quá trình trong các ngôn ngữ lập trình giúp tự động giải phóng bộ nhớ mà các đối tượng không còn sử dụng hoặc được tham chiếu bởi chương trình. Nó giúp quản lý bộ nhớ một cách hiệu quả và ngăn chặn rò rỉ bộ nhớ.
+
+    **Cách Hoạt Động:**
+    Trong Node.js, bộ máy JavaScript V8 sử dụng một garbage collector để xác định và thu gom những đối tượng không còn được tham chiếu. Garbage collector định kỳ quét bộ nhớ (không gian bộ nhớ) để tìm các đối tượng không còn có thể đạt được và giải phóng bộ nhớ mà chúng chiếm giữ.
+
+    **Ví dụ:**
+    Xem đoạn mã Node.js sau đây:
+
+    ```javascript
+    let obj1 = { name: "John" };
+    let obj2 = { name: "Jane" };
+
+    obj1 = null; // obj1 không còn có thể đạt được
+    // Tại điểm này, garbage collector có thể giải phóng bộ nhớ mà obj1 chiếm giữ
+
+    // Thực hiện các thao tác khác...
+
+    // Garbage collector có thể chạy nền và giải phóng bộ nhớ.
+    ```
+
+    Trong ví dụ này, khi `obj1` được đặt thành `null`, nó không còn có thể đạt được nữa, và garbage collector có thể xác định nó là một đối tượng cần được giải phóng.
+
+54. `Các kiểu stream trong nodejs`
+
+    Trong Node.js, có 4 loại stream chính, chia thành 2 loại đọc (readable) và 2 loại ghi (writable):
+
+    ### 1. Readable Streams (Đọc):
+
+    1. **Readable Streams (Đọc cơ bản):**
+      - Đây là kiểu cơ bản nhất của readable stream, nơi dữ liệu được sản xuất và có thể đọc từ đối tượng này.
+
+      ```javascript
+      const fs = require('fs');
+      const readableStream = fs.createReadStream('example.txt');
+      ```
+
+    2. **Writable Streams (Đọc có thể ghi):**
+      - Readable stream có thể được chuyển thành writable stream để chuyển dữ liệu từ một nguồn vào một đích.
+
+      ```javascript
+      const fs = require('fs');
+      const readableStream = fs.createReadStream('example.txt');
+      const writableStream = fs.createWriteStream('output.txt');
+      readableStream.pipe(writableStream);
+      ```
+
+    ### 2. Writable Streams (Ghi):
+
+    1. **Writable Streams (Ghi cơ bản):**
+      - Writable stream đơn giản là một nơi dữ liệu có thể được đưa vào.
+
+      ```javascript
+      const fs = require('fs');
+      const writableStream = fs.createWriteStream('output.txt');
+      ```
+
+    2. **Duplex Streams (Ghi và Đọc):**
+      - Duplex streams là sự kết hợp của readable và writable stream. Nói chung, đối tượng này có thể đọc và ghi dữ liệu.
+
+      ```javascript
+      const { Duplex } = require('stream');
+      const duplexStream = new Duplex({
+        read(size) {
+          // Đọc dữ liệu
+        },
+        write(chunk, encoding, callback) {
+          // Ghi dữ liệu
+        }
+      });
+      ```
+
+    3. **Transform Streams (Chuyển Đổi):**
+      - Transform streams giống như duplex streams, nhưng chúng làm một số thay đổi dữ liệu trong quá trình đọc và ghi.
+
+      ```javascript
+      const { Transform } = require('stream');
+      const transformStream = new Transform({
+        transform(chunk, encoding, callback) {
+          // Chuyển đổi dữ liệu
+        }
+      });
+      ```
+
+    Tổng cộng, có 4 loại stream chính trong Node.js: Readable Streams, Writable Streams, Duplex Streams, và Transform Streams. Các loại này cung cấp một cơ sở mạnh mẽ cho xử lý dữ liệu trong Node.js, đặc biệt là khi làm việc với dữ liệu lớn hoặc với dữ liệu đến từ nhiều nguồn.
+
 ## LOOPBACK
 
 LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
@@ -8558,6 +8675,272 @@ của dữ liệu. Một số ứng dụng có thể sử dụng cả hai loại
 
     - Khi đánh index cho mảng, cân nhắc đến cách bạn thường xuyên truy vấn dữ liệu. Index có thể giúp tăng tốc độ truy vấn, nhưng cũng cần phải cân nhắc đến hiệu suất ghi và dung lượng đĩa.
     - Index trên mảng không phải lúc nào cũng là lựa chọn tốt nhất, và hiệu suất của nó phụ thuộc vào cách bạn sử dụng dữ liệu trong ứng dụng của mình.
+
+16. `Cách remove object attribute torng mongodb, cho ví dụ`
+
+    Trong MongoDB, bạn có thể xóa một thuộc tính (hoặc trường) khỏi một đối tượng (hoặc document) bằng cách sử dụng toán tử `$unset` trong lệnh `update`. Dưới đây là một ví dụ:
+
+    ### Ví dụ:
+
+    Giả sử bạn có một collection `users` và mỗi document trong collection này có một trường `age` mà bạn muốn xóa.
+
+    ```javascript
+    // Kết nối tới MongoDB
+    const MongoClient = require('mongodb').MongoClient;
+    const uri = 'mongodb://localhost:27017/mydatabase';
+
+    MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+      if (err) throw err;
+
+      const db = client.db('mydatabase');
+      const usersCollection = db.collection('users');
+
+      // Xóa trường "age" từ document có "_id" là 1
+      usersCollection.updateOne(
+        { _id: 1 },
+        { $unset: { age: '' } },
+        (err, result) => {
+          if (err) throw err;
+          
+          console.log('Đã xóa trường "age" thành công.');
+          client.close();
+        }
+      );
+    });
+    ```
+
+    Trong ví dụ này:
+    - `usersCollection.updateOne()` được sử dụng để cập nhật một document.
+    - `{ _id: 1 }` là điều kiện để xác định document cần cập nhật (ở đây là document có `_id` là 1).
+    - `{ $unset: { age: '' } }` là toán tử `$unset` để xóa trường `age`.
+
+    Lưu ý rằng nếu trường không tồn tại trong document, lệnh này vẫn sẽ được thực hiện mà không có lỗi, và không có trường `age` nào được thêm vào document nếu nó không tồn tại từ trước.
+
+17. `How can you achieve transaction and locking in mongodb`
+
+    ### Tiếng Anh:
+
+    MongoDB supports multi-document transactions starting from version 4.0. To achieve transactions and locking in MongoDB, you can use the following approaches:
+
+    1. **Multi-Document Transactions:**
+      - MongoDB supports multi-document transactions within a replica set. Transactions allow you to perform multiple operations on multiple documents, and these operations are either all committed or all rolled back.
+      - Example:
+
+        ```javascript
+        const session = client.startSession();
+
+        await session.withTransaction(async () => {
+          // Perform operations within the transaction
+          await collection1.insertOne(document1, { session });
+          await collection2.updateOne(filter2, update2, { session });
+        });
+
+        // Transaction automatically committed if no errors occur
+        ```
+
+    2. **Two-Phase Commit (2PC):**
+      - MongoDB uses a two-phase commit protocol for transactions. It involves a preparation phase and a commit phase.
+      - Example:
+
+        ```javascript
+        // Start the transaction
+        session.startTransaction();
+
+        try {
+          // Perform operations within the transaction
+          await collection1.insertOne(document1, { session });
+          await collection2.updateOne(filter2, update2, { session });
+
+          // Commit the transaction
+          await session.commitTransaction();
+        } catch (error) {
+          // An error occurred, abort the transaction
+          await session.abortTransaction();
+        }
+        ```
+
+    3. **Locking:**
+      - MongoDB uses optimistic concurrency control, which means it uses the concept of document-level locks rather than traditional locks.
+      - Locks are acquired during the prepare phase of a transaction, and conflicts are detected during the commit phase.
+
+    ### Tiếng Việt:
+
+    MongoDB hỗ trợ giao dịch đa tài liệu (multi-document transactions) bắt đầu từ phiên bản 4.0. Để đạt được giao dịch và khóa trong MongoDB, bạn có thể sử dụng các phương pháp sau:
+
+    1. **Giao Dịch Đa Tài Liệu:**
+      - MongoDB hỗ trợ giao dịch đa tài liệu trong một replica set. Giao dịch cho phép bạn thực hiện nhiều thao tác trên nhiều tài liệu và những thao tác này sẽ được cả commit hoặc rollback.
+      - Ví dụ:
+
+        ```javascript
+        const session = client.startSession();
+
+        await session.withTransaction(async () => {
+          // Thực hiện các thao tác trong giao dịch
+          await collection1.insertOne(document1, { session });
+          await collection2.updateOne(filter2, update2, { session });
+        });
+
+        // Giao dịch tự động commit nếu không có lỗi
+        ```
+
+    2. **Two-Phase Commit (2PC):**
+      - MongoDB sử dụng giao thức commit hai pha cho giao dịch, bao gồm giai đoạn chuẩn bị và giai đoạn commit.
+      - Ví dụ:
+
+        ```javascript
+        // Bắt đầu giao dịch
+        session.startTransaction();
+
+        try {
+          // Thực hiện các thao tác trong giao dịch
+          await collection1.insertOne(document1, { session });
+          await collection2.updateOne(filter2, update2, { session });
+
+          // Commit giao dịch
+          await session.commitTransaction();
+        } catch (error) {
+          // Có lỗi xảy ra, hủy bỏ giao dịch
+          await session.abortTransaction();
+        }
+        ```
+
+    3. **Khóa (Locking):**
+      - MongoDB sử dụng kiểm soát tối ưu hóa lạc quan (optimistic concurrency control), có nghĩa là nó sử dụng khái niệm khóa cấp độ tài liệu thay vì khóa truyền thống.
+      - Khóa được tạo trong giai đoạn chuẩn bị của giao dịch, và xung đột được phát hiện trong giai đoạn commit.
+
+
+18. `Khi nào cần sử dụng mongo hơn là so với sql`
+
+    Quyết định giữa MongoDB (NoSQL) và SQL (Relational Database) thường phụ thuộc vào yêu cầu cụ thể của ứng dụng và mô hình dữ liệu bạn đang làm việc. Dưới đây là một số trường hợp khi nào bạn có thể cần sử dụng MongoDB hơn so với SQL:
+
+    ### Khi Nên Sử Dụng MongoDB (NoSQL):
+
+    1. **Dữ Liệu Không Đồng Nhất (Unstructured Data):**
+      - MongoDB thích hợp cho dữ liệu không cấu trúc, linh hoạt và thay đổi thường xuyên, như dữ liệu JSON hoặc BSON. Nó giúp khi có nhu cầu lưu trữ dữ liệu đa dạng và không chặt chẽ vào một mô hình cố định.
+
+    2. **Mô Hình Dữ Liệu Phân Tán (Distributed Data Model):**
+      - MongoDB hỗ trợ mô hình dữ liệu phân tán, giúp xử lý tốt khi có nhiều server hoặc khi mở rộng theo quy mô lớn.
+
+    3. **Khả Năng Mở Rộng Ngang (Horizontal Scaling):**
+      - MongoDB dễ mở rộng ngang bằng cách thêm server vào hệ thống, giúp nó phù hợp cho các ứng dụng có yêu cầu mở rộng cao.
+
+    4. **Tốc Độ Truy Xuất Nhanh (Fast Access):**
+      - MongoDB thích hợp cho các ứng dụng đòi hỏi truy cập dữ liệu nhanh chóng và linh hoạt, như ứng dụng với khả năng mở rộng cao.
+
+    5. **Dữ Liệu Với Cấu Trúc Phức Tạp (Complex Data Structures):**
+      - MongoDB hỗ trợ lưu trữ và truy vấn dữ liệu có cấu trúc phức tạp, như mảng lồng, đối tượng lồng, giúp nó phù hợp cho dữ liệu phức tạp.
+
+    ### Khi Nên Sử Dụng SQL:
+
+    1. **Mô Hình Dữ Liệu Liên Kết (Relational Data Model):**
+      - SQL phù hợp cho các ứng dụng yêu cầu mô hình dữ liệu liên kết cứng chặt với các quan hệ giữa các bảng.
+
+    2. **Truy Vấn Phức Tạp (Complex Queries):**
+      - SQL có ngôn ngữ truy vấn mạnh mẽ, phù hợp cho các tác vụ truy vấn phức tạp và phân tích dữ liệu phức tạp.
+
+    3. **Khả Năng Gắn Kết (Integrity):**
+      - SQL hỗ trợ các ràng buộc toàn vẹn (integrity constraints) giữa các bảng, đảm bảo tính nhất quán và kiểm soát dữ liệu.
+
+    4. **Bảo Mật Mạnh Mẽ (Strong Security):**
+      - SQL thường có các chức năng bảo mật mạnh mẽ với quản lý người dùng, quyền truy cập, và kiểm soát truy cập dữ liệu.
+
+    5. **Dữ Liệu Có Cấu Trúc Chặt Chẽ (Structured Data):**
+      - SQL thích hợp cho các ứng dụng có dữ liệu có cấu trúc chặt chẽ, với mô hình dữ liệu đơn giản và rõ ràng.
+
+19. `Làm cách nào để ngăn chặn injection trong mongodb`
+
+    Để ngăn chặn tấn công injection trong MongoDB, bạn cần sử dụng các biện pháp an toàn khi thực hiện các truy vấn. Dưới đây là một số biện pháp bạn có thể thực hiện:
+
+    1. **Sử Dụng Prepared Statements:**
+      - Khi bạn sử dụng các thư viện truy vấn MongoDB trong các ngôn ngữ lập trình như Node.js, Python, Java, và nhiều ngôn ngữ khác, hãy sử dụng prepared statements hoặc tham số hóa các truy vấn để giảm thiểu rủi ro của injection.
+      - Ví dụ (sử dụng thư viện Mongoose trong Node.js):
+
+        ```javascript
+        const userInput = req.body.input;
+        const query = { username: userInput };
+        User.findOne(query, (err, user) => {
+          // Xử lý kết quả truy vấn
+        });
+        ```
+
+    2. **Escape Dữ Liệu Đầu Vào:**
+      - Trước khi sử dụng dữ liệu đầu vào từ người dùng, hãy thực hiện quá trình escape để loại bỏ các ký tự đặc biệt có thể được sử dụng trong các cuộc tấn công injection.
+      - Ví dụ (sử dụng thư viện như `mongodb.escape` trong Node.js):
+
+        ```javascript
+        const userInput = req.body.input;
+        const escapedInput = mongodb.escape(userInput);
+        const query = { username: escapedInput };
+        User.findOne(query, (err, user) => {
+          // Xử lý kết quả truy vấn
+        });
+        ```
+
+    3. **Kiểm Tra Dữ Liệu Đầu Vào:**
+      - Thực hiện kiểm tra và xác thực dữ liệu đầu vào từ người dùng để đảm bảo rằng nó tuân thủ các quy tắc dữ liệu hợp lệ.
+      - Ví dụ:
+
+        ```javascript
+        const userInput = req.body.input;
+        if (/^[a-zA-Z0-9]+$/.test(userInput)) {
+          const query = { username: userInput };
+          User.findOne(query, (err, user) => {
+            // Xử lý kết quả truy vấn
+          });
+        } else {
+          // Xử lý dữ liệu đầu vào không hợp lệ
+        }
+        ```
+
+    4. **Tắt Thông Báo Lỗi Chi Tiết:**
+      - Trong môi trường sản xuất, hãy tắt thông báo lỗi chi tiết để ngăn chặn người tấn công nhận thông tin quan trọng về cấu trúc và lỗi của hệ thống MongoDB.
+      - Đặt `ServerSelectionTimeoutMS` để ngăn chặn một số tấn công injection.
+
+        ```javascript
+        const MongoClient = require('mongodb').MongoClient;
+        const uri = 'mongodb://localhost:27017/mydatabase';
+        
+        const client = new MongoClient(uri, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          serverSelectionTimeoutMS: 5000, // Timeout 5 seconds
+        });
+        ```
+
+    Lưu ý rằng việc sử dụng prepared statements hoặc thư viện ORM như Mongoose (đối với Node.js) có thể giúp tự động bảo vệ khỏi injection nếu được sử dụng đúng cách.
+
+20. `Giải thích cấu trúc của ObjectId trong Mongodb`
+
+    `ObjectId` là một kiểu dữ liệu đặc biệt được sử dụng để đại diện cho trường `_id` trong MongoDB. Mỗi document trong MongoDB thường có một trường `_id` với giá trị là một đối tượng kiểu `ObjectId`. Dưới đây là giải thích về cấu trúc của `ObjectId`:
+
+    ### Cấu Trúc `ObjectId`:
+
+    `ObjectId` trong MongoDB là một chuỗi hex (hệ 16) dài 24 ký tự, được biểu diễn bởi các ký tự từ "0" đến "9" và từ "a" đến "f". Mỗi ký tự hex biểu diễn 4 bit, vì vậy một `ObjectId` có tổng cộng 96 bit.
+
+    Cấu trúc chi tiết của `ObjectId` như sau:
+
+    - **Timestamp (4 bytes):**  Thời gian tạo `ObjectId` được lưu dưới dạng số giây kể từ thời điểm Unix Epoch (1/1/1970 00:00:00). Giúp sắp xếp các document theo thời gian tạo.
+
+    - **Machine Identifier (3 bytes):** Được tạo dựa trên địa chỉ MAC của máy chủ hoặc một số ngẫu nhiên nếu không có địa chỉ MAC. Điều này giúp định danh máy chủ tạo ra `ObjectId`.
+
+    - **Process Identifier (2 bytes):** Được tạo dựa trên Process ID của quá trình tạo ra `ObjectId`. Điều này giúp định danh quá trình tạo ra `ObjectId`.
+
+    - **Counter (3 bytes):** Một giá trị số nguyên ngẫu nhiên, được tăng lên mỗi khi tạo một `ObjectId` trong cùng một giây. Nếu giá trị counter vượt quá 16777215, nó sẽ reset về 0.
+
+    ### Ví dụ:
+
+    Dưới đây là một ví dụ về một `ObjectId`:
+
+    ```
+    5fd5f58645bde41294367fbc
+    ```
+
+    - Timestamp: `5fd5f586` (hex) chuyển sang decimal là khoảng 1640001926 (s).
+    - Machine Identifier: `45bde4` (hex).
+    - Process Identifier: `1294` (hex).
+    - Counter: `367fbc` (hex).
+
+    Với thông tin trên, bạn có thể xác định được thời gian tạo, máy chủ, và quá trình tạo ra `ObjectId`. Tuy nhiên, để giải mã chính xác, bạn cần sử dụng các hàm cụ thể được cung cấp bởi thư viện MongoDB trong ngôn ngữ lập trình bạn đang sử dụng.
 
 # REDIS
 
