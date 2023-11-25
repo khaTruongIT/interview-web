@@ -1342,6 +1342,291 @@ Trong các phiên bản mới nhất của React, bạn cũng có thể sử d�
         ```
 
       - Run the application and test the PWA features.
+
+16. `Cách sử dụng redux thunk`
+
+    Redux Thunk is a middleware for Redux that allows you to write asynchronous logic in your Redux actions. It enables action creators to return functions instead of plain action objects. These functions, known as thunks, can perform asynchronous operations, such as making API calls, before dispatching the actual actions.
+
+    Here's an example of how to use Redux Thunk in a React.js application with TypeScript:
+
+    1. First, install the required packages:
+
+    ```bash
+    npm install redux react-redux @types/react-redux redux-thunk @types/redux-thunk
+    ```
+
+    2. Create your Redux store and configure the middleware:
+
+    ```typescript
+    // store.ts
+    import { createStore, applyMiddleware } from 'redux';
+    import thunk from 'redux-thunk';
+    import rootReducer from './reducers'; // Assume you have a rootReducer
+
+    const store = createStore(rootReducer, applyMiddleware(thunk));
+
+    export default store;
+    ```
+
+    3. Write a Redux Thunk action creator:
+
+    ```typescript
+    // actions.ts
+    import { Dispatch } from 'redux';
+    import { ThunkAction } from 'redux-thunk';
+    import { RootState } from './reducers'; // Assuming you have a RootState
+
+    // Define your action types
+    const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
+    const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+    const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
+
+    // Define your action creators
+    const fetchDataRequest = () => ({
+      type: FETCH_DATA_REQUEST,
+    });
+
+    const fetchDataSuccess = (data: any) => ({
+      type: FETCH_DATA_SUCCESS,
+      payload: data,
+    });
+
+    const fetchDataFailure = (error: string) => ({
+      type: FETCH_DATA_FAILURE,
+      payload: error,
+    });
+
+    // Define your asynchronous thunk action
+    export const fetchData = (): ThunkAction<void, RootState, null, any> => {
+      return async (dispatch: Dispatch) => {
+        dispatch(fetchDataRequest());
+
+        try {
+          // Perform async operation, for example, fetch data from an API
+          const response = await fetch('https://api.example.com/data');
+          const data = await response.json();
+
+          // Dispatch success action with the received data
+          dispatch(fetchDataSuccess(data));
+        } catch (error) {
+          // Dispatch failure action with the error message
+          dispatch(fetchDataFailure(error.message));
+        }
+      };
+    };
+    ```
+
+    4. Connect your component to the Redux store and dispatch the thunk action:
+
+    ```typescript
+    // Your React component
+    import React from 'react';
+    import { useDispatch, useSelector } from 'react-redux';
+    import { fetchData } from './actions';
+
+    const YourComponent: React.FC = () => {
+      const dispatch = useDispatch();
+      const data = useSelector((state: RootState) => state.data);
+
+      const handleFetchData = () => {
+        dispatch(fetchData());
+      };
+
+      return (
+        <div>
+          <button onClick={handleFetchData}>Fetch Data</button>
+          <div>{data}</div>
+        </div>
+      );
+    };
+
+    export default YourComponent;
+    ```
+
+    In this example, the `fetchData` action creator returns a thunk function that dispatches different actions based on the success or failure of an asynchronous operation, such as fetching data from an API. Redux Thunk allows you to handle complex asynchronous logic in a more organized way within your Redux actions.
+
+17. `Redux saga là gì, cách sử dụng redux saga`
+
+    **Redux Saga in React.js:**
+
+    Redux Saga is a middleware library for Redux that handles side effects in your application. Side effects can include things like asynchronous operations, such as data fetching or API calls, and Redux Saga provides a way to manage these side effects in a more organized and testable manner.
+
+    Unlike Redux Thunk, which allows you to write asynchronous logic in your action creators, Redux Saga introduces the concept of Sagas - long-lived functions that can listen for actions and perform asynchronous tasks independently. This separation of concerns makes it easier to handle complex asynchronous flows and manage application side effects more effectively.
+
+    **How to Use Redux Saga in React.js with TypeScript:**
+
+    1. **Install the necessary packages:**
+
+    ```bash
+    npm install redux react-redux @types/react-redux redux-saga @types/redux-saga
+    ```
+
+    2. **Create your Redux store and configure the middleware:**
+
+    ```typescript
+    // store.ts
+    import { createStore, applyMiddleware } from 'redux';
+    import createSagaMiddleware from 'redux-saga';
+    import rootReducer from './reducers'; // Assume you have a rootReducer
+    import rootSaga from './sagas'; // Create this file for your root saga
+
+    const sagaMiddleware = createSagaMiddleware();
+
+    const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+    sagaMiddleware.run(rootSaga);
+
+    export default store;
+    ```
+
+    3. **Write your Saga:**
+
+    ```typescript
+    // sagas.ts
+    import { call, put, takeEvery } from 'redux-saga/effects';
+    import { fetchDataSuccess, fetchDataFailure } from './actions'; // Assume you have these action creators
+
+    // Define your asynchronous function (e.g., API call)
+    const fetchDataApi = async () => {
+      const response = await fetch('https://api.example.com/data');
+      return response.json();
+    };
+
+    // Define your Saga worker function
+    function* fetchDataWorker() {
+      try {
+        const data = yield call(fetchDataApi);
+        yield put(fetchDataSuccess(data));
+      } catch (error) {
+        yield put(fetchDataFailure(error.message));
+      }
+    }
+
+    // Define your Saga watcher function
+    function* watchFetchData() {
+      yield takeEvery('FETCH_DATA_REQUEST', fetchDataWorker);
+    }
+
+    export default function* rootSaga() {
+      yield watchFetchData();
+    }
+    ```
+
+    4. **Dispatch actions in your React component:**
+
+    ```typescript
+    // Your React component
+    import React, { useEffect } from 'react';
+    import { useDispatch, useSelector } from 'react-redux';
+    import { fetchDataRequest } from './actions'; // Assume you have this action creator
+
+    const YourComponent: React.FC = () => {
+      const dispatch = useDispatch();
+      const data = useSelector((state: RootState) => state.data);
+
+      useEffect(() => {
+        dispatch(fetchDataRequest());
+      }, [dispatch]);
+
+      return (
+        <div>
+          <div>{data}</div>
+        </div>
+      );
+    };
+
+    export default YourComponent;
+    ```
+
+    In this example, `redux-saga` is used to handle the asynchronous flow of data fetching. The Saga listens for a specific action (`FETCH_DATA_REQUEST`) and then executes the asynchronous task in the worker function. If successful, it dispatches a success action; otherwise, it dispatches a failure action. This separation of logic makes it easier to manage complex asynchronous flows in your application.
+
+18. `Làm cách nào để set initial state trong redux reactjs`
+
+    Trong Redux khi bạn tạo một store, bạn có thể thiết lập initial state bằng cách truyền giá trị ban đầu vào hàm `createStore` của Redux.
+
+    Dưới đây là một ví dụ cách thiết lập initial state trong Redux khi sử dụng React:
+
+    1. **Tạo một reducer:**
+
+    ```javascript
+    // reducers.js
+    const initialState = {
+      counter: 0,
+    };
+
+    const counterReducer = (state = initialState, action) => {
+      switch (action.type) {
+        case 'INCREMENT':
+          return { ...state, counter: state.counter + 1 };
+        case 'DECREMENT':
+          return { ...state, counter: state.counter - 1 };
+        default:
+          return state;
+      }
+    };
+
+    export default counterReducer;
+    ```
+
+    2. **Tạo store và kết hợp reducer:**
+
+    ```javascript
+    // store.js
+    import { createStore } from 'redux';
+    import counterReducer from './reducers';
+
+    const store = createStore(counterReducer);
+
+    export default store;
+    ```
+
+    Ở đây, `initialState` được sử dụng để định nghĩa trạng thái ban đầu của ứng dụng trong reducer `counterReducer`.
+
+    3. **Sử dụng Redux Provider trong ứng dụng React:**
+
+    ```javascript
+    // index.js
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { Provider } from 'react-redux';
+    import store from './store';
+    import App from './App';
+
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root')
+    );
+    ```
+
+    4. **Sử dụng trong component React:**
+
+    ```javascript
+    // App.js
+    import React from 'react';
+    import { useSelector, useDispatch } from 'react-redux';
+
+    const App = () => {
+      const counter = useSelector((state) => state.counter);
+      const dispatch = useDispatch();
+
+      return (
+        <div>
+          <p>Counter: {counter}</p>
+          <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+          <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+        </div>
+      );
+    };
+
+    export default App;
+    ```
+
+    Ở đây, `useSelector` được sử dụng để truy cập trạng thái từ Redux store, và `useDispatch` để dispatch các actions.
+
+    Khi bạn tạo store bằng `createStore(counterReducer)`, Redux sẽ sử dụng `initialState` từ reducer để thiết lập trạng thái ban đầu của store.
+
 # Javascripts
 
 ## ES6 trong Javascript
@@ -3334,6 +3619,383 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
     ```
 
     Khi sử dụng `Map` hoặc `Object`, bạn nên chọn cấu trúc dữ liệu phù hợp với yêu cầu cụ thể của bạn. Nếu bạn cần tính năng như sự đa dạng về kiểu key hoặc duyệt theo thứ tự chèn, `Map` có thể là lựa chọn tốt hơn. Ngược lại, nếu bạn chỉ cần lưu trữ dữ liệu đơn giản với key là chuỗi, thì `Object` có thể đủ đơn giản và hiệu quả.
+
+33. `IIFE trong javasript là gì, cho ví dụ`
+
+    IIFE là viết tắt của "Immediately Invoked Function Expression," tức là một hàm được khai báo và ngay lập tức được gọi thực thi. IIFE được sử dụng để tạo ra một phạm vi (scope) riêng tư để tránh tình trạng xung đột biến toàn cục và giữ cho biến không tác động đến phạm vi toàn cục.
+
+    Dưới đây là một ví dụ về cách sử dụng IIFE trong một ứng dụng Node.js Express:
+
+    ```javascript
+    const express = require('express');
+    const app = express();
+
+    // Sử dụng IIFE để bảo vệ biến không làm ảnh hưởng đến phạm vi toàn cục
+    (function () {
+      const privateVariable = 'This is private';
+
+      // Đăng ký một route sử dụng biến từ IIFE
+      app.get('/', (req, res) => {
+        res.send(privateVariable);
+      });
+    })();
+
+    const port = 3000;
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+    ```
+
+    Trong ví dụ trên, `privateVariable` được bảo vệ trong một IIFE và không truy cập được từ bên ngoài. Điều này giúp tránh xung đột với các biến khác trong ứng dụng và giữ cho biến `privateVariable` chỉ là một phần của phạm vi của IIFE.
+
+34. `Cách sử dụng function.prototype.call trong javascript`
+
+    `Function.prototype.call()` là một phương thức của mọi hàm JavaScript, và nó được sử dụng để gọi một hàm với một giá trị cụ thể cho `this` và các đối số được truyền vào một cách tường minh.
+
+    Cú pháp của `call` là:
+
+    ```javascript
+    function.call(thisArg, arg1, arg2, ...)
+    ```
+
+    - `thisArg`: Giá trị được sử dụng như `this` khi gọi hàm.
+    - `arg1, arg2, ...`: Các đối số được truyền vào hàm.
+
+    Dưới đây là một ví dụ để hiểu cách sử dụng `call`:
+
+    ```javascript
+    function greet(name) {
+      console.log(`Hello, ${name}! My name is ${this.name}.`);
+    }
+
+    const person = {
+      name: 'John',
+    };
+
+    // Sử dụng call để gọi hàm greet với context của đối tượng person
+    greet.call(person, 'Alice');
+    ```
+
+    Trong ví dụ trên, `call` được sử dụng để gọi hàm `greet` với đối tượng `person` làm giá trị của `this`. Kết quả sẽ là "Hello, Alice! My name is John."
+
+    Một số điều cần lưu ý:
+
+    1. **Thay đổi giá trị `this`:** `call` cho phép bạn thay đổi giá trị của `this` cho một hàm cụ thể.
+      
+    2. **Truyền đối số: ** Bạn có thể truyền đối số cho hàm thông qua `call`, sau đối số `this`.
+
+    3. **Gọi hàm trực tiếp:** Không giống như cách thông thường gọi hàm với dấu ngoặc đơn `()`, `call` cho phép bạn kiểm soát giá trị của `this`.
+
+    Lưu ý rằng từ ES6 trở đi, có một cách khác để thay đổi giá trị của `this` và truyền đối số bằng cách sử dụng `arrow function` và `spread operator`. Tuy nhiên, `call` vẫn là một phương pháp quan trọng và mạnh mẽ khi làm việc với hàm truyền thống.
+
+35. `Cách sử dụng function.prototype.apply trong javascript`
+
+    `Function.prototype.apply()` là một phương thức của mọi hàm JavaScript, giống như `call`, nhưng thay vì truyền vào các đối số một cách tường minh, `apply` nhận một mảng các đối số. Cú pháp của `apply` như sau:
+
+    ```javascript
+    function.apply(thisArg, [arg1, arg2, ...])
+    ```
+
+    - `thisArg`: Giá trị được sử dụng như `this` khi gọi hàm.
+    - `[arg1, arg2, ...]`: Mảng các đối số được truyền vào hàm.
+
+    Dưới đây là một ví dụ để hiểu cách sử dụng `apply`:
+
+    ```javascript
+    function greet(name, age) {
+      console.log(`Hello, ${name}! I am ${age} years old. My name is ${this.name}.`);
+    }
+
+    const person = {
+      name: 'John',
+    };
+
+    const args = ['Alice', 30];
+
+    // Sử dụng apply để gọi hàm greet với context của đối tượng person và mảng đối số
+    greet.apply(person, args);
+    ```
+
+    Trong ví dụ trên, `apply` được sử dụng để gọi hàm `greet` với đối tượng `person` làm giá trị của `this`, và với mảng `[Alice, 30]` làm đối số cho hàm. Kết quả sẽ là "Hello, Alice! I am 30 years old. My name is John."
+
+    Lưu ý rằng, giống như `call`, `apply` cũng cho phép bạn thay đổi giá trị của `this` và truyền đối số vào hàm. Tuy nhiên, `apply` thích hợp hơn khi số lượng đối số không biết trước và được đặt trong một mảng.
+
+36. `Quy tắc ép kiểu trong javascript`
+
+      JavaScript có một số quy tắc về ép kiểu (coercion) khi thực hiện các phép toán hoặc so sánh giữa các kiểu dữ liệu khác nhau. Điều này có thể dẫn đến kết quả không mong muốn nếu không hiểu rõ cách JavaScript thực hiện các quy tắc này. Dưới đây là một số quy tắc cơ bản và ví dụ minh họa:
+
+      ### 1. **Toán tử `+` (Concatenation và Addition):**
+
+      - **Chuỗi và số:**
+        ```javascript
+        const str = '5';
+        const num = 10;
+
+        const result = str + num; // Kết quả là chuỗi '510'
+        ```
+
+        Trong ví dụ này, chuỗi '5' được nối với số 10, và JavaScript tự động chuyển đổi số 10 thành chuỗi để thực hiện phép nối chuỗi.
+
+      - **Số và số:**
+        ```javascript
+        const num1 = 5;
+        const num2 = '10';
+
+        const sum = num1 + num2; // Kết quả là chuỗi '510'
+        ```
+
+        Trong trường hợp này, số 5 được chuyển đổi thành chuỗi để thực hiện phép nối chuỗi.
+
+      ### 2. **So sánh (Equality Operators):**
+
+      - **So sánh không chặt chẽ (`==`):**
+        ```javascript
+        const value1 = 5;
+        const value2 = '5';
+
+        console.log(value1 == value2); // true
+        ```
+
+        JavaScript tự động thực hiện ép kiểu để so sánh giữa số và chuỗi, nếu có thể chuyển đổi một cách hợp lý.
+
+      - **So sánh chặt chẽ (`===`):**
+        ```javascript
+        const value1 = 5;
+        const value2 = '5';
+
+        console.log(value1 === value2); // false
+        ```
+
+        So sánh chặt chẽ không thực hiện ép kiểu tự động, nên giá trị và kiểu dữ liệu phải đều giống nhau để kết quả là `true`.
+
+  ### 3. **Falsy và Truthy Values:**
+
+  - **Falsy values:**
+    ```javascript
+    if (0) {
+      // Khối mã này không được thực thi vì 0 là giá trị falsy
+    }
+
+    if ('') {
+      // Khối mã này không được thực thi vì chuỗi rỗng là giá trị falsy
+    }
+    ```
+
+  - **Truthy values:**
+    ```javascript
+    if (1) {
+      // Khối mã này được thực thi vì 1 là giá trị truthy
+    }
+
+    if ('hello') {
+      // Khối mã này được thực thi vì chuỗi 'hello' là giá trị truthy
+    }
+    ```
+
+    JavaScript tự động chuyển đổi giá trị thành falsy hoặc truthy khi cần thiết.
+
+  ### 4. **Toán tử Logic (`&&`, `||`):**
+
+  - **Toán tử `&&`:**
+    ```javascript
+    const result = 'hello' && 42; // Kết quả là số 42
+    ```
+
+    Nếu giá trị bên trái của `&&` là truthy, kết quả là giá trị bên phải của nó.
+
+  - **Toán tử `||`:**
+    ```javascript
+    const result = '' || 'default'; // Kết quả là chuỗi 'default'
+    ```
+
+    Nếu giá trị bên trái của `||` là falsy, kết quả là giá trị bên phải của nó.
+
+  ### Kết luận:
+
+  Hiểu rõ về quy tắc ép kiểu trong JavaScript là quan trọng để tránh nhầm lẫn và bugs không mong muốn trong mã nguồn của bạn. Luôn sử dụng so sánh chặt chẽ (`===` và `!==`) khi kiểm tra giá trị và kiểu để tránh các hiểu lầm không mong muốn.
+
+
+37. `Cách kiểm tra property có tồn tại hay không trong javascript`
+
+    JavaScript có một số quy tắc về ép kiểu (coercion) khi thực hiện các phép toán hoặc so sánh giữa các kiểu dữ liệu khác nhau. Điều này có thể dẫn đến kết quả không mong muốn nếu không hiểu rõ cách JavaScript thực hiện các quy tắc này. Dưới đây là một số quy tắc cơ bản và ví dụ minh họa:
+
+    ### 1. **Toán tử `+` (Concatenation và Addition):**
+
+    - **Chuỗi và số:**
+      ```javascript
+      const str = '5';
+      const num = 10;
+
+      const result = str + num; // Kết quả là chuỗi '510'
+      ```
+
+      Trong ví dụ này, chuỗi '5' được nối với số 10, và JavaScript tự động chuyển đổi số 10 thành chuỗi để thực hiện phép nối chuỗi.
+
+    - **Số và số:**
+      ```javascript
+      const num1 = 5;
+      const num2 = '10';
+
+      const sum = num1 + num2; // Kết quả là chuỗi '510'
+      ```
+
+      Trong trường hợp này, số 5 được chuyển đổi thành chuỗi để thực hiện phép nối chuỗi.
+
+    ### 2. **So sánh (Equality Operators):**
+
+    - **So sánh không chặt chẽ (`==`):**
+      ```javascript
+      const value1 = 5;
+      const value2 = '5';
+
+      console.log(value1 == value2); // true
+      ```
+
+      JavaScript tự động thực hiện ép kiểu để so sánh giữa số và chuỗi, nếu có thể chuyển đổi một cách hợp lý.
+
+    - **So sánh chặt chẽ (`===`):**
+      ```javascript
+      const value1 = 5;
+      const value2 = '5';
+
+      console.log(value1 === value2); // false
+      ```
+
+      So sánh chặt chẽ không thực hiện ép kiểu tự động, nên giá trị và kiểu dữ liệu phải đều giống nhau để kết quả là `true`.
+
+    ### 3. **Falsy và Truthy Values:**
+
+    - **Falsy values:**
+      ```javascript
+      if (0) {
+        // Khối mã này không được thực thi vì 0 là giá trị falsy
+      }
+
+      if ('') {
+        // Khối mã này không được thực thi vì chuỗi rỗng là giá trị falsy
+      }
+      ```
+
+    - **Truthy values:**
+      ```javascript
+      if (1) {
+        // Khối mã này được thực thi vì 1 là giá trị truthy
+      }
+
+      if ('hello') {
+        // Khối mã này được thực thi vì chuỗi 'hello' là giá trị truthy
+      }
+      ```
+
+      JavaScript tự động chuyển đổi giá trị thành falsy hoặc truthy khi cần thiết.
+
+    ### 4. **Toán tử Logic (`&&`, `||`):**
+
+    - **Toán tử `&&`:**
+      ```javascript
+      const result = 'hello' && 42; // Kết quả là số 42
+      ```
+
+      Nếu giá trị bên trái của `&&` là truthy, kết quả là giá trị bên phải của nó.
+
+    - **Toán tử `||`:**
+      ```javascript
+      const result = '' || 'default'; // Kết quả là chuỗi 'default'
+      ```
+
+      Nếu giá trị bên trái của `||` là falsy, kết quả là giá trị bên phải của nó.
+
+    ### Kết luận:
+
+    Hiểu rõ về quy tắc ép kiểu trong JavaScript là quan trọng để tránh nhầm lẫn và bugs không mong muốn trong mã nguồn của bạn. Luôn sử dụng so sánh chặt chẽ (`===` và `!==`) khi kiểm tra giá trị và kiểu để tránh các hiểu lầm không mong muốn.
+
+38. `So sánh in operator và hasOwnProperty trong javascript`
+
+    `in` operator và `hasOwnProperty` method đều được sử dụng để kiểm tra xem một thuộc tính có tồn tại trong một đối tượng JavaScript hay không, nhưng có một số điểm khác biệt quan trọng giữa chúng:
+
+    ### 1. **Phạm vi kiểm tra:**
+
+    - **`in` operator:** Kiểm tra xem một thuộc tính có tồn tại trong đối tượng, kể cả các thuộc tính được kế thừa từ prototype chain.
+
+      ```javascript
+      const obj = { key: 'value' };
+      console.log('key' in obj); // true
+      ```
+
+    - **`hasOwnProperty` method:** Kiểm tra xem một thuộc tính có tồn tại trong đối tượng và có phải là thuộc tính trực tiếp của đối tượng đó, không kiểm tra các thuộc tính được kế thừa từ prototype chain.
+
+      ```javascript
+      const obj = { key: 'value' };
+      console.log(obj.hasOwnProperty('key')); // true
+      ```
+
+    ### 2. **Sử dụng trong vòng lặp `for...in`:**
+
+    - **`in` operator:** Thường được sử dụng trong vòng lặp `for...in` để lặp qua tất cả các thuộc tính của một đối tượng, bao gồm cả những thuộc tính được kế thừa từ prototype chain.
+
+      ```javascript
+      for (let prop in obj) {
+        console.log(prop); // in sẽ lặp qua cả các thuộc tính, bao gồm kế thừa
+      }
+      ```
+
+    - **`hasOwnProperty` method:** Thường được sử dụng để lọc ra các thuộc tính trực tiếp của đối tượng mà không bao gồm các thuộc tính kế thừa.
+
+      ```javascript
+      for (let prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+          console.log(prop); // hasOwnProperty loại bỏ các thuộc tính kế thừa
+        }
+      }
+      ```
+
+    ### Lưu ý:
+
+    - Nếu bạn chỉ quan tâm đến việc kiểm tra xem một thuộc tính có tồn tại trong đối tượng hay không mà không quan tâm đến việc nó có được kế thừa hay không, `hasOwnProperty` thường là lựa chọn tốt hơn.
+      
+    - Khi sử dụng vòng lặp `for...in` để duyệt qua các thuộc tính của một đối tượng, thường nên sử dụng `hasOwnProperty` để đảm bảo rằng bạn chỉ xử lý những thuộc tính trực tiếp của đối tượng, không bao gồm các thuộc tính được kế thừa.
+
+39. `Memomize trong javascript`
+
+    Memoization là một kỹ thuật tối ưu hóa trong lập trình để lưu trữ kết quả của các hàm đã được tính toán trước đó và sử dụng lại chúng khi cùng một đầu vào được cung cấp. Nó giúp giảm số lần tính toán lại cho các đầu vào giống nhau, cải thiện hiệu suất của chương trình.
+
+    Ở JavaScript, memoization thường được thực hiện bằng cách sử dụng closures và đối tượng cache. Dưới đây là một ví dụ đơn giản về cách sử dụng memoization trong JavaScript:
+
+    ```javascript
+    function memoize(func) {
+      const cache = {};
+
+      return function (...args) {
+        const key = JSON.stringify(args);
+
+        if (cache[key]) {
+          console.log('Returning from cache:', cache[key]);
+          return cache[key];
+        }
+
+        const result = func(...args);
+        cache[key] = result;
+
+        console.log('Calculating and caching result:', result);
+        return result;
+      };
+    }
+
+    // Ví dụ hàm tính giai thừa sử dụng memoization
+    const factorial = memoize((n) => {
+      if (n === 0 || n === 1) {
+        return 1;
+      }
+      return n * factorial(n - 1);
+    });
+
+    // Sử dụng hàm tính giai thừa với memoization
+    console.log(factorial(5)); // Calculating and caching result: 120
+    console.log(factorial(4)); // Returning from cache: 24
+    console.log(factorial(5)); // Returning from cache: 120
+    ```
+
+    Trong ví dụ này, `memoize` là một hàm cao cấp nhận một hàm khác (`func`) làm tham số. Nó trả về một hàm mới, được kết hợp với một đối tượng `cache` để lưu trữ kết quả tính toán trước đó. Mỗi lần hàm được gọi, nó kiểm tra xem kết quả đã được lưu trữ trong `cache` chưa. Nếu có, nó sẽ trả về kết quả đó thay vì tính toán lại, giúp cải thiện hiệu suất.
 
 # Typescript
 
@@ -6294,6 +6956,334 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
     Lưu ý rằng trong môi trường thực tế, bạn có thể muốn sử dụng một số công cụ như `path` để xử lý đường dẫn file một cách chính xác hơn và chắc chắn.
 
+48. `Cho ví dụ về một ứng dụng chạy nodejs express typescript và websocket`
+
+
+    Dưới đây là một ví dụ đơn giản về ứng dụng Node.js Express sử dụng TypeScript và thư viện Socket.IO để tạo một server WebSocket. Để bắt đầu, bạn cần cài đặt các gói npm cần thiết bằng cách chạy lệnh:
+
+    ```bash
+    npm init -y
+    npm install express socket.io typescript ts-node
+    ```
+
+    Sau đó, tạo một tệp `tsconfig.json` để cấu hình TypeScript:
+
+    ```json
+    {
+      "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "strict": true
+      }
+    }
+    ```
+
+    Tạo thư mục `src` và bên trong đó, tạo hai tệp `app.ts` và `index.ts`:
+
+    1. `src/app.ts`:
+
+    ```typescript
+    import express from 'express';
+    import http from 'http';
+    import { Server, Socket } from 'socket.io';
+
+    class App {
+      public express: express.Application;
+      private server: http.Server;
+      private io: Server;
+
+      constructor() {
+        this.express = express();
+        this.server = http.createServer(this.express);
+        this.io = new Server(this.server);
+
+        this.configure();
+        this.handleRoutes();
+        this.handleSockets();
+      }
+
+      private configure(): void {
+        this.express.use(express.json());
+        this.express.use(express.urlencoded({ extended: false }));
+      }
+
+      private handleRoutes(): void {
+        this.express.get('/', (_, res) => {
+          res.send('Hello, WebSocket!');
+        });
+      }
+
+      private handleSockets(): void {
+        this.io.on('connection', (socket: Socket) => {
+          console.log('A user connected');
+
+          socket.on('disconnect', () => {
+            console.log('User disconnected');
+          });
+
+          socket.on('message', (msg: string) => {
+            console.log(`Message: ${msg}`);
+            this.io.emit('message', msg); // Gửi lại tin nhắn đến tất cả các client
+          });
+        });
+      }
+    }
+
+    export default new App().server;
+    ```
+
+    2. `src/index.ts`:
+
+    ```typescript
+    import app from './app';
+
+    const port = process.env.PORT || 3000;
+
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+    ```
+
+    Cuối cùng, thêm script `"start"` vào tệp `package.json` để chạy ứng dụng:
+
+    ```json
+    "scripts": {
+      "start": "ts-node src/index.ts"
+    }
+    ```
+
+    Sau khi hoàn tất, bạn có thể chạy ứng dụng bằng cách sử dụng lệnh:
+
+    ```bash
+    npm start
+    ```
+
+    Ứng dụng sẽ lắng nghe trên cổng 3000. Bạn có thể mở trình duyệt và truy cập `http://localhost:3000` để kiểm tra. Khi một client kết nối, server sẽ in ra thông báo "A user connected" và nếu client gửi một tin nhắn, server sẽ in ra nó và gửi lại tin nhắn đó đến tất cả các client khác.
+
+49.`Cách sử dụng Buffer trong nodejs`
+
+  Trong Node.js, `Buffer` là một lớp được cung cấp để xử lý dữ liệu nhị phân (binary data). Nó là một đối tượng mảng của các byte, và cung cấp các phương thức để làm việc với dữ liệu nhị phân, đặc biệt là trong ngữ cảnh của đọc và ghi dữ liệu từ và đến các nguồn và đích như hệ thống tệp và các giao thức mạng.
+
+  ### Tạo Buffer:
+
+  Có nhiều cách để tạo một Buffer trong Node.js:
+
+  1. **Tạo từ chuỗi:**
+    ```javascript
+    const bufferFromString = Buffer.from('Hello, world!', 'utf-8');
+    ```
+
+  2. **Tạo từ mảng byte:**
+    ```javascript
+    const bufferFromBytes = Buffer.from([0x48, 0x65, 0x6C, 0x6C, 0x6F]);
+    ```
+
+  3. **Tạo buffer rỗng với kích thước cố định:**
+    ```javascript
+    const emptyBuffer = Buffer.alloc(10); // Tạo buffer rỗng với kích thước 10 byte
+    ```
+
+  ### Xử lý Buffer:
+
+  Buffer hỗ trợ nhiều phương thức để thực hiện các hoạt động trên dữ liệu nhị phân, ví dụ:
+
+  - **Đọc dữ liệu từ Buffer:**
+    ```javascript
+    const data = bufferFromString.toString('utf-8'); // Chuyển buffer thành chuỗi
+    console.log(data); // In: Hello, world!
+    ```
+
+  - **Ghi dữ liệu vào Buffer:**
+    ```javascript
+    const newData = 'New data';
+    bufferFromString.write(newData, 0, newData.length, 'utf-8');
+    console.log(bufferFromString.toString('utf-8')); // In: New data, world!
+    ```
+
+  - **So sánh Buffer:**
+    ```javascript
+    const buffer1 = Buffer.from('ABC');
+    const buffer2 = Buffer.from('ABC');
+    const isEqual = buffer1.equals(buffer2);
+    console.log(isEqual); // true
+    ```
+
+  ### Sử dụng Buffer trong Node.js:
+
+  Buffer thường được sử dụng trong các trường hợp sau:
+
+    1. **Đọc/ghi dữ liệu từ/đến tệp hoặc socket:**
+      Khi làm việc với tệp hoặc socket, Buffer thường được sử dụng để đọc và ghi dữ liệu nhị phân.
+
+    2. **Xử lý dữ liệu nhị phân từ các nguồn khác nhau:**
+      Khi tương tác với các giao thức mạng như HTTP, Buffer là lựa chọn phổ biến để xử lý dữ liệu đến và đi.
+
+    3. **Mã hóa và giải mã dữ liệu:**
+      Khi làm việc với mã hóa và giải mã dữ liệu, Buffer thường được sử dụng để chứa dữ liệu nhị phân.
+
+    4. **Làm việc với hình ảnh, âm thanh, video:**
+      Khi xử lý các loại tệp hình ảnh, âm thanh, hoặc video, Buffer thường được sử dụng để chứa dữ liệu đối tượng này.
+
+50. `Global trong nodejs`
+
+    Trong Node.js, đối tượng `global` là một biến toàn cục (global variable) và là một đối tượng toàn cục (global object) mà mọi module đều có thể truy cập. Tất cả các biến và hàm được khai báo mà không thuộc về một module cụ thể đều được thêm vào đối tượng `global`.
+
+    Một số điều cần lưu ý khi sử dụng `global` trong Node.js:
+
+    1. **Không nên sử dụng quá nhiều:**
+      Việc sử dụng quá nhiều biến toàn cục có thể dẫn đến sự nhầm lẫn và khó bảo trì mã nguồn.
+
+    2. **Sử dụng var, let, hoặc const khi khai báo biến:**
+      Khi khai báo biến toàn cục, hãy sử dụng `var`, `let`, hoặc `const` để tránh tình trạng biến bị rơi vào đối tượng `global` mà không được khai báo.
+
+    ### Ví dụ sử dụng `global`:
+
+    ```javascript
+    // Khai báo biến toàn cục
+    global.myGlobalVariable = 'Hello from global!';
+
+    // Sử dụng biến toàn cục từ một module khác
+    // module1.js
+    console.log(global.myGlobalVariable); // In: Hello from global!
+
+    // Hoặc có thể trực tiếp sử dụng từ bất kỳ module nào
+    // module2.js
+    console.log(myGlobalVariable); // In: Hello from global!
+    ```
+  
+51. `Làm cách nào để load HTML trong nodejs`
+
+    Có một số cách để load HTML trong một ứng dụng Node.js. Dưới đây là một số phương pháp phổ biến:
+
+    ### 1. Sử dụng `fs` Module:
+
+    Bạn có thể sử dụng mô-đun `fs` để đọc nội dung của file HTML và gửi nó đến client bằng cách sử dụng `res.send()`.
+
+    ```javascript
+    const fs = require('fs');
+    const http = require('http');
+
+    const server = http.createServer((req, res) => {
+      if (req.url === '/') {
+        fs.readFile('path/to/your/index.html', 'utf8', (err, data) => {
+          if (err) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Internal Server Error');
+            return;
+          }
+
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(data);
+        });
+      }
+    });
+
+    const port = 3000;
+    server.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+    ```
+
+    ### 2. Sử dụng Express:
+
+    Nếu bạn đang sử dụng framework Express, bạn có thể sử dụng `res.sendFile()`.
+
+    ```javascript
+    const express = require('express');
+    const app = express();
+
+    app.get('/', (req, res) => {
+      res.sendFile('path/to/your/index.html', { root: __dirname });
+    });
+
+    const port = 3000;
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+    ```
+
+    ### 3. Sử dụng Template Engine:
+
+    Một cách phổ biến để load HTML là sử dụng template engine như EJS, Handlebars, hoặc Pug.
+
+    ```javascript
+    const express = require('express');
+    const app = express();
+
+    app.set('view engine', 'ejs'); // Sử dụng EJS làm template engine
+    app.get('/', (req, res) => {
+      res.render('index', { /* Your data goes here */ });
+    });
+
+    const port = 3000;
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+    ```
+
+    ### Lưu ý:
+
+    - Đối với cách sử dụng `fs`, hãy đảm bảo kiểm tra lỗi khi đọc file.
+    - Khi sử dụng template engine, bạn có thể truyền dữ liệu từ server đến template để render thông tin động trong HTML.
+
+    Chọn cách phù hợp với yêu cầu cụ thể của bạn và môi trường phát triển của bạn.
+
+52. `Event emmiter trong nodejs`
+
+    EventEmitter là một phần của mô-đun `events` trong Node.js, nó cung cấp một cơ chế để xử lý sự kiện trong mô hình lập trình bất đồng bộ. Nó cho phép các đối tượng (event emitters) phát ra các sự kiện và các đối tượng khác đăng ký (listeners) để nghe và xử lý các sự kiện đó.
+
+    ### Sử dụng EventEmitter trong Node.js:
+
+    Dưới đây là một ví dụ đơn giản về cách sử dụng EventEmitter trong Node.js:
+
+    ```javascript
+    const EventEmitter = require('events');
+
+    // Tạo một đối tượng EventEmitter mới
+    const myEmitter = new EventEmitter();
+
+    // Đăng ký một listener cho sự kiện 'myEvent'
+    myEmitter.on('myEvent', (data) => {
+      console.log('Event received with data:', data);
+    });
+
+    // Phát ra sự kiện 'myEvent' với dữ liệu
+    myEmitter.emit('myEvent', { message: 'Hello, EventEmitter!' });
+    ```
+
+    ### Sử dụng EventEmitter trong Node.js Express:
+
+    Trong môi trường Express, bạn có thể sử dụng EventEmitter để tạo các sự kiện tùy chỉnh để quản lý luồng xử lý của ứng dụng. Dưới đây là một ví dụ đơn giản:
+
+    ```javascript
+    const express = require('express');
+    const EventEmitter = require('events');
+
+    const app = express();
+    const port = 3000;
+
+    // Tạo một đối tượng EventEmitter cho ứng dụng Express
+    const eventEmitter = new EventEmitter();
+
+    // Đăng ký một listener cho sự kiện 'customEvent'
+    eventEmitter.on('customEvent', (data) => {
+      console.log('Custom event received with data:', data);
+    });
+
+    app.get('/', (req, res) => {
+      // Phát ra sự kiện 'customEvent' khi có yêu cầu đến đường dẫn '/'
+      eventEmitter.emit('customEvent', { message: 'Request to / received' });
+      res.send('Hello, Express with EventEmitter!');
+    });
+
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+    ```
+
+    Trong ví dụ này, mỗi khi có một yêu cầu đến đường dẫn `'/'`, sự kiện `customEvent` được phát ra, và một listener đăng ký trước đó reagiert bằng cách in ra thông điệp và dữ liệu của sự kiện.
 
 ## LOOPBACK
 
@@ -7393,6 +8383,181 @@ của dữ liệu. Một số ứng dụng có thể sử dụng cả hai loại
 
     3. **Tính Nguyên Tử:**
       - Cả hai phương thức đều là nguyên tử ở cấp độ tài liệu, có nghĩa là hoặc toàn bộ quá trình thay thế hoặc hoạt động cập nhật được áp dụng như một hoạt động duy nhất, không thể chia rẽ.
+
+13. `Shard trong mongodb là gì`
+
+    Sharding là một phương pháp chia nhỏ dữ liệu của cơ sở dữ liệu MongoDB để phân phối nó trên nhiều máy chủ (nodes) để tận dụng tối đa khả năng mở rộng và tăng hiệu suất. Cụ thể, shard là một phần nhỏ của dữ liệu được phân phối và lưu trữ trên một node trong một tập hợp các node.
+
+    ### Cách MongoDB Shard Hoạt Động:
+
+    1. **Shard Key:**
+      - Mỗi document trong MongoDB có một trường được gọi là shard key.
+      - Shard key quyết định cách dữ liệu được phân phối giữa các shard.
+
+    2. **Shard Cluster:**
+      - Một shard cluster bao gồm nhiều shard servers và các thành phần khác như mongos routers và config servers.
+
+    3. **Mongos Routers:**
+      - Mongos là một thành phần của MongoDB chịu trách nhiệm định tuyến các yêu cầu của ứng dụng đến các shard phù hợp.
+      - Nó biết cách dữ liệu được phân phối trên các shard và gửi yêu cầu đến shard cụ thể.
+
+    4. **Config Servers:**
+      - Config servers lưu trữ metadata về dữ liệu, bao gồm thông tin về shard key và phân phối dữ liệu.
+      - Chúng giữ thông tin về cách document được phân phối trên các shard.
+
+    ### Ví dụ Sử Dụng Shard:
+
+    1. **Khởi Tạo Shard Cluster:**
+      - Trước hết, bạn cần khởi tạo shard cluster bằng cách chia ra các shard và cấu hình config servers.
+
+    2. **Chọn Shard Key:**
+      - Xác định shard key cho collection bạn muốn shard. Shard key nên được chọn sao cho dữ liệu phân phối đồng đều giữa các shard.
+
+    3. **Thêm Shard vào Cluster:**
+      - Thêm shard vào cluster bằng lệnh `sh.addShard()`.
+
+      ```javascript
+      sh.addShard("shard1.example.net:27017");
+      sh.addShard("shard2.example.net:27017");
+      ```
+
+    4. **Chia Dữ Liệu:**
+      - Bắt đầu chia dữ liệu bằng cách kích thích sharding cho collection.
+
+      ```javascript
+      sh.enableSharding("mydatabase");
+      sh.shardCollection("mydatabase.mycollection", { shardKey: 1 });
+      ```
+
+      Trong đó, `{ shardKey: 1 }` là shard key bạn đã chọn.
+
+    5. **Insert Data:**
+      - Dữ liệu được tự động phân phối trên các shard khi được chèn vào collection.
+
+      ```javascript
+      db.mycollection.insert({ _id: 1, shardKey: "A", otherField: "data" });
+      ```
+
+    6. **Truy Vấn Dữ Liệu:**
+      - Khi truy vấn dữ liệu, mongos router tự động xác định shard cụ thể cần truy vấn dựa trên shard key.
+
+      ```javascript
+      db.mycollection.find({ shardKey: "A" });
+      ```
+
+    ### Lưu ý:
+
+    - Việc lựa chọn shard key quan trọng để đảm bảo dữ liệu được phân phối đồng đều giữa các shard.
+    - Shard không nên được chọn quá ít, vì điều này có thể dẫn đến tình trạng hot spot (shard có lượng dữ liệu lớn hơn so với các shard khác).
+
+14. `Các loại index trong mongodb`
+
+    Trong MongoDB, có nhiều loại index khác nhau để cải thiện hiệu suất truy vấn. Dưới đây là một số loại index phổ biến:
+
+    ### 1. **Single Field Index:**
+
+    - Đánh index cho một trường đơn trong một document.
+
+    ```javascript
+    db.collection.createIndex({ fieldName: 1 });
+    ```
+
+    Trong đó:
+    - `collection`: Tên của collection mà bạn muốn đánh index.
+    - `fieldName`: Tên trường bạn muốn đánh index.
+    - `1`: Chỉ định việc sắp xếp theo trường đó theo thứ tự tăng dần. Nếu bạn muốn thứ tự giảm dần, bạn có thể sử dụng `-1`.
+
+    ### 2. **Compound Index:**
+
+    - Đánh index cho nhiều trường trong một document.
+
+    ```javascript
+    db.collection.createIndex({ field1: 1, field2: -1 });
+    ```
+
+    Trong đó:
+    - `field1` và `field2` là các trường bạn muốn đánh index.
+    - `1` và `-1` chỉ định thứ tự sắp xếp của từng trường.
+
+    ### 3. **Text Index:**
+
+    - Sử dụng để tìm kiếm văn bản trong các trường chứa văn bản.
+
+    ```javascript
+    db.collection.createIndex({ textField: "text" });
+    ```
+
+    Sử dụng `$text` để thực hiện truy vấn văn bản:
+
+    ```javascript
+    db.collection.find({ $text: { $search: "searchTerm" } });
+    ```
+
+    ### 4. **Geospatial Index:**
+
+    - Sử dụng để tìm kiếm trong các trường chứa dữ liệu địa lý.
+
+    ```javascript
+    db.collection.createIndex({ locationField: "2dsphere" });
+    ```
+
+    ### 5. **Hashed Index:**
+
+    - Sử dụng để tìm kiếm trên một trường với giá trị băm.
+
+    ```javascript
+    db.collection.createIndex({ hashedField: "hashed" });
+    ```
+
+    ### 6. **Wildcard Index:**
+
+    - Đánh index cho tất cả các trường trong một document.
+
+    ```javascript
+    db.collection.createIndex({ "$**": 1 });
+    ```
+
+    ### Lưu ý:
+
+    - Việc đánh index có thể tăng tốc độ truy vấn nhưng đồng thời có thể làm tăng dung lượng đĩa và giảm hiệu suất ghi.
+    - Khi chọn loại index, cân nhắc giữa yêu cầu truy vấn và ảnh hưởng đến hiệu suất ghi của hệ thống.
+
+15. `Có thể khởi tạo index cho array trong 1 mảng hay không`
+
+    Có, bạn có thể khởi tạo index cho các trường là mảng trong MongoDB. Điều này giúp tối ưu hóa truy vấn và cải thiện hiệu suất trong các trường hợp sử dụng mảng.
+
+    ### Index cho Mảng Đơn:
+
+    Đối với một trường là mảng, bạn có thể đánh index bằng cách sử dụng cú pháp đơn giản:
+
+    ```javascript
+    db.collection.createIndex({ arrayField: 1 });
+    ```
+
+    Trong đó, `arrayField` là tên của trường mảng bạn muốn đánh index, và `1` chỉ định thứ tự tăng dần. Bạn cũng có thể sử dụng `-1` để thứ tự giảm dần.
+
+    ### Index cho Các Phần Tử Trong Mảng:
+
+    Đôi khi, bạn muốn tạo index trên các phần tử trong mảng. Điều này hữu ích khi bạn muốn truy vấn dữ liệu dựa trên giá trị của các phần tử trong mảng.
+
+    ```javascript
+    db.collection.createIndex({ "arrayField.element": 1 });
+    ```
+
+    Trong trường hợp này, `arrayField` là tên của trường mảng và `element` là tên của phần tử bạn muốn đánh index.
+
+    ### Index cho Mảng Chứa Đối Tượng:
+
+    Nếu mảng chứa các đối tượng và bạn muốn tìm kiếm dựa trên thuộc tính của đối tượng trong mảng, bạn có thể sử dụng:
+
+    ```javascript
+    db.collection.createIndex({ "arrayField.property": 1 });
+    ```
+
+    ### Lưu ý:
+
+    - Khi đánh index cho mảng, cân nhắc đến cách bạn thường xuyên truy vấn dữ liệu. Index có thể giúp tăng tốc độ truy vấn, nhưng cũng cần phải cân nhắc đến hiệu suất ghi và dung lượng đĩa.
+    - Index trên mảng không phải lúc nào cũng là lựa chọn tốt nhất, và hiệu suất của nó phụ thuộc vào cách bạn sử dụng dữ liệu trong ứng dụng của mình.
 
 # REDIS
 
