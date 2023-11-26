@@ -1197,7 +1197,7 @@ Trong các phiên bản mới nhất của React, bạn cũng có thể sử d�
       npx webpack serve --mode development
       ```
 
-15. `PWA apps trong reactjs, giải t hích PWA`
+15. `PWA apps trong reactjs, giải thích PWA`
 
     **Tiếng Việt:**
 
@@ -3996,6 +3996,152 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
     ```
 
     Trong ví dụ này, `memoize` là một hàm cao cấp nhận một hàm khác (`func`) làm tham số. Nó trả về một hàm mới, được kết hợp với một đối tượng `cache` để lưu trữ kết quả tính toán trước đó. Mỗi lần hàm được gọi, nó kiểm tra xem kết quả đã được lưu trữ trong `cache` chưa. Nếu có, nó sẽ trả về kết quả đó thay vì tính toán lại, giúp cải thiện hiệu suất.
+
+40. `Service worker trong javascript là gì`
+
+    Service Worker là một loại công nghệ trong web development, không chỉ giới hạn trong Node.js mà còn sử dụng rộng rãi trong phát triển web front-end. Service Worker là một loại worker script chạy ở background trong trình duyệt và cung cấp nhiều tính năng mạnh mẽ như quản lý cache, push notification, và offline capabilities.
+
+    Dưới đây là một ví dụ về việc sử dụng Service Worker trong một ứng dụng web tích hợp với Node.js:
+
+    1. **Tạo Service Worker:**
+
+      Đầu tiên, bạn cần tạo một file JavaScript để định nghĩa Service Worker. Ví dụ, tạo một file có tên là `sw.js`:
+
+      ```javascript
+      // sw.js
+      self.addEventListener('install', (event) => {
+        event.waitUntil(
+          caches.open('my-cache').then((cache) => {
+            return cache.addAll([
+              '/',
+              '/index.html',
+              '/styles.css',
+              '/app.js',
+              // Các tài nguyên khác cần được cache
+            ]);
+          })
+        );
+      });
+
+      self.addEventListener('fetch', (event) => {
+        event.respondWith(
+          caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+          })
+        );
+      });
+      ```
+
+      Trong đoạn mã trên, `install` sẽ được gọi khi Service Worker được cài đặt và `fetch` sẽ xử lý mọi request, trả về tài nguyên từ cache nếu có.
+
+    2. **Kết nối Service Worker với Ứng Dụng Node.js:**
+
+      Trong file HTML của ứng dụng Node.js, bạn có thể kết nối Service Worker như sau:
+
+      ```html
+      <!-- index.html -->
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css">
+        <title>Node.js App with Service Worker</title>
+      </head>
+      <body>
+        <h1>Hello, Node.js with Service Worker!</h1>
+        <script src="/app.js"></script>
+        <script>
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+              .then((registration) => {
+                console.log('Service Worker registered with scope:', registration.scope);
+              })
+              .catch((error) => {
+                console.error('Service Worker registration failed:', error);
+              });
+          }
+        </script>
+      </body>
+      </html>
+      ```
+
+      Trong đoạn mã trên, chúng ta kiểm tra xem trình duyệt có hỗ trợ Service Worker không và sau đó đăng ký Service Worker.
+
+    3. **Chạy Ứng Dụng Node.js:**
+
+      Chạy server Node.js:
+
+      ```bash
+      node server.js
+      ```
+
+      Truy cập ứng dụng trong trình duyệt tại `http://localhost:3000` và kiểm tra Console để xem thông báo đăng ký Service Worker.
+
+    Khi Service Worker đã được đăng ký và cài đặt, nó sẽ quản lý cache cho các tài nguyên cần thiết và giúp ứng dụng của bạn hoạt động nhanh chóng, ngay cả khi mạng không ổn định hoặc khi không có kết nối mạng.
+
+41. `Việc gì xảy ra nếu như cộng 2 mảng trong javascript`
+
+    Khi bạn thực hiện phép cộng (`+`) giữa hai mảng trong JavaScript, kết quả sẽ không phải là tổng của các phần tử của mảng nhưng là một chuỗi mới. JavaScript sẽ thực hiện việc chuyển đổi tự động của các mảng sang chuỗi và sau đó nối chúng lại với nhau. Điều này có thể tạo ra một chuỗi chứa các giá trị của các phần tử mảng được nối với nhau.
+
+    Dưới đây là một ví dụ:
+
+    ```javascript
+    const array1 = [1, 2, 3];
+    const array2 = [4, 5, 6];
+
+    const result = array1 + array2;
+
+    console.log(result); // Kết quả là chuỗi "1,2,34,5,6"
+    ```
+
+    Như bạn thấy, kết quả là một chuỗi được tạo ra từ việc nối các giá trị của cả hai mảng.
+
+    Nếu bạn muốn thực hiện phép cộng giữa các phần tử của hai mảng, bạn có thể sử dụng các phương thức như `concat` hoặc toán tử spread (`...`). Ví dụ:
+
+    ```javascript
+    const array1 = [1, 2, 3];
+    const array2 = [4, 5, 6];
+
+    // Sử dụng phương thức concat
+    const resultConcat = array1.concat(array2);
+    console.log(resultConcat); // Kết quả là mảng [1, 2, 3, 4, 5, 6]
+
+    // Sử dụng toán tử spread
+    const resultSpread = [...array1, ...array2];
+    console.log(resultSpread); // Kết quả là mảng [1, 2, 3, 4, 5, 6]
+    ```
+
+    Cả hai cách trên sẽ tạo ra một mảng mới chứa tất cả các phần tử từ cả hai mảng.
+
+42. `Làm cách nào để empty một array trong javascript`
+
+      Để làm rỗng (empty) một mảng trong JavaScript, bạn có thể sử dụng một trong những cách sau:
+
+    1. **Gán Mảng mới:**
+        ```javascript
+        let myArray = [1, 2, 3, 4, 5];
+        myArray = [];
+        // hoặc
+        myArray.length = 0;
+        ```
+        Cả hai cách trên đều gán một mảng mới có độ dài 0 cho biến `myArray`, làm cho mảng trở thành rỗng.
+
+    2. **Sử Dụng `splice`:**
+      ```javascript
+      let myArray = [1, 2, 3, 4, 5];
+      myArray.splice(0, myArray.length);
+      ```
+      Phương thức `splice` có thể được sử dụng để cắt một phần của mảng và trong trường hợp này, chúng ta sử dụng nó để cắt tất cả các phần tử từ index 0 (bắt đầu) với độ dài là `myArray.length`, làm cho mảng trở thành rỗng.
+
+    3. **Gán `[]` cho Mảng:**
+      ```javascript
+      let myArray = [1, 2, 3, 4, 5];
+      myArray = [];
+      ```
+      Gán một mảng rỗng trực tiếp cho biến `myArray`.
+
+    Tất cả các cách trên đều sẽ làm cho mảng trở thành rỗng. Chọn cách mà bạn cảm thấy phù hợp với ngữ cảnh và quy tắc lập trình của bạn.
 
 # Typescript
 
@@ -7432,7 +7578,7 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
     Tóm lại, Express.js là một framework linh hoạt, đơn giản, và mạnh mẽ, làm cho nó trở thành một lựa chọn phổ biến cho phát triển ứng dụng web trên nền tảng Node.js.
 
-56. `Làm cách nào để handle file uploda trong nodejs`
+56. `Làm cách nào để handle file upload trong nodejs`
 
     Để xử lý tải lên tệp trong Node.js và Express, bạn có thể sử dụng middleware như `multer`. Dưới đây là một ví dụ về cách thực hiện điều này:
 
@@ -7581,6 +7727,103 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
     - Dữ liệu được lưu và truy xuất thông qua phương thức `set` và `get` của client Redis.
 
     Để chạy ví dụ này, đảm bảo bạn đã cài đặt và đang chạy một server Redis local hoặc chỉnh sửa địa chỉ server trong `createClient()` nếu bạn sử dụng một server Redis từ xa.
+
+58. `Cách garbage collection hoạt động trong nodejs`
+
+    **English:**
+
+    In Node.js, garbage collection is the process of automatically managing memory by reclaiming unused or no longer reachable memory to prevent memory leaks. Node.js uses the V8 JavaScript engine, developed by Google, which incorporates a generational garbage collector.
+
+    The V8 garbage collector primarily utilizes two main algorithms: the **Scavenger (or New) collector** and the **Mark-Sweep (or Old) collector**.
+
+    1. **Scavenger Collector (New Space):**
+      - Newly created objects are allocated in the "New Space."
+      - The Scavenger collector identifies and reclaims short-lived objects quickly.
+      - Surviving objects are moved to the "Old Space."
+
+    2. **Mark-Sweep Collector (Old Space):**
+      - Objects that have survived several garbage collection cycles are moved to the "Old Space."
+      - The Mark-Sweep collector identifies and reclaims long-lived objects.
+      - It marks reachable objects, sweeps away unreachable ones, and compacts memory.
+
+    3. **Incremental Marking:**
+      - To minimize pauses during garbage collection, V8 uses incremental marking.
+      - It divides the marking phase into smaller steps, spreading the work across multiple JavaScript execution cycles.
+
+    4. **Garbage Collection Triggers:**
+      - Garbage collection is triggered when the allocated memory reaches a certain threshold.
+      - The exact mechanism varies based on the V8 version and configurations.
+
+    **Tiếng Việt:**
+
+    Trong Node.js, garbage collection là quá trình quản lý bộ nhớ tự động bằng cách thu hồi bộ nhớ không sử dụng hoặc không thể tiếp cận nữa để ngăn chặn rò rỉ bộ nhớ. Node.js sử dụng trình điều khiển JavaScript V8, được phát triển bởi Google, và tích hợp một bộ thu gom rác theo thế hệ.
+
+    Trình thu gom rác V8 chủ yếu sử dụng hai thuật toán chính: **Thu gom rác Scavenger (hoặc New)** và **Thu gom rác Mark-Sweep (hoặc Old)**.
+
+    1. **Thu gom rác Scavenger (New Space):**
+      - Các đối tượng mới được tạo được phân bổ trong "New Space".
+      - Thu gom rác Scavenger nhận diện và thu hồi các đối tượng có tuổi thọ ngắn nhanh chóng.
+      - Các đối tượng sống sót được chuyển đến "Old Space".
+
+    2. **Thu gom rác Mark-Sweep (Old Space):**
+      - Các đối tượng đã sống sót qua nhiều chu kỳ thu gom rác được chuyển đến "Old Space".
+      - Thu gom rác Mark-Sweep nhận diện và thu hồi các đối tượng có tuổi thọ dài.
+      - Nó đánh dấu các đối tượng có thể tiếp cận được, làm sạch các đối tượng không thể tiếp cận được và nén bộ nhớ.
+
+    3. **Đánh Dấu Tăng Dần:**
+      - Để giảm thiểu thời gian tạm dừng trong quá trình thu gom rác, V8 sử dụng đánh dấu tăng dần.
+      - Nó chia nhỏ giai đoạn đánh dấu thành các bước nhỏ, phân tán công việc qua nhiều chu kỳ thực thi JavaScript.
+
+    4. **Kích Hoạt Thu Gom Rác:**
+      - Thu gom rác được kích hoạt khi bộ nhớ đã phân bổ đạt đến một ngưỡng nhất định.
+      - Cơ chế cụ thể thay đổi tùy thuộc vào phiên bản V8 và cấu hình sử dụng.
+
+59. `Phân biệt req.query và req.params trong nodejs express`
+
+    Trong Express.js, `req.query` và `req.params` là hai cách để lấy thông tin từ URL, nhưng chúng đều có mục đích và cách sử dụng khác nhau.
+
+    1. **`req.query`:**
+      - **Mục đích:** Được sử dụng để lấy các tham số (parameters) truyền vào qua URL trong query string.
+      - **Ví dụ URL:** `http://example.com/api/users?name=John&age=25`
+      - **Lấy giá trị trong mã nguồn:**
+        ```javascript
+        const name = req.query.name; // John
+        const age = req.query.age;   // 25
+        ```
+
+    2. **`req.params`:**
+      - **Mục đích:** Được sử dụng để lấy các tham số truyền vào qua URL dưới dạng route parameters.
+      - **Ví dụ URL:** `http://example.com/api/users/:id`
+      - **Ví dụ Route:** `app.get('/api/users/:id', (req, res) => { /*...*/ });`
+      - **Lấy giá trị trong mã nguồn:**
+        ```javascript
+        const userId = req.params.id; // Giá trị của tham số trong URL
+        ```
+
+    **Ví dụ hoàn chỉnh:**
+    ```javascript
+    const express = require('express');
+    const app = express();
+
+    // Route sử dụng req.query
+    app.get('/api/users', (req, res) => {
+      const name = req.query.name;
+      const age = req.query.age;
+      res.send(`Name: ${name}, Age: ${age}`);
+    });
+
+    // Route sử dụng req.params
+    app.get('/api/users/:id', (req, res) => {
+      const userId = req.params.id;
+      res.send(`User ID: ${userId}`);
+    });
+
+    app.listen(3000, () => {
+      console.log('Server is running on port 3000');
+    });
+    ```
+
+    Khi bạn truy cập `http://localhost:3000/api/users?name=John&age=25`, bạn sẽ nhận được phản hồi từ Route sử dụng `req.query`. Nếu bạn truy cập `http://localhost:3000/api/users/123`, bạn sẽ nhận được phản hồi từ Route sử dụng `req.params`.
 
 ## LOOPBACK
 
