@@ -1,4 +1,24 @@
-Web Fundamentals
+# Giới thiệu bản thân
+
+Certainly! Here's an introduction for you:
+
+---
+
+Hello, I'm [Your Name], a seasoned full-stack web developer with over 2 years of hands-on experience. My expertise lies in crafting robust web applications using cutting-edge technologies such as Node.js, Express.js, React.js, and Next.js.
+
+In the realm of server-side development, I specialize in Node.js and Express.js, leveraging their powerful features to create scalable and efficient backend solutions. On the client side, I am proficient in React.js, a popular JavaScript library for building user interfaces, and Next.js, a framework that enhances React applications with server-side rendering and other advanced features.
+
+Throughout my career, I've had the opportunity to work on diverse projects, honing my skills in both frontend and backend development. I'm passionate about creating seamless and engaging user experiences while ensuring the performance and reliability of the underlying systems.
+
+I thrive in dynamic environments and enjoy tackling challenges that come with developing web applications. My commitment to staying updated with the latest industry trends and continuously enhancing my skills allows me to deliver high-quality solutions that meet both user requirements and business objectives.
+
+Let's build something incredible together! If you're looking for a dedicated and experienced full-stack web developer, I'd love to discuss how I can contribute to your next project.
+
+--- 
+
+Feel free to customize this introduction to better fit your personal style and experiences!
+
+# Web Fundamentals
 
 - HTML
   - HTML5 vs HTML
@@ -7903,6 +7923,82 @@ Lưu ý rằng Interceptor trong LoopBack 4 được thực hiện theo kiểu "
 ## SQL
 
 ### SQL (Structured Query Language) là một ngôn ngữ lập trình dùng để truy vấn và quản lý cơ sở dữ liệu quan hệ (Relational Database Management System - RDBMS). SQL được thiết kế để thao tác dữ liệu trong các hệ thống quản lý cơ sở dữ liệu quan hệ như MySQL, Oracle, SQL Server, PostgreSQL, và SQLite.
+
+Trong SQL (Structured Query Language), thứ tự của các câu lệnh truy vấn (query) thường theo các bước cơ bản sau:
+
+1. **SELECT**: Chọn các cột dữ liệu từ một hoặc nhiều bảng.
+   ```sql
+   SELECT column1, column2, ...
+   FROM table_name;
+   ```
+
+2. **FROM**: Xác định bảng hoặc bảng nào cần truy vấn dữ liệu.
+   ```sql
+   SELECT column1, column2, ...
+   FROM table_name;
+   ```
+
+3. **WHERE**: Điều kiện để lọc dữ liệu theo một hoặc nhiều điều kiện.
+   ```sql
+   SELECT column1, column2, ...
+   FROM table_name
+   WHERE condition;
+   ```
+
+4. **GROUP BY**: Nhóm các dòng dữ liệu dựa trên một hoặc nhiều cột.
+   ```sql
+   SELECT column1, COUNT(*)
+   FROM table_name
+   GROUP BY column1;
+   ```
+
+5. **HAVING**: Sử dụng để lọc kết quả của GROUP BY dựa trên điều kiện.
+   ```sql
+   SELECT column1, COUNT(*)
+   FROM table_name
+   GROUP BY column1
+   HAVING COUNT(*) > 1;
+   ```
+
+6. **ORDER BY**: Sắp xếp kết quả theo một hoặc nhiều cột.
+   ```sql
+   SELECT column1, column2
+   FROM table_name
+   ORDER BY column1 ASC, column2 DESC;
+   ```
+
+7. **LIMIT/OFFSET (nếu cần)**: Giới hạn số lượng kết quả trả về hoặc bỏ qua một số kết quả ở đầu.
+   ```sql
+   SELECT column1, column2
+   FROM table_name
+   ORDER BY column1
+   LIMIT 10 OFFSET 20;
+   ```
+
+Subquery (hoặc con subquery) trong SQL là một truy vấn được nhúng bên trong một truy vấn khác. Subquery thường được sử dụng để trả về một tập dữ liệu nhỏ hơn hoặc một giá trị cụ thể, mà sau đó có thể được sử dụng trong một truy vấn lớn hơn.
+
+Dưới đây là một ví dụ sử dụng subquery trong PostgreSQL để hiển thị thông tin về các khách hàng có tổng số đơn đặt hàng lớn hơn một giá trị cụ thể:
+
+```sql
+-- Bước 1: Viết subquery để tính tổng số đơn đặt hàng cho mỗi khách hàng
+SELECT customer_id, SUM(order_amount) AS total_orders
+FROM orders
+GROUP BY customer_id;
+
+-- Bước 2: Sử dụng subquery trong câu truy vấn chính để lọc các khách hàng có tổng số đơn đặt hàng lớn hơn 1000
+SELECT customer_id, total_orders
+FROM (
+    SELECT customer_id, SUM(order_amount) AS total_orders
+    FROM orders
+    GROUP BY customer_id
+) AS subquery
+WHERE total_orders > 1000;
+```
+
+Trong ví dụ này, bước đầu tiên sử dụng một subquery để tính tổng số đơn đặt hàng cho mỗi khách hàng từ bảng `orders`. Sau đó, trong bước thứ hai, subquery này được nhúng vào câu truy vấn chính để lọc ra những khách hàng có tổng số đơn đặt hàng lớn hơn 1000.
+
+Lưu ý rằng subquery có thể xuất hiện trong các phần khác nhau của một câu truy vấn, như trong mệnh đề SELECT, FROM, WHERE, và nó có thể trả về một giá trị hoặc một bảng tùy thuộc vào cách bạn sử dụng nó.
+Lưu ý rằng không phải tất cả các câu lệnh truy vấn đều cần sử dụng tất cả các phần trên, và chúng có thể được sắp xếp theo thứ tự khác nhau tùy thuộc vào yêu cầu cụ thể của truy vấn.
 
 Tại sao phải sử dụng ngôn ngữ SQL:
 
