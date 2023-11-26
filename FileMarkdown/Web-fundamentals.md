@@ -3837,97 +3837,57 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
 37. `Cách kiểm tra property có tồn tại hay không trong javascript`
 
-    JavaScript có một số quy tắc về ép kiểu (coercion) khi thực hiện các phép toán hoặc so sánh giữa các kiểu dữ liệu khác nhau. Điều này có thể dẫn đến kết quả không mong muốn nếu không hiểu rõ cách JavaScript thực hiện các quy tắc này. Dưới đây là một số quy tắc cơ bản và ví dụ minh họa:
+    Trong JavaScript, có một số cách để kiểm tra xem một thuộc tính có tồn tại trong một đối tượng hay không. Dưới đây là một số cách phổ biến:
 
-    ### 1. **Toán tử `+` (Concatenation và Addition):**
+    ### 1. Sử dụng `in` operator:
 
-    - **Chuỗi và số:**
-      ```javascript
-      const str = '5';
-      const num = 10;
+    ```javascript
+    const myObject = { key: 'value' };
 
-      const result = str + num; // Kết quả là chuỗi '510'
-      ```
+    if ('key' in myObject) {
+      console.log('Thuộc tính tồn tại!');
+    } else {
+      console.log('Thuộc tính không tồn tại!');
+    }
+    ```
 
-      Trong ví dụ này, chuỗi '5' được nối với số 10, và JavaScript tự động chuyển đổi số 10 thành chuỗi để thực hiện phép nối chuỗi.
+    ### 2. Sử dụng `hasOwnProperty` method:
 
-    - **Số và số:**
-      ```javascript
-      const num1 = 5;
-      const num2 = '10';
+    ```javascript
+    const myObject = { key: 'value' };
 
-      const sum = num1 + num2; // Kết quả là chuỗi '510'
-      ```
+    if (myObject.hasOwnProperty('key')) {
+      console.log('Thuộc tính tồn tại!');
+    } else {
+      console.log('Thuộc tính không tồn tại!');
+    }
+    ```
 
-      Trong trường hợp này, số 5 được chuyển đổi thành chuỗi để thực hiện phép nối chuỗi.
+    ### 3. Kiểm tra với giá trị undefined:
 
-    ### 2. **So sánh (Equality Operators):**
+    ```javascript
+    const myObject = { key: 'value' };
 
-    - **So sánh không chặt chẽ (`==`):**
-      ```javascript
-      const value1 = 5;
-      const value2 = '5';
+    if (myObject.key !== undefined) {
+      console.log('Thuộc tính tồn tại!');
+    } else {
+      console.log('Thuộc tính không tồn tại!');
+    }
+    ```
 
-      console.log(value1 == value2); // true
-      ```
+    ### 4. Sử dụng Optional Chaining (ES2020):
 
-      JavaScript tự động thực hiện ép kiểu để so sánh giữa số và chuỗi, nếu có thể chuyển đổi một cách hợp lý.
+    ```javascript
+    const myObject = { key: 'value' };
 
-    - **So sánh chặt chẽ (`===`):**
-      ```javascript
-      const value1 = 5;
-      const value2 = '5';
+    if (myObject?.key) {
+      console.log('Thuộc tính tồn tại!');
+    } else {
+      console.log('Thuộc tính không tồn tại!');
+    }
+    ```
 
-      console.log(value1 === value2); // false
-      ```
-
-      So sánh chặt chẽ không thực hiện ép kiểu tự động, nên giá trị và kiểu dữ liệu phải đều giống nhau để kết quả là `true`.
-
-    ### 3. **Falsy và Truthy Values:**
-
-    - **Falsy values:**
-      ```javascript
-      if (0) {
-        // Khối mã này không được thực thi vì 0 là giá trị falsy
-      }
-
-      if ('') {
-        // Khối mã này không được thực thi vì chuỗi rỗng là giá trị falsy
-      }
-      ```
-
-    - **Truthy values:**
-      ```javascript
-      if (1) {
-        // Khối mã này được thực thi vì 1 là giá trị truthy
-      }
-
-      if ('hello') {
-        // Khối mã này được thực thi vì chuỗi 'hello' là giá trị truthy
-      }
-      ```
-
-      JavaScript tự động chuyển đổi giá trị thành falsy hoặc truthy khi cần thiết.
-
-    ### 4. **Toán tử Logic (`&&`, `||`):**
-
-    - **Toán tử `&&`:**
-      ```javascript
-      const result = 'hello' && 42; // Kết quả là số 42
-      ```
-
-      Nếu giá trị bên trái của `&&` là truthy, kết quả là giá trị bên phải của nó.
-
-    - **Toán tử `||`:**
-      ```javascript
-      const result = '' || 'default'; // Kết quả là chuỗi 'default'
-      ```
-
-      Nếu giá trị bên trái của `||` là falsy, kết quả là giá trị bên phải của nó.
-
-    ### Kết luận:
-
-    Hiểu rõ về quy tắc ép kiểu trong JavaScript là quan trọng để tránh nhầm lẫn và bugs không mong muốn trong mã nguồn của bạn. Luôn sử dụng so sánh chặt chẽ (`===` và `!==`) khi kiểm tra giá trị và kiểu để tránh các hiểu lầm không mong muốn.
+    Lưu ý rằng khi sử dụng `in` operator hoặc `hasOwnProperty`, bạn có thể tránh được những vấn đề liên quan đến việc một thuộc tính có giá trị là `undefined`. Tuy nhiên, cách sử dụng Optional Chaining giúp đơn giản hóa mã nguồn và giảm khả năng phát sinh lỗi nếu thuộc tính không tồn tại hoặc có giá trị là `null` hoặc `undefined`.
 
 38. `So sánh in operator và hasOwnProperty trong javascript`
 
