@@ -7878,6 +7878,239 @@ export class MyApplication extends Application {
 
 Lưu ý rằng Interceptor trong LoopBack 4 được thực hiện theo kiểu "Chuỗi Interceptor" (Interceptor Chain), trong đó mỗi Interceptor có thể được đăng ký và chạy tuần tự theo thứ tự xác định.
 
+## NESTJS
+
+1. `Filters trong nestjs dùng để làm gì`
+
+    Trong NestJS, các Filters được sử dụng để xử lý các loại logic liên quan đến xử lý các loại ngoại lệ, chúng ta có thể thực hiện các hành động như chuyển đổi dữ liệu, ghi log, hoặc thậm chí thay đổi response trước khi nó được gửi đi. Filters thường được sử dụng để thực hiện các nhiệm vụ xử lý liên quan đến lớp Controller hoặc Exception Filters.
+
+    Dưới đây là một ví dụ đơn giản về cách sử dụng một Filter trong NestJS:
+
+    1. **Tạo một Exception Filter:**
+      
+      ```typescript
+      // file: src/common/filters/http-exception.filter.ts
+      import { ExceptionFilter, Catch, ArgumentsHost, HttpStatus } from '@nestjs/common';
+      import { Response } from 'express';
+
+      @Catch()
+      export class HttpExceptionFilter implements ExceptionFilter {
+        catch(exception: any, host: ArgumentsHost) {
+          const ctx = host.switchToHttp();
+          const response = ctx.getResponse<Response>();
+          const status = exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+
+          response
+            .status(status)
+            .json({
+              statusCode: status,
+              message: exception.message,
+              timestamp: new Date().toISOString(),
+              path: ctx.getRequest().url,
+            });
+        }
+      }
+      ```
+
+    2. **Kết nối Filter với Controller:**
+      
+      ```typescript
+      // file: src/app.controller.ts
+      import { Controller, Get, UseFilters } from '@nestjs/common';
+      import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+
+      @Controller('example')
+      @UseFilters(HttpExceptionFilter)
+      export class AppController {
+        @Get()
+        async example() {
+          // Simulate an exception
+          throw new Error('This is an example exception.');
+        }
+      }
+      ```
+
+    Trong ví dụ trên, `HttpExceptionFilter` là một Filter xử lý ngoại lệ. Nó được áp dụng cho tất cả các route trong `AppController` thông qua decorator `@UseFilters(HttpExceptionFilter)`.
+
+    Khi một ngoại lệ xảy ra trong quá trình xử lý yêu cầu, Filter sẽ bắt được ngoại lệ và thực hiện xử lý tùy chỉnh, chẳng hạn như ghi log hoặc thay đổi cách dữ liệu được trả về. Trong trường hợp này, nó trả về một đối tượng JSON chứa thông tin về ngoại lệ.
+
+2. `Pipe trong nestjs dùng để làm gì`
+
+    Trong NestJS, Pipe là một thành phần quan trọng giúp thực hiện xác thực dữ liệu (data validation) và chuyển đổi dữ liệu trước khi nó được chuyển đến các hàm xử lý trong Controller. Cụ thể, các Pipe thường được sử dụng để:
+
+    1. **Xác thực Dữ liệu (Data Validation):** Pipe có thể được sử dụng để kiểm tra và đảm bảo rằng dữ liệu đầu vào đáp ứng các tiêu chuẩn cụ thể trước khi nó được chuyển đến hàm xử lý thực sự. Điều này giúp đảm bảo tính đúng đắn và an toàn của dữ liệu.
+
+    2. **Chuyển Đổi Dữ liệu (Data Transformation):** Pipe có thể chuyển đổi hoặc làm sạch dữ liệu đầu vào để đảm bảo rằng nó đáp ứng định dạng hoặc yêu cầu cụ thể trước khi nó được xử lý bởi Controller.
+
+    3. **Áp dụng Logic Phức tạp:** Pipe cung cấp một cơ chế để triển khai logic phức tạp như xử lý lỗi, thống kê, hoặc các tác vụ tùy chỉnh khác liên quan đến xử lý dữ liệu.
+
+    Dưới đây là một ví dụ cơ bản về cách sử dụng Pipe trong NestJS:
+
+    ```typescript
+    // file: src/common/pipes/validation.pipe.ts
+    import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
+    import { validate, ValidationError } from 'class-validator';
+    import { plainToClass } from 'class-transformer';
+
+    @Injectable()
+    export class ValidationPipe implements PipeTransform<any> {
+      async transform(value: any, metadata: ArgumentMetadata) {
+        const { metatype } = metadata;
+        if (!metatype || !this.toValidate(metatype)) {
+          return value;
+        }
+
+        const object = plainToClass(metatype, value);
+        const errors = await validate(object);
+        if (errors.length > 0) {
+          throw new BadRequestException('Validation failed');
+        }
+        return value;
+      }
+
+      private toValidate(metatype: Function): boolean {
+        const types: Function[] = [String, Boolean, Number, Array, Object];
+        return !types.includes(metatype);
+      }
+    }
+    ```
+
+    Trong ví dụ trên, `ValidationPipe` là một Pipe custom được sử dụng để kiểm tra và xác thực dữ liệu đầu vào sử dụng thư viện `class-validator`. Bạn có thể áp dụng Pipe này trong một Controller bằng cách sử dụng decorator `@UsePipes(ValidationPipe)` hoặc trong một cấp module.
+
+3. `Repository trong nestjs là gì, cho ví dụ về repository trong nestjs`
+
+    Trong NestJS, Repositories là một khái niệm được sử dụng chủ yếu khi làm việc với cơ sở dữ liệu. Repository là một lớp cung cấp các phương thức để thực hiện các thao tác cơ bản như tạo, đọc, cập nhật và xóa (CRUD) dữ liệu trong cơ sở dữ liệu. NestJS thường sử dụng các thư viện như TypeORM hoặc Mongoose để tương tác với cơ sở dữ liệu, và Repositories là một phần quan trọng của mô hình dữ liệu.
+
+    Dưới đây là một ví dụ về cách sử dụng Repository trong NestJS với TypeORM, một ORM (Object-Relational Mapping) phổ biến:
+
+    1. **Cài đặt TypeORM và các dependencies:**
+
+      ```bash
+      npm install --save @nestjs/typeorm typeorm mysql
+      ```
+
+    2. **Tạo một Entity (Model):**
+
+      ```typescript
+      // file: src/posts/post.entity.ts
+      import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+
+      @Entity()
+      export class Post {
+        @PrimaryGeneratedColumn()
+        id: number;
+
+        @Column()
+        title: string;
+
+        @Column()
+        content: string;
+      }
+      ```
+
+    3. **Tạo một Repository:**
+
+      ```typescript
+      // file: src/posts/posts.repository.ts
+      import { EntityRepository, Repository } from 'typeorm';
+      import { Post } from './post.entity';
+
+      @EntityRepository(Post)
+      export class PostsRepository extends Repository<Post> {}
+      ```
+
+    4. **Sử dụng Repository trong Service hoặc Controller:**
+
+      ```typescript
+      // file: src/posts/posts.service.ts
+      import { Injectable } from '@nestjs/common';
+      import { InjectRepository } from '@nestjs/typeorm';
+      import { Repository } from 'typeorm';
+      import { Post } from './post.entity';
+
+      @Injectable()
+      export class PostsService {
+        constructor(
+          @InjectRepository(PostsRepository)
+          private readonly postsRepository: PostsRepository,
+        ) {}
+
+        async getAllPosts(): Promise<Post[]> {
+          return this.postsRepository.find();
+        }
+
+        async getPostById(id: number): Promise<Post> {
+          return this.postsRepository.findOne(id);
+        }
+
+        async createPost(post: Post): Promise<Post> {
+          return this.postsRepository.save(post);
+        }
+
+        async updatePost(id: number, updatedPost: Partial<Post>): Promise<Post> {
+          await this.postsRepository.update(id, updatedPost);
+          return this.postsRepository.findOne(id);
+        }
+
+        async deletePost(id: number): Promise<void> {
+          await this.postsRepository.delete(id);
+        }
+      }
+      ```
+
+    Trong ví dụ này, `PostsRepository` là một Repository đặc biệt cho Entity `Post`. Bạn có thể thấy cách chúng ta sử dụng Repository trong `PostsService` để thực hiện các thao tác CRUD cơ bản. Điều này giúp tách biệt logic xử lý cơ sở dữ liệu từ logic kinh doanh, làm cho mã nguồn dễ đọc và bảo trì hơn.
+
+4. `Guards trong nestjs là gì, cho ví dụ về việc sử dụng guards trong nestjs`
+
+    Trong NestJS, Guards là một thành phần quan trọng giúp kiểm soát việc truy cập vào các phần khác nhau của ứng dụng dựa trên các điều kiện cụ thể. Guards có thể được sử dụng để xác thực người dùng, quyết định liệu một người dùng có quyền truy cập vào một route hay không, và thực hiện nhiều nhiệm vụ kiểm soát truy cập khác.
+
+    Dưới đây là một ví dụ đơn giản về cách sử dụng Guards trong NestJS:
+
+    1. **Tạo một Guard:**
+
+      ```typescript
+      // file: src/common/guards/auth.guard.ts
+      import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+      import { Observable } from 'rxjs';
+
+      @Injectable()
+      export class AuthGuard implements CanActivate {
+        canActivate(
+          context: ExecutionContext,
+        ): boolean | Promise<boolean> | Observable<boolean> {
+          const request = context.switchToHttp().getRequest();
+          return this.validateRequest(request);
+        }
+
+        private validateRequest(request: any): boolean {
+          // Perform authentication logic here
+          // For simplicity, assume every request is authenticated
+          return true;
+        }
+      }
+      ```
+
+    2. **Sử dụng Guard trong Controller:**
+
+      ```typescript
+      // file: src/app.controller.ts
+      import { Controller, Get, UseGuards } from '@nestjs/common';
+      import { AuthGuard } from './common/guards/auth.guard';
+
+      @Controller('example')
+      @UseGuards(AuthGuard)
+      export class AppController {
+        @Get()
+        example() {
+          return 'This route requires authentication';
+        }
+      }
+      ```
+
+    Trong ví dụ này, `AuthGuard` là một Guard cơ bản kiểm tra xem một request có được phép truy cập hay không. Guard này được áp dụng cho một route cụ thể bằng cách sử dụng decorator `@UseGuards(AuthGuard)`.
+
+    Khi một request được gửi đến route được bảo vệ bởi `AuthGuard`, NestJS sẽ gọi phương thức `canActivate` của Guard. Trong phương thức này, bạn có thể thực hiện logic xác thực, chẳng hạn như kiểm tra token, quyền người dùng, hoặc bất kỳ điều kiện nào khác. Nếu `canActivate` trả về `true`, request sẽ được tiếp tục xử lý; nếu là `false`, request sẽ bị từ chối và không thể truy cập được.
+
 # Database
 
 ## SQL
