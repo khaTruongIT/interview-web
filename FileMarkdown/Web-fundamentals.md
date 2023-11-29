@@ -7084,7 +7084,6 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
 48. `Cho ví dụ về một ứng dụng chạy nodejs express typescript và websocket`
 
-
     Dưới đây là một ví dụ đơn giản về ứng dụng Node.js Express sử dụng TypeScript và thư viện Socket.IO để tạo một server WebSocket. Để bắt đầu, bạn cần cài đặt các gói npm cần thiết bằng cách chạy lệnh:
 
     ```bash
@@ -7877,6 +7876,461 @@ export class MyApplication extends Application {
 ```
 
 Lưu ý rằng Interceptor trong LoopBack 4 được thực hiện theo kiểu "Chuỗi Interceptor" (Interceptor Chain), trong đó mỗi Interceptor có thể được đăng ký và chạy tuần tự theo thứ tự xác định.
+
+1. `Context trong loopback là gì, cho ví dụ về việc sử dụng context trong loopgback`
+
+Trong LoopBack, "context" thường được sử dụng để đại diện cho môi trường thực thi của ứng dụng và chứa thông tin quan trọng như các đối tượng request, response, và các dịch vụ khác. Context giúp quản lý trạng thái và dữ liệu liên quan đến một cuộc gọi HTTP hoặc một hoạt động khác trong ứng dụng.
+
+Dưới đây là một ví dụ về cách sử dụng context trong LoopBack trong một Controller:
+
+```javascript
+// Import các module cần thiết từ LoopBack
+const { inject } = require('@loopback/context');
+const { get, param } = require('@loopback/rest');
+
+// Tạo một Controller đơn giản
+class MyController {
+  constructor(
+    // Inject context thông qua constructor
+    @inject.context() private myContext: Context,
+  ) {}
+
+  // Một endpoint đơn giản
+  @get('/hello/{name}')
+  async hello(
+    @param.path.string('name') name: string,
+  ): Promise<string> {
+    // Lấy thông tin từ context
+    const requestId = this.myContext.get('requestId');
+
+    // Thực hiện các công việc khác với context
+    console.log(`Handling request ${requestId} for ${name}`);
+
+    // Trả về kết quả
+    return `Hello, ${name}!`;
+  }
+}
+```
+
+Trong ví dụ trên:
+
+- Chúng ta sử dụng decorator `@inject.context()` để inject context vào constructor của Controller.
+- Trong phương thức `hello`, chúng ta sử dụng `this.myContext.get('requestId')` để lấy giá trị của khóa 'requestId' từ context. Điều này có thể là bất kỳ thông tin nào liên quan đến môi trường thực thi của ứng dụng.
+- Phương thức `hello` có một tham số đường dẫn, được xác định bằng decorator `@param.path.string('name')`. Điều này thể hiện sự linh hoạt của LoopBack trong việc xử lý tham số từ các nguồn khác nhau, trong trường hợp này là từ đường dẫn URL.
+
+Lưu ý rằng điều này chỉ là một ví dụ đơn giản và có thể có nhiều cách sử dụng context tùy thuộc vào yêu cầu cụ thể của ứng dụng.
+
+2. `Component trong loopback 4 là gì, cách sử dụng component trong loopback 4`
+
+    Trong LoopBack 4, các Components là một cách để tái sử dụng và tổ chức code trong ứng dụng. Mỗi Component là một phần độc lập, có thể chứa các Controllers, Services, Repositories và các khối logic khác. Các Component có thể được kích hoạt và sử dụng trong ứng dụng LoopBack, giúp việc quản lý và mở rộng ứng dụng trở nên dễ dàng hơn.
+
+    Dưới đây là một ví dụ đơn giản về cách tạo và sử dụng một Component trong LoopBack 4:
+
+    1. Tạo một Component mới:
+
+    ```typescript
+    // src/components/greeter.component.ts
+
+    import { Component } from '@loopback/core';
+
+    export class GreeterComponent implements Component {
+      constructor() {}
+
+      // Các phương thức và logic của Component có thể được thêm ở đây
+    }
+    ```
+
+    2. Đăng ký Component trong ứng dụng:
+
+    ```typescript
+    // src/application.ts
+
+    import { MyApplication } from './application';
+    import { GreeterComponent } from './components/greeter.component';
+
+    export class MyApp extends MyApplication {
+      constructor(options: ApplicationConfig = {}) {
+        super(options);
+
+        // Đăng ký GreeterComponent để sử dụng trong ứng dụng
+        this.component(GreeterComponent);
+      }
+    }
+    ```
+
+    3. Sử dụng Component trong một Controller:
+
+    ```typescript
+    // src/controllers/greeter.controller.ts
+
+    import { inject } from '@loopback/context';
+    import { get } from '@loopback/rest';
+    import { GreeterComponent } from '../components/greeter.component';
+
+    export class GreeterController {
+      constructor(
+        // Inject GreeterComponent thông qua constructor
+        @inject('components.GreeterComponent')
+        private greeterComponent: GreeterComponent,
+      ) {}
+
+      @get('/greet')
+      greet(): string {
+        // Gọi phương thức của GreeterComponent
+        return this.greeterComponent.sayHello();
+      }
+    }
+    ```
+
+    4. Thêm logic vào Component:
+
+    ```typescript
+    // src/components/greeter.component.ts
+
+    import { injectable } from '@loopback/core';
+
+    @injectable()
+    export class GreeterComponent {
+      constructor() {}
+
+      // Phương thức của Component
+      sayHello(): string {
+        return 'Hello from GreeterComponent!';
+      }
+    }
+    ```
+
+    Trong ví dụ này:
+
+    - Chúng ta đã tạo một Component `GreeterComponent` có một phương thức `sayHello`.
+    - Component này đã được đăng ký trong ứng dụng thông qua `this.component(GreeterComponent)` trong file `application.ts`.
+    - Trong Controller `GreeterController`, chúng ta đã inject `GreeterComponent` thông qua constructor và sử dụng phương thức `sayHello` của nó trong endpoint `/greet`.
+
+    Qua ví dụ này, bạn có thể thấy cách Components giúp tổ chức và quản lý code một cách hiệu quả trong ứng dụng LoopBack 4.
+
+3. `Binding trong loopback 4 là gì, cách sử dụng binding trong loopback 4`
+
+    Trong LoopBack 4, "binding" đề cập đến cách mà các đối tượng được liên kết và quản lý trong container của ứng dụng. Binding là một cách để gắn kết giữa một khóa (key) và một giá trị hoặc một loại dịch vụ trong container. Các binding có thể được sử dụng để quản lý các thành phần khác nhau của ứng dụng như Controllers, Services, Repositories, và các thành phần khác.
+
+    Dưới đây là một ví dụ về cách sử dụng binding trong LoopBack 4:
+
+    1. **Tạo một Service:**
+
+    ```typescript
+    // src/services/greeter.service.ts
+
+    import { injectable } from '@loopback/core';
+
+    @injectable()
+    export class GreeterService {
+      greet(name: string): string {
+        return `Hello, ${name}!`;
+      }
+    }
+    ```
+
+    2. **Đăng ký Service trong ứng dụng:**
+
+    ```typescript
+    // src/application.ts
+
+    import { MyApplication } from './application';
+    import { GreeterService } from './services/greeter.service';
+
+    export class MyApp extends MyApplication {
+      constructor(options: ApplicationConfig = {}) {
+        super(options);
+
+        // Đăng ký GreeterService trong container của ứng dụng
+        this.bind('services.GreeterService').toClass(GreeterService);
+      }
+    }
+    ```
+
+    3. **Inject Service trong một Controller:**
+
+    ```typescript
+    // src/controllers/greeter.controller.ts
+
+    import { inject } from '@loopback/context';
+    import { get } from '@loopback/rest';
+    import { GreeterService } from '../services/greeter.service';
+
+    export class GreeterController {
+      constructor(
+        // Inject GreeterService thông qua constructor
+        @inject('services.GreeterService')
+        private greeterService: GreeterService,
+      ) {}
+
+      @get('/greet/{name}')
+      greet(@param.path.string('name') name: string): string {
+        // Gọi phương thức của GreeterService
+        return this.greeterService.greet(name);
+      }
+    }
+    ```
+
+    Trong ví dụ này:
+
+    - Chúng ta đã tạo một Service `GreeterService` có một phương thức `greet`.
+    - Trong file `application.ts`, chúng ta đã đăng ký `GreeterService` trong container của ứng dụng với khóa `'services.GreeterService'` và liên kết nó với class `GreeterService`.
+    - Trong Controller `GreeterController`, chúng ta đã inject `GreeterService` thông qua constructor và sử dụng nó trong phương thức `greet` để trả về lời chào.
+
+    Bằng cách sử dụng binding, chúng ta có thể quản lý và tái sử dụng các thành phần của ứng dụng một cách linh hoạt và dễ dàng.
+
+4. `Dependency injection trong loopback 4 là gì, cho ví dụ`
+
+    Dependency Injection (DI) là một kỹ thuật trong lập trình mà đối tượng nhận các phụ thuộc của mình từ bên ngoài thay vì tự tạo ra chúng. Trong LoopBack 4, DI là một phần quan trọng của hệ thống và được sử dụng để quản lý và cung cấp các đối tượng và dịch vụ cho các thành phần của ứng dụng như Controllers, Services, Repositories, và các thành phần khác.
+
+    Dưới đây là một ví dụ cụ thể về cách sử dụng Dependency Injection trong LoopBack 4:
+
+    1. **Tạo một Service:**
+
+    ```typescript
+    // src/services/greeter.service.ts
+
+    import { injectable } from '@loopback/core';
+
+    @injectable()
+    export class GreeterService {
+      greet(name: string): string {
+        return `Hello, ${name}!`;
+      }
+    }
+    ```
+
+    2. **Inject Service trong một Controller:**
+
+    ```typescript
+    // src/controllers/greeter.controller.ts
+
+    import { inject } from '@loopback/context';
+    import { get, param } from '@loopback/rest';
+    import { GreeterService } from '../services/greeter.service';
+
+    export class GreeterController {
+      constructor(
+        // Inject GreeterService thông qua constructor
+        @inject('services.GreeterService')
+        private greeterService: GreeterService,
+      ) {}
+
+      @get('/greet/{name}')
+      greet(@param.path.string('name') name: string): string {
+        // Gọi phương thức của GreeterService
+        return this.greeterService.greet(name);
+      }
+    }
+    ```
+
+    3. **Đăng ký Service trong ứng dụng:**
+
+    ```typescript
+    // src/application.ts
+
+    import { MyApplication } from './application';
+    import { GreeterService } from './services/greeter.service';
+
+    export class MyApp extends MyApplication {
+      constructor(options: ApplicationConfig = {}) {
+        super(options);
+
+        // Tạo một instance của GreeterService và đăng ký nó trong container của ứng dụng
+        this.bind('services.GreeterService').toClass(GreeterService);
+      }
+    }
+    ```
+
+    Trong ví dụ trên:
+
+    - Chúng ta đã tạo một Service `GreeterService` và đánh dấu nó với decorator `@injectable()` để nó có thể được quản lý bởi LoopBack's DI container.
+    - Trong Controller `GreeterController`, chúng ta đã sử dụng decorator `@inject` để inject `GreeterService` thông qua constructor.
+    - Trong file `application.ts`, chúng ta đã đăng ký `GreeterService` trong container của ứng dụng bằng cách sử dụng `this.bind('services.GreeterService').toClass(GreeterService)`.
+
+    Qua quá trình này, LoopBack tự động giải quyết và cung cấp các phụ thuộc (dependency) cho chúng ta, giúp mã nguồn trở nên linh hoạt và dễ bảo trì hơn.
+
+5. `Authentication trong loopback 4 nodejs express postgres`
+
+    Để triển khai một hệ thống xác thực cơ bản bằng LoopBack 4 và PostgreSQL, bạn cần thực hiện một số bước sau:
+
+    1. **Cài đặt các package cần thiết:**
+
+    ```bash
+    npm install --save @loopback/authentication @loopback/authentication-jwt @loopback/authorization
+    npm install --save pg
+    ```
+
+    2. **Tạo một model để lưu trữ thông tin người dùng:**
+
+    ```bash
+    lb4 model
+    ```
+
+    Trong quá trình tạo model, bạn sẽ được hỏi về một số thuộc tính cho model người dùng (username, email, password, ...).
+
+    3. **Thực hiện xác thực:**
+
+      - Tạo một `UserRepository` để thao tác với cơ sở dữ liệu.
+      - Tạo một `UserService` để xử lý logic liên quan đến người dùng.
+      - Tạo một `UserController` để xử lý các yêu cầu liên quan đến người dùng.
+
+    4. **Tích hợp JWT (JSON Web Token) cho xác thực:**
+
+      - Cài đặt `@loopback/authentication-jwt`.
+      - Tạo một `JWTService` để tạo và xác thực token JWT.
+      - Cấu hình phần xác thực trong `application.ts`.
+
+    Dưới đây là một ví dụ giả định về cách có thể triển khai:
+
+    ```typescript
+    // src/services/user.service.ts
+    import { UserRepository } from '../repositories';
+    import { User } from '../models';
+    import { repository } from '@loopback/repository';
+    import { compare, genSalt, hash } from 'bcryptjs';
+
+    export class UserService {
+      constructor(
+        @repository(UserRepository)
+        public userRepository: UserRepository,
+      ) {}
+
+      async verifyCredentials(username: string, password: string): Promise<User | null> {
+        const foundUser = await this.userRepository.findOne({ where: { username } });
+        if (!foundUser) {
+          return null;
+        }
+
+        const passwordMatched = await compare(password, foundUser.password);
+        if (!passwordMatched) {
+          return null;
+        }
+
+        return foundUser;
+      }
+
+      async hashPassword(password: string): Promise<string> {
+        const salt = await genSalt(10);
+        return hash(password, salt);
+      }
+    }
+    ```
+
+    ```typescript
+    // src/services/jwt.service.ts
+    import { TokenService, UserService } from '@loopback/authentication';
+    import { BindingKey } from '@loopback/core';
+    import { promisify } from 'util';
+    import { sign } from 'jsonwebtoken';
+
+    const signAsync = promisify(sign);
+
+    export class JWTService implements TokenService {
+      constructor(
+        public userService: UserService,
+        public jwtSecret: string,
+        public jwtExpiresIn: string,
+      ) {}
+
+      async verifyToken(token: string): Promise<any> {
+        // Add your verification logic here
+      }
+
+      async generateToken(userProfile: any): Promise<string> {
+        return signAsync(userProfile, this.jwtSecret, {
+          expiresIn: this.jwtExpiresIn,
+        });
+      }
+    }
+
+    export const JWTServiceBinding = BindingKey.create<JWTService>('services.JWTService');
+    ```
+
+    ```typescript
+    // src/controllers/user.controller.ts
+    import { inject } from '@loopback/context';
+    import { post, requestBody, HttpErrors } from '@loopback/rest';
+    import { User } from '../models';
+    import { UserService } from '../services';
+    import { JWTService, JWTServiceBinding } from '../services/jwt.service';
+
+    export class UserController {
+      constructor(
+        @inject('services.UserService')
+        public userService: UserService,
+        @inject(JWTServiceBinding)
+        public jwtService: JWTService,
+      ) {}
+
+      @post('/signup')
+      async signUp(@requestBody() user: User): Promise<{ token: string }> {
+        // Validate if the user already exists
+        const existingUser = await this.userService.userRepository.findOne({
+          where: { username: user.username },
+        });
+        if (existingUser) {
+          throw new HttpErrors.Conflict('User already exists');
+        }
+
+        // Hash the password before saving it to the database
+        user.password = await this.userService.hashPassword(user.password);
+
+        // Create the user
+        const savedUser = await this.userService.userRepository.create(user);
+
+        // Generate a JWT token for the new user
+        const token = await this.jwtService.generateToken({
+          id: savedUser.id,
+          username: savedUser.username,
+        });
+
+        return { token };
+      }
+
+      @post('/login')
+      async login(@requestBody() credentials: { username: string; password: string }): Promise<{ token: string }> {
+        const user = await this.userService.verifyCredentials(credentials.username, credentials.password);
+
+        if (!user) {
+          throw new HttpErrors.Unauthorized('Invalid credentials');
+        }
+
+        // Generate a JWT token for the authenticated user
+        const token = await this.jwtService.generateToken({
+          id: user.id,
+          username: user.username,
+        });
+
+        return { token };
+      }
+    }
+    ```
+
+    ```typescript
+    // src/application.ts
+    import { JWTService, JWTServiceBinding } from './services/jwt.service';
+    import { ApplicationConfig, MyApplication } from './application';
+
+    export { MyApplication };
+
+    export async function main(options: ApplicationConfig = {}) {
+      const app = new MyApplication(options);
+
+      // Bind JWT service
+      app.bind(JWTServiceBinding).toClass(JWTService);
+
+      await app.boot();
+      await app.start();
+
+      const url = app.restServer.url;
+      console.log(`Server is running at ${url}`);
+
+      return app;
+    }
+    ```
+
+    Lưu ý rằng mã nguồn trên chỉ là một hướng dẫn cơ bản và không chứa các biện pháp bảo mật đầy đủ. Trong một ứng dụng thực tế, bạn cần xem xét và triển khai nhiều biện pháp bảo mật hơn như HTTPS, xác thực email, và quản lý lỗi an toàn.
 
 ## NESTJS
 
