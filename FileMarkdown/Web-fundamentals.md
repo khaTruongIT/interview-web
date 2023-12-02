@@ -14,9 +14,115 @@ I thrive in dynamic environments and enjoy tackling challenges that come with de
 
 Let's build something incredible together! If you're looking for a dedicated and experienced full-stack web developer, I'd love to discuss how I can contribute to your next project.
 
+## Cach thu 2
+
+Dear [Tên người đọc],
+
+I am thrilled to introduce myself as a dedicated and passionate individual currently pursuing my academic journey at the University of Information Technology (UIT). With over two years of practical experience in programming, specializing in Node.js and React.js, I am enthusiastic about continually refining both my technical and soft skills to contribute to the creation of high-quality software that enhances the user experience.
+
+**Educational Background:**
+I am currently a student at UIT, where I have been exposed to a comprehensive curriculum that has not only deepened my theoretical understanding but has also provided me with practical insights into the dynamic world of software development. The diverse and challenging coursework at UIT has been instrumental in shaping my analytical thinking and problem-solving abilities.
+
+**Professional Experience:**
+Having accumulated over two years of hands-on experience in programming, with a focus on Node.js and React.js, I have had the privilege of working on projects that demanded a keen understanding of web development and user interface design. This practical exposure has allowed me to apply theoretical concepts learned in the classroom to real-world scenarios, enhancing my ability to deliver effective and efficient solutions.
+
+**Commitment to Continuous Improvement:**
+I am committed to a philosophy of continuous improvement, constantly seeking avenues to enhance both my hard and soft skills. On the technical front, I avidly explore emerging technologies, engage in coding challenges, and actively contribute to open-source projects. Simultaneously, I understand the importance of effective communication, collaboration, and adaptability in a team environment. To this end, I actively participate in group projects, workshops, and leadership activities to hone my interpersonal and teamwork skills.
+
+**Passion for Learning:**
+My enthusiasm for learning is a driving force in my journey. I am genuinely intrigued by the ever-evolving landscape of technology and consider the process of acquiring new skills as an exciting and enriching endeavor. Whether it's diving into a new programming language, exploring advanced frameworks, or understanding user experience design principles, I approach each learning opportunity with eagerness and dedication.
+
+**Future Endeavors:**
+Looking ahead, my goal is to leverage the skills and knowledge acquired at UIT, combined with my practical experience, to contribute meaningfully to the field of software development. I aspire to be a coder who not only meets industry standards but consistently raises the bar for quality and innovation. My dedication to continuous learning and improvement reflects my commitment to delivering products that resonate with end-users.
+
+In conclusion, I am eager to embark on new challenges, contribute to innovative projects, and collaborate with like-minded professionals who share a passion for excellence in software development. I am confident that my diverse skill set and unwavering commitment to growth make me an asset to any team.
+
+Thank you for considering my introduction, and I look forward to the possibility of contributing to and thriving within your esteemed community.
+
+Best regards,
+
+[Tên của bạn]
 --- 
 
 Feel free to customize this introduction to better fit your personal style and experiences!
+
+
+# FOX AI
+**Title: FOX AI - Transforming Stock Trading with Node.js, Express, and TypeScript**
+
+---
+
+**Introduction:**
+
+Greetings esteemed interview panel,
+
+I am delighted to have the opportunity to introduce you to our groundbreaking project, FOX AI. FOX AI is at the forefront of revolutionizing stock trading, combining cutting-edge technologies such as Node.js, Express, and TypeScript. Today, I am excited to share our journey and recent milestone – the integration of FOX AI into the Zalo Mini App platform.
+
+---
+
+**About FOX AI:**
+
+**1. Technology Stack:**
+   - **Node.js & Express:** Leveraging the speed and efficiency of JavaScript on the server-side.
+   - **TypeScript:** Bringing static typing to JavaScript, enhancing code quality and maintainability.
+
+**2. Core Objective:**
+   - Empowering stock traders with advanced AI-driven insights and analytics.
+   - Providing real-time data analysis for informed decision-making.
+
+**3. Key Features:**
+   - Predictive Analytics: Utilizing machine learning algorithms to forecast stock trends.
+   - Real-time Market Data: Aggregating and processing live market data for immediate analysis.
+   - Personalized Insights: Tailoring recommendations based on individual trading patterns.
+
+---
+
+**Recent Milestone: Zalo Mini App Integration:**
+
+FOX AI has reached a significant milestone by seamlessly integrating with the Zalo Mini App, extending our reach and accessibility to a wider audience.
+
+**1. Zalo Mini App:**
+   - A lightweight, fast, and user-friendly platform.
+   - Provides FOX AI's services within the Zalo ecosystem, enhancing user convenience.
+
+**2. Benefits of Integration:**
+   - **Mobile Accessibility:** Users can access FOX AI's stock trading insights on-the-go.
+   - **Wider User Base:** Leveraging Zalo's extensive user base for increased adoption.
+   - **Enhanced User Experience:** A seamless and intuitive interface for an improved trading experience.
+
+---
+
+**Use Case Scenario:**
+
+Imagine a scenario where a trader, immersed in a bustling coffee shop, receives real-time stock alerts through the FOX AI Zalo Mini App. The trader, armed with personalized insights, makes swift decisions that lead to profitable outcomes. This represents the power and convenience FOX AI brings to the fingertips of every stock trader.
+
+---
+
+**Conclusion:**
+
+In conclusion, FOX AI is not merely a project; it's a commitment to transforming the stock trading landscape. By harnessing the capabilities of Node.js, Express, and TypeScript, and extending our reach through the Zalo Mini App, FOX AI is poised to make stock trading smarter, more accessible, and more profitable for everyone.
+
+Thank you for your time, and we look forward to the exciting future of FOX AI.
+
+---
+
+*Note: Adjust the details and specifics based on the actual features and achievements of the FOX AI project.*
+
+# Muc tieu cua ban than 
+
+Distinguished interview panel,
+
+Allow me to express my sincere gratitude for the opportunity to discuss my aspirations and plans for personal development in the realm of software development. I believe that continual growth, both in technical and soft skills, is pivotal for contributing to the creation of high-quality software that truly enhances the user experience. As I stand before you today, I am eager to share my commitment to evolving into a more competent coder, equipped with the proficiency to craft software that not only meets but exceeds user expectations.
+
+On the technical front, I am dedicated to honing my hard skills. This includes delving deeper into programming languages, staying abreast of the latest frameworks, and mastering tools that facilitate efficient and scalable development. I am currently engaged in a comprehensive learning plan that spans various domains, including but not limited to algorithms, data structures, and design patterns. This knowledge base, I believe, will form a robust foundation upon which I can build innovative and high-performance software solutions.
+
+However, I am equally aware of the significance of soft skills in our dynamic and collaborative industry. Effective communication, teamwork, and adaptability are paramount in navigating the intricacies of software development projects. Recognizing this, I am actively engaging in activities that foster these skills. I seek opportunities to collaborate with diverse teams, participate in workshops on effective communication, and continually refine my problem-solving abilities.
+
+My overarching goal is to contribute to the creation of software that transcends mere functionality – software that resonates with users on a human level. I envision becoming a coder with a holistic understanding of both the technical and user-centric aspects of software development. To achieve this, I am committed to pursuing projects that challenge me, seeking mentorship from industry experts, and engaging in continuous learning through both formal education and hands-on experience.
+
+In conclusion, my commitment to personal development stems from a genuine passion for creating impactful software solutions. I am driven by the desire to not only meet industry standards but to set new benchmarks for excellence. I am excited about the prospect of evolving into a coder with the acumen to craft software that leaves a lasting and positive impression on its users.
+
+Thank you for considering my aspirations, and I am eager to contribute my dedication and evolving skill set to your esteemed team.
 
 # Web Fundamentals
 
@@ -9120,6 +9226,172 @@ Tóm lại, DDL được sử dụng để định nghĩa cấu trúc dữ liệ
       ```
 
     Lưu ý rằng càng tăng cấp độ cô lập, càng có thể gặp phải tăng độ trễ và giảm hiệu suất do cần phải thực hiện nhiều công đoạn kiểm tra và đồng bộ hóa hơn. Do đó, việc chọn mức cô lập phù hợp cần cân nhắc giữa tính nhất quán và hiệu suất của hệ thống.
+
+10. `Store procedures la gi, cho vi du ve cach su dung store procedure`
+
+    Stored Procedures là các chương trình hay đoạn mã SQL được lưu trữ trong cơ sở dữ liệu và có thể được gọi bởi các ứng dụng hoặc các câu lệnh SQL khác. Stored Procedures thường được sử dụng để thực hiện các tác vụ phức tạp hoặc thao tác dữ liệu trong cơ sở dữ liệu.
+
+    Dưới đây là một ví dụ đơn giản về Stored Procedure trong SQL, sử dụng SQL Server:
+
+    ```sql
+    CREATE PROCEDURE GetEmployeeById
+        @EmployeeId INT
+    AS
+    BEGIN
+        SELECT * FROM Employees WHERE EmployeeID = @EmployeeId
+    END
+    ```
+
+    Trong ví dụ này, Stored Procedure có tên là `GetEmployeeById`, nhận một tham số là `@EmployeeId` và trả về thông tin về nhân viên có `EmployeeID` tương ứng.
+
+    Bây giờ, để sử dụng Stored Procedure này trong một ứng dụng Node.js Express, bạn có thể sử dụng một thư viện SQL như `mssql` để kết nối và thực hiện truy vấn.
+
+    Dưới đây là một ví dụ cơ bản:
+
+    1. Đầu tiên, cài đặt thư viện `mssql`:
+
+    ```bash
+    npm install mssql
+    ```
+
+    2. Sử dụng trong mã Node.js:
+
+    ```javascript
+    const express = require('express');
+    const sql = require('mssql');
+
+    const app = express();
+
+    // Thiết lập cấu hình kết nối cơ sở dữ liệu
+    const config = {
+      user: 'your_username',
+      password: 'your_password',
+      server: 'your_server',
+      database: 'your_database',
+    };
+
+    // Kết nối đến cơ sở dữ liệu
+    sql.connect(config, (err) => {
+      if (err) {
+        console.error('Error connecting to database:', err);
+      } else {
+        console.log('Connected to database');
+      }
+    });
+
+    // Định nghĩa route sử dụng Stored Procedure
+    app.get('/employee/:id', (req, res) => {
+      const employeeId = req.params.id;
+
+      // Gọi Stored Procedure
+      const request = new sql.Request();
+      request.input('EmployeeId', sql.Int, employeeId);
+
+      request.execute('GetEmployeeById', (err, result) => {
+        if (err) {
+          console.error('Error executing stored procedure:', err);
+          res.status(500).send('Internal Server Error');
+        } else {
+          // Trả về kết quả từ Stored Procedure
+          res.json(result.recordset);
+        }
+      });
+    });
+
+    // Khởi động server
+    const port = 3000;
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+    ```
+
+    Trong ví dụ trên, khi bạn gửi một yêu cầu GET đến endpoint `/employee/:id`, nó sẽ gọi Stored Procedure `GetEmployeeById` với tham số là `EmployeeId` và trả về kết quả dưới dạng JSON.
+
+11. `Cho vi du su dung trigger trong sql`
+
+    Trong SQL, một trigger là một đối tượng cơ sở dữ liệu được sử dụng để tự động thực hiện một hành động nào đó khi một sự kiện cụ thể xảy ra trong cơ sở dữ liệu. Sự kiện đó có thể là thêm, sửa đổi hoặc xóa dữ liệu từ một bảng. Trigger có thể được sử dụng để kiểm soát dữ liệu, thực hiện các hành động phụ thuộc vào các sự kiện trong cơ sở dữ liệu.
+
+    Dưới đây là một ví dụ chi tiết về một trigger trong SQL. Giả sử chúng ta có một bảng `Orders` và muốn tự động cập nhật trạng thái đơn hàng khi có một đơn hàng mới được thêm vào:
+
+    ```sql
+    -- Tạo bảng Orders
+    CREATE TABLE Orders (
+        OrderID INT PRIMARY KEY,
+        OrderDate DATETIME,
+        OrderStatus VARCHAR(50)
+    );
+
+    -- Tạo trigger để tự động cập nhật trạng thái đơn hàng
+    CREATE TRIGGER UpdateOrderStatus
+    ON Orders
+    AFTER INSERT
+    AS
+    BEGIN
+        UPDATE o
+        SET OrderStatus = 'Processing'
+        FROM Orders o
+        INNER JOIN inserted i ON o.OrderID = i.OrderID;
+    END;
+    ```
+
+    Trong ví dụ này, trigger có tên là `UpdateOrderStatus`. Nó được kích hoạt sau khi một dòng mới được thêm vào bảng `Orders`. Khi một đơn hàng mới được thêm, trigger sẽ tự động cập nhật trạng thái của đơn hàng thành 'Processing'.
+
+    Để sử dụng trigger SQL trong một ứng dụng Node.js Express, bạn có thể sử dụng thư viện SQL như `mssql`. Dưới đây là một ví dụ đơn giản:
+
+    1. Cài đặt thư viện `mssql`:
+
+    ```bash
+    npm install mssql
+    ```
+
+    2. Sử dụng trong mã Node.js:
+
+    ```javascript
+    const express = require('express');
+    const sql = require('mssql');
+
+    const app = express();
+
+// Thiết lập cấu hình kết nối cơ sở dữ liệu
+const config = {
+  user: 'your_username',
+  password: 'your_password',
+  server: 'your_server',
+  database: 'your_database',
+};
+
+// Kết nối đến cơ sở dữ liệu
+sql.connect(config, (err) => {
+  if (err) {
+    console.error('Error connecting to database:', err);
+  } else {
+    console.log('Connected to database');
+  }
+});
+
+// Định nghĩa route để thêm đơn hàng
+app.post('/addOrder', async (req, res) => {
+  try {
+    // Thực hiện thêm đơn hàng
+    const result = await sql.query("INSERT INTO Orders (OrderID, OrderDate) VALUES (1, GETDATE())");
+
+    // Trigger sẽ tự động cập nhật trạng thái đơn hàng
+
+    res.send('Order added successfully');
+  } catch (error) {
+    console.error('Error adding order:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Khởi động server
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+```
+
+Trong ví dụ trên, khi bạn thêm một đơn hàng mới thông qua endpoint `/addOrder`, trigger trong cơ sở dữ liệu sẽ tự động cập nhật trạng thái của đơn hàng.
 
 ## NOSQL
 
