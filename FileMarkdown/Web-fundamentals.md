@@ -124,6 +124,46 @@ In conclusion, my commitment to personal development stems from a genuine passio
 
 Thank you for considering my aspirations, and I am eager to contribute my dedication and evolving skill set to your esteemed team.
 
+1. `Tell me about yourself`
+
+Khi bạn đối mặt với câu hỏi "Tell me about yourself" trong một buổi phỏng vấn, bạn có thể tuân theo cấu trúc chung sau đây để tự giới thiệu mình:
+
+1. **Bắt đầu với Tên và Học vấn:**
+   - "Hi, my name is [Tên của bạn]. I graduated from [Tên trường Đại học hoặc Cao đẳng] with a degree in [Chuyên ngành]."
+
+2. **Kinh nghiệm làm việc:**
+   - "I have [số năm] years of experience in [Lĩnh vực làm việc]. My most recent position was at [Tên công ty] where I [Mô tả ngắn về công việc của bạn]."
+
+3. **Kỹ năng và Năng lực:**
+   - "During my time at [Tên công ty/trường], I developed strong skills in [Liệt kê một số kỹ năng chính của bạn, như quản lý thời gian, làm việc nhóm, giải quyết vấn đề, etc.]."
+
+4. **Thành tựu và Dự án quan trọng:**
+   - "One of my notable achievements was [Mô tả một thành công hoặc dự án quan trọng mà bạn đã đạt được]."
+
+5. **Sở thích hoặc Kết nối với vị trí ứng tuyển:**
+   - "Outside of work, I am passionate about [Mô tả một hoạt động hoặc sở thích của bạn]. I believe that my skills in [Một kỹ năng hoặc khía cạnh của bạn] align well with the requirements for this position."
+
+6. **Mục tiêu nghề nghiệp:**
+   - "I am excited about the opportunity to [Mô tả mục tiêu nghề nghiệp hoặc lý do bạn muốn làm việc tại công ty đó]."
+
+7. **Kết luận:**
+   - "In summary, I bring a strong background in [Lĩnh vực chính], coupled with [Các điểm mạnh của bạn]. I am confident that my skills and experiences make me a great fit for the [Tên vị trí công việc] role."
+
+Lưu ý rằng bạn nên tùy chỉnh phần giới thiệu của mình phù hợp với vị trí công việc cụ thể mà bạn đang phỏng vấn. Hãy cố gắng thể hiện sự tự tin và tích cực trong lời nói của mình.
+
+
+2. `Noi ve cong viec lam truoc day`
+
+In my previous role as a software developer, my primary responsibilities revolved around the full lifecycle of web development. I was actively involved in creating and enhancing websites, undertaking tasks ranging from initial concept design to deploying the final product. A significant part of my role involved crafting server-side logic, ensuring seamless functionality, and optimizing performance for an optimal user experience.
+
+Furthermore, I took charge of software maintenance, regularly implementing updates and troubleshooting any issues that arose post-deployment. I believe in the importance of ongoing improvement, and I consistently sought opportunities to enhance the efficiency and functionality of the software.
+
+Collaboration played a crucial role in my daily tasks. Working closely with cross-functional teams, I participated in project discussions, contributing insights to refine requirements and ensure alignment with the overall vision. Additionally, I actively engaged in the seamless handover of products to our partners, fostering effective communication and cooperation to meet project deadlines.
+
+One of the aspects I found particularly rewarding was problem-solving. I enjoyed the challenge of identifying and rectifying software defects, working closely with QA teams to conduct thorough testing and ensure the delivery of a high-quality product. This experience not only sharpened my technical skills but also honed my ability to work efficiently within a team-oriented environment.
+
+In summary, my previous role as a software developer equipped me with comprehensive experience in web development, server-side logic implementation, software maintenance, and effective collaboration within a team. I am confident that these skills make me well-suited for a position where a diverse skill set and a collaborative mindset are valued.
+
 # Web Fundamentals
 
 - HTML
