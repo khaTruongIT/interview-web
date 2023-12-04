@@ -4269,6 +4269,38 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
 
     Tất cả các cách trên đều sẽ làm cho mảng trở thành rỗng. Chọn cách mà bạn cảm thấy phù hợp với ngữ cảnh và quy tắc lập trình của bạn.
 
+43. `Defer trong javascript la gi, cho vi du su dung defer trong javascript`
+
+    Trong JavaScript, `defer` là một thuộc tính của thẻ `<script>` được sử dụng trong HTML để xác định việc tải và thực thi mã JavaScript. Khi thuộc tính `defer` được thêm vào thẻ `<script>`, nó cho biết rằng việc tải mã JavaScript này sẽ diễn ra bất đồng bộ (asynchronously), và mã sẽ được thực thi sau khi toàn bộ trang HTML đã được phân tích xong.
+
+    Dưới đây là một ví dụ minh họa về cách sử dụng `defer`:
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Defer Example</title>
+      <!-- Script 1 without defer -->
+      <script src="script1.js"></script>
+      <!-- Script 2 with defer -->
+      <script defer src="script2.js"></script>
+    </head>
+    <body>
+      <h1>Hello, World!</h1>
+    </body>
+    </html>
+    ```
+
+    Trong đoạn mã trên:
+
+    - `<script src="script1.js"></script>`: Mã từ tệp tin `script1.js` sẽ được tải và thực thi ngay lập tức khi trình duyệt gặp phải nó. Nếu tệp tin này nặng và mất thời gian để tải, nó có thể ảnh hưởng đến việc hiển thị trang web.
+
+    - `<script defer src="script2.js"></script>`: Mã từ tệp tin `script2.js` sẽ được tải bất đồng bộ và thực thi sau khi trang HTML đã được phân tích xong. Điều này giúp tránh việc chặn tải trang và cải thiện trải nghiệm người dùng. Mã này sẽ thực thi theo thứ tự xuất hiện trong mã nguồn HTML.
+
+    Lưu ý rằng thuộc tính `defer` chỉ có ảnh hưởng đối với các tệp tin `<script>` có thuộc tính `src`, không áp dụng cho mã JavaScript được đặt trực tiếp trong thẻ `<script>` mà không có thuộc tính `src`.
+
 # Typescript
 
 Typescript compiles to Javascript và nó có thể execute bởi bất kỳ Javascript engine nào
@@ -10695,6 +10727,116 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 
   Tùy thuộc vào yêu cầu cụ thể của ứng dụng, lựa chọn giữa TCP và UDP sẽ phụ thuộc vào các yếu tố như độ tin cậy, hiệu suất, và đặc tính của ứng dụng.
 
+7. `Khi nhan vao 1 trang web thi cac tac vu duoc thuc hien duoi web la gi`
+
+Khi bạn nhấn vào một trang web, nhiều tác vụ sẽ diễn ra tiếp theo trong quá trình truyền thông trên Internet. Dưới đây là một số bước chính:
+
+1. **Gửi yêu cầu (Request):** Trình duyệt web của bạn sẽ gửi yêu cầu tới máy chủ (server) của trang web mà bạn muốn truy cập. Yêu cầu này được gửi thông qua giao thức HTTP (hoặc HTTPS nếu trang web hỗ trợ kết nối an toàn).
+
+2. **Phân giải tên miền (Domain Resolution):** Nếu bạn nhập vào thanh địa chỉ một tên miền (ví dụ: www.example.com), trình duyệt cần phải chuyển đổi tên miền này thành địa chỉ IP tương ứng của máy chủ web. Quá trình này được gọi là phân giải tên miền (DNS resolution).
+
+3. **Thiết lập Kết nối (Connection Establishment):** Sau khi có địa chỉ IP của máy chủ, trình duyệt sẽ thiết lập một kết nối TCP (hoặc TLS nếu sử dụng HTTPS) với máy chủ để bắt đầu truyền dữ liệu.
+
+4. **Gửi Yêu Cầu (Sending Request):** Trình duyệt gửi yêu cầu HTTP đến máy chủ web, yêu cầu trang web cụ thể nào bạn muốn truy cập.
+
+5. **Xử lý Yêu Cầu (Processing Request):** Máy chủ nhận yêu cầu, xử lý nó và chuẩn bị gửi lại trang web hoặc thông tin được yêu cầu.
+
+6. **Gửi Phản Hồi (Sending Response):** Máy chủ gửi phản hồi, chứa dữ liệu trang web hoặc thông tin cần thiết, trở lại trình duyệt của bạn thông qua kết nối đã được thiết lập.
+
+7. **Hiển Thị Trang Web (Rendering):** Trình duyệt nhận dữ liệu từ máy chủ và bắt đầu hiển thị trang web cho người dùng. Quá trình này bao gồm tải các tài nguyên như hình ảnh, stylesheet, mã JavaScript, và thực hiện các tác vụ hiển thị trang web đầy đủ.
+
+Các bước trên chỉ là một cái nhìn tổng quan và còn nhiều chi tiết khác có thể xảy ra tùy thuộc vào cách trang web cụ thể được xây dựng và cấu hình
+
+8. `TLS trong HTTPS la gi`
+
+TLS, hay Transport Layer Security, là một giao thức bảo mật được sử dụng để bảo vệ dữ liệu truyền tải qua Internet. Trong ngữ cảnh của HTTPS (Hypertext Transfer Protocol Secure), TLS chính là phần bảo mật mà giao thức này sử dụng để đảm bảo tính toàn vẹn, an toàn và bí mật của thông tin truyền tải giữa máy tính của người sử dụng và máy chủ web.
+
+Cụ thể, quá trình hoạt động của TLS trong HTTPS như sau:
+
+1. **Bắt đầu kết nối:** Khi trình duyệt web kết nối đến một trang web sử dụng HTTPS, nó yêu cầu máy chủ xác nhận danh tính của mình.
+
+2. **Giao tiếp an toàn:** Máy chủ web phản hồi bằng cách gửi chứng chỉ sống cho trình duyệt. Chứng chỉ này là một tập hợp các thông tin chứng minh danh tính của máy chủ.
+
+3. **Xác nhận chứng chỉ:** Trình duyệt xác nhận chứng chỉ bằng cách kiểm tra chữ ký số được ký bởi một tổ chức chứng thực đáng tin cậy (Certificate Authority - CA). Nếu chứng chỉ là hợp lệ, quá trình tiếp tục.
+
+4. **Sử dụng mã hóa:** Sau khi chứng thực thành công, máy tính của người sử dụng và máy chủ bắt đầu sử dụng mã hóa để bảo vệ dữ liệu truyền tải giữa chúng. Điều này ngăn chặn bất kỳ bên thứ ba nào theo dõi hoặc thay đổi dữ liệu.
+
+5. **Bảo vệ chống lại tấn công:** TLS cung cấp cơ chế bảo vệ chống lại các loại tấn công như tấn công man-in-the-middle, trong đó kẻ tấn công cố gắng can thiệp vào quá trình truyền tải thông tin giữa máy tính và máy chủ.
+
+Tóm lại, TLS trong HTTPS đảm bảo một kết nối an toàn và bảo mật giữa người sử dụng và máy chủ web thông qua việc sử dụng chứng chỉ sống, mã hóa dữ liệu và các cơ chế bảo vệ khác.
+
+9. `Kieu tan cong man in the middle trong network la gi`
+
+Tấn công Man-in-the-Middle (MitM) là một hình thức tấn công mà kẻ tấn công chèn mình giữa hai bên truyền thông và thực hiện các hoạt động không được ủy quyền. Khi bị tấn công MitM, người tấn công có thể đọc, sửa đổi hoặc thậm chí là chặn thông tin giữa các bên mà không bị phát hiện.
+
+Dưới đây là một số ví dụ về tấn công Man-in-the-Middle:
+
+1. **Tấn công Trong Mạng Wi-Fi Công cộng:**
+   - **Scenario:** Bạn đang kết nối với một mạng Wi-Fi công cộng, ví dụ như trong một quán cà phê.
+   - **MitM Attack:** Một kẻ tấn công có thể tạo một mạng Wi-Fi giả mạo với tên giống như mạng công cộng chính, khiến người dùng kết nối đến mạng giả mạo.
+   - **Consequence:** Kẻ tấn công có thể theo dõi và thậm chí là sửa đổi thông tin được truyền tải giữa thiết bị của bạn và Internet.
+
+2. **Tấn công SSL Stripping:**
+   - **Scenario:** Người dùng truy cập một trang web an toàn sử dụng HTTPS.
+   - **MitM Attack:** Kẻ tấn công có thể thực hiện tấn công SSL stripping để chuyển đổi kết nối HTTPS thành HTTP, sau đó theo dõi và sửa đổi thông tin.
+   - **Consequence:** Mọi thông tin truyền tải qua kết nối không còn được mã hóa và trở nên dễ dàng cho kẻ tấn công thu thập.
+
+3. **Tấn công DNS Spoofing:**
+   - **Scenario:** Người dùng cố gắng truy cập một trang web bằng cách nhập tên miền vào trình duyệt.
+   - **MitM Attack:** Kẻ tấn công thực hiện tấn công DNS spoofing để chuyển hướng yêu cầu DNS của người dùng đến một địa chỉ IP giả mạo.
+   - **Consequence:** Người dùng sẽ bị đưa đến một trang web giả mạo hoặc bị chặn khỏi truy cập trang web mong muốn.
+
+4. **Tấn công Man-in-the-Browser:**
+   - **Scenario:** Người dùng truy cập trang web ngân hàng để thực hiện giao dịch.
+   - **MitM Attack:** Kẻ tấn công chiếm quyền kiểm soát trình duyệt của người dùng bằng cách lợi dụng các mã độc hại hoặc phần mềm độc hại.
+   - **Consequence:** Kẻ tấn công có thể đánh cắp thông tin đăng nhập, mã xác thực, hoặc thậm chí thực hiện các giao dịch không hợp lệ mà người dùng không biết.
+
+    ```bash
+    npm install express body-parser
+    ```
+
+    1. **Tạo một ứng dụng Express đơn giản:**
+    ```javascript
+    const express = require('express');
+    const bodyParser = require('body-parser');
+    const app = express();
+    const port = 3000;
+
+    app.use(bodyParser.urlencoded({ extended: false }));
+
+    app.post('/login', (req, res) => {
+      const { username, password } = req.body;
+      console.log(`Received login credentials - Username: ${username}, Password: ${password}`);
+      res.send('Login successful!');
+    });
+
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+    ```
+
+    2. **Tạo một proxy Man-in-the-Middle:**
+    ```javascript
+    const express = require('express');
+    const http = require('http');
+    const httpProxy = require('http-proxy');
+    const app = express();
+
+    const targetServer = 'http://localhost:3000'; // Đây là máy chủ chính
+    const proxy = httpProxy.createProxyServer();
+
+    app.all('/*', (req, res) => {
+      proxy.web(req, res, { target: targetServer });
+    });
+
+    const mitmServer = http.createServer(app);
+    mitmServer.listen(8080, () => {
+      console.log('Man-in-the-Middle server is running on port 8080');
+    });
+    ```
+
+Trong ví dụ này, server Express chạy ở cổng 3000, và proxy Man-in-the-Middle chạy ở cổng 8080. Khi bạn thực hiện một yêu cầu POST đến `/login` trên cổng 8080, proxy sẽ chuyển tiếp yêu cầu đó đến máy chủ Express chính ở cổng 3000 và nhận lại kết quả. Trong một tấn công Man-in-the-Middle thực tế, kẻ tấn công có thể thay đổi hoặc ghi lại thông tin trong quá trình này mà không bị phát hiện. Điều này làm cho nó trở thành một vấn đề bảo mật lớn và làm tăng sự quan trọng của việc sử dụng HTTPS để mã hóa dữ liệu truyền tải giữa người sử dụng và máy chủ.
+
    # DOCKER
 
    1. `Docker là gì ?`
@@ -10703,19 +10845,19 @@ Tóm lại, Redis là một hệ thống cơ sở dữ liệu in-memory mạnh m
 
    Một số điểm chính về Docker bao gồm:
 
-   1. **Portability (Khả năng di động):** Containers cho phép bạn đóng gói tất cả các yếu tố cần thiết để chạy ứng dụng vào một gói duy nhất. Điều này giúp đảm bảo rằng ứng dụng của bạn sẽ hoạt động giống nhau trên mọi nền tảng mà Docker hỗ trợ.
+   2. **Portability (Khả năng di động):** Containers cho phép bạn đóng gói tất cả các yếu tố cần thiết để chạy ứng dụng vào một gói duy nhất. Điều này giúp đảm bảo rằng ứng dụng của bạn sẽ hoạt động giống nhau trên mọi nền tảng mà Docker hỗ trợ.
 
-   2. **Isolation (Cách ly):** Mỗi container hoạt động như một môi trường độc lập, cách ly khỏi các container khác và hệ thống host. Điều này giúp ngăn chặn các xung đột và ảnh hưởng tới nhau.
+   3. **Isolation (Cách ly):** Mỗi container hoạt động như một môi trường độc lập, cách ly khỏi các container khác và hệ thống host. Điều này giúp ngăn chặn các xung đột và ảnh hưởng tới nhau.
 
-   3. **Tích hợp và triển khai dễ dàng:** Các container có thể được đóng gói và chia sẻ dễ dàng thông qua các hệ thống quản lý phiên bản như Docker Hub. Điều này giúp tăng tốc quá trình triển khai và đảm bảo sự nhất quán giữa môi trường phát triển và môi trường sản xuất.
+   4. **Tích hợp và triển khai dễ dàng:** Các container có thể được đóng gói và chia sẻ dễ dàng thông qua các hệ thống quản lý phiên bản như Docker Hub. Điều này giúp tăng tốc quá trình triển khai và đảm bảo sự nhất quán giữa môi trường phát triển và môi trường sản xuất.
 
-   4. **Hiệu suất:** So với máy ảo truyền thống, container thường có hiệu suất tốt hơn, vì chúng chia sẻ hạ tầng hệ thống của máy chủ host và sử dụng tài nguyên hệ thống hiệu quả hơn.
+   5. **Hiệu suất:** So với máy ảo truyền thống, container thường có hiệu suất tốt hơn, vì chúng chia sẻ hạ tầng hệ thống của máy chủ host và sử dụng tài nguyên hệ thống hiệu quả hơn.
 
-   5. **Quản lý tài nguyên:** Docker cung cấp các công cụ để quản lý tài nguyên của các container, cho phép bạn xác định và kiểm soát việc sử dụng CPU, bộ nhớ và các tài nguyên khác.
+   6. **Quản lý tài nguyên:** Docker cung cấp các công cụ để quản lý tài nguyên của các container, cho phép bạn xác định và kiểm soát việc sử dụng CPU, bộ nhớ và các tài nguyên khác.
 
    Docker đã đạt được sự phổ biến rộng rãi trong việc triển khai ứng dụng và dịch vụ, từ các dự án nhỏ đến các hệ thống quy mô lớn, do tính đơn giản, khả năng di động và khả năng cách ly môi trường của nó.
 
-   2. `Setup docker cho một ứng dụng nodejs express postgres redis cơ bản`
+   7. `Setup docker cho một ứng dụng nodejs express postgres redis cơ bản`
 
       Dưới đây là hướng dẫn cơ bản để bạn thiết lập một ứng dụng Node.js Express với PostgreSQL và Redis sử dụng Docker.
 
