@@ -7982,6 +7982,96 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
 
     Khi bạn truy cập `http://localhost:3000/api/users?name=John&age=25`, bạn sẽ nhận được phản hồi từ Route sử dụng `req.query`. Nếu bạn truy cập `http://localhost:3000/api/users/123`, bạn sẽ nhận được phản hồi từ Route sử dụng `req.params`.
 
+60. `Security protocols in nodejs`
+
+    Trong Node.js, có một số giao thức bảo mật quan trọng để đảm bảo an toàn trong các ứng dụng web và mạng. Dưới đây là một số giao thức và cách áp dụng chúng:
+
+    1. **SSL/TLS (Secure Socket Layer/Transport Layer Security):**
+      - **Mô tả:** Giao thức này đảm bảo an toàn trong việc truyền thông qua mạng bằng cách mã hóa dữ liệu giữa máy khách và máy chủ.
+      - **Áp dụng:**
+        - Sử dụng module `https` trong Node.js để tạo một máy chủ HTTPS.
+        - Cung cấp các tệp chứng chỉ SSL/TLS để kích hoạt giao thức bảo mật.
+
+      ```javascript
+      const https = require('https');
+      const fs = require('fs');
+
+      const options = {
+        key: fs.readFileSync('path/to/private-key.pem'),
+        cert: fs.readFileSync('path/to/certificate.pem'),
+      };
+
+      const server = https.createServer(options, (req, res) => {
+        res.writeHead(200);
+        res.end('Hello, HTTPS world!');
+      });
+
+      server.listen(443, () => {
+        console.log('Server listening on port 443');
+      });
+      ```
+
+    2. **OAuth 2.0:**
+      - **Mô tả:** Giao thức xác thực và ủy quyền cho phép ứng dụng thực hiện hành động thay mặt người dùng mà không cần chia sẻ mật khẩu.
+      - **Áp dụng:**
+        - Sử dụng các thư viện OAuth như Passport để xác thực và ủy quyền.
+        - Cấu hình chiến lược OAuth 2.0 cho ứng dụng của bạn.
+
+      ```javascript
+      const passport = require('passport');
+      const OAuth2Strategy = require('passport-oauth2');
+
+      passport.use('oauth2', new OAuth2Strategy({
+        authorizationURL: 'https://example.com/auth',
+        tokenURL: 'https://example.com/token',
+        clientID: EXAMPLE_CLIENT_ID,
+        clientSecret: EXAMPLE_CLIENT_SECRET,
+        callbackURL: 'https://your-app.com/auth/callback',
+      }, (accessToken, refreshToken, profile, done) => {
+        // Handle authentication logic here
+        return done(null, profile);
+      }));
+
+      // Use the 'oauth2' strategy in your routes
+      app.get('/auth/oauth2', passport.authenticate('oauth2'));
+
+      app.get('/auth/oauth2/callback',
+        passport.authenticate('oauth2', { failureRedirect: '/' }),
+        (req, res) => {
+          // Successful authentication, redirect home.
+          res.redirect('/');
+        });
+      ```
+
+    3. **JWT (JSON Web Token):**
+      - **Mô tả:** Giao thức này được sử dụng để truyền thông tin xác thực giữa các bên dưới dạng một chuỗi JSON được ký.
+      - **Áp dụng:**
+        - Sử dụng thư viện như `jsonwebtoken` để tạo và xác thực JWT.
+        - Lưu ý rằng không nên lưu trữ thông tin nhạy cảm trong JWT mà không được ký.
+
+      ```javascript
+      const jwt = require('jsonwebtoken');
+
+      const payload = { user_id: 123, username: 'example_user' };
+      const secretKey = 'your_secret_key';
+
+      // Create a JWT
+      const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+      // Verify a JWT
+      jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+          // Token is invalid
+          console.error('Invalid token');
+        } else {
+          // Token is valid, decoded contains the payload
+          console.log(decoded);
+        }
+      });
+      ```
+
+    Lưu ý rằng việc triển khai bảo mật đòi hỏi một chiến lược toàn diện, bao gồm cả các biện pháp bảo vệ khác như xác thực người dùng, kiểm soát truy cập, và quản lý phiên làm việc. Cụ thể, mỗi ứng dụng có thể yêu cầu một cách tiếp cận khác nhau tùy thuộc vào yêu cầu cụ thể của nó.
+
 ## LOOPBACK
 
 LoopBack là một framework phát triển ứng dụng web và API được xây dựng trên Node.js. Dựa vào trang web mà bạn đã cung cấp, sau đây là một số đặc điểm chính của LoopBack:
