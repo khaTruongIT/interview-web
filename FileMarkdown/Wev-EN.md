@@ -82,6 +82,107 @@ Browser storage refers to the mechanisms provided by web browsers to store data 
 
 In summary, the choice between cookies, local storage, and session storage depends on the specific use case, data size requirements, and desired persistence of the stored data. Cookies are often used for session management and small amounts of data, while local storage and session storage are suitable for larger data and scenarios where data needs to persist beyond a session or page reload.
 
+2. `What is tcp, udp`
+
+TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are two of the most widely used transport layer protocols in computer networks. They are responsible for ensuring the reliable delivery of data between devices on a network. Here's a brief overview of each:
+
+1. **TCP (Transmission Control Protocol):**
+   - **Connection-oriented:** TCP is a connection-oriented protocol, which means it establishes a reliable and orderly connection between two devices before exchanging data.
+   - **Reliability:** It ensures reliable and error-free delivery of data. If any packets are lost during transmission, TCP will retransmit them.
+   - **Ordering:** TCP ensures that data is delivered in the same order in which it was sent, eliminating the risk of data arriving out of sequence.
+   - **Flow control:** TCP implements flow control mechanisms to manage the rate at which data is sent between devices, preventing congestion.
+
+   TCP is commonly used for applications where data integrity and accuracy are crucial, such as web browsing, email, file transfer (e.g., FTP), and other applications that require a reliable and ordered connection.
+
+2. **UDP (User Datagram Protocol):**
+   - **Connectionless:** UDP is a connectionless protocol, meaning it does not establish a dedicated connection before sending data. Each packet is sent independently.
+   - **Unreliable:** Unlike TCP, UDP does not guarantee the delivery of data, and it does not provide mechanisms for error recovery or retransmission.
+   - **Low overhead:** Because it lacks the overhead of connection establishment and error recovery, UDP is generally faster and has lower latency than TCP.
+   - **Broadcast and multicast support:** UDP is often used in situations where low-latency communication is more critical than guaranteed delivery, such as real-time audio and video streaming, online gaming, and certain types of network discovery or broadcasting.
+
+In summary, TCP is suitable for applications that require reliable and ordered data delivery, while UDP is appropriate for scenarios where low latency and quick data transmission are more important than reliability. The choice between TCP and UDP depends on the specific requirements of the application or service being used.
+
+3. `When clicking on the website, what are task run below`
+
+When you click on a website, several tasks occur in the background to retrieve and display the requested web page. Here's a simplified overview of the typical tasks involved:
+
+1. **DNS Resolution:**
+   - Your browser needs to translate the human-readable domain name (e.g., www.example.com) into an IP address that the computer can use to locate the server. This process is called DNS resolution, and it involves querying a DNS (Domain Name System) server.
+
+2. **Establishing a TCP Connection:**
+   - Once the IP address is obtained, the browser establishes a TCP (Transmission Control Protocol) connection with the web server. This is typically done using a three-way handshake to ensure a reliable connection.
+
+3. **Sending an HTTP Request:**
+   - After establishing the TCP connection, the browser sends an HTTP (Hypertext Transfer Protocol) request to the web server. This request includes information such as the type of request (GET, POST, etc.) and the specific resource being requested (e.g., a web page, image, or script).
+
+4. **Processing the Request on the Server:**
+   - The web server receives the HTTP request and processes it. This involves fetching the requested resource from the server's file system or generating it dynamically based on the request.
+
+5. **Sending the HTTP Response:**
+   - The server sends back an HTTP response to the browser. This response includes the requested resource (e.g., HTML content, images, CSS files) along with an HTTP status code indicating the success or failure of the request.
+
+6. **Rendering the Web Page:**
+   - The browser receives the HTTP response and begins rendering the web page. It parses the HTML content, retrieves additional resources (such as images and stylesheets), and renders the page according to the specified layout.
+
+7. **Executing JavaScript:**
+   - If the web page includes JavaScript, the browser executes the JavaScript code, which can dynamically modify the page, make additional requests, and interact with the user.
+
+8. **Rendering the Final Page:**
+   - The browser combines all the retrieved resources, including HTML, CSS, images, and executed JavaScript, to render the final web page that you see on your screen.
+
+9. **Closing the Connection:**
+   - Once the web page is fully loaded and displayed, the browser may keep the TCP connection open for a short period in case additional requests need to be made. Otherwise, the connection is closed.
+
+These tasks happen seamlessly and quickly, allowing you to interact with and view web pages on the internet. Keep in mind that this is a simplified overview, and there may be additional complexities depending on the specific features and technologies used on a website.
+
+4. `What is dns`
+
+DNS, or Domain Name System, is a hierarchical and distributed system that translates human-readable domain names into IP addresses. In other words, it provides a way to associate domain names (like www.example.com) with the numerical IP addresses that computers use to identify each other on a network.
+
+Here's how DNS works:
+
+1. **User Requests a Website:**
+   - When you type a domain name into your web browser (e.g., www.example.com) and press Enter, your computer needs to know the corresponding IP address to connect to the web server.
+
+2. **DNS Query:**
+   - Your computer sends a DNS query to a DNS resolver (usually provided by your Internet Service Provider or a third-party DNS service). If the resolver has the IP address for the requested domain in its cache, it provides the answer immediately. Otherwise, it proceeds to the next step.
+
+3. **Recursive DNS Resolution:**
+   - If the resolver doesn't have the IP address in its cache, it initiates a recursive DNS resolution process. It starts by querying root DNS servers, which direct the resolver to the top-level domain (TLD) servers (like ".com" for example). The TLD servers then direct the resolver to the authoritative DNS servers for the specific domain.
+
+4. **Authoritative DNS Servers:**
+   - The authoritative DNS servers are responsible for knowing the IP address associated with the requested domain. They provide the resolver with the necessary information.
+
+5. **Response to the Resolver:**
+   - The authoritative DNS servers send the IP address back to the resolver. The resolver, in turn, stores this information in its cache for future use and provides the IP address to your computer.
+
+6. **Accessing the Website:**
+   - With the IP address obtained from DNS, your computer can now establish a connection to the web server hosting the requested website. The web server then sends back the requested web page, and your browser renders it for you to view.
+
+DNS is a critical component of the internet infrastructure, making it easier for users to access websites without having to remember complex numerical IP addresses. It simplifies the process of navigating the internet by providing a human-readable and memorable naming system for websites.
+
+5. `what is smtp, ftp in network`
+
+SMTP (Simple Mail Transfer Protocol) and FTP (File Transfer Protocol) are two different protocols used in computer networks for specific purposes. Here's an overview of each:
+
+1. **SMTP (Simple Mail Transfer Protocol):**
+   - **Purpose:** SMTP is a protocol used for sending and receiving emails over a network. It is the standard protocol for email transmission on the internet.
+   - **Functionality:** SMTP works by moving your email messages from your email client (such as Outlook or Gmail) to the email server and between email servers. It is a text-based protocol that defines how email clients and servers interact.
+   - **Ports:** SMTP typically uses port 25 for communication, but encrypted variants like SMTP over TLS/SSL may use different ports, such as 587.
+
+2. **FTP (File Transfer Protocol):**
+   - **Purpose:** FTP is a protocol designed for transferring files between computers over a network. It allows users to upload files from their local computer to a remote server or download files from a remote server to their local computer.
+   - **Functionality:** FTP provides a simple way to transfer files, and it supports features like directory listing, file renaming, and permission changes on the remote server. There are two modes of FTP: active mode and passive mode.
+   - **Ports:** FTP uses two ports for communication: port 21 for command/control and port 20 for data transfer. In passive mode, additional ports are dynamically used for data transfer.
+
+Both SMTP and FTP are essential for different aspects of network communication:
+
+- **SMTP** is crucial for the reliable transmission of emails across the internet, allowing users to send and receive messages.
+  
+- **FTP** is commonly used for uploading files to a website, sharing files between computers, or accessing remote file repositories. There are also secure variants like FTPS (FTP Secure) and SFTP (SSH File Transfer Protocol) that add encryption to the data transfer process.
+
+These protocols represent just a small part of the extensive set of protocols that facilitate communication and data transfer across networks. Each protocol serves a specific purpose and is used in various applications and services on the internet.
+
 # JAVASCRIPT 
 
 ECMAScript 2015, also known as ES6 (ECMAScript 6) or ECMAScript 2015, is a significant update to the JavaScript language specification. It introduced several new features, syntax enhancements, and improvements to make JavaScript more powerful, expressive, and easier to work with. Some of the key features introduced in ES6 include:
@@ -1305,5 +1406,56 @@ Here's a simple example of creating a REST API using Node.js and Express to mana
 This example demonstrates the basic CRUD (Create, Read, Update, Delete) operations for managing a collection of books. It includes routes for retrieving all books, retrieving a specific book by ID, adding a new book, updating an existing book, and deleting a book.
 
 # SQL
+1. `What is index in sql, give example`
 
+In SQL, an index is a database object that improves the speed of data retrieval operations on a database table. Indexes are created on one or more columns of a table and provide a quick lookup mechanism for locating rows in the table based on the indexed columns. Here are a few types of indexes commonly used in SQL:
+
+1. **Primary Key Index:**
+   - A primary key index is automatically created when you define a primary key for a table. It ensures that each value in the indexed column(s) is unique and not null.
+   - Example:
+     ```sql
+     CREATE TABLE Students (
+       StudentID INT PRIMARY KEY,
+       FirstName VARCHAR(50),
+       LastName VARCHAR(50)
+     );
+     ```
+
+2. **Unique Index:**
+   - A unique index ensures that the values in the indexed column(s) are unique, similar to a primary key. However, unlike a primary key, a table can have multiple unique indexes.
+   - Example:
+     ```sql
+     CREATE TABLE Employees (
+       EmployeeID INT,
+       SocialSecurityNumber VARCHAR(15) UNIQUE,
+       FirstName VARCHAR(50),
+       LastName VARCHAR(50)
+     );
+     ```
+
+3. **Non-Clustered Index:**
+   - A non-clustered index is an index in which the logical order of the index does not match the physical order of the rows on disk. This means that the data rows are stored separately from the index, and the index contains pointers to the corresponding data rows.
+   - Example:
+     ```sql
+     CREATE NONCLUSTERED INDEX IX_EmployeeLastName
+     ON Employees (LastName);
+     ```
+
+4. **Clustered Index:**
+   - A clustered index determines the physical order of data rows in a table. When you create a clustered index, the table data is rearranged to match the order of the index. A table can have only one clustered index.
+   - Example:
+     ```sql
+     CREATE CLUSTERED INDEX IX_StudentID
+     ON Students (StudentID);
+     ```
+
+5. **Composite Index:**
+   - A composite index involves more than one column. It can be created on multiple columns to improve the performance of queries that involve conditions on those columns.
+   - Example:
+     ```sql
+     CREATE INDEX IX_EmployeeName
+     ON Employees (LastName, FirstName);
+     ```
+
+It's important to note that while indexes can significantly improve query performance, they also come with some overhead during data modification operations (inserts, updates, deletes). Therefore, it's crucial to carefully consider the columns to index based on the specific queries your application will be executing frequently.
 # NOSQL
