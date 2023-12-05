@@ -183,6 +183,44 @@ Both SMTP and FTP are essential for different aspects of network communication:
 
 These protocols represent just a small part of the extensive set of protocols that facilitate communication and data transfer across networks. Each protocol serves a specific purpose and is used in various applications and services on the internet.
 
+6. `What is proxy`
+
+The term "proxy" can refer to different concepts depending on the context, but in the context of computer networks and web development, a proxy commonly refers to a server or software application that acts as an intermediary between a user's device (client) and the destination server. Here are a couple of common types of proxies:
+
+1. **Network Proxy:**
+   - A network proxy is an intermediate server that sits between a client (e.g., a computer or smartphone) and the destination server. It acts on behalf of the client to make requests to the server or receive responses from the server.
+
+   - **Use Cases:**
+     - **Content Filtering:** Proxies can be used to filter or block content based on policies set by network administrators.
+     - **Anonymity:** Proxies can hide the client's IP address, providing a level of anonymity.
+     - **Caching:** Proxies can cache frequently requested content, reducing the load on the destination server and improving performance.
+
+2. **Web Proxy:**
+   - A web proxy specifically focuses on handling HTTP requests, acting as an intermediary between a client and a web server. It can modify requests and responses, enabling various functionalities.
+
+   - **Use Cases:**
+     - **Access Control:** Web proxies can restrict access to certain websites or types of content.
+     - **Logging:** Proxies can log web activity for analysis or auditing purposes.
+     - **Security:** Proxies can provide an additional layer of security by filtering out malicious content.
+
+3. **Reverse Proxy:**
+   - A reverse proxy is positioned on the server side and handles requests on behalf of one or more servers. Clients interact with the reverse proxy, which then forwards requests to the appropriate server and returns the response to the client.
+
+   - **Use Cases:**
+     - **Load Balancing:** Reverse proxies can distribute incoming requests across multiple servers to balance the load.
+     - **SSL Termination:** Reverse proxies can handle SSL/TLS encryption and decryption, offloading this task from backend servers.
+     - **Web Acceleration:** Reverse proxies can cache static content and compress data to improve website performance.
+
+4. **API Proxy:**
+   - In the context of web development and APIs, an API proxy is a server or middleware that sits between client applications and a backend API server. It can be used for various purposes, including security, monitoring, and customization of API requests and responses.
+
+   - **Use Cases:**
+     - **Security:** API proxies can enforce authentication, authorization, and encryption for API requests.
+     - **Monitoring:** Proxies can collect metrics, logs, and analytics on API usage.
+     - **Transformation:** Proxies can modify or transform API requests and responses to suit the needs of client applications.
+
+In summary, a proxy acts as an intermediary between clients and servers, facilitating various functionalities such as security, anonymity, content filtering, load balancing, and performance optimization, depending on its type and use case.
+
 # JAVASCRIPT 
 
 ECMAScript 2015, also known as ES6 (ECMAScript 6) or ECMAScript 2015, is a significant update to the JavaScript language specification. It introduced several new features, syntax enhancements, and improvements to make JavaScript more powerful, expressive, and easier to work with. Some of the key features introduced in ES6 include:
@@ -840,6 +878,290 @@ To address callback hell, several approaches have been developed:
 
 By adopting these approaches, you can make your asynchronous code more readable, modular, and maintainable, avoiding the pitfalls of callback hell.
 
+8. `properties of oop in javascript, typescript`
+
+Object-oriented programming (OOP) is a paradigm that uses objects, which can contain data in the form of fields (often known as attributes or properties) and code in the form of procedures (often known as methods). There are four main principles or characteristics of OOP: Encapsulation, Abstraction, Inheritance, and Polymorphism. Let's explore each of these with examples in TypeScript:
+
+### 1. Encapsulation:
+
+**Definition:** Encapsulation is the bundling of data (attributes) and the methods that operate on the data into a single unit known as a class. It restricts access to some of the object's components and prevents the accidental modification of data.
+
+**Example in TypeScript:**
+```typescript
+class BankAccount {
+  private balance: number;
+
+  constructor(initialBalance: number) {
+    this.balance = initialBalance;
+  }
+
+  deposit(amount: number): void {
+    this.balance += amount;
+  }
+
+  withdraw(amount: number): void {
+    if (amount <= this.balance) {
+      this.balance -= amount;
+    } else {
+      console.log("Insufficient funds.");
+    }
+  }
+
+  getBalance(): number {
+    return this.balance;
+  }
+}
+
+// Usage
+const account = new BankAccount(1000);
+account.deposit(500);
+account.withdraw(200);
+console.log("Current Balance:", account.getBalance());
+```
+
+**Explanation:**
+- The `balance` property is encapsulated within the `BankAccount` class and marked as `private`, making it accessible only within the class.
+- Methods like `deposit`, `withdraw`, and `getBalance` provide controlled access to the `balance` property, encapsulating the data and ensuring that it is modified only through defined methods.
+
+### 2. Abstraction:
+
+**Definition:** Abstraction is the process of simplifying complex systems by modeling classes based on the essential properties and behaviors they share, while hiding irrelevant details.
+
+**Example in TypeScript:**
+```typescript
+abstract class Shape {
+  abstract calculateArea(): number;
+}
+
+class Circle extends Shape {
+  constructor(private radius: number) {
+    super();
+  }
+
+  calculateArea(): number {
+    return Math.PI * this.radius ** 2;
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(private width: number, private height: number) {
+    super();
+  }
+
+  calculateArea(): number {
+    return this.width * this.height;
+  }
+}
+
+// Usage
+const circle = new Circle(5);
+console.log("Circle Area:", circle.calculateArea());
+
+const rectangle = new Rectangle(4, 6);
+console.log("Rectangle Area:", rectangle.calculateArea());
+```
+
+**Explanation:**
+- The `Shape` class is an abstraction that defines a common interface for all shapes with the `calculateArea` method.
+- The `Circle` and `Rectangle` classes extend `Shape` and provide specific implementations for calculating the area.
+- Users can work with the abstract `Shape` class without worrying about the internal details of each specific shape.
+
+### 3. Inheritance:
+
+**Definition:** Inheritance allows a class (subclass or derived class) to inherit properties and behaviors from another class (superclass or base class). It promotes code reuse and the creation of a hierarchical structure.
+
+**Example in TypeScript:**
+```typescript
+class Animal {
+  constructor(private name: string) {}
+
+  makeSound(): void {
+    console.log("Some generic sound");
+  }
+}
+
+class Dog extends Animal {
+  constructor(name: string, private breed: string) {
+    super(name);
+  }
+
+  makeSound(): void {
+    console.log("Woof! Woof!");
+  }
+
+  getBreed(): string {
+    return this.breed;
+  }
+}
+
+// Usage
+const myDog = new Dog("Buddy", "Labrador");
+console.log("Dog's Name:", myDog.getName());  // Inherited from Animal
+console.log("Dog's Breed:", myDog.getBreed()); // Specific to Dog
+myDog.makeSound();  // Overrides the method from Animal
+```
+
+**Explanation:**
+- The `Animal` class is the base class with a `name` property and a `makeSound` method.
+- The `Dog` class extends `Animal`, inheriting the `name` property and `makeSound` method. It also adds a specific property `breed` and a method `getBreed`.
+- Instances of `Dog` can access both the properties and methods of the `Animal` class through inheritance.
+
+### 4. Polymorphism:
+
+**Definition:** Polymorphism allows objects of different classes to be treated as objects of a common base class. It enables a single interface to represent different types of objects.
+
+**Example in TypeScript:**
+```typescript
+class Bird {
+  fly(): void {
+    console.log("Bird is flying");
+  }
+}
+
+class Fish {
+  swim(): void {
+    console.log("Fish is swimming");
+  }
+}
+
+// Polymorphic function
+function move(animal: Bird | Fish): void {
+  if (animal instanceof Bird) {
+    animal.fly();
+  } else if (animal instanceof Fish) {
+    animal.swim();
+  }
+}
+
+// Usage
+const bird = new Bird();
+const fish = new Fish();
+
+move(bird); // Outputs: "Bird is flying"
+move(fish); // Outputs: "Fish is swimming"
+```
+
+**Explanation:**
+- The `Bird` and `Fish` classes have different methods (`fly` and `swim`, respectively).
+- The `move` function takes a parameter of type `Bird | Fish`, which means it can accept instances of either class.
+- Inside the `move` function, the specific behavior is determined based on the actual type of the object passed (runtime polymorphism).
+- This allows for a unified way of interacting with objects of different types through a common interface.
+
+9. `We should put the script at bottom or top of file html`
+
+The placement of JavaScript scripts in an HTML file, whether at the top or bottom, can have implications for the loading and rendering behavior of the web page. The general best practice is to place scripts at the bottom of the HTML file, just before the closing `</body>` tag. This approach is recommended for several reasons:
+
+1. **Page Loading Performance:**
+   - Placing scripts at the bottom allows the HTML content to load and render first. This ensures a faster initial page load, as the browser can render the visible content without being delayed by the downloading and executing of JavaScript. Users perceive the page as loading more quickly.
+
+2. **Parallel Loading:**
+   - Browsers typically download resources, including scripts, in parallel. If scripts are placed at the top of the HTML file, they may delay the loading of other page assets. By placing scripts at the bottom, HTML, CSS, and other resources can be downloaded concurrently, maximizing parallel loading and improving overall page load times.
+
+3. **Improved User Experience:**
+   - Users get a better experience when they can interact with the visible content of the page while scripts are loading. Placing scripts at the bottom allows users to start interacting with the page sooner, even if some non-critical scripts are still loading in the background.
+
+4. **Reduced Render-Blocking:**
+   - Placing scripts at the bottom minimizes the render-blocking nature of JavaScript. If scripts are in the head of the document, they may delay the rendering of the entire page until they are fully downloaded and executed. By deferring script execution to the end, the rendering of the main content is not blocked.
+
+However, there are cases where scripts need to be placed in the head of the document. For example:
+
+- **Dependency on Document Structure:** If a script relies on elements in the HTML document, it might need to be placed in the head to ensure that those elements are available when the script runs.
+
+- **Asynchronous or Deferred Loading:** Using the `async` or `defer` attributes on script tags allows scripts to be loaded asynchronously or deferred, reducing their impact on page load performance.
+
+```html
+<!-- Example with async attribute -->
+<script async src="example.js"></script>
+
+<!-- Example with defer attribute -->
+<script defer src="example.js"></script>
+```
+
+In conclusion, the general best practice is to place scripts at the bottom of the HTML file to optimize page loading performance and improve the user experience. However, specific use cases and requirements may dictate placing scripts in the head or using asynchronous/deferred loading strategies.
+
+10. `What is dom in javascript, how can we access the dom in javascript`
+
+### DOM (Document Object Model) in JavaScript:
+
+The Document Object Model (DOM) is a programming interface that represents the structure of a document (typically an HTML or XML document) as a tree of objects. In the context of web development, the DOM allows JavaScript to interact with and manipulate the content, structure, and style of a web page dynamically.
+
+### Connecting to the DOM in JavaScript:
+
+To connect to the DOM in JavaScript, you can use the `document` object. This object represents the entire HTML document and provides methods and properties to interact with its elements. Here's a simple example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Example</title>
+</head>
+<body>
+
+  <h1 id="mainHeading">Hello, DOM!</h1>
+
+  <script>
+    // Connecting to the DOM
+    const headingElement = document.getElementById('mainHeading');
+
+    // Manipulating the DOM
+    headingElement.innerHTML = 'Hello, Updated DOM!';
+  </script>
+
+</body>
+</html>
+```
+
+In this example:
+
+- The JavaScript code is placed inside the `<script>` tag at the end of the body to ensure that the DOM has been fully loaded before the script runs.
+
+- The `document.getElementById('mainHeading')` method is used to connect to the DOM and retrieve the HTML element with the `id` attribute of 'mainHeading' (in this case, an `<h1>` element).
+
+- The `innerHTML` property is then used to update the content of the heading element.
+
+### Rendering DOM Elements Dynamically:
+
+To render DOM elements dynamically, you can create new elements, modify their attributes and content, and append them to the existing DOM structure. Here's an example that creates a new paragraph element and appends it to the body:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic DOM Rendering</title>
+</head>
+<body>
+
+  <h1 id="mainHeading">Hello, DOM!</h1>
+
+  <script>
+    // Connecting to the DOM
+    const headingElement = document.getElementById('mainHeading');
+
+    // Creating a new paragraph element
+    const paragraphElement = document.createElement('p');
+    paragraphElement.textContent = 'This is a dynamically created paragraph.';
+
+    // Appending the paragraph element to the body
+    document.body.appendChild(paragraphElement);
+  </script>
+
+</body>
+</html>
+```
+
+In this example:
+
+- The `document.createElement('p')` method is used to create a new `<p>` (paragraph) element.
+
+- The `textContent` property is set to assign text content to the paragraph element.
+
+- The `document.body.appendChild(paragraphElement)` method is used to append the newly created paragraph element to the body of the HTML document.
+
+These basic operations demonstrate how JavaScript can connect to the DOM, retrieve elements, and dynamically render content on a web page. There are more advanced techniques and methods available for DOM manipulation depending on your specific requirements.
 # REACTJS
 1. `Compare between clien side rendering and server side rendering, reactjs and nextjs`
 
@@ -883,6 +1205,231 @@ By adopting these approaches, you can make your asynchronous code more readable,
       - SEO challenges, as search engines may not efficiently crawl JavaScript-rendered content.
 
     In summary, React.js is a library for building user interfaces on the client side, while Next.js is a framework built on React that adds features like server-side rendering and static site generation. The choice between SSR and CSR depends on factors like performance requirements, SEO goals, and the nature of the content in your application. Next.js provides a flexible solution that allows you to choose the rendering approach that best fits your needs.
+
+2. `React hooks in javascript`
+
+React Hooks are functions that allow developers to use state and lifecycle features in functional components, which were traditionally only available in class components. Hooks were introduced in React version 16.8 to make it easier to write and manage stateful logic in functional components.
+
+Before Hooks, stateful logic was typically implemented using class components, and functional components were primarily used for presentational purposes. With the advent of Hooks, functional components gained the ability to manage state, lifecycle methods, context, and more.
+
+Here are some commonly used React Hooks:
+
+1. **useState:**
+   - Allows functional components to manage state.
+   - Example:
+     ```jsx
+     import React, { useState } from 'react';
+
+     function Counter() {
+       const [count, setCount] = useState(0);
+
+       return (
+         <div>
+           <p>Count: {count}</p>
+           <button onClick={() => setCount(count + 1)}>Increment</button>
+         </div>
+       );
+     }
+     ```
+
+2. **useEffect:**
+   - Enables performing side effects in functional components, such as data fetching, subscriptions, or manually changing the DOM.
+   - Example:
+     ```jsx
+     import React, { useState, useEffect } from 'react';
+
+     function ExampleComponent() {
+       const [data, setData] = useState(null);
+
+       useEffect(() => {
+         // Perform data fetching or other side effects here
+         // This function will run after every render
+         fetchData().then((result) => setData(result));
+       }, []); // The empty dependency array means this effect runs once after the initial render
+
+       return <div>{data ? <p>Data: {data}</p> : <p>Loading...</p>}</div>;
+     }
+     ```
+
+3. **useContext:**
+   - Allows functional components to subscribe to a context without introducing nesting.
+   - Example:
+     ```jsx
+     import React, { useContext } from 'react';
+     import MyContext from './MyContext';
+
+     function MyComponent() {
+       const contextValue = useContext(MyContext);
+
+       return <p>Context Value: {contextValue}</p>;
+     }
+     ```
+
+4. **useReducer:**
+   - Provides a way to handle complex state logic by dispatching actions to update the state.
+   - Example:
+     ```jsx
+     import React, { useReducer } from 'react';
+
+     const initialState = { count: 0 };
+
+     function reducer(state, action) {
+       switch (action.type) {
+         case 'increment':
+           return { count: state.count + 1 };
+         default:
+           throw new Error();
+       }
+     }
+
+     function Counter() {
+       const [state, dispatch] = useReducer(reducer, initialState);
+
+       return (
+         <div>
+           <p>Count: {state.count}</p>
+           <button onClick={() => dispatch({ type: 'increment' })}>Increment</button>
+         </div>
+       );
+     }
+     ```
+
+React Hooks make it easier to share logic between components, manage stateful behavior, and write more concise and readable code in functional components. They have become an integral part of modern React development.
+
+3. `What is useEffect in nodejs`
+
+In React, the `useEffect` hook is used to perform side effects in functional components. Side effects can include data fetching, subscriptions, manual DOM manipulations, or any operation that needs to be performed after the initial render or in response to changes in state or props.
+
+The `useEffect` hook takes two arguments:
+
+1. A function that contains the code for the side effect.
+2. An optional array of dependencies that specifies when the effect should be re-run. If the dependencies array is omitted, the effect runs after every render. If it's an empty array, the effect runs once after the initial render. If it contains values, the effect runs when any of those values change.
+
+Here's a basic example of using `useEffect` to perform a data-fetching operation:
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function DataFetchingComponent() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Function to fetch data
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.example.com/data');
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetch data function
+    fetchData();
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  return (
+    <div>
+      {data ? (
+        <p>Data: {data}</p>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}
+
+export default DataFetchingComponent;
+```
+
+In this example:
+
+- The `useEffect` hook is used to fetch data from an API after the initial render.
+- The empty dependency array (`[]`) ensures that the effect runs only once after the initial render.
+- The `fetchData` function is an asynchronous function that fetches data from an API and updates the component's state using `setData`.
+
+The `useEffect` hook is a powerful tool for managing side effects in functional components and is an essential part of React development, particularly when dealing with asynchronous operations or integrating with external APIs.
+
+4. `What is dom in javascript, what is virtual dom in reactjs`
+
+**DOM (Document Object Model) in JavaScript:**
+
+The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a document as a tree of objects, where each object corresponds to a part of the document, such as elements, attributes, and text. The DOM provides a way for JavaScript to interact with and manipulate HTML and XML documents dynamically.
+
+With the DOM, you can:
+
+1. **Access Elements:** Use JavaScript to access, modify, or delete HTML elements and attributes.
+2. **Modify Content:** Change the content, structure, and style of a document dynamically.
+3. **Respond to Events:** Attach event listeners to elements to respond to user actions like clicks, keypresses, etc.
+4. **Create and Delete Elements:** Dynamically create or remove elements on the fly.
+
+Here's a simple example of using the DOM to manipulate an HTML element:
+
+```html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Example</title>
+</head>
+<body>
+
+  <div id="exampleDiv">
+    <p>Hello, DOM!</p>
+  </div>
+
+  <script>
+    // Accessing and modifying the content of the paragraph element
+    var paragraph = document.querySelector('#exampleDiv p');
+    paragraph.textContent = 'Hello, Updated DOM!';
+  </script>
+
+</body>
+</html>
+```
+
+In this example, JavaScript is used to find the paragraph element with the `id` of `exampleDiv`, and then it updates the text content of the paragraph.
+
+---
+
+**Virtual DOM in React:**
+
+The Virtual DOM is a concept used in React to optimize the updating of the actual DOM. Instead of directly manipulating the real DOM whenever there's a change in the application state, React uses a virtual representation of the DOM called the Virtual DOM.
+
+Here's how it works:
+
+1. **Component Renders:** When a React component's state or props change, it re-renders.
+
+2. **Virtual DOM Representation:** Instead of updating the actual DOM immediately, React creates a virtual representation of what the updated DOM should look like.
+
+3. **Differential Algorithm:** React then compares the new virtual DOM with the previous one using a process called "reconciliation" or "diffing." It identifies the minimal number of changes needed to update the actual DOM.
+
+4. **Real DOM Update:** Finally, React updates only the necessary parts of the real DOM, minimizing the impact on performance.
+
+The Virtual DOM helps in achieving better performance by reducing the frequency of direct manipulations on the actual DOM, which can be an expensive operation. React's efficient diffing algorithm ensures that only the necessary updates are applied to the DOM, improving the application's overall responsiveness.
+
+Here's a simple example of a React component using JSX:
+
+```jsx
+import React, { useState } from 'react';
+
+function ExampleComponent() {
+  const [message, setMessage] = useState('Hello, Virtual DOM!');
+
+  return (
+    <div>
+      <p>{message}</p>
+      <button onClick={() => setMessage('Updated Message')}>Update Message</button>
+    </div>
+  );
+}
+
+export default ExampleComponent;
+```
+
+In this example, when the button is clicked, React updates the virtual DOM, performs a diff, and then updates the actual DOM efficiently with the changed content.
 
 # NODEJS
 
@@ -1405,6 +1952,63 @@ Here's a simple example of creating a REST API using Node.js and Express to mana
 
 This example demonstrates the basic CRUD (Create, Read, Update, Delete) operations for managing a collection of books. It includes routes for retrieving all books, retrieving a specific book by ID, adding a new book, updating an existing book, and deleting a book.
 
+7.`What is cors in nodejs`
+
+CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers to control how web pages in one domain can request and interact with resources hosted on another domain. It is a crucial mechanism for preventing unauthorized access to resources and protecting against potential security vulnerabilities.
+
+When a web page makes a cross-origin HTTP request (i.e., a request to a different domain, protocol, or port), the browser enforces the Same-Origin Policy, which restricts such requests by default. CORS is a set of HTTP headers that allows the server to declare which origins are permitted to access its resources.
+
+In a Node.js application, you can enable CORS by adding appropriate headers to your HTTP responses. The `cors` package is a popular middleware for handling CORS in Node.js applications. Below is an example of how to use the `cors` middleware in a Node.js and Express application:
+
+1. First, install the `cors` package using npm:
+
+   ```bash
+   npm install cors
+   ```
+
+2. Create a simple Node.js and Express server with CORS middleware:
+
+   ```javascript
+   // Import required modules
+   const express = require('express');
+   const cors = require('cors');
+
+   // Create an Express application
+   const app = express();
+
+   // Use CORS middleware
+   app.use(cors());
+
+   // Define a route that handles a cross-origin request
+   app.get('/api/data', (req, res) => {
+     // Respond with some data
+     res.json({ message: 'Hello, CORS!' });
+   });
+
+   // Start the server on port 3000
+   const port = 3000;
+   app.listen(port, () => {
+     console.log(`Server is running on http://localhost:${port}`);
+   });
+   ```
+
+3. Save the file (e.g., `server.js`) and run the server:
+
+   ```bash
+   node server.js
+   ```
+
+Now, your Node.js server is configured to handle cross-origin requests using the `cors` middleware. The `app.use(cors())` line in the code adds the necessary CORS headers to your responses.
+
+Here's a breakdown of the example:
+
+- The `cors` middleware is imported and added to the Express application using `app.use(cors())`.
+- A simple route (`/api/data`) is defined to handle a cross-origin GET request and responds with a JSON message.
+- The server listens on port 3000.
+
+With CORS enabled, the server can handle requests from different origins without violating the Same-Origin Policy. The `cors` middleware automatically handles the required headers to permit cross-origin requests, including handling preflight requests for complex requests (e.g., with custom headers or methods).
+
+
 # SQL
 1. `What is index in sql, give example`
 
@@ -1458,4 +2062,39 @@ In SQL, an index is a database object that improves the speed of data retrieval 
      ```
 
 It's important to note that while indexes can significantly improve query performance, they also come with some overhead during data modification operations (inserts, updates, deletes). Therefore, it's crucial to carefully consider the columns to index based on the specific queries your application will be executing frequently.
+
+2. `Isolation level in sql`
+
+In SQL, isolation levels define the degree to which transactions are isolated from each other. Isolation levels ensure the consistency and integrity of the data when multiple transactions are executed concurrently. There are four standard isolation levels defined by the SQL standard, from the least isolated to the most isolated:
+
+1. **Read Uncommitted:**
+   - In the Read Uncommitted isolation level, transactions can read data that has been modified but not yet committed by other transactions. This level offers the least isolation and can lead to issues such as dirty reads, non-repeatable reads, and phantom reads.
+   - Example:
+     ```sql
+     SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+     ```
+
+2. **Read Committed:**
+   - In the Read Committed isolation level, a transaction can only read committed data. It eliminates dirty reads but may still allow non-repeatable reads and phantom reads. This is the default isolation level in many database systems.
+   - Example:
+     ```sql
+     SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+     ```
+
+3. **Repeatable Read:**
+   - The Repeatable Read isolation level ensures that if a transaction reads a value, it will see the same value throughout the transaction, even if other transactions modify the data. It prevents dirty reads and non-repeatable reads but may still allow phantom reads.
+   - Example:
+     ```sql
+     SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+     ```
+
+4. **Serializable:**
+   - Serializable is the highest isolation level, providing the strictest level of isolation. It ensures that the results of a transaction are not affected by other transactions executing concurrently. Serializable isolation prevents dirty reads, non-repeatable reads, and phantom reads but can result in lower concurrency.
+   - Example:
+     ```sql
+     SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+     ```
+
+Note: The syntax for setting the isolation level may vary slightly depending on the specific database management system (DBMS) you are using (e.g., MySQL, PostgreSQL, SQL Server). The examples provided above are generic and may need to be adapted based on the SQL dialect of your DBMS.
+
 # NOSQL
