@@ -4300,6 +4300,88 @@ Trong ví dụ trên, chúng ta đã tạo một đồ thị và triển khai BF
     - `<script defer src="script2.js"></script>`: Mã từ tệp tin `script2.js` sẽ được tải bất đồng bộ và thực thi sau khi trang HTML đã được phân tích xong. Điều này giúp tránh việc chặn tải trang và cải thiện trải nghiệm người dùng. Mã này sẽ thực thi theo thứ tự xuất hiện trong mã nguồn HTML.
 
     Lưu ý rằng thuộc tính `defer` chỉ có ảnh hưởng đối với các tệp tin `<script>` có thuộc tính `src`, không áp dụng cho mã JavaScript được đặt trực tiếp trong thẻ `<script>` mà không có thuộc tính `src`.
+  
+  44. `Promise la sequence hay parallel`
+
+  "Promise" trong ngữ cảnh của lập trình là một đối tượng được sử dụng để đại diện cho một giá trị hoặc sự kiện không đồng bộ (asynchronous) trong tương lai. Có hai cách chính để xử lý các promise: sequence (tuần tự) và parallel (song song).
+
+  1. **Sequence (Tuần tự):**
+    - Khi các promise được xử lý theo dạng tuần tự, nghĩa là mỗi promise sẽ chờ đến khi promise trước đó đã hoàn thành trước khi thực hiện.
+    - Các promise sau sẽ được xử lý dựa trên kết quả của promise trước đó, giống như một chuỗi các bước thực hiện.
+    - Điều này đảm bảo rằng các hành động sẽ được thực hiện theo một thứ tự cụ thể, giúp kiểm soát dòng chảy của chương trình.
+
+  2. **Parallel (Song song):**
+    - Khi các promise được xử lý theo dạng song song, nghĩa là chúng sẽ được thực hiện cùng một lúc mà không cần đợi promise trước đó hoàn thành.
+    - Các promise sẽ được thực hiện đồng thời, có thể tận dụng được đa nhân nhiệm và giảm thời gian chờ đợi.
+    - Kết quả của từng promise không ảnh hưởng đến promise khác, chúng hoạt động độc lập với nhau.
+
+  Ví dụ:
+
+  **Tuần tự:**
+  ```javascript
+  const promise1 = asyncFunction1();
+  const result1 = await promise1;
+
+  const promise2 = asyncFunction2(result1);
+  const result2 = await promise2;
+
+  // ...
+  ```
+
+  **Song song:**
+  ```javascript
+  const promise1 = asyncFunction1();
+  const promise2 = asyncFunction2();
+  const promise3 = asyncFunction3();
+
+  const [result1, result2, result3] = await Promise.all([promise1, promise2, promise3]);
+  ```
+
+  Trong ví dụ song song, tất cả các promise đều được bắt đầu cùng một lúc và chờ đợi tất cả chúng hoàn thành trước khi tiếp tục.
+
+Trong JavaScript, khi sử dụng `Promise.all` và một trong các promise bị lỗi (rejected), thì toàn bộ kết quả của `Promise.all` cũng sẽ bị lỗi. Nếu ít nhất một promise bị rejected, `Promise.all` sẽ trả về một promise bị rejected với giá trị là lỗi của promise đầu tiên bị rejected.
+
+Ví dụ:
+
+```javascript
+const promise1 = Promise.resolve(1);
+const promise2 = Promise.reject("Error in promise2");
+const promise3 = Promise.resolve(3);
+
+Promise.all([promise1, promise2, promise3])
+  .then(results => {
+    console.log("Success:", results); // Không được thực hiện vì có promise bị rejected
+  })
+  .catch(error => {
+    console.error("Error:", error); // In ra lỗi của promise2
+  });
+```
+
+Trong ví dụ trên, `Promise.all` sẽ trả về một promise bị rejected với giá trị là lỗi của `promise2`, và `.catch` sẽ được gọi để xử lý lỗi.
+
+Đối với `Promise.race`, nếu một trong các promise bị hoàn thành (fulfilled hoặc rejected), `Promise.race` sẽ trả về kết quả của promise đó. Nếu promise đó là rejected, thì `Promise.race` cũng sẽ bị rejected với lỗi của promise đó.
+
+Ví dụ:
+
+```javascript
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve('Promise 1 resolved'), 1000);
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => reject('Promise 2 rejected'), 500);
+});
+
+Promise.race([promise1, promise2])
+  .then(result => {
+    console.log("Success:", result); // Không được thực hiện vì promise2 sẽ rejected trước
+  })
+  .catch(error => {
+    console.error("Error:", error); // In ra lỗi của promise2
+  });
+```
+
+Trong ví dụ này, `Promise.race` sẽ trả về promise2 với giá trị là lỗi của nó, và `.catch` sẽ được gọi để xử lý lỗi.
 
 # Typescript
 
@@ -8071,6 +8153,93 @@ Middleware trong Express.js giúp tăng tính linh hoạt và dễ quản lý tr
       ```
 
     Lưu ý rằng việc triển khai bảo mật đòi hỏi một chiến lược toàn diện, bao gồm cả các biện pháp bảo vệ khác như xác thực người dùng, kiểm soát truy cập, và quản lý phiên làm việc. Cụ thể, mỗi ứng dụng có thể yêu cầu một cách tiếp cận khác nhau tùy thuộc vào yêu cầu cụ thể của nó.
+
+61. `Garbage collector trong nodejs`
+
+Garbage collector (GC) trong Node.js là một phần quan trọng của runtime environment, đảm bảo việc quản lý bộ nhớ hiệu quả và giải phóng bộ nhớ không sử dụng. Cơ chế hoạt động của garbage collector trong Node.js có thể được mô tả bằng các bước sau:
+
+1. **Sử dụng Mark-and-Sweep:**
+   - Node.js sử dụng mô hình Garbage Collection dựa trên Mark-and-Sweep (đánh dấu và quét).
+   - Trong bước đánh dấu, garbage collector đánh dấu (mark) tất cả các đối tượng được truy cập được bởi các "roots" (ví dụ: biến toàn cục, stack, các đối tượng của hàm đang thực thi).
+   - Sau đó, garbage collector quét qua tất cả các đối tượng trong heap (vùng bộ nhớ nơi đối tượng được lưu trữ), và những đối tượng không được đánh dấu là không được sử dụng.
+
+2. **Phát hiện và Xóa đối tượng không sử dụng:**
+   - Các đối tượng không được đánh dấu trong bước trước đó được coi là "rác".
+   - Garbage collector sau đó xóa tất cả các đối tượng rác, giải phóng bộ nhớ chúng đang chiếm giữ.
+   - Quá trình này đảm bảo rằng chỉ có bộ nhớ được sử dụng bởi các đối tượng đang tồn tại, và những đối tượng không còn tham chiếu sẽ bị thu hồi.
+
+3. **Generation Scavenging (Tìm kiếm ở thế hệ):**
+   - Node.js sử dụng mô hình Generational Garbage Collection, phân chia heap thành các "thế hệ" (generations) khác nhau: New space và Old space.
+   - New space là nơi lưu trữ các đối tượng mới được tạo ra. Thông thường, đối tượng mới có tuổi thọ thấp và thường xuyên bị thu hồi.
+   - Các đối tượng sống qua một số chu kỳ thu gom rác sẽ được chuyển từ New space sang Old space, nơi thu gom rác thường xuyên ít hơn vì đối tượng ở Old space có khả năng sống lâu hơn.
+
+4. **Incremental Garbage Collection:**
+   - Node.js thực hiện Garbage Collection ở chế độ nhất quán (incremental) để giảm thời gian gián đoạn dừng (pause) của ứng dụng.
+   - Thay vì dừng hoạt động của toàn bộ ứng dụng để thu gom rác, GC được chia nhỏ thành các bước nhỏ và được thực hiện lẻ tẻ trong quá trình thực thi của ứng dụng.
+
+5. **Tùy chỉnh với flags và API:**
+   - Node.js cung cấp các cờ (flags) và API cho phép người phát triển tinh chỉnh cấu hình garbage collector để đáp ứng nhu cầu cụ thể của ứng dụng.
+   - Ví dụ, sử dụng flag `--max-old-space-size` để xác định dung lượng tối đa cho Old space.
+
+Garbage collector trong Node.js tự động quản lý bộ nhớ và giảm gánh nặng cho người phát triển, nhưng việc hiểu cách nó hoạt động có thể giúp tối ưu hóa hiệu suất của ứng dụng.
+
+62. `Worker thread trong nodejs`
+
+Worker threads trong Node.js là một tính năng giúp thực hiện các tác vụ đồng thời (concurrent) bằng cách tạo các luồng thực thi bổ sung. Các worker threads cho phép ứng dụng Node.js tận dụng được đa nhân nhiệm của hệ thống, giúp cải thiện hiệu suất và đáp ứng đồng thời với các tác vụ nặng.
+
+Dưới đây là một ví dụ cơ bản về cách sử dụng worker threads trong Node.js:
+
+```javascript
+const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
+
+if (isMainThread) {
+  // Nếu đây là luồng chính (main thread)
+
+  // Tạo một worker thread và truyền dữ liệu cho nó
+  const worker = new Worker(__filename, {
+    workerData: { input: 10 }
+  });
+
+  // Lắng nghe sự kiện từ worker thread
+  worker.on('message', result => {
+    console.log('Main thread received result:', result);
+  });
+
+  // Gửi thông điệp đến worker thread
+  worker.postMessage('Start calculation in worker thread');
+} else {
+  // Nếu đây là một worker thread
+
+  // Lắng nghe thông điệp từ main thread
+  parentPort.on('message', message => {
+    console.log('Worker thread received message:', message);
+
+    // Thực hiện một công việc nặng trong worker thread
+    const result = performHeavyTask(workerData.input);
+
+    // Gửi kết quả về main thread
+    parentPort.postMessage(result);
+  });
+}
+
+function performHeavyTask(input) {
+  // Giả định công việc nặng
+  let result = input;
+  for (let i = 0; i < 1000000000; i++) {
+    result += Math.random();
+  }
+  return result;
+}
+```
+
+Trong ví dụ trên:
+
+- Luồng chính tạo một worker thread và truyền một đối tượng `workerData` chứa dữ liệu cho worker thread.
+- Worker thread lắng nghe thông điệp từ luồng chính và thực hiện một công việc nặng.
+- Khi công việc hoàn thành, worker thread gửi kết quả về luồng chính thông qua `parentPort`.
+- Luồng chính lắng nghe sự kiện từ worker thread và nhận kết quả, sau đó xuất ra màn hình.
+
+Lưu ý rằng việc sử dụng worker threads có thể hữu ích trong trường hợp có các tác vụ nặng mà bạn muốn thực hiện mà không làm treo chính luồng chính.
 
 ## LOOPBACK
 
