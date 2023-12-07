@@ -4383,6 +4383,41 @@ Promise.race([promise1, promise2])
 
 Trong ví dụ này, `Promise.race` sẽ trả về promise2 với giá trị là lỗi của nó, và `.catch` sẽ được gọi để xử lý lỗi.
 
+45. `Strict mode trong javascript `
+
+Strict mode là một chế độ trong JavaScript giúp làm tăng tính an toàn và chặt chẽ của ngôn ngữ. Khi sử dụng strict mode, một số quy tắc nghiêm ngặt được áp dụng, giúp phát hiện và ngăn chặn một số lỗi phổ biến và các hành vi không an toàn trong JavaScript. Để bật strict mode, bạn đơn giản chỉ cần thêm `"use strict";` ở đầu của một file JavaScript hoặc ở đầu của một hàm.
+
+Dưới đây là một ví dụ về một đoạn code có thể gặp lỗi khi sử dụng strict mode:
+
+```javascript
+// Không sử dụng strict mode
+function example1() {
+  undeclaredVariable = 10; // Biến không được khai báo
+  console.log('Value:', undeclaredVariable);
+}
+
+example1();
+
+// Sử dụng strict mode
+function example2() {
+  "use strict";
+  strictModeVariable = 20; // Lỗi: Biến không được khai báo
+  console.log('Value:', strictModeVariable);
+}
+
+example2();
+```
+
+Trong ví dụ trên, hàm `example1` không sử dụng strict mode, nên nó không báo lỗi khi gán giá trị cho `undeclaredVariable`, mặc dù biến này không được khai báo trước đó. Ngược lại, hàm `example2` sử dụng strict mode, nên nó sẽ báo lỗi khi cố gắng gán giá trị cho `strictModeVariable` mà không khai báo trước.
+
+Khi chạy đoạn code sử dụng strict mode, bạn sẽ nhận được một lỗi như sau:
+
+```
+ReferenceError: strictModeVariable is not defined
+```
+
+Lưu ý rằng việc sử dụng strict mode không chỉ báo lỗi cho việc sử dụng biến chưa được khai báo, mà còn áp dụng nhiều quy tắc khác nhau để cải thiện chất lượng mã nguồn và giảm thiểu những lỗi phổ biến.
+
 # Typescript
 
 Typescript compiles to Javascript và nó có thể execute bởi bất kỳ Javascript engine nào
@@ -12529,4 +12564,4 @@ Trong ví dụ này, server Express chạy ở cổng 3000, và proxy Man-in-the
       - Số lượng replicas cũng được cấu hình khi tạo index. Thông thường, một index có ít nhất một replica để đảm bảo sự sẵn sàng và độ tin cậy. Số lượng replicas càng lớn, hệ thống có thêm nhiều bản sao và có khả năng chịu chấp nhận lỗi của nhiều node hơn.
 
     **Lưu ý:**
-    - Số lượng shards và replicas nên được thiết lập cẩn thận tùy thuộc vào nhu cầu và tài nguyên hệ thống của bạn. Quyết định về số lượng shards và replicas ảnh hưởng đến hiệu suất và sự sẵn sàng của hệ thống Elasticsearch của bạn.
+    - Số lượng shards và replicas nên được thiết lập cẩn thận tùy thuộc vào nhu cầu và tài nguyên hệ thống của bạn. Quyết định về số lượng shards và replicas ảnh hưởng đến hiệu suất và sự sẵn sàng của hệ thống Elasticsearch của bạn.``
