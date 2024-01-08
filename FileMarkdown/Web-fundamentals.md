@@ -1793,6 +1793,77 @@ Trong các phiên bản mới nhất của React, bạn cũng có thể sử d�
 
     Khi bạn tạo store bằng `createStore(counterReducer)`, Redux sẽ sử dụng `initialState` từ reducer để thiết lập trạng thái ban đầu của store.
 
+19. `useSwr trong nextjs la gi`
+
+    `useSWR` là một hook được cung cấp bởi thư viện SWR (stale-while-revalidate) để quản lý trạng thái dữ liệu trong ứng dụng Next.js. Nó giúp bạn dễ dàng thực hiện các yêu cầu dữ liệu và quản lý bộ đệm của chúng để cung cấp trải nghiệm người dùng mượt mà.
+
+    Dưới đây là một ví dụ chi tiết về cách sử dụng `useSWR` trong Next.js:
+
+    1. Bắt đầu bằng cách cài đặt thư viện SWR:
+
+    ```bash
+    npm install swr
+    ```
+
+    2. Tạo một custom hook để sử dụng `useSWR`:
+
+    ```jsx
+    // utils/useUserData.js
+    import useSWR from 'swr';
+
+    const fetcher = async (url) => {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    };
+
+    export const useUserData = (userId) => {
+      const { data, error } = useSWR(`/api/user/${userId}`, fetcher);
+
+      return {
+        user: data,
+        isLoading: !error && !data,
+        isError: error,
+      };
+    };
+    ```
+
+    Trong ví dụ trên, `fetcher` là một hàm xử lý việc gửi yêu cầu và xử lý dữ liệu trả về từ API. Custom hook `useUserData` sử dụng `useSWR` để theo dõi dữ liệu của một người dùng dựa trên `userId`.
+
+    3. Sử dụng custom hook trong component:
+
+    ```jsx
+    // pages/user/[userId].js
+    import { useRouter } from 'next/router';
+    import { useUserData } from '../../utils/useUserData';
+
+    const UserProfile = () => {
+      const router = useRouter();
+      const { userId } = router.query;
+      const { user, isLoading, isError } = useUserData(userId);
+
+      if (isLoading) {
+        return <p>Loading...</p>;
+      }
+
+      if (isError) {
+        return <p>Error loading user data</p>;
+      }
+
+      return (
+        <div>
+          <h1>{user.name}</h1>
+          <p>Email: {user.email}</p>
+          {/* Render other user information */}
+        </div>
+      );
+    };
+
+    export default UserProfile;
+    ```
+
+    Trong trang `UserProfile`, chúng ta sử dụng custom hook `useUserData` để lấy dữ liệu của người dùng dựa trên `userId`. Nếu dữ liệu đang được tải, chúng ta hiển thị thông báo "Loading...", nếu có lỗi, chúng ta hiển thị thông báo lỗi, nếu không, chúng ta hiển thị thông tin người dùng.
+
 # Javascripts
 
 ## ES6 trong Javascript
@@ -8275,6 +8346,124 @@ Trong ví dụ trên:
 - Luồng chính lắng nghe sự kiện từ worker thread và nhận kết quả, sau đó xuất ra màn hình.
 
 Lưu ý rằng việc sử dụng worker threads có thể hữu ích trong trường hợp có các tác vụ nặng mà bạn muốn thực hiện mà không làm treo chính luồng chính.
+
+62. `Giai thich module decorator trong nestjs`
+
+    Trong NestJS, `@Module` decorator được sử dụng để định nghĩa một module. Các trường chính của `@Module` là `providers`, `imports`, và `exports`, chúng định nghĩa cách các thành phần trong module tương tác với nhau và với các module khác.
+
+    1. **Providers:**
+      - Trong `@Module`, trường `providers` được sử dụng để đăng ký các providers (services, repositories, ...) để chúng có thể được sử dụng trong module hoặc các module khác sử dụng `imports`.
+      - Providers là các đối tượng có thể được inject vào controllers hoặc services khác để xử lý logic kinh doanh.
+
+      ```typescript
+      import { Module } from '@nestjs/common';
+      import { CatsController } from './cats.controller';
+      import { CatsService } from './cats.service';
+
+      @Module({
+        controllers: [CatsController],
+        providers: [CatsService],
+      })
+      export class CatsModule {}
+      ```
+
+    2. **Imports:**
+      - Trường `imports` trong `@Module` cho biết các module mà module hiện tại phụ thuộc vào. Các thành phần (controllers, providers) được xuất từ các module được liệt kê trong trường `imports` có thể được sử dụng trong module hiện tại.
+
+      ```typescript
+      import { Module } from '@nestjs/common';
+      import { CatsModule } from './cats/cats.module';
+      import { DogsModule } from './dogs/dogs.module';
+
+      @Module({
+        imports: [CatsModule, DogsModule],
+      })
+      export class AppModule {}
+      ```
+
+    3. **Exports:**
+      - Trường `exports` trong `@Module` cho biết các thành phần (controllers, providers) mà module hiện tại muốn chia sẻ với các module khác. Các module khác cần phải import module hiện tại để sử dụng các thành phần được xuất.
+
+      ```typescript
+      import { Module } from '@nestjs/common';
+      import { CatsController } from './cats/cats.controller';
+      import { CatsService } from './cats/cats.service';
+
+      @Module({
+        controllers: [CatsController],
+        providers: [CatsService],
+        exports: [CatsService],
+      })
+      export class CatsModule {}
+      ```
+
+      Trong ví dụ trên, `CatsService` được đăng ký trong `providers` và xuất ra ngoài module thông qua trường `exports`. Điều này có nghĩa là các module khác có thể import `CatsModule` và sử dụng `CatsService` mà không cần phải đăng ký lại nó trong scope của module đó.
+
+63. `Life cycle trong nestjs`
+
+    Trong NestJS, life cycle là một khái niệm quan trọng để hiểu khi bạn xây dựng ứng dụng. Có hai loại life cycle chính trong NestJS: life cycle của application và life cycle của component (controller, provider, middleware).
+
+    ### Life Cycle của Application:
+
+    1. **Application Initialization (`onApplicationBootstrap`):**
+      - Khi ứng dụng NestJS khởi động, sự kiện `onApplicationBootstrap` sẽ được kích hoạt. Điều này thường được sử dụng để thực hiện các hành động cần thiết sau khi ứng dụng đã khởi động hoàn toàn.
+
+      ```typescript
+      import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
+
+      @Injectable()
+      export class AppService implements OnApplicationBootstrap {
+        onApplicationBootstrap() {
+          console.log('Application is now initialized');
+        }
+      }
+      ```
+
+    2. **Application Shutdown (`onApplicationShutdown`):**
+      - Ngược lại, khi ứng dụng NestJS shutdown, sự kiện `onApplicationShutdown` sẽ được kích hoạt. Điều này thường được sử dụng để thực hiện các tác vụ dọn dẹp hoặc giải phóng tài nguyên trước khi ứng dụng tắt.
+
+      ```typescript
+      import { Injectable, OnApplicationShutdown } from '@nestjs/common';
+
+      @Injectable()
+      export class AppService implements OnApplicationShutdown {
+        onApplicationShutdown(signal?: string) {
+          console.log(`Application is shutting down (${signal})`);
+        }
+      }
+      ```
+
+    ### Life Cycle của Component:
+
+    1. **Initialization (`onModuleInit`):**
+      - Khi một module được khởi tạo, sự kiện `onModuleInit` sẽ được kích hoạt cho tất cả các thành phần (controllers, providers) trong module đó.
+
+      ```typescript
+      import { Injectable, OnModuleInit } from '@nestjs/common';
+
+      @Injectable()
+      export class CatsService implements OnModuleInit {
+        onModuleInit() {
+          console.log('CatsService has been initialized');
+        }
+      }
+      ```
+
+    2. **Shutdown (`onModuleDestroy`):**
+      - Khi một module bị hủy, sự kiện `onModuleDestroy` sẽ được kích hoạt cho tất cả các thành phần trong module đó. Điều này thường được sử dụng để giải phóng tài nguyên hoặc thực hiện các tác vụ dọn dẹp.
+
+      ```typescript
+      import { Injectable, OnModuleDestroy } from '@nestjs/common';
+
+      @Injectable()
+      export class CatsService implements OnModuleDestroy {
+        onModuleDestroy() {
+          console.log('CatsService is being destroyed');
+        }
+      }
+      ```
+
+    Các sự kiện này giúp bạn quản lý vòng đời của ứng dụng và component, cho phép bạn thực hiện các tác vụ cần thiết tại các điểm khác nhau trong quá trình chạy ứng dụng NestJS.
 
 ## LOOPBACK
 
